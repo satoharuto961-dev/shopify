@@ -483,3 +483,68 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
+
+.site-header {
+  text-align: left;
+  display: flex;
+  justify-content: center;
+}
+
+.site-branding {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin: 0 auto;
+  max-width: 720px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.site-logo {
+  background: rgba(253, 244, 255, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 18px 36px -20px rgba(47, 27, 71, 0.7);
+  padding: 0.75rem;
+}
+
+.site-brand-copy {
+  flex: 1 1 240px;
+}
+
+.site-brand-copy .site-title {
+  text-align: left;
+}
+
+.site-brand-copy .site-subtitle {
+  text-align: left;
+  max-width: 32rem;
+}
+
+@media (max-width: 640px) {
+  .site-brand-copy .site-title,
+  .site-brand-copy .site-subtitle {
+    text-align: center;
+  }
+}
+
+.cta-navigation .section-header {
+  text-align: center;
+}
+
+.cta-button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cta-button-grid .button {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-accent);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.cta-button-grid .button:hover,
+.cta-button-grid .button:focus {
+  background: rgba(236, 72, 153, 0.16);
+}
