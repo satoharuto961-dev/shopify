@@ -1,13 +1,13 @@
 :root {
   color-scheme: light;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --color-background: linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%);
-  --color-text: #0f172a;
-  --color-muted: #475569;
-  --color-accent: #2563eb;
-  --color-accent-dark: #1d4ed8;
+  --color-background: linear-gradient(180deg, #fdf2f8 0%, #fff7ed 45%, #fefce8 100%);
+  --color-text: #2f1b47;
+  --color-muted: #5b4167;
+  --color-accent: #a855f7;
+  --color-accent-dark: #7c3aed;
   --color-surface: #ffffff;
-  --shadow-elevated: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  --shadow-elevated: 0 28px 60px -20px rgba(47, 27, 71, 0.3);
 }
 
 body {
@@ -22,8 +22,8 @@ body {
 
 .site-header,
 .site-footer {
-  background: #0f172a;
-  color: #f8fafc;
+  background: radial-gradient(circle at top, rgba(124, 58, 237, 0.92), rgba(168, 85, 247, 0.85));
+  color: #fdf4ff;
   text-align: center;
   padding: 2.5rem 1rem;
 }
@@ -63,9 +63,9 @@ body {
 }
 
 .button-primary {
-  background: var(--color-accent);
-  color: #f8fafc;
-  box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.45);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(236, 72, 153, 0.9));
+  color: #fdf4ff;
+  box-shadow: 0 16px 34px -12px rgba(168, 85, 247, 0.55);
 }
 
 .button-primary:hover,
@@ -75,13 +75,13 @@ body {
 }
 
 .button-secondary {
-  background: rgba(37, 99, 235, 0.12);
+  background: rgba(236, 72, 153, 0.14);
   color: var(--color-accent);
 }
 
 .button-secondary:hover,
 .button-secondary:focus {
-  background: rgba(37, 99, 235, 0.2);
+  background: rgba(236, 72, 153, 0.24);
   transform: translateY(-2px);
 }
 
@@ -101,7 +101,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.2), transparent 55%);
+  background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.18), transparent 55%);
   pointer-events: none;
 }
 
@@ -116,7 +116,7 @@ body {
 .hero-badge {
   display: inline-flex;
   align-self: flex-start;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(168, 85, 247, 0.12);
   color: var(--color-accent);
   font-weight: 600;
   padding: 0.35rem 0.85rem;
@@ -177,11 +177,11 @@ body {
 }
 
 .hero-card {
-  background: rgba(15, 23, 42, 0.9);
-  color: #e2e8f0;
+  background: linear-gradient(160deg, rgba(46, 16, 101, 0.95), rgba(124, 58, 237, 0.82));
+  color: #f5f3ff;
   border-radius: 18px;
   padding: 2rem;
-  box-shadow: 0 20px 45px -18px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 24px 45px -18px rgba(47, 27, 71, 0.55);
 }
 
 .hero-card h3 {
@@ -195,7 +195,7 @@ body {
 }
 
 .hero-card a {
-  color: #bfdbfe;
+  color: #fce7f3;
   font-weight: 600;
   text-decoration: none;
 }
@@ -205,10 +205,10 @@ body {
 }
 
 .hero-stat {
-  background: var(--color-surface);
+  background: rgba(255, 247, 237, 0.92);
   border-radius: 16px;
   padding: 1.75rem;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.18);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -260,7 +260,7 @@ body {
 }
 
 .feature-card {
-  background: rgba(37, 99, 235, 0.08);
+  background: linear-gradient(145deg, rgba(253, 242, 248, 0.9), rgba(216, 180, 254, 0.65));
   border-radius: 16px;
   padding: 1.75rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -279,7 +279,7 @@ body {
 
 .feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 30px -20px rgba(37, 99, 235, 0.6);
+  box-shadow: 0 22px 34px -20px rgba(124, 58, 237, 0.55);
 }
 
 .path-list {
@@ -306,12 +306,12 @@ body {
 }
 
 .quote-card {
-  background: #0f172a;
-  color: #f8fafc;
+  background: linear-gradient(180deg, rgba(46, 16, 101, 0.95), rgba(124, 58, 237, 0.88));
+  color: #f8f6ff;
   border-radius: 18px;
   padding: 2.5rem;
   max-width: 320px;
-  box-shadow: 0 22px 40px -24px rgba(15, 23, 42, 0.8);
+  box-shadow: 0 26px 44px -28px rgba(47, 27, 71, 0.65);
 }
 
 .quote-card blockquote {
@@ -322,7 +322,7 @@ body {
 
 .quote-card cite {
   font-style: normal;
-  color: rgba(248, 250, 252, 0.7);
+  color: rgba(255, 237, 250, 0.75);
 }
 
 .testimonials .testimonial-grid {
@@ -333,7 +333,7 @@ body {
 
 .testimonial-card {
   margin: 0;
-  background: rgba(15, 23, 42, 0.04);
+  background: rgba(168, 85, 247, 0.08);
   border-radius: 16px;
   padding: 2rem;
   display: flex;
@@ -355,8 +355,8 @@ body {
 
 .landing-cta {
   text-align: center;
-  background: #0f172a;
-  color: #f8fafc;
+  background: linear-gradient(160deg, rgba(46, 16, 101, 0.92), rgba(168, 85, 247, 0.9));
+  color: #fdf4ff;
   border-radius: 24px;
   padding: 3rem 2.5rem;
   box-shadow: var(--shadow-elevated);
@@ -370,7 +370,90 @@ body {
 .landing-cta p {
   margin: 0 0 2rem;
   font-size: 1.05rem;
-  color: rgba(248, 250, 252, 0.8);
+  color: rgba(255, 240, 255, 0.8);
+}
+
+.collections-grid {
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.75rem;
+}
+
+.collection-card {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(244, 219, 255, 0.8));
+  border-radius: 18px;
+  padding: 1.85rem;
+  box-shadow: 0 16px 28px -22px rgba(47, 27, 71, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.collection-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.collection-card p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.collection-tag {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(236, 72, 153, 0.16);
+  color: rgba(124, 58, 237, 0.9);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+}
+
+.ritual-section {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
+}
+
+.ritual-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.ritual-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.ritual-list strong {
+  color: var(--color-text);
+}
+
+.ritual-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ritual-card {
+  background: linear-gradient(150deg, rgba(236, 72, 153, 0.92), rgba(168, 85, 247, 0.82));
 }
 
 @media (max-width: 720px) {
@@ -394,5 +477,9 @@ body {
 
   .section-header h2 {
     font-size: 1.9rem;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
