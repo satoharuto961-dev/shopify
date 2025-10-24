@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "welcome_heading",
+        "label": "Welcome heading",
+        "default": "Hello, world!"
+      },
+      {
+        "type": "textarea",
+        "id": "welcome_body",
+        "label": "Welcome message",
+        "default": "Welcome to your brand new Shopify theme. Start customizing in the editor to make it yours."
+      }
+    ]
+  }
+]

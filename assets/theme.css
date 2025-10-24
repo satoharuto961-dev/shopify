@@ -1,0 +1,63 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f7f8;
+  color: #1f2933;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-header,
+.site-footer {
+  background: #111827;
+  color: #f9fafb;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.site-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.site-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+.hello-world-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  max-width: 480px;
+  padding: 3rem;
+  text-align: center;
+}
+
+.hello-world-card h2 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  color: #111827;
+}
+
+.hello-world-card p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #374151;
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page_title | escape }}</title>
+    {{ content_for_header }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 class="site-title">{{ shop.name }}</h1>
+      <p class="site-subtitle">A simple “Hello, world” Shopify theme.</p>
+    </header>
+    <main class="site-main" role="main">
+      {{ content_for_layout }}
+    </main>
+    <footer class="site-footer">
+      <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
+    </footer>
+    {{ content_for_footer }}
+  </body>
+</html>
