@@ -187,3 +187,41 @@
       {%- endform -%}
     </div>
   </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var timer = document.getElementById('purchase-countdown');
+      if (!timer) return;
+
+      var container = timer.closest('.purchase-countdown-text');
+      var targetTime = Date.now() + (20 * 60 * 60 * 1000);
+
+      function updateTimer() {
+        var now = Date.now();
+        var diff = targetTime - now;
+
+        if (diff <= 0) {
+          if (container) {
+            container.textContent = 'Sale ended';
+          } else {
+            timer.textContent = 'Sale ended';
+          }
+          clearInterval(intervalId);
+          return;
+        }
+
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        var minutes = Math.floor((diff / (1000 * 60)) % 60);
+        var seconds = Math.floor((diff / 1000) % 60);
+
+        timer.textContent = [hours, minutes, seconds]
+          .map(function (value) {
+            return value.toString().padStart(2, '0');
+          })
+          .join(':');
+      }
+
+      updateTimer();
+      var intervalId = setInterval(updateTimer, 1000);
+    });
+  </script>
