@@ -1,197 +1,392 @@
+{%- assign featured_product = collections['all'].products.first -%}
+
 <section class="landing-hero">
-  <div class="hero-content">
-    <span class="hero-badge">Mindful living studio</span>
-    <h1>Tools for calmer, more connected days</h1>
-    <h2>Curated wellness rituals for therapists, creators, and caregivers</h2>
+  <div class="hero-copy">
+    <span class="hero-badge">Digital therapy resource</span>
+    <h1>CBT Worksheets Mega Bundle</h1>
     <p>
-      Explore a rotating collection of therapeutic guides, reflective journals, and sensory objects that help you
-      build sustainable practices of rest and renewal. Every piece in our studio is selected to nurture both client
-      experiences and your personal wellbeing.
+      Our CBT worksheets mega bundle has been developed for professionals supporting people living with anxiety,
+      depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders who can benefit from
+      CBT-based therapy. Equip every session with evidence-informed exercises that translate complex concepts into
+      practical, client-ready tools.
     </p>
-    <div class="hero-actions">
-      <a class="button button-primary" href="#discover" rel="noopener">Discover the studio</a>
-      <a class="button button-secondary" href="#collections">Browse collections</a>
-    </div>
-    <ul class="hero-highlights">
-      <li>Thoughtfully sourced tools for reflection, regulation, and ritual</li>
-      <li>Worldwide delivery plus instant access to digital companions</li>
-      <li>Guidance created with input from clinicians and community leaders</li>
+    <ul class="hero-list">
+      <li>Worksheets, cards, and journals designed for one-on-one or group therapy</li>
+      <li>Adaptable resources for common presentations including anxiety, depression, ADHD, OCD, and more</li>
+      <li>Instant digital download with professional licensing for clinical use</li>
     </ul>
-    <div class="hero-metric-grid">
-      <div class="hero-metric">
-        <strong>150+</strong>
-        <span>Resources supporting mindfulness, movement, and somatic care</span>
+    {% if featured_product %}
+      <div class="hero-meta">
+        <div class="product-price">
+          <span class="price-label">Bundle price</span>
+          <strong>{{ featured_product.price | money }}</strong>
+          {% if featured_product.compare_at_price_max > featured_product.price %}
+            <small>({{ featured_product.compare_at_price_max | money }} value when purchased separately)</small>
+          {% endif %}
+        </div>
+        <form method="post" action="/cart/add" class="product-form" enctype="multipart/form-data">
+          <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="button button-primary" {% unless featured_product.available %}disabled{% endunless %}>
+            {% if featured_product.available %}
+              Add bundle to cart
+            {% else %}
+              Sold out
+            {% endif %}
+          </button>
+        </form>
+        <a class="button button-secondary" href="{{ featured_product.url }}">View product details</a>
       </div>
-      <div class="hero-metric">
-        <strong>30</strong>
-        <span>Rotating seasonal workshops and live group experiences</span>
-      </div>
-      <div class="hero-metric">
-        <strong>95%</strong>
-        <span>Of members report feeling more grounded after one month</span>
-      </div>
-    </div>
+    {% else %}
+      <p class="hero-meta hero-meta--fallback">
+        Add the bundle to your store catalog to enable purchasing from the homepage.
+      </p>
+    {% endif %}
+    <p class="hero-guarantee">
+      Please note that there is overlap in the exercises across the bundle due to every strategy being CBT-based.
+      Each worksheet has been adapted with examples and prompts tailored to the specific condition it serves.
+    </p>
   </div>
   <div class="hero-visual">
-    <div class="hero-card hero-card--stack">
-      <div class="hero-card-heading">
-        <span class="card-badge">Featured studio mix</span>
-        <span class="card-pages">Seasonal curation</span>
+    {% if featured_product and featured_product.featured_image %}
+      <img
+        src="{{ featured_product.featured_image | img_url: '720x720' }}"
+        alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}"
+        class="hero-product-image"
+        loading="lazy"
+      >
+    {% else %}
+      <div class="hero-placeholder">
+        <span class="placeholder-badge">Mega bundle preview</span>
+        <h3>140+ ready-to-print pages</h3>
+        <p>Session planners, guided journals, psychoeducation one-pagers, and homework assignments.</p>
       </div>
-      <h3>Rituals for everyday balance</h3>
-      <ul class="hero-card-list">
-        <li>Gentle prompts for session reflections and debriefs</li>
-        <li>Ambient playlists for grounding and creative focus</li>
-        <li>Sensory tools to welcome calm into shared spaces</li>
-      </ul>
-      <a href="#collections">Explore the full curation &rarr;</a>
-    </div>
-    <div class="hero-stat">
-      <strong>Community-led</strong>
-      <span>Guided by therapists, artists, and somatic practitioners</span>
+    {% endif %}
+    <div class="hero-rating">
+      <span class="rating-stars" aria-hidden="true">★★★★★</span>
+      <div class="rating-copy">
+        <strong>4.9 / 5 stars</strong>
+        <p>Trusted by therapists, coaches, and mental health students worldwide.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="landing-section cta-navigation">
-  <header class="section-header">
-    <h2>Chart your path to wellbeing</h2>
-    <p>Select a focus area to explore resources that meet you where you are in your healing journey.</p>
-  </header>
-  <div class="cta-button-grid">
-    <a class="button" href="#collections">Mindfulness &amp; grounding</a>
-    <a class="button" href="#collections">Creative expression</a>
-    <a class="button" href="#collections">Community care</a>
-    <a class="button" href="#collections">Restorative movement</a>
-    <a class="button" href="#collections">Practice management</a>
-    <a class="button" href="#workshops">Live workshops</a>
-    <a class="button" href="#faq">Membership questions</a>
-  </div>
-</section>
-
-<section class="landing-section" id="collections">
-  <header class="section-header">
-    <h2>Curated collections for every season of care</h2>
+<section class="feature-section">
+  <div class="feature-intro">
+    <h2>Built for professionals who need ready-to-use CBT interventions</h2>
     <p>
-      Our shelves blend tactile objects, digital toolkits, and community experiences so you can create spaces where
-      calm and creativity coexist. Mix and match pieces to design rituals that honor each moment.
+      Deliver consistent, confident care with printable and digital resources you can tailor to each client. Every
+      worksheet is organized so you can quickly brief clients, capture insights, and assign meaningful follow-up
+      work with minimal prep time.
     </p>
-  </header>
-  <div class="bundle-includes-grid">
-    <article class="include-card">
-      <h3>Session openers</h3>
-      <p>Conversation decks, breathwork bells, and sensory grounding aids to welcome clients with intention.</p>
+  </div>
+  <div class="feature-grid">
+    <article class="feature-card">
+      <h3>Session-ready structure</h3>
+      <p>Clear step-by-step prompts guide clients through cognitive restructuring, behavioural activation, and
+        thought logging exercises.</p>
     </article>
-    <article class="include-card">
-      <h3>Studio journals</h3>
-      <p>Guided notebooks with prompts for daily reflections, gratitude practices, and personal storytelling.</p>
+    <article class="feature-card">
+      <h3>Versatile formats</h3>
+      <p>Download, print, or use digitally with editable PDF formats to match the needs of telehealth or in-person
+        sessions.</p>
     </article>
-    <article class="include-card">
-      <h3>Rest kits</h3>
-      <p>Weighted wraps, aromatherapy blends, and restorative playlists for deep relaxation between sessions.</p>
-    </article>
-    <article class="include-card">
-      <h3>Community circles</h3>
-      <p>Facilitation guides, conversation themes, and digital gathering tools to support group connection.</p>
-    </article>
-    <article class="include-card">
-      <h3>Workspace essentials</h3>
-      <p>Minimal planners, intention cards, and ethically crafted décor to keep your practice grounded.</p>
-    </article>
-    <article class="include-card">
-      <h3>Digital companions</h3>
-      <p>Downloadable meditations, somatic video series, and client-ready resources for continued care.</p>
+    <article class="feature-card">
+      <h3>Professional polish</h3>
+      <p>Consistent design language and colour palettes reinforce your brand while keeping psychoeducation easy to
+        digest.</p>
     </article>
   </div>
 </section>
 
-<section class="landing-section alt" id="workshops">
-  <div class="section-content">
-    <header class="section-header">
-      <h2>Designed for busy professionals</h2>
-      <p>
-        Whether you guide clients, lead teams, or hold space for loved ones, our studio keeps your rituals grounded
-        without adding hours to your schedule. Join collaborative workshops or explore self-paced journeys.
-      </p>
-    </header>
-    <div class="benefits-grid">
-      <article class="benefit-card">
-        <h3>Live gatherings</h3>
-        <p>Monthly circles featuring somatic educators, art therapists, and community healers.</p>
-      </article>
-      <article class="benefit-card">
-        <h3>Resource library</h3>
-        <p>On-demand classes, guided meditations, and practice templates ready to implement immediately.</p>
-      </article>
-      <article class="benefit-card">
-        <h3>Supportive community</h3>
-        <p>Member forums with prompts, accountability partners, and collaborative project spaces.</p>
-      </article>
-    </div>
+<section class="bundle-section" id="whats-included">
+  <div class="section-header">
+    <h2>What&apos;s included in the mega bundle?</h2>
+    <p>All resources are organized by presentation so you can swiftly match the right tool to the right client.</p>
   </div>
-  <div class="section-visual">
-    <div class="quote-card">
-      <blockquote>
-        "Each gathering reminds me to slow down, listen inward, and share tools that feel authentic to my practice."
-      </blockquote>
-      <cite>&mdash; Dr. Aileen Moore, Clinical Director</cite>
-    </div>
+  <div class="bundle-grid">
+    <article class="bundle-card">
+      <h3>Anxiety and worry management</h3>
+      <p>Grounding scripts, worry exposure ladders, and thought-challenging prompts for calming anxious cycles.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>Depression activation guides</h3>
+      <p>Behavioural activation planners, values discovery sheets, and mood monitoring journals.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>ADHD focus supports</h3>
+      <p>Executive function planners, task breakdown worksheets, and self-regulation cue cards.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>OCD response prevention</h3>
+      <p>ERP tracking logs, obsession mapping templates, and coping scripts for exposure work.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>Insomnia sleep hygiene</h3>
+      <p>Sleep diaries, stimulus control plans, and cognitive refocusing exercises for nightly routines.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>Addiction recovery tools</h3>
+      <p>Trigger mapping worksheets, craving logs, and values-based commitment plans.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>Chronic pain management</h3>
+      <p>Pacing planners, acceptance worksheets, and mind-body integration practices.</p>
+    </article>
+    <article class="bundle-card">
+      <h3>Eating disorder recovery</h3>
+      <p>Body image reframing exercises, meal support prompts, and compassionate reflection journals.</p>
+    </article>
   </div>
 </section>
 
-<section class="landing-section testimonials">
-  <header class="section-header">
-    <h2>Trusted by therapists worldwide</h2>
-    <p>Stories from mental health professionals who weave our studio rituals into their practices.</p>
-  </header>
+<section class="cta-ribbon">
+  <div class="cta-content">
+    <h2>Ready to streamline your CBT sessions?</h2>
+    <p>Download the entire library once and reuse it across your caseload with flexible licensing for clinical
+      practice.</p>
+  </div>
+  {% if featured_product %}
+    <form method="post" action="/cart/add" class="cta-form" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="button button-primary" {% unless featured_product.available %}disabled{% endunless %}>
+        {% if featured_product.available %}
+          Get the CBT Worksheets Mega Bundle
+        {% else %}
+          Sold out
+        {% endif %}
+      </button>
+    </form>
+  {% endif %}
+</section>
+
+<section class="testimonial-section" id="reviews">
+  <div class="section-header">
+    <h2>Feedback from practitioners using the bundle</h2>
+    <p>Therapists, coaches, and mental health students consistently award the bundle five-star reviews.</p>
+  </div>
   <div class="testimonial-grid">
-    <figure class="testimonial-card">
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Rachael &middot; Sep 8, 2025</p>
+      </header>
       <blockquote>
-        "The kits are sequenced so thoughtfully. I can design sessions that feel nourishing in minutes."
+        Great range of subjects related to CBT. Clearly described topics and colour scheme. I am a new (student) CBT
+        therapist and I believe this bundle is a great way to start familiarising myself with some of the key topics
+        in year 1. Thank you!
       </blockquote>
-      <figcaption>Priya, LPC</figcaption>
-    </figure>
-    <figure class="testimonial-card">
-      <blockquote>
-        "My telehealth clients love the digital companions and grounding videos. Engagement is up 40%."
-      </blockquote>
-      <figcaption>Martin, LMFT</figcaption>
-    </figure>
-    <figure class="testimonial-card">
-      <blockquote>
-        "The supervision toolkit helps our interns stay organized and hit their milestones with confidence."
-      </blockquote>
-      <figcaption>Callie, Clinical Supervisor</figcaption>
-    </figure>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback and support
+        Rachael. All the best with your studies.</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Emily O Kimm &middot; Jul 27, 2025</p>
+      </header>
+      <blockquote>Helpful&mdash;thanks so much! Well organized and thorough.</blockquote>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Leslie &middot; Jul 16, 2025</p>
+      </header>
+      <blockquote>Great quality, matched description and exceeded expectations.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind feedback Leslie! 😀</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Joe Martin &middot; Jul 10, 2025</p>
+      </header>
+      <blockquote>Exactly what I needed for working with clients.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your purchase and kind
+        feedback Joe.</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Zoe Makin &middot; Apr 21, 2025</p>
+      </header>
+      <blockquote>Range of resources, which as a mental health professional I find informed and practical. Would
+        recommend.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Zoe for your kind feedback! Great to
+        know you found value in our content.</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Tiffany &middot; Apr 12, 2025</p>
+      </header>
+      <blockquote>Love these printables! I would recommend.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback Tiffany 😀</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Alidde Alouidor &middot; Mar 16, 2025</p>
+      </header>
+      <blockquote>Great resources to use with clients!!!!!!</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Alidde! 😀</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Regina &middot; Mar 3, 2025</p>
+      </header>
+      <blockquote>Just what I needed to add to my therapy toolkit!</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your lovely review
+        Regina!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Matthew &middot; Feb 4, 2025</p>
+      </header>
+      <blockquote>Just what I wanted for my sessions.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> That is wonderful to hear! Thank you Matthew!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Tammy Holcombe &middot; Dec 24, 2024</p>
+      </header>
+      <blockquote>Exactly what I ordered. Fast delivery download.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind review Tammy!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Amber &middot; Dec 22, 2024</p>
+      </header>
+      <blockquote>Just as advertised. Thank you.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Amber!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Jeffrey &middot; Dec 21, 2024</p>
+      </header>
+      <blockquote>Great item that matched description!</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much Jeffrey!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Chantell Trumbull &middot; Nov 29, 2024</p>
+      </header>
+      <blockquote>This bundle is so helpful, exactly what I needed!</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> That is so wonderful to hear! Thank you
+        Chantell!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 4 out of 5">
+          <span aria-hidden="true">★★★★☆</span>
+        </div>
+        <p class="testimonial-meta">Pascal Hanggi &middot; Nov 28, 2024</p>
+      </header>
+      <blockquote>A good product with genuine fillable forms. Useful and a great product to have if you are a therapist.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind feedback and
+        understanding, we appreciate your support.</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Megan Berthiaume &middot; Nov 18, 2024</p>
+      </header>
+      <blockquote>I love it. So helpful.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your kind review Megan!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Marcus Ordane &middot; Nov 13, 2024</p>
+      </header>
+      <blockquote>Perfect to use everyday with clients.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your wonderful reviews
+        Marcus!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">KarMichay Pope &middot; Oct 24, 2024</p>
+      </header>
+      <blockquote>Just what I needed to have.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much KarMichay!</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Devon Gray &middot; Oct 9, 2024</p>
+      </header>
+      <blockquote>This was really great thanks.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Devon, for your purchase and review.</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 5 out of 5">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="testimonial-meta">Charlotte Summersides &middot; Aug 10, 2024</p>
+      </header>
+      <blockquote>Such good quality resources! Myself and my clients love them already!</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much Charlotte 😀</p>
+    </article>
+    <article class="testimonial-card">
+      <header>
+        <div class="testimonial-rating" aria-label="Rated 3 out of 5">
+          <span aria-hidden="true">★★★☆☆</span>
+        </div>
+        <p class="testimonial-meta">Unni Babu &middot; Dec 3, 2024</p>
+      </header>
+      <blockquote>Expected more unique worksheets instead of repeated worksheets on variety of pathologies. Missing core
+        beliefs worksheets which are crucial.</blockquote>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback Unni. We
+        appreciate you taking the time to share your experience!</p>
+    </article>
   </div>
 </section>
 
-<section class="landing-section faq" id="faq">
-  <header class="section-header">
-    <h2>Frequently asked questions</h2>
-    <p>Everything you need to know about joining the studio and weaving these practices into your routines.</p>
-  </header>
-  <div class="faq-grid">
-    <article class="faq-item">
-      <h3>How will I receive my items?</h3>
-      <p>Physical pieces ship worldwide with tracking, and digital companions arrive instantly in your inbox.</p>
-    </article>
-    <article class="faq-item">
-      <h3>Can I share resources with clients or teams?</h3>
-      <p>Absolutely. Each purchase includes guidance for inviting clients, colleagues, or loved ones into the ritual.</p>
-    </article>
-    <article class="faq-item">
-      <h3>Do you release new collections?</h3>
-      <p>We refresh the studio seasonally with limited-edition collaborations and updated digital experiences.</p>
-    </article>
+<section class="cta-banner">
+  <div class="cta-banner-copy">
+    <h2>Have questions before you buy?</h2>
+    <p>If you would like to confirm whether the worksheets are right for your practice, reach out and we&apos;ll be
+      happy to help.</p>
   </div>
-</section>
-
-<section class="landing-cta" id="discover">
-  <h2>Become part of the studio community</h2>
-  <p>
-    Stay in the loop with new collections, member gatherings, and restorative practices designed to support your
-    everyday rhythms. Subscribe for first access and thoughtful surprises.
-  </p>
-  <a class="button button-primary" href="https://www.psychology.com.co/" target="_blank" rel="noopener">Join the newsletter</a>
+  <a class="button button-secondary" href="mailto:{{ shop.email }}">Contact Sam and Veronica</a>
 </section>
