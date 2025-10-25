@@ -1006,3 +1006,21 @@ body {
     padding: 2rem 1.5rem;
   }
 }
+
+/* Hide optional indicators and placeholders on checkout form fields */
+.field__label__optional,
+.field__label span[aria-hidden="true"],
+.field__input-wrapper .field__label__optional {
+  display: none !important;
+}
+
+input[placeholder*="(optional)"]::placeholder,
+textarea[placeholder*="(optional)"]::placeholder {
+  color: transparent !important;
+}
+
+input[placeholder*="(optional)"]::-ms-input-placeholder,
+textarea[placeholder*="(optional)"]::-ms-input-placeholder {
+  color: transparent !important;
+}
+
