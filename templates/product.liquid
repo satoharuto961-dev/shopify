@@ -139,28 +139,17 @@
   </header>
   <div class="purchase-panel">
     <div class="purchase-pricing">
-      <span class="purchase-trending">In 20+ carts</span>
+      <p class="purchase-trending">In 20+ carts</p>
       <div class="purchase-primary-row">
-        <div class="purchase-price-group">
-          {%- if product.compare_at_price > product.price -%}
-            <span class="purchase-price-label">Now</span>
-          {%- endif -%}
-          <span class="purchase-price">{{ product.price | money }}</span>
-          {%- if product.compare_at_price > product.price -%}
-            <span class="purchase-compare">{{ product.compare_at_price | money }}</span>
-          {%- endif -%}
-        </div>
+        <span class="purchase-price">Now $19.99</span>
+        <span class="purchase-compare">$100.52</span>
         <span class="purchase-badge">New markdown!</span>
       </div>
-      {%- if product.compare_at_price > product.price -%}
-        {%- assign discount_amount = product.compare_at_price | minus: product.price -%}
-        {%- assign discount_percent = discount_amount | times: 100 | divided_by: product.compare_at_price -%}
-        <div class="purchase-secondary-row">
-          <span class="purchase-discount">{{ discount_percent }}% off</span>
-          <span class="purchase-bullet" aria-hidden="true">&bull;</span>
-          <span class="purchase-countdown">Sale ends in 20:18:27</span>
-        </div>
-      {%- endif -%}
+      <div class="purchase-secondary-row" role="text">
+        <span class="purchase-discount">70% off</span>
+        <span class="purchase-bullet" aria-hidden="true">&bull;</span>
+        <span class="purchase-countdown-text">Sale ends in <span class="purchase-countdown" id="purchase-countdown">20:00:00</span></span>
+      </div>
     </div>
 
       {%- assign form_id = 'product-form-' | append: product.id -%}
@@ -185,3 +174,41 @@
       {%- endform -%}
     </div>
   </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var timer = document.getElementById('purchase-countdown');
+      if (!timer) return;
+
+      var container = timer.closest('.purchase-countdown-text');
+      var targetTime = Date.now() + (20 * 60 * 60 * 1000);
+
+      function updateTimer() {
+        var now = Date.now();
+        var diff = targetTime - now;
+
+        if (diff <= 0) {
+          if (container) {
+            container.textContent = 'Sale ended';
+          } else {
+            timer.textContent = 'Sale ended';
+          }
+          clearInterval(intervalId);
+          return;
+        }
+
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        var minutes = Math.floor((diff / (1000 * 60)) % 60);
+        var seconds = Math.floor((diff / 1000) % 60);
+
+        timer.textContent = [hours, minutes, seconds]
+          .map(function (value) {
+            return value.toString().padStart(2, '0');
+          })
+          .join(':');
+      }
+
+      updateTimer();
+      var intervalId = setInterval(updateTimer, 1000);
+    });
+  </script>
