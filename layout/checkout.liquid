@@ -8,6 +8,14 @@
     {{ content_for_header }}
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
+    <style>
+      .checkout [data-trekkie-id="sign-in-link"],
+      .checkout a[href*="/account/login"],
+      .checkout [data-trekkie-id="privacy-policy"],
+      .checkout a[href*="privacy-policy"] {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     {{ skip_to_content_link }}
