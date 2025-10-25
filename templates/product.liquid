@@ -112,22 +112,30 @@
       {%- endif -%}
     </div>
 
-    {%- assign form_id = 'product-form-' | append: product.id -%}
-    {%- assign quantity_id = 'quantity-' | append: product.id -%}
-    {%- form 'product', product, id: form_id, class: 'product-purchase-form' -%}
-      {%- if product.variants.size > 1 -%}
-        <label class="purchase-label" for="variant-select-{{ product.id }}">Choose your edition</label>
-        <select id="variant-select-{{ product.id }}" name="id">
-          {%- for variant in product.variants -%}
-            <option value="{{ variant.id }}" {%- if variant == product.selected_or_first_available_variant -%}selected{%- endif -%} {%- unless variant.available -%}disabled{%- endunless -%}>
-              {{ variant.title }} &mdash; {{ variant.price | money }}{%- unless variant.available -%} (Sold out){%- endunless -%}
-            </option>
-          {%- endfor -%}
-        </select>
-      {%- else -%}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      {%- endif -%}
+      {%- assign form_id = 'product-form-' | append: product.id -%}
+      {%- assign quantity_id = 'quantity-' | append: product.id -%}
+      {%- form 'product', product, id: form_id, class: 'product-purchase-form' -%}
+        {%- if product.variants.size > 1 -%}
+          <label class="purchase-label" for="variant-select-{{ product.id }}">Choose your edition</label>
+          <select id="variant-select-{{ product.id }}" name="id">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {%- if variant == product.selected_or_first_available_variant -%}selected{%- endif -%} {%- unless variant.available -%}disabled{%- endunless -%}>
+                {{ variant.title }} &mdash; {{ variant.price | money }}{%- unless variant.available -%} (Sold out){%- endunless -%}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- endif -%}
 
-    {%- endform -%}
-  </div>
-</section>
+        <label class="purchase-label" for="{{ quantity_id }}">Quantity</label>
+        <input id="{{ quantity_id }}" type="number" name="quantity" value="1" min="1" class="purchase-quantity"{% unless product.available %} disabled{% endunless %}>
+
+        <div class="purchase-actions">
+          <button type="submit" class="button button-primary" name="add"{% unless product.available %} disabled{% endunless %}>Add to cart</button>
+          <button type="submit" class="button button-buy-now" formmethod="post" formaction="{{ routes.cart_add_url }}?return_to=/checkout"{% unless product.available %} disabled{% endunless %}>Buy now</button>
+        </div>
+
+      {%- endform -%}
+    </div>
+  </section>
