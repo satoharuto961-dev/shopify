@@ -44,22 +44,6 @@
             <li><a href="/pages/contact">Consultations &amp; workshops</a></li>
           </ul>
         </div>
-        <div class="footer-section">
-          <h3 class="footer-heading">Connect</h3>
-          <ul class="footer-links">
-            {% if shop.email %}
-              <li><a href="mailto:{{ shop.email }}">{{ shop.email }}</a></li>
-            {% endif %}
-            {% if shop.phone %}
-              <li>
-                <a href="tel:{{ shop.phone | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' }}">
-                  {{ shop.phone }}
-                </a>
-              </li>
-            {% endif %}
-            <li><a href="https://www.instagram.com" rel="noopener noreferrer" target="_blank">Instagram community</a></li>
-          </ul>
-        </div>
       </div>
       <div class="footer-bottom">
         <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
