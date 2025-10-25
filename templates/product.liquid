@@ -137,20 +137,33 @@
     <h2>Reserve your copy of {{ product.title }}</h2>
     <p>Secure a beautifully crafted edition and receive immediate access to the digital ritual library.</p>
   </header>
-  <div class="purchase-panel">
-    <div class="purchase-pricing">
-      <p class="purchase-trending">In 20+ carts</p>
-      <div class="purchase-primary-row">
-        <span class="purchase-price">Now $19.99</span>
-        <span class="purchase-compare">$100.52</span>
-        <span class="purchase-badge">New markdown!</span>
+    <div class="purchase-panel">
+      <div class="purchase-pricing sale-info">
+        <p class="sale-carts">In 20+ carts</p>
+        <div class="sale-price-row">
+          <span class="sale-current">Now $19.99</span>
+          <span class="sale-old">$100.52</span>
+          <span class="sale-badge">New markdown!</span>
+        </div>
+        <div
+          class="sale-discount"
+          role="text"
+          data-countdown-container
+          data-countdown-final="Sale ended"
+        >
+          <span>70% off</span>
+          <span class="sale-divider" aria-hidden="true">&bull;</span>
+          <span class="sale-countdown-text">
+            Sale ends in
+            <span
+              class="sale-countdown"
+              role="timer"
+              aria-live="polite"
+              data-countdown-hours="20"
+            >20:00:00</span>
+          </span>
+        </div>
       </div>
-      <div class="purchase-secondary-row" role="text">
-        <span class="purchase-discount">70% off</span>
-        <span class="purchase-bullet" aria-hidden="true">&bull;</span>
-        <span class="purchase-countdown-text">Sale ends in <span class="purchase-countdown" id="purchase-countdown">20:00:00</span></span>
-      </div>
-    </div>
 
       {%- assign form_id = 'product-form-' | append: product.id -%}
       {%- form 'product', product, id: form_id, class: 'product-purchase-form' -%}

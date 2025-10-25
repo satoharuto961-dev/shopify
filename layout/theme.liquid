@@ -32,5 +32,53 @@
       <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
     </footer>
     {{ content_for_footer }}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var countdowns = document.querySelectorAll('[data-countdown-hours]');
+
+        countdowns.forEach(function (timer) {
+          var hours = parseFloat(timer.dataset.countdownHours);
+          if (isNaN(hours) || hours <= 0) {
+            return;
+          }
+
+          var targetTime = Date.now() + hours * 60 * 60 * 1000;
+          var container = timer.closest('[data-countdown-container]');
+          var finalText = container && container.dataset.countdownFinal ? container.dataset.countdownFinal : 'Sale ended';
+          var intervalId;
+
+          function render() {
+            var diff = targetTime - Date.now();
+
+            if (diff <= 0) {
+              if (container) {
+                container.textContent = finalText;
+              } else {
+                timer.textContent = finalText;
+              }
+
+              if (intervalId) {
+                clearInterval(intervalId);
+              }
+              return;
+            }
+
+            var totalSeconds = Math.floor(diff / 1000);
+            var hrs = Math.floor(totalSeconds / 3600);
+            var mins = Math.floor((totalSeconds % 3600) / 60);
+            var secs = totalSeconds % 60;
+
+            timer.textContent = [hrs, mins, secs]
+              .map(function (value) {
+                return String(value).padStart(2, '0');
+              })
+              .join(':');
+          }
+
+          render();
+          intervalId = window.setInterval(render, 1000);
+        });
+      });
+    </script>
   </body>
 </html>
