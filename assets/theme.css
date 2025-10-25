@@ -200,6 +200,17 @@ body {
   text-decoration: none;
 }
 
+/*
+ * Hide express checkout options (e.g., Google Pay, Shop Pay) everywhere they
+ * might surface so that the standard checkout flow is the only option. These
+ * buttons are rendered by Shopify inside .additional-checkout-buttons or
+ * .shopify-payment-button containers.
+ */
+.additional-checkout-buttons,
+.shopify-payment-button {
+  display: none !important;
+}
+
 .hero-card a:hover {
   text-decoration: underline;
 }
