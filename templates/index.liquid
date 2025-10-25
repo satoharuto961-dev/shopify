@@ -48,7 +48,17 @@
     </p>
   </div>
   <div class="hero-visual">
-    {% if featured_product and featured_product.featured_image %}
+    {% assign hero_media = featured_product.featured_media %}
+    {% if featured_product and hero_media %}
+      <img
+        src="{{ hero_media | image_url: width: 960 }}"
+        srcset="{{ hero_media | image_url: width: 480 }} 480w, {{ hero_media | image_url: width: 720 }} 720w, {{ hero_media | image_url: width: 960 }} 960w"
+        sizes="(min-width: 1024px) 420px, 90vw"
+        alt="{{ hero_media.alt | default: featured_product.title | escape }}"
+        class="hero-product-image"
+        loading="lazy"
+      >
+    {% elsif featured_product and featured_product.featured_image %}
       <img
         src="{{ featured_product.featured_image | img_url: '720x720' }}"
         alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}"
