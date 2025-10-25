@@ -51,16 +51,16 @@
     {% assign hero_media = featured_product.featured_media %}
     {% if featured_product and hero_media %}
       <img
-        src="{{ hero_media | image_url: width: 960 }}"
-        srcset="{{ hero_media | image_url: width: 480 }} 480w, {{ hero_media | image_url: width: 720 }} 720w, {{ hero_media | image_url: width: 960 }} 960w"
-        sizes="(min-width: 1024px) 420px, 90vw"
+        src="{{ hero_media | image_url: width: 1200 }}"
+        srcset="{{ hero_media | image_url: width: 480 }} 480w, {{ hero_media | image_url: width: 720 }} 720w, {{ hero_media | image_url: width: 960 }} 960w, {{ hero_media | image_url: width: 1200 }} 1200w"
+        sizes="(min-width: 1280px) 560px, (min-width: 1024px) 480px, 90vw"
         alt="{{ hero_media.alt | default: featured_product.title | escape }}"
         class="hero-product-image"
         loading="lazy"
       >
     {% elsif featured_product and featured_product.featured_image %}
       <img
-        src="{{ featured_product.featured_image | img_url: '720x720' }}"
+        src="{{ featured_product.featured_image | img_url: '960x960' }}"
         alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}"
         class="hero-product-image"
         loading="lazy"
@@ -88,9 +88,9 @@
       {% for image in featured_product.images limit: 8 %}
         <figure class="product-preview-item">
           <img
-            src="{{ image | image_url: width: 620 }}"
-            srcset="{{ image | image_url: width: 320 }} 320w, {{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 620 }} 620w"
-            sizes="(min-width: 1024px) 180px, 60vw"
+            src="{{ image | image_url: width: 820 }}"
+            srcset="{{ image | image_url: width: 320 }} 320w, {{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 620 }} 620w, {{ image | image_url: width: 820 }} 820w"
+            sizes="(min-width: 1280px) 260px, (min-width: 1024px) 220px, 70vw"
             alt="{{ image.alt | default: featured_product.title | escape }}"
             loading="lazy"
           >
