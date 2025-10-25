@@ -128,19 +128,6 @@
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
       {%- endif -%}
 
-      <label class="purchase-label" for="{{ quantity_id }}">Quantity</label>
-      <input id="{{ quantity_id }}" name="quantity" type="number" min="1" value="1" inputmode="numeric">
-
-      <button type="submit" class="button button-primary" {%- unless product.available -%}disabled{%- endunless -%}>
-        {%- if product.available -%}
-          Add to cart
-        {%- else -%}
-          Sold out
-        {%- endif -%}
-      </button>
     {%- endform -%}
-
-    <p class="purchase-note">Ships within 2–3 business days with carbon-neutral delivery. Includes access to guided
-      meditations and discussion circles.</p>
   </div>
 </section>
