@@ -837,3 +837,258 @@ body {
     grid-column: auto;
   }
 }
+
+.cart-page {
+  background: var(--color-surface);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: var(--shadow-elevated);
+  display: grid;
+  gap: 2.5rem;
+}
+
+.cart-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.cart-summary {
+  margin: 0.75rem 0 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+
+.cart-form {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.cart-item {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: auto 1fr;
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+  align-items: start;
+}
+
+.cart-item-media {
+  width: 140px;
+}
+
+.cart-item-image {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3e8ff;
+}
+
+.cart-item-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cart-item-image--placeholder {
+  display: grid;
+  place-items: center;
+  height: 160px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.cart-item-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.cart-item-title h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.cart-item-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cart-item-title a:hover,
+.cart-item-title a:focus {
+  text-decoration: underline;
+}
+
+.cart-item-variant {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.cart-item-pricing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.cart-item-pricing dt {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.cart-item-pricing dd {
+  margin: 0.2rem 0 0;
+  font-weight: 600;
+}
+
+.cart-quantity-input {
+  width: 100%;
+  max-width: 80px;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 27, 71, 0.12);
+  font-size: 1rem;
+}
+
+.cart-item-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-remove {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cart-remove:hover,
+.cart-remove:focus {
+  text-decoration: underline;
+}
+
+.cart-footer {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: start;
+}
+
+.cart-note label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.cart-note textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(47, 27, 71, 0.12);
+  font-size: 1rem;
+  min-height: 140px;
+  resize: vertical;
+}
+
+.cart-totals {
+  background: rgba(47, 27, 71, 0.05);
+  border-radius: 18px;
+  padding: 1.75rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cart-totals dl {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.cart-totals dt {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.cart-totals dd {
+  margin: 0.3rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cart-totals-note dd {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.cart-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cart-empty {
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 24px;
+  padding: 2.5rem;
+  text-align: center;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cart-empty p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 960px) {
+  .cart-page {
+    padding: 2.5rem;
+  }
+
+  .cart-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .cart-item {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item-media {
+    width: 100%;
+  }
+
+  .cart-item-image--placeholder {
+    height: 200px;
+  }
+
+  .cart-actions {
+    justify-content: stretch;
+  }
+
+  .cart-actions .button {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .cart-page {
+    padding: 2rem 1.5rem;
+  }
+}

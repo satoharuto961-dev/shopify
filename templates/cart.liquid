@@ -1,0 +1,117 @@
+<section class="cart-page">
+  <header class="cart-header">
+    <h1>Shopping cart</h1>
+    <p class="cart-summary">
+      {%- if cart.item_count > 0 -%}
+        You currently have <strong>{{ cart.item_count }}</strong> {{ cart.item_count | pluralize: 'item', 'items' }} in your cart.
+      {%- else -%}
+        Your cart is empty right now.
+      {%- endif -%}
+    </p>
+  </header>
+
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart, class: 'cart-form' -%}
+      <ul class="cart-items" role="list">
+        {%- for item in cart.items -%}
+          <li class="cart-item">
+            <div class="cart-item-media">
+              {%- if item.image -%}
+                <a href="{{ item.url }}" class="cart-item-image">
+                  {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', sizes: '(min-width: 800px) 160px, 120px', alt: item.image.alt | default: item.product.title }}
+                </a>
+              {%- else -%}
+                <div class="cart-item-image cart-item-image--placeholder" aria-hidden="true">No image</div>
+              {%- endif -%}
+            </div>
+
+            <div class="cart-item-details">
+              <div class="cart-item-title">
+                <h2>
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h2>
+                {%- if item.variant.title != 'Default Title' -%}
+                  <p class="cart-item-variant">{{ item.variant.title }}</p>
+                {%- endif -%}
+              </div>
+
+              <dl class="cart-item-pricing">
+                <div>
+                  <dt>Price</dt>
+                  <dd>{{ item.final_price | money }}</dd>
+                </div>
+                <div>
+                  <dt>Quantity</dt>
+                  <dd>
+                    <label class="visually-hidden" for="updates_{{ item.key }}">Quantity for {{ item.product.title }}</label>
+                    <input
+                      id="updates_{{ item.key }}"
+                      class="cart-quantity-input"
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      inputmode="numeric"
+                    >
+                  </dd>
+                </div>
+                <div>
+                  <dt>Total</dt>
+                  <dd>{{ item.final_line_price | money }}</dd>
+                </div>
+              </dl>
+
+              <div class="cart-item-actions">
+                <a class="cart-remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="cart-footer">
+        <div class="cart-note">
+          <label for="Cart-note">Order notes</label>
+          <textarea id="Cart-note" name="note" rows="3" placeholder="Share anything we should know to personalize your bundle.">{{ cart.note }}</textarea>
+        </div>
+
+        <div class="cart-totals">
+          <dl>
+            <div>
+              <dt>Subtotal</dt>
+              <dd>{{ cart.total_price | money }}</dd>
+            </div>
+            {%- if cart.taxes_included or cart.requires_shipping -%}
+              <div class="cart-totals-note">
+                <dt class="visually-hidden">Tax and shipping notice</dt>
+                <dd>
+                  {%- if cart.taxes_included -%}
+                    Taxes included.
+                  {%- else -%}
+                    Taxes calculated at checkout.
+                  {%- endif -%}
+                  {%- if cart.requires_shipping -%}
+                    Shipping calculated at checkout.
+                  {%- endif -%}
+                </dd>
+              </div>
+            {%- endif -%}
+          </dl>
+
+          <div class="cart-actions">
+            <button type="submit" name="update" class="button button-secondary">Update cart</button>
+            <button type="submit" name="checkout" class="button button-primary">Proceed to checkout</button>
+          </div>
+        </div>
+      </div>
+    {%- endform -%}
+  {%- else -%}
+    <div class="cart-empty">
+      <p>
+        Explore our latest releases and add a title to begin your therapeutic reading journey.
+      </p>
+      <a class="button button-primary" href="{{ routes.all_products_collection_url }}">Browse books</a>
+      <a class="button button-secondary" href="/">Return home</a>
+    </div>
+  {%- endif -%}
+</section>
