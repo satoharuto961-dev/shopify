@@ -31,14 +31,7 @@
   <div class="hero-visual">
     {%- if product.featured_media -%}
       <figure class="product-hero-visual">
-        {{- product.featured_media
-          | media_tag:
-            class: 'product-hero-image',
-            loading: 'eager',
-            image_size: '2048x',
-            widths: '480, 720, 960, 1200, 1600, 2048',
-            sizes: '(min-width: 1024px) 480px, (min-width: 768px) 50vw, 90vw'
-        -}}
+        {{ product.featured_media | media_tag: class: 'product-hero-image', loading: 'eager' }}
         {%- if product.featured_media.alt != blank -%}
           <figcaption class="visually-hidden">{{ product.featured_media.alt }}</figcaption>
         {%- endif -%}
