@@ -263,6 +263,8 @@ img {
   gap: 1.5rem;
   align-items: center;
   justify-content: center;
+  max-width: 560px;
+  width: 100%;
 }
 
 .product-preview-strip {
@@ -275,7 +277,7 @@ img {
 .product-preview-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(140px, 1fr);
+  grid-auto-columns: minmax(220px, 1fr);
   gap: 1.25rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
@@ -314,6 +316,7 @@ img {
 .hero-product-image {
   border-radius: 22px;
   box-shadow: 0 32px 70px -40px rgba(31, 37, 68, 0.65);
+  width: 100%;
 }
 
 .hero-placeholder {
