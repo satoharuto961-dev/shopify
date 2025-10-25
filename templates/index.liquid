@@ -82,6 +82,27 @@
   </div>
 </section>
 
+{% if featured_product and featured_product.images.size > 0 %}
+  <section class="product-preview-strip" aria-label="Bundle preview images">
+    <div class="product-preview-track">
+      {% for image in featured_product.images limit: 8 %}
+        <figure class="product-preview-item">
+          <img
+            src="{{ image | image_url: width: 620 }}"
+            srcset="{{ image | image_url: width: 320 }} 320w, {{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 620 }} 620w"
+            sizes="(min-width: 1024px) 180px, 60vw"
+            alt="{{ image.alt | default: featured_product.title | escape }}"
+            loading="lazy"
+          >
+          {% if image.alt != blank %}
+            <figcaption class="visually-hidden">{{ image.alt }}</figcaption>
+          {% endif %}
+        </figure>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
 <section class="feature-section">
   <div class="feature-intro">
     <h2>Built for professionals who need ready-to-use CBT interventions</h2>
