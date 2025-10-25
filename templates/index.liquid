@@ -24,11 +24,12 @@
             <small>({{ featured_product.compare_at_price_max | money }} value when purchased separately)</small>
           {% endif %}
         </div>
-        <form method="post" action="/cart/add" class="product-form" enctype="multipart/form-data">
+        <form method="post" action="{{ routes.cart_add_url }}" class="product-form" enctype="multipart/form-data">
           <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="return_to" value="/checkout">
           <button type="submit" class="button button-primary" {% unless featured_product.available %}disabled{% endunless %}>
             {% if featured_product.available %}
-              Add bundle to cart
+              Buy the bundle now
             {% else %}
               Sold out
             {% endif %}
@@ -147,11 +148,12 @@
       practice.</p>
   </div>
   {% if featured_product %}
-    <form method="post" action="/cart/add" class="cta-form" enctype="multipart/form-data">
+    <form method="post" action="{{ routes.cart_add_url }}" class="cta-form" enctype="multipart/form-data">
       <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="return_to" value="/checkout">
       <button type="submit" class="button button-primary" {% unless featured_product.available %}disabled{% endunless %}>
         {% if featured_product.available %}
-          Get the CBT Worksheets Mega Bundle
+          Get instant access now
         {% else %}
           Sold out
         {% endif %}
@@ -159,6 +161,33 @@
     </form>
   {% endif %}
 </section>
+
+{% if featured_product and featured_product.media_count > 0 %}
+  <section class="featured-product-gallery" aria-labelledby="featured-gallery-heading">
+    <div class="featured-gallery-header">
+      <h2 id="featured-gallery-heading">Preview the bundle</h2>
+      <p>Flip through a sampling of the worksheets and resources included in the collection.</p>
+    </div>
+    <div class="featured-gallery-grid">
+      {% for media in featured_product.media %}
+        {% if media.media_type == 'image' %}
+          <figure class="featured-gallery-item">
+            <img
+              src="{{ media | image_url: width: 900 }}"
+              srcset="{{ media | image_url: width: 450 }} 450w, {{ media | image_url: width: 700 }} 700w, {{ media | image_url: width: 900 }} 900w"
+              sizes="(min-width: 1024px) 300px, 90vw"
+              alt="{{ media.alt | default: featured_product.title }}"
+              loading="lazy"
+            >
+            {% if media.alt != blank %}
+              <figcaption class="visually-hidden">{{ media.alt }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
 
 <section class="testimonial-section" id="reviews">
   <div class="section-header">
