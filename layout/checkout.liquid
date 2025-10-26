@@ -26,12 +26,21 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
       }
 
       .checkout-branding__logo img {
         width: 86px;
         height: 86px;
         display: block;
+      }
+
+      .checkout-branding__label {
+        margin-top: 0.75rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        color: #1f2937;
       }
     </style>
   </head>
@@ -46,6 +55,7 @@
           height="96"
           loading="lazy"
         >
+        <p class="checkout-branding__label">Psychology Press checkout</p>
       </div>
     </header>
     {{ order_summary_toggle }}
