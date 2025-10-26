@@ -1,4 +1,12 @@
-{% if cart.item_count > 0 %}
+{% if cart.item_count == 0 %}
+  <section class="cart-redirect">
+    <div class="cart-redirect-content">
+      <h1>Your cart is empty</h1>
+      <p>Add your favourite resources to move straight into checkout.</p>
+      <a class="button button-primary" href="/">Browse the catalog</a>
+    </div>
+  </section>
+{% elsif cart.item_count == 1 %}
   <script>
     window.location.href = {{ routes.checkout_url | json }};
   </script>
@@ -8,11 +16,26 @@
     <p><a href="{{ routes.checkout_url }}">Continue to checkout</a></p>
   </noscript>
 {% else %}
-  <section class="cart-redirect">
-    <div class="cart-redirect-content">
-      <h1>Your cart is empty</h1>
-      <p>Add your favourite resources to move straight into checkout.</p>
-      <a class="button button-primary" href="/">Browse the catalog</a>
+  <section class="cart-limit">
+    <div class="cart-limit-content">
+      <h1>One order at a time</h1>
+      <p>Your cart contains multiple items. Please remove extra items so you can continue to checkout with a single order.</p>
+      <ul class="cart-limit-items">
+        {% for item in cart.items %}
+          <li class="cart-limit-item">
+            <div class="cart-limit-item-details">
+              <h2>{{ item.product.title | escape }}</h2>
+              <p>{{ item.variant.title | escape }}</p>
+              <p>Quantity: {{ item.quantity }}</p>
+            </div>
+            <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-remove">
+              <input type="hidden" name="line" value="{{ forloop.index }}">
+              <input type="hidden" name="quantity" value="0">
+              <button type="submit" class="button">Remove this item</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </section>
 {% endif %}
