@@ -945,6 +945,45 @@ img {
   margin: 0;
 }
 
+.cart-limit-quantity-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-limit-quantity-input input[type="number"] {
+  width: 4.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 37, 68, 0.18);
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text);
+  background: #fff;
+  -moz-appearance: textfield;
+}
+
+.cart-limit-quantity-input input[type="number"]::-webkit-outer-spin-button,
+.cart-limit-quantity-input input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cart-limit-quantity-input .button {
+  padding: 0.55rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.cart-review-checkout {
+  margin-top: 2rem;
+}
+
+.cart-review-checkout .button {
+  width: 100%;
+  max-width: 320px;
+}
+
 .cart-limit-quantity-button {
   width: 2.5rem;
   height: 2.5rem;

@@ -7,14 +7,54 @@
     </div>
   </section>
 {% elsif cart.item_count == 1 %}
-  <script>
-    window.location.href = {{ routes.checkout_url | json }};
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url={{ routes.checkout_url }}">
-    <p>Redirecting you to secure checkout&hellip;</p>
-    <p><a href="{{ routes.checkout_url }}">Continue to checkout</a></p>
-  </noscript>
+  <section class="cart-limit cart-review">
+    <div class="cart-limit-content">
+      <h1>Review your order</h1>
+      <p>Update the quantity below or continue to secure checkout.</p>
+      <ul class="cart-limit-items">
+        {% for item in cart.items %}
+          <li class="cart-limit-item">
+            <div class="cart-limit-item-details">
+              <h2>{{ item.product.title | escape }}</h2>
+              <p>{{ item.variant.title | escape }}</p>
+              <div class="cart-limit-item-quantity">
+                <label class="cart-limit-item-quantity-label" for="cart-quantity-{{ forloop.index }}">Quantity</label>
+                <div class="cart-limit-item-quantity-controls">
+                  <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-quantity-form">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <input type="hidden" name="quantity" value="{{ item.quantity | minus: 1 }}">
+                    <button type="submit" class="cart-limit-quantity-button" aria-label="Decrease quantity for {{ item.product.title | escape }}" {% if item.quantity <= 1 %}disabled{% endif %}>
+                      <span aria-hidden="true">&minus;</span>
+                    </button>
+                  </form>
+                  <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-quantity-form cart-limit-quantity-input">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <input id="cart-quantity-{{ forloop.index }}" type="number" min="1" name="quantity" value="{{ item.quantity }}">
+                    <button type="submit" class="button button-secondary">Update</button>
+                  </form>
+                  <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-quantity-form">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <input type="hidden" name="quantity" value="{{ item.quantity | plus: 1 }}">
+                    <button type="submit" class="cart-limit-quantity-button" aria-label="Increase quantity for {{ item.product.title | escape }}">
+                      <span aria-hidden="true">+</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-remove">
+              <input type="hidden" name="line" value="{{ forloop.index }}">
+              <input type="hidden" name="quantity" value="0">
+              <button type="submit" class="button">Remove this item</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+      <form method="post" action="{{ routes.checkout_url }}" class="cart-review-checkout">
+        <button type="submit" class="button button-primary">Continue to checkout</button>
+      </form>
+    </div>
+  </section>
 {% else %}
   <section class="cart-limit">
     <div class="cart-limit-content">
