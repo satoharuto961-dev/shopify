@@ -638,6 +638,43 @@ img {
   text-align: left;
 }
 
+.product-reviews .reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: var(--color-surface-muted);
+  border-radius: 20px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgba(31, 37, 68, 0.08);
+  box-shadow: 0 18px 46px -32px rgba(31, 37, 68, 0.4);
+}
+
+.review-rating {
+  font-size: 1.15rem;
+  color: #ffb400;
+  letter-spacing: 0.18em;
+}
+
+.review-quote {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.review-author {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
 .quote-card blockquote {
   margin: 0;
   font-size: 1.2rem;
