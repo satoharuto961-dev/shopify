@@ -26,7 +26,26 @@
             <div class="cart-limit-item-details">
               <h2>{{ item.product.title | escape }}</h2>
               <p>{{ item.variant.title | escape }}</p>
-              <p>Quantity: {{ item.quantity }}</p>
+              <div class="cart-limit-item-quantity">
+                <span class="cart-limit-item-quantity-label">Quantity</span>
+                <div class="cart-limit-item-quantity-controls">
+                  <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-quantity-form">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <input type="hidden" name="quantity" value="{{ item.quantity | minus: 1 }}">
+                    <button type="submit" class="cart-limit-quantity-button" aria-label="Decrease quantity for {{ item.product.title | escape }}" {% if item.quantity <= 1 %}disabled{% endif %}>
+                      <span aria-hidden="true">&minus;</span>
+                    </button>
+                  </form>
+                  <span class="cart-limit-item-quantity-value" aria-live="polite">{{ item.quantity }}</span>
+                  <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-quantity-form">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <input type="hidden" name="quantity" value="{{ item.quantity | plus: 1 }}">
+                    <button type="submit" class="cart-limit-quantity-button" aria-label="Increase quantity for {{ item.product.title | escape }}">
+                      <span aria-hidden="true">+</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
             <form method="post" action="{{ routes.cart_change_url }}" class="cart-limit-remove">
               <input type="hidden" name="line" value="{{ forloop.index }}">

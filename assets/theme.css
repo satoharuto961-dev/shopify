@@ -903,6 +903,84 @@ img {
   color: var(--color-muted);
 }
 
+.cart-limit-items {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cart-limit-item {
+  background: var(--color-surface);
+  border-radius: 18px;
+  padding: 1.75rem;
+  border: 1px solid rgba(31, 37, 68, 0.08);
+  box-shadow: 0 18px 42px -30px rgba(31, 37, 68, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-limit-item-quantity {
+  margin-top: 0.5rem;
+}
+
+.cart-limit-item-quantity-label {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.35rem;
+}
+
+.cart-limit-item-quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cart-limit-quantity-form {
+  margin: 0;
+}
+
+.cart-limit-quantity-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 37, 68, 0.15);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cart-limit-quantity-button:hover:not(:disabled),
+.cart-limit-quantity-button:focus-visible:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.cart-limit-quantity-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cart-limit-item-quantity-value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .testimonial-section {
   display: grid;
   gap: 2.5rem;
