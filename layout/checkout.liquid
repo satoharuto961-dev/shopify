@@ -15,10 +15,39 @@
       .checkout a[href*="privacy-policy"] {
         display: none !important;
       }
+
+      .checkout-branding {
+        background: linear-gradient(135deg, rgba(88, 62, 255, 0.9), rgba(102, 198, 255, 0.85));
+        text-align: center;
+        padding: 2.25rem 1.5rem 1.5rem;
+      }
+
+      .checkout-branding__logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .checkout-branding__logo img {
+        width: 86px;
+        height: 86px;
+        display: block;
+      }
     </style>
   </head>
   <body>
     {{ skip_to_content_link }}
+    <header class="checkout-branding" role="banner">
+      <div class="checkout-branding__logo">
+        <img
+          src="{{ 'psychology-logo.svg' | asset_url }}"
+          alt="Illustrated psychology press logo showing an open book"
+          width="96"
+          height="96"
+          loading="lazy"
+        >
+      </div>
+    </header>
     {{ order_summary_toggle }}
     {{ content_for_layout }}
   </body>
