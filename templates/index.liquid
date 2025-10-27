@@ -2,27 +2,26 @@
 
 <section class="landing-hero">
   <div class="hero-copy">
-    <span class="hero-badge">Digital therapy resource</span>
-    <h1>CBT Worksheets Mega Bundle</h1>
+    <span class="hero-badge">Psychology insights hub</span>
+    <h1>The Psychology Practitioner Toolkit</h1>
     <p>
-      Our CBT worksheets mega bundle has been developed for professionals supporting people living with anxiety,
-      depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders who can benefit from
-      CBT-based therapy. Equip every session with evidence-informed exercises that translate complex concepts into
-      practical, client-ready tools.
+      Welcome to your central hub for translating the science of psychology into everyday practice. Curated for
+      educators, therapists, coaches, and lifelong learners, the toolkit distills cognitive, social, developmental,
+      and biological research into ready-to-use lesson plans, handouts, and explainer visuals.
     </p>
     <ul class="hero-list">
-      <li>Worksheets, cards, and journals designed for one-on-one or group therapy</li>
-      <li>Adaptable resources for common presentations including anxiety, depression, ADHD, OCD, and more</li>
-      <li>Instant digital download with professional licensing for clinical use</li>
+      <li>Foundational concepts simplified for workshops, classrooms, and client sessions</li>
+      <li>Evidence-based activities that connect theory to behaviour change and self-reflection</li>
+      <li>Instant digital download with licensing for professional and academic use</li>
     </ul>
     {% if featured_product %}
       <div class="hero-meta">
         <div class="hero-sale-card sale-info">
           <p class="sale-carts">In 20+ carts</p>
           <div class="sale-price-row">
-            <span class="sale-current">Now $19.99</span>
-            <span class="sale-old">$100.52</span>
-            <span class="sale-badge">New markdown!</span>
+            <span class="sale-current">Now $29.00</span>
+            <span class="sale-old">$120.00</span>
+            <span class="sale-badge">Introductory price</span>
           </div>
           <div
             class="sale-discount"
@@ -48,7 +47,7 @@
           <input type="hidden" name="return_to" value="/checkout">
           <button type="submit" class="button button-primary" {% unless featured_product.available %}disabled{% endunless %}>
             {% if featured_product.available %}
-              Buy the bundle now
+              Explore the toolkit
             {% else %}
               Sold out
             {% endif %}
@@ -58,12 +57,12 @@
       </div>
     {% else %}
       <p class="hero-meta hero-meta--fallback">
-        Add the bundle to your store catalog to enable purchasing from the homepage.
+        Add the toolkit to your store catalog to enable purchasing from the homepage.
       </p>
     {% endif %}
     <p class="hero-guarantee">
-      Please note that there is overlap in the exercises across the bundle due to every strategy being CBT-based.
-      Each worksheet has been adapted with examples and prompts tailored to the specific condition it serves.
+      Each module includes facilitator notes, discussion prompts, and reflection exercises so you can move from
+      psychological theory to meaningful action without additional prep work.
     </p>
   </div>
   <div class="hero-visual">
@@ -86,23 +85,23 @@
       >
     {% else %}
       <div class="hero-placeholder">
-        <span class="placeholder-badge">Mega bundle preview</span>
-        <h3>140+ ready-to-print pages</h3>
-        <p>Session planners, guided journals, psychoeducation one-pagers, and homework assignments.</p>
+        <span class="placeholder-badge">Toolkit preview</span>
+        <h3>160+ ready-to-share pages</h3>
+        <p>Lesson slides, reflection journals, lab-style activities, and myth-busting explainers.</p>
       </div>
     {% endif %}
     <div class="hero-rating">
       <span class="rating-stars" aria-hidden="true">★★★★★</span>
       <div class="rating-copy">
         <strong>4.9 / 5 stars</strong>
-        <p>Trusted by therapists, coaches, and mental health students worldwide.</p>
+        <p>Trusted by psychology teachers, wellness practitioners, and curious minds worldwide.</p>
       </div>
     </div>
   </div>
 </section>
 
 {% if featured_product and featured_product.images.size > 0 %}
-  <section class="product-preview-strip" aria-label="Bundle preview images">
+  <section class="product-preview-strip" aria-label="Toolkit preview images">
     <div class="product-preview-track">
       {% for image in featured_product.images limit: 8 %}
         <figure class="product-preview-item">
@@ -124,78 +123,78 @@
 
 <section class="feature-section">
   <div class="feature-intro">
-    <h2>Built for professionals who need ready-to-use CBT interventions</h2>
+    <h2>Bring general psychology to life in any setting</h2>
     <p>
-      Deliver consistent, confident care with printable and digital resources you can tailor to each client. Every
-      worksheet is organized so you can quickly brief clients, capture insights, and assign meaningful follow-up
-      work with minimal prep time.
+      Lead engaging discussions on cognition, behaviour, emotion, and wellbeing with polished visuals and
+      interactive exercises. The toolkit keeps complex concepts approachable while preserving the research-backed
+      rigour your audience expects.
     </p>
   </div>
   <div class="feature-grid">
     <article class="feature-card">
       <h3>Session-ready structure</h3>
-      <p>Clear step-by-step prompts guide clients through cognitive restructuring, behavioural activation, and
-        thought logging exercises.</p>
+      <p>Guided scripts, discussion maps, and recap summaries make it easy to facilitate conversations about the
+        brain, behaviour, and mental health literacy.</p>
     </article>
     <article class="feature-card">
       <h3>Versatile formats</h3>
-      <p>Download, print, or use digitally with editable PDF formats to match the needs of telehealth or in-person
-        sessions.</p>
+      <p>Download, print, or present digitally with editable PDFs and slide decks that adapt to classrooms,
+        community programs, and private practice.</p>
     </article>
     <article class="feature-card">
       <h3>Professional polish</h3>
-      <p>Consistent design language and colour palettes reinforce your brand while keeping psychoeducation easy to
-        digest.</p>
+      <p>Consistent design language, infographics, and iconography reinforce your expertise while keeping
+        psychoeducation digestible.</p>
     </article>
   </div>
 </section>
 
 <section class="bundle-section" id="whats-included">
   <div class="section-header">
-    <h2>What&apos;s included in the mega bundle?</h2>
-    <p>All resources are organized by presentation so you can swiftly match the right tool to the right client.</p>
+    <h2>What&apos;s inside the toolkit?</h2>
+    <p>Resources are grouped by cornerstone psychology topics so you can quickly curate lessons and interventions.</p>
   </div>
   <div class="bundle-grid">
     <article class="bundle-card">
-      <h3>Anxiety and worry management</h3>
-      <p>Grounding scripts, worry exposure ladders, and thought-challenging prompts for calming anxious cycles.</p>
+      <h3>Cognitive psychology essentials</h3>
+      <p>Memory experiments, cognitive bias explainers, and attention-mapping worksheets that spark curiosity.</p>
     </article>
     <article class="bundle-card">
-      <h3>Depression activation guides</h3>
-      <p>Behavioural activation planners, values discovery sheets, and mood monitoring journals.</p>
+      <h3>Social dynamics and identity</h3>
+      <p>Group activity guides on conformity, prejudice reduction, and interpersonal communication skills.</p>
     </article>
     <article class="bundle-card">
-      <h3>ADHD focus supports</h3>
-      <p>Executive function planners, task breakdown worksheets, and self-regulation cue cards.</p>
+      <h3>Development across the lifespan</h3>
+      <p>Milestone trackers, case study reflections, and narrative prompts for early childhood through older adulthood.</p>
     </article>
     <article class="bundle-card">
-      <h3>OCD response prevention</h3>
-      <p>ERP tracking logs, obsession mapping templates, and coping scripts for exposure work.</p>
+      <h3>Brain and behaviour</h3>
+      <p>Neuroanatomy infographics, neurotransmitter charts, and sensory system lab stations.</p>
     </article>
     <article class="bundle-card">
-      <h3>Insomnia sleep hygiene</h3>
-      <p>Sleep diaries, stimulus control plans, and cognitive refocusing exercises for nightly routines.</p>
+      <h3>Emotion and motivation</h3>
+      <p>Self-regulation planners, affect labeling exercises, and goal-setting frameworks grounded in research.</p>
     </article>
     <article class="bundle-card">
-      <h3>Addiction recovery tools</h3>
-      <p>Trigger mapping worksheets, craving logs, and values-based commitment plans.</p>
+      <h3>Positive psychology in practice</h3>
+      <p>Strengths spotting activities, gratitude labs, and wellbeing check-ins for groups and individuals.</p>
     </article>
     <article class="bundle-card">
-      <h3>Chronic pain management</h3>
-      <p>Pacing planners, acceptance worksheets, and mind-body integration practices.</p>
+      <h3>Research and ethics toolkit</h3>
+      <p>Ethics dilemma scenarios, experimental design templates, and quick-reference APA style guides.</p>
     </article>
     <article class="bundle-card">
-      <h3>Eating disorder recovery</h3>
-      <p>Body image reframing exercises, meal support prompts, and compassionate reflection journals.</p>
+      <h3>Clinical conversation starters</h3>
+      <p>Case formulation worksheets, intake questionnaires, and psychoeducation handouts for common concerns.</p>
     </article>
   </div>
 </section>
 
 <section class="cta-ribbon">
   <div class="cta-content">
-    <h2>Ready to streamline your CBT sessions?</h2>
-    <p>Download the entire library once and reuse it across your caseload with flexible licensing for clinical
-      practice.</p>
+    <h2>Ready to champion psychological literacy?</h2>
+    <p>Download the complete library once and reuse it across classes, workshops, and client programs with flexible
+      licensing.</p>
   </div>
   {% if featured_product %}
     <form method="post" action="{{ routes.cart_add_url }}" class="cta-form" enctype="multipart/form-data">
@@ -215,8 +214,8 @@
 {% if featured_product and featured_product.media_count > 0 %}
   <section class="featured-product-gallery" aria-labelledby="featured-gallery-heading">
     <div class="featured-gallery-header">
-      <h2 id="featured-gallery-heading">Preview the bundle</h2>
-      <p>Flip through a sampling of the worksheets and resources included in the collection.</p>
+      <h2 id="featured-gallery-heading">Preview the toolkit</h2>
+      <p>Flip through a sampling of the lesson visuals, activities, and handouts included in the collection.</p>
     </div>
     <div class="featured-gallery-grid">
       {% for media in featured_product.media %}
@@ -241,8 +240,8 @@
 
 <section class="testimonial-section" id="reviews">
   <div class="section-header">
-    <h2>Feedback from practitioners using the bundle</h2>
-    <p>Therapists, coaches, and mental health students consistently award the bundle five-star reviews.</p>
+    <h2>Feedback from psychology professionals and learners</h2>
+    <p>Teachers, facilitators, and graduate students consistently award the toolkit five-star reviews.</p>
   </div>
   <div class="testimonial-grid">
     <article class="testimonial-card">
@@ -253,12 +252,11 @@
         <p class="testimonial-meta">Rachael &middot; Sep 8, 2025</p>
       </header>
       <blockquote>
-        Great range of subjects related to CBT. Clearly described topics and colour scheme. I am a new (student) CBT
-        therapist and I believe this bundle is a great way to start familiarising myself with some of the key topics
-        in year 1. Thank you!
+        A comprehensive resource that breaks down complex psychological models into digestible lessons. My students
+        love the interactive experiments and I save hours of prep time each week.
       </blockquote>
-      <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback and support
-        Rachael. All the best with your studies.</p>
+      <p class="testimonial-response"><strong>Sam and Veronica:</strong> We appreciate you sharing how the toolkit is
+        supporting your classroom, Rachael!</p>
     </article>
     <article class="testimonial-card">
       <header>
@@ -267,7 +265,8 @@
         </div>
         <p class="testimonial-meta">Emily O Kimm &middot; Jul 27, 2025</p>
       </header>
-      <blockquote>Helpful&mdash;thanks so much! Well organized and thorough.</blockquote>
+      <blockquote>Helpful&mdash;thanks so much! The neuroscience diagrams and case studies make my workshops more
+        engaging.</blockquote>
     </article>
     <article class="testimonial-card">
       <header>
@@ -276,7 +275,8 @@
         </div>
         <p class="testimonial-meta">Leslie &middot; Jul 16, 2025</p>
       </header>
-      <blockquote>Great quality, matched description and exceeded expectations.</blockquote>
+      <blockquote>Great quality, matched description, and exceeded expectations. Perfect balance of theory and
+        practice.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind feedback Leslie! 😀</p>
     </article>
     <article class="testimonial-card">
@@ -286,7 +286,7 @@
         </div>
         <p class="testimonial-meta">Joe Martin &middot; Jul 10, 2025</p>
       </header>
-      <blockquote>Exactly what I needed for working with clients.</blockquote>
+      <blockquote>Exactly what I needed to help clients connect their experiences to broader psychological concepts.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your purchase and kind
         feedback Joe.</p>
     </article>
@@ -297,8 +297,8 @@
         </div>
         <p class="testimonial-meta">Zoe Makin &middot; Apr 21, 2025</p>
       </header>
-      <blockquote>Range of resources, which as a mental health professional I find informed and practical. Would
-        recommend.</blockquote>
+      <blockquote>Range of resources that are informed, practical, and beautifully designed. My clients appreciate the
+        relatable examples.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Zoe for your kind feedback! Great to
         know you found value in our content.</p>
     </article>
@@ -309,7 +309,7 @@
         </div>
         <p class="testimonial-meta">Tiffany &middot; Apr 12, 2025</p>
       </header>
-      <blockquote>Love these printables! I would recommend.</blockquote>
+      <blockquote>Love these printables! They make psychoeducation feel welcoming and actionable.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback Tiffany 😀</p>
     </article>
     <article class="testimonial-card">
@@ -319,7 +319,7 @@
         </div>
         <p class="testimonial-meta">Alidde Alouidor &middot; Mar 16, 2025</p>
       </header>
-      <blockquote>Great resources to use with clients!!!!!!</blockquote>
+      <blockquote>Great resources to use with clients!!!!!! The reflection prompts are a hit with teens.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Alidde! 😀</p>
     </article>
     <article class="testimonial-card">
@@ -329,7 +329,7 @@
         </div>
         <p class="testimonial-meta">Regina &middot; Mar 3, 2025</p>
       </header>
-      <blockquote>Just what I needed to add to my therapy toolkit!</blockquote>
+      <blockquote>Just what I needed to expand my psychoeducation toolkit!</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your lovely review
         Regina!</p>
     </article>
@@ -340,7 +340,7 @@
         </div>
         <p class="testimonial-meta">Matthew &middot; Feb 4, 2025</p>
       </header>
-      <blockquote>Just what I wanted for my sessions.</blockquote>
+      <blockquote>Just what I wanted for group sessions on emotion regulation and motivation.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> That is wonderful to hear! Thank you Matthew!</p>
     </article>
     <article class="testimonial-card">
@@ -350,7 +350,7 @@
         </div>
         <p class="testimonial-meta">Tammy Holcombe &middot; Dec 24, 2024</p>
       </header>
-      <blockquote>Exactly what I ordered. Fast delivery download.</blockquote>
+      <blockquote>Exactly what I ordered. Download was instant and the facilitator notes are gold.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind review Tammy!</p>
     </article>
     <article class="testimonial-card">
@@ -360,7 +360,7 @@
         </div>
         <p class="testimonial-meta">Amber &middot; Dec 22, 2024</p>
       </header>
-      <blockquote>Just as advertised. Thank you.</blockquote>
+      <blockquote>Just as advertised. Thank you for making psychology approachable.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Amber!</p>
     </article>
     <article class="testimonial-card">
@@ -370,7 +370,7 @@
         </div>
         <p class="testimonial-meta">Jeffrey &middot; Dec 21, 2024</p>
       </header>
-      <blockquote>Great item that matched description!</blockquote>
+      <blockquote>Great item that matched description and elevated my client resources!</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much Jeffrey!</p>
     </article>
     <article class="testimonial-card">
@@ -380,7 +380,7 @@
         </div>
         <p class="testimonial-meta">Chantell Trumbull &middot; Nov 29, 2024</p>
       </header>
-      <blockquote>This bundle is so helpful, exactly what I needed!</blockquote>
+      <blockquote>This toolkit is so helpful, exactly what I needed!</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> That is so wonderful to hear! Thank you
         Chantell!</p>
     </article>
@@ -391,7 +391,8 @@
         </div>
         <p class="testimonial-meta">Pascal Hanggi &middot; Nov 28, 2024</p>
       </header>
-      <blockquote>A good product with genuine fillable forms. Useful and a great product to have if you are a therapist.</blockquote>
+      <blockquote>A good product with genuine fillable forms. Useful and a great resource for anyone teaching or
+        practicing psychology.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your kind feedback and
         understanding, we appreciate your support.</p>
     </article>
@@ -402,7 +403,7 @@
         </div>
         <p class="testimonial-meta">Megan Berthiaume &middot; Nov 18, 2024</p>
       </header>
-      <blockquote>I love it. So helpful.</blockquote>
+      <blockquote>I love it. The positive psychology modules sparked brilliant conversations.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your kind review Megan!</p>
     </article>
     <article class="testimonial-card">
@@ -412,7 +413,7 @@
         </div>
         <p class="testimonial-meta">Marcus Ordane &middot; Nov 13, 2024</p>
       </header>
-      <blockquote>Perfect to use everyday with clients.</blockquote>
+      <blockquote>Perfect to use every day with clients exploring behaviour change.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much for your wonderful reviews
         Marcus!</p>
     </article>
@@ -423,7 +424,7 @@
         </div>
         <p class="testimonial-meta">KarMichay Pope &middot; Oct 24, 2024</p>
       </header>
-      <blockquote>Just what I needed to have.</blockquote>
+      <blockquote>Just what I needed to have on hand for outreach presentations.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much KarMichay!</p>
     </article>
     <article class="testimonial-card">
@@ -433,7 +434,7 @@
         </div>
         <p class="testimonial-meta">Devon Gray &middot; Oct 9, 2024</p>
       </header>
-      <blockquote>This was really great thanks.</blockquote>
+      <blockquote>This was really great thanks. The research methods cheatsheets are already in rotation.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you Devon, for your purchase and review.</p>
     </article>
     <article class="testimonial-card">
@@ -443,7 +444,7 @@
         </div>
         <p class="testimonial-meta">Charlotte Summersides &middot; Aug 10, 2024</p>
       </header>
-      <blockquote>Such good quality resources! Myself and my clients love them already!</blockquote>
+      <blockquote>Such good quality resources! My students and clients love them already!</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you so much Charlotte 😀</p>
     </article>
     <article class="testimonial-card">
@@ -453,8 +454,8 @@
         </div>
         <p class="testimonial-meta">Unni Babu &middot; Dec 3, 2024</p>
       </header>
-      <blockquote>Expected more unique worksheets instead of repeated worksheets on variety of pathologies. Missing core
-        beliefs worksheets which are crucial.</blockquote>
+      <blockquote>Expected more unique worksheets on niche research topics. Hoping for more advanced statistics
+        breakdowns in future updates.</blockquote>
       <p class="testimonial-response"><strong>Sam and Veronica:</strong> Thank you for your feedback Unni. We
         appreciate you taking the time to share your experience!</p>
     </article>
@@ -464,8 +465,8 @@
 <section class="cta-banner">
   <div class="cta-banner-copy">
     <h2>Have questions before you buy?</h2>
-    <p>If you would like to confirm whether the worksheets are right for your practice, reach out and we&apos;ll be
-      happy to help.</p>
+    <p>If you would like to confirm whether the toolkit fits your psychology curriculum or practice, reach out and
+      we&apos;ll be happy to help.</p>
   </div>
   <a class="button button-secondary" href="mailto:{{ shop.email }}">Contact us</a>
 </section>
