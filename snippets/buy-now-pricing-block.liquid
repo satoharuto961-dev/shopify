@@ -204,3 +204,129 @@
     }
   }
 </style>
+
+<script>
+  (function () {
+    if (typeof fetch !== 'function' || typeof URLSearchParams === 'undefined') {
+      return;
+    }
+
+    var checkoutUrl = '{{ routes.checkout_url }}';
+    var clearCartUrl = '{{ routes.cart_clear_url }}.js';
+
+    var bindBuyNowForm = function (form) {
+      if (!form || form.dataset.buyNowBound === 'true') {
+        return;
+      }
+
+      form.dataset.buyNowBound = 'true';
+
+      form.addEventListener('submit', function (event) {
+        if (form.dataset.buyNowBypass === 'true') {
+          form.dataset.buyNowBypass = 'false';
+          return;
+        }
+
+        event.preventDefault();
+
+        var submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.classList.add('buy-now-card__button--disabled');
+        }
+
+        var restoreButtonState = function () {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.classList.remove('buy-now-card__button--disabled');
+          }
+        };
+
+        var finalizeWithFallback = function () {
+          restoreButtonState();
+          form.dataset.buyNowBypass = 'true';
+          form.submit();
+        };
+
+        var formData = new FormData(form);
+        var variantId = formData.get('id');
+        var quantity = formData.get('quantity') || 1;
+        var sellingPlan = formData.get('selling_plan');
+
+        if (!variantId) {
+          finalizeWithFallback();
+          return;
+        }
+
+        var payload = {
+          items: [
+            {
+              id: variantId,
+              quantity: parseInt(quantity, 10) || 1
+            }
+          ]
+        };
+
+        if (sellingPlan) {
+          payload.items[0].selling_plan = sellingPlan;
+        }
+
+        var requestOptions = {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        };
+
+        fetch(clearCartUrl, requestOptions)
+          .catch(function () {
+            // Continue even if the cart could not be cleared so we can still attempt checkout.
+          })
+          .then(function () {
+            return fetch(form.action + '.js', Object.assign({}, requestOptions, {
+              body: JSON.stringify(payload)
+            }));
+          })
+          .then(function (response) {
+            if (!response || !response.ok) {
+              throw new Error('Failed to add item to cart');
+            }
+
+            window.location.href = checkoutUrl;
+          })
+          .catch(function () {
+            finalizeWithFallback();
+          });
+      });
+    };
+
+    var initializeBuyNowForms = function (root) {
+      var scope = root || document;
+      var forms = scope.querySelectorAll('.buy-now-card__form');
+      if (!forms.length) {
+        return;
+      }
+
+      forms.forEach(bindBuyNowForm);
+    };
+
+    var onReady = function (callback) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', callback);
+      } else {
+        callback();
+      }
+    };
+
+    onReady(function () {
+      initializeBuyNowForms(document);
+    });
+
+    document.addEventListener('shopify:section:load', function (event) {
+      initializeBuyNowForms(event.target);
+    });
+  })();
+</script>
