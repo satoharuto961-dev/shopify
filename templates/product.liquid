@@ -74,26 +74,7 @@
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           {%- endif -%}
 
-          <label class="product-form__label" for="Quantity-{{ form.id }}">Quantity</label>
-          <input
-            id="Quantity-{{ form.id }}"
-            class="product-form__input"
-            type="number"
-            name="quantity"
-            min="1"
-            value="1"
-          >
-
           {{ form | payment_terms }}
-
-          <button
-            type="submit"
-            name="add"
-            class="product-form__submit"
-            {%- unless product.available -%} disabled{%- endunless -%}
-          >
-            {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
-          </button>
 
           {%- if product.available -%}
             <div class="product-form__payment-button">
