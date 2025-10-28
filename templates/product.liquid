@@ -71,6 +71,7 @@
           {%- endif -%}
 
           <div class="product-pricing__primary">
+            <span class="product-pricing__label">Now</span>
             <span class="product-pricing__price">{{ product.price | money }}</span>
             {%- if product.compare_at_price > product.price -%}
               <span class="product-pricing__compare">{{ product.compare_at_price | money }}</span>
