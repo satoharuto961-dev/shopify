@@ -67,7 +67,7 @@
     <form method="post" action="{{ routes.cart_add_url }}" class="buy-now-card__form">
       <input type="hidden" name="id" value="{{ primary_variant.id }}">
       <input type="hidden" name="quantity" value="1">
-      <input type="hidden" name="return_to" value="/checkout">
+      <input type="hidden" name="return_to" value="{{ routes.checkout_url }}">
       <button type="submit" class="buy-now-card__button">Buy Now</button>
     </form>
   {%- endif -%}
