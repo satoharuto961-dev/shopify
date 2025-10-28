@@ -9,20 +9,21 @@
     {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
-    <header class="site-header">
-      <div class="site-branding">
-        <img
-          src="{{ 'psychology-logo.svg' | asset_url }}"
-          alt="Illustrated psychology press logo showing an open book"
-          width="96"
-          height="96"
-          class="site-logo"
-        >
-        <div class="site-brand-copy">
-          <p class="site-subtitle">
-            Curating psychology books, therapeutic workbooks, and reflective practices for every stage of healing.
-          </p>
-        </div>
+    <header class="site-header" id="top">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Psychoreads home">
+          <span class="brand-mark" aria-hidden="true">PR</span>
+          <span class="brand-name">Psychoreads</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#conversions">Why It Converts</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact" class="nav-cta">Contact</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
     <main class="site-main" role="main">
@@ -31,73 +32,31 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <h2 class="footer-title">{{ shop.name }}</h2>
-          <p>
-            Thoughtfully curated resources for clinicians, caregivers, and anyone exploring emotional wellbeing.
-          </p>
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">PR</span>
+            <span class="brand-name">Psychoreads</span>
+          </div>
+          <p>Premium Shopify systems for modern digital creators. We build, launch, and support your store so you can scale faster.</p>
         </div>
-        <div class="footer-section">
-          <h3 class="footer-heading">Explore</h3>
-          <ul class="footer-links">
-            <li><a href="/collections/all">Shop all titles</a></li>
-            <li><a href="/pages/about">About our collective</a></li>
-            <li><a href="/pages/contact">Consultations &amp; workshops</a></li>
+        <div class="footer-links">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="#features">What&apos;s Included</a></li>
+            <li><a href="#conversions">Conversion Strategy</a></li>
+            <li><a href="#pricing">Pricing</a></li>
           </ul>
+        </div>
+        <div class="footer-cta" id="contact">
+          <h2>Ready to launch?</h2>
+          <p>Message our team to finalize payment and access your turnkey Shopify website.</p>
+          <a class="button button-primary" href="/pages/contact">Contact Us to Purchase</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
-        <small>All content is for educational purposes and is not a substitute for professional care.</small>
+        <small>&copy; {{ 'now' | date: '%Y' }} Psychoreads. All rights reserved.</small>
+        <small>Secure delivery, full ownership, and lifetime support included.</small>
       </div>
     </footer>
     {{ content_for_footer }}
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var countdowns = document.querySelectorAll('[data-countdown-hours]');
-
-        countdowns.forEach(function (timer) {
-          var hours = parseFloat(timer.dataset.countdownHours);
-          if (isNaN(hours) || hours <= 0) {
-            return;
-          }
-
-          var targetTime = Date.now() + hours * 60 * 60 * 1000;
-          var container = timer.closest('[data-countdown-container]');
-          var finalText = container && container.dataset.countdownFinal ? container.dataset.countdownFinal : 'Sale ended';
-          var intervalId;
-
-          function render() {
-            var diff = targetTime - Date.now();
-
-            if (diff <= 0) {
-              if (container) {
-                container.textContent = finalText;
-              } else {
-                timer.textContent = finalText;
-              }
-
-              if (intervalId) {
-                clearInterval(intervalId);
-              }
-              return;
-            }
-
-            var totalSeconds = Math.floor(diff / 1000);
-            var hrs = Math.floor(totalSeconds / 3600);
-            var mins = Math.floor((totalSeconds % 3600) / 60);
-            var secs = totalSeconds % 60;
-
-            timer.textContent = [hrs, mins, secs]
-              .map(function (value) {
-                return String(value).padStart(2, '0');
-              })
-              .join(':');
-          }
-
-          render();
-          intervalId = window.setInterval(render, 1000);
-        });
-      });
-    </script>
   </body>
 </html>

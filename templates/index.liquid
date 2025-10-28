@@ -1,12 +1,181 @@
-{%- assign featured_product = collections['all'].products.first -%}
-
-{%- if featured_product -%}
-  {%- render 'product-landing', product: featured_product -%}
-{%- else -%}
-  <section class="product-unavailable">
-    <div class="product-unavailable__content">
-      <h1>Product coming soon</h1>
-      <p>Add a product to the <code>all</code> collection to showcase it on the homepage.</p>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-content">
+    <p class="hero-badge">Premium Shopify System</p>
+    <h1 id="hero-title">Launch Your Digital Product Business in 24 Hours — Without Coding or Apps.</h1>
+    <p class="hero-subtitle">Own a proven Shopify system that converts your digital products automatically.</p>
+    <a class="button button-primary" href="/pages/contact">Contact Us to Purchase This Website</a>
+    <p class="hero-trust">Includes theme, domain, setup, and full support — all for a one-time payment of $500.</p>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-mockup hero-mockup--home">
+      <span>Homepage Preview</span>
     </div>
-  </section>
-{%- endif -%}
+    <div class="hero-mockup hero-mockup--product">
+      <span>Product Page Preview</span>
+    </div>
+  </div>
+</section>
+
+<section class="visual-showcase" aria-labelledby="visual-showcase-title">
+  <div class="section-heading">
+    <h2 id="visual-showcase-title">Clean, fast, and optimized — built to sell eBooks, courses, templates, and more.</h2>
+    <p>Professional-grade layouts highlight your offer, capture trust instantly, and guide visitors straight to checkout.</p>
+  </div>
+  <div class="visual-grid">
+    <figure class="visual-card">
+      <div class="visual-screenshot visual-screenshot--home"></div>
+      <figcaption>Homepage mockup with hero, social proof, and instant purchase button.</figcaption>
+    </figure>
+    <figure class="visual-card">
+      <div class="visual-screenshot visual-screenshot--product"></div>
+      <figcaption>Product page optimized for digital downloads with instant delivery.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="features" id="features" aria-labelledby="features-title">
+  <div class="section-heading">
+    <h2 id="features-title">What You’ll Get</h2>
+    <p>Everything you need to launch a high-converting digital storefront in a single, done-for-you package.</p>
+  </div>
+  <ul class="feature-list">
+    <li>Fully optimized Shopify theme (instant checkout, no Add to Cart)</li>
+    <li>Domain name like Psychoreads.com (choose your own)</li>
+    <li>Prebuilt product page ready for digital downloads</li>
+    <li>Lifetime license + complete ownership</li>
+    <li>One-on-one support to customize your site</li>
+    <li>Quick setup guide + walkthrough video</li>
+  </ul>
+</section>
+
+<section class="conversions" id="conversions" aria-labelledby="conversions-title">
+  <div class="section-heading">
+    <h2 id="conversions-title">Why This System Converts</h2>
+    <p>We engineered every interaction around speed, clarity, and trust so your audience can buy the moment inspiration strikes.</p>
+  </div>
+  <div class="conversions-grid">
+    <div class="conversion-card">
+      <h3>No Add-to-Cart friction = more impulse buys.</h3>
+      <p>Instant checkout means your customer taps once, pays, and receives their download immediately. It’s the fastest path to revenue.</p>
+    </div>
+    <div class="conversion-card">
+      <h3>Mobile-first layout for faster sales.</h3>
+      <p>Over 70% of digital purchases happen on phones. We optimized typography, spacing, and payment buttons for thumbs and small screens.</p>
+    </div>
+    <div class="conversion-card">
+      <h3>Designed for digital creators.</h3>
+      <p>Whether you sell PDFs, templates, eBooks, or online courses, every section guides the buyer to understand, trust, and purchase quickly.</p>
+    </div>
+    <div class="conversion-card">
+      <h3>Every section built for clarity.</h3>
+      <p>From testimonials to FAQs, we deploy conversion copy best practices so visitors never feel lost — only excited to buy.</p>
+    </div>
+    <div class="conversion-stat">
+      <p class="stat-value">&lt; 30 seconds</p>
+      <p class="stat-caption">Average buyer completes checkout in under half a minute with our instant-purchase flow.</p>
+    </div>
+  </div>
+</section>
+
+<section class="examples" id="examples" aria-labelledby="examples-title">
+  <div class="section-heading">
+    <h2 id="examples-title">Live Examples</h2>
+    <p>See exactly how your store will look and perform once it’s live.</p>
+  </div>
+  <div class="example-links">
+    <a class="example-card" href="https://psychoreads.com" target="_blank" rel="noopener">🔗 View Home Page Example</a>
+    <a class="example-card" href="https://psychoreads.com/products/digital-library" target="_blank" rel="noopener">🔗 View Product Page Example</a>
+  </div>
+</section>
+
+<section class="audience" aria-labelledby="audience-title">
+  <div class="section-heading">
+    <h2 id="audience-title">Who This Is For</h2>
+  </div>
+  <div class="audience-grid">
+    <div>
+      <h3>Perfect For</h3>
+      <ul>
+        <li>Course creators</li>
+        <li>eBook authors</li>
+        <li>Template sellers</li>
+        <li>Coaches or educators</li>
+        <li>Anyone selling digital downloads</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Not For</h3>
+      <ul>
+        <li>Physical product stores</li>
+        <li>People who prefer manual setup</li>
+        <li>Businesses needing custom app development</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" aria-labelledby="testimonials-title">
+  <div class="section-heading">
+    <h2 id="testimonials-title">Real Results</h2>
+    <p>Swap in your own customer stories — the layout is ready to showcase social proof right away.</p>
+  </div>
+  <div class="testimonial-grid">
+    <blockquote class="testimonial-card">
+      <p>“This setup saved me weeks of work. My first sale came in the same day.”</p>
+      <cite>— Digital Product Author</cite>
+    </blockquote>
+    <blockquote class="testimonial-card">
+      <p>“The no-cart checkout doubled my conversions.”</p>
+      <cite>— Course Creator</cite>
+    </blockquote>
+    <blockquote class="testimonial-card">
+      <p>“Worth every dollar — perfect system for digital creators.”</p>
+      <cite>— Template Designer</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="section-heading">
+    <h2 id="faq-title">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Can I use my own domain?</summary>
+      <p>Absolutely. We help you connect your existing domain or secure a new one that aligns with your brand.</p>
+    </details>
+    <details>
+      <summary>How fast do I get access?</summary>
+      <p>You receive access within 24 hours of purchase. We deliver your login credentials and onboarding guide immediately.</p>
+    </details>
+    <details>
+      <summary>Will you transfer the site for me?</summary>
+      <p>Yes. We handle the entire transfer and configuration so you can simply log in and start selling.</p>
+    </details>
+    <details>
+      <summary>Is customization included?</summary>
+      <p>We include one-on-one support to tailor colors, copy, and products so the store reflects your brand perfectly.</p>
+    </details>
+    <details>
+      <summary>Can I resell this website later?</summary>
+      <p>Definitely. You own the full Shopify theme and domain, giving you the freedom to resell or rebrand anytime.</p>
+    </details>
+  </div>
+</section>
+
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="pricing-card">
+    <p class="pricing-badge">One-Time Payment</p>
+    <h2 id="pricing-title">Secure the complete Shopify website system for <span>$500</span>.</h2>
+    <p>No recurring fees • Lifetime access • Secure setup included</p>
+    <a class="button button-primary" href="/pages/contact">Contact Us to Purchase This Website</a>
+  </div>
+</section>
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta-card">
+    <h2 id="cta-title">👉 Contact Us to Purchase This Website.</h2>
+    <p>When you click the button, you’ll reach our contact page where our team will help you finalize your purchase.</p>
+    <a class="button button-primary" href="/pages/contact">Contact Us to Purchase This Website</a>
+  </div>
+</section>
