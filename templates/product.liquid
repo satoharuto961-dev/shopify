@@ -6,9 +6,6 @@
     </div>
   </section>
 {%- else -%}
-  {%- assign form_id = 'product-form-' | append: product.id -%}
-  {%- assign quantity_id = 'quantity-' | append: product.id -%}
-
   <section class="product-page" aria-labelledby="product-title">
     <nav class="product-breadcrumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>
@@ -60,92 +57,17 @@
           {%- endif -%}
         </header>
 
-        {%- assign popularity_badge = product.metafields.custom.popularity_badge -%}
-        {%- assign intro_badge = product.metafields.custom.promo_badge -%}
-        {%- assign promo_detail = product.metafields.custom.promo_detail -%}
-        {%- assign promo_timer = product.metafields.custom.promo_timer -%}
-
-        <div class="product-pricing" aria-label="Pricing information">
-          {%- if popularity_badge != blank -%}
-            <p class="product-pricing__popularity">{{ popularity_badge }}</p>
-          {%- endif -%}
-
-          <div class="product-pricing__primary">
-            <span class="product-pricing__label">Now</span>
-            <span class="product-pricing__price">{{ product.price | money }}</span>
-            {%- if product.compare_at_price > product.price -%}
-              <span class="product-pricing__compare">{{ product.compare_at_price | money }}</span>
-            {%- endif -%}
-          </div>
-
-          {%- if intro_badge != blank or product.compare_at_price > product.price or promo_detail != blank or promo_timer != blank -%}
-            <div class="product-pricing__meta">
-              {%- if intro_badge != blank -%}
-                <span class="product-pricing__badge">{{ intro_badge }}</span>
-              {%- endif -%}
-
-              {%- if product.compare_at_price > product.price -%}
-                {%- assign price_ratio = product.price | times: 10000 | divided_by: product.compare_at_price -%}
-                {%- assign discount_percentage = 10000 | minus: price_ratio -%}
-                {%- assign discount_percentage = discount_percentage | divided_by: 100 -%}
-                <span class="product-pricing__discount">{{ discount_percentage }}% off</span>
-              {%- endif -%}
-
-              {%- if promo_detail != blank -%}
-                <span class="product-pricing__detail">{{ promo_detail }}</span>
-              {%- endif -%}
-
-              {%- if promo_timer != blank -%}
-                <span class="product-pricing__timer">{{ promo_timer }}</span>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+        <div class="product-buy-now" aria-label="Checkout pricing spotlight">
+          {%- render 'buy-now-pricing-block', product: product -%}
         </div>
 
         {%- if product.description != blank -%}
           <div class="product-description">{{ product.description }}</div>
         {%- endif -%}
 
-        {%- form 'product', product, id: form_id, class: 'product-form' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
-          {%- if product.variants.size > 1 -%}
-            <div class="product-options">
-              {%- for option in product.options_with_values -%}
-                <fieldset class="product-option">
-                  <legend>{{ option.name }}</legend>
-                  <div class="product-option-values">
-                    {%- for value in option.values -%}
-                      {%- assign option_id = option.name | handleize | append: '-' | append: value | handleize -%}
-                      <label class="product-option-value" for="{{ option_id }}">
-                        <input
-                          id="{{ option_id }}"
-                          type="radio"
-                          name="options[{{ option.name }}]"
-                          value="{{ value }}"
-                          {%- if option.selected_value == value -%}checked{%- endif -%}
-                        >
-                        <span>{{ value }}</span>
-                      </label>
-                    {%- endfor -%}
-                  </div>
-                </fieldset>
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-
-          <div class="product-cta">
-            <label class="product-quantity" for="{{ quantity_id }}">Quantity</label>
-            <input id="{{ quantity_id }}" name="quantity" type="number" min="1" value="1" inputmode="numeric">
-            <button type="submit" class="button button-primary" {%- unless product.available -%}disabled{%- endunless -%}>
-              {%- if product.available -%}
-                Add to cart
-              {%- else -%}
-                Sold out
-              {%- endif -%}
-            </button>
-          </div>
-        {%- endform -%}
+        <div class="product-direct-checkout-note">
+          <p>Ready to get started? Head straight to checkout — no cart required.</p>
+        </div>
 
         <div class="product-extra">
           <h2>What makes this book special</h2>
