@@ -6,23 +6,17 @@
     </div>
   </section>
 {%- else -%}
-  <section class="product-page" aria-labelledby="product-title">
-    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      <span aria-hidden="true">&rsaquo;</span>
-      <span>{{ product.title }}</span>
-    </nav>
-
-    <div class="product-content">
-      <div class="product-gallery">
+  <section class="product" aria-labelledby="product-title">
+    <div class="product__grid">
+      <div class="product__media">
         {%- if product.media.size > 0 -%}
-          <div class="product-media-list" role="list">
+          <div class="product__media-gallery" role="list">
             {%- for media in product.media -%}
-              <figure class="product-media-thumb" role="listitem">
+              <figure class="product__media-item" role="listitem">
                 {{
                   media
                   | media_tag:
-                    class: 'product-media-image',
+                    class: 'product__media-image',
                     loading: 'lazy',
                     image_size: '2048x2048'
                 }}
@@ -32,52 +26,262 @@
               </figure>
             {%- endfor -%}
           </div>
+        {%- else -%}
+          <div class="product__media-placeholder">No media available</div>
         {%- endif -%}
-
-        <div class="product-media-featured">
-          {%- if product.featured_media -%}
-            {{
-              product.featured_media
-              | media_tag:
-                class: 'product-media-main',
-                loading: 'eager',
-                image_size: '2048x2048'
-            }}
-          {%- else -%}
-            <div class="product-media-placeholder">No media available</div>
-          {%- endif -%}
-        </div>
       </div>
 
-      <aside class="product-details">
-        <header class="product-header">
+      <div class="product__details">
+        <header class="product__header">
           <h1 id="product-title">{{ product.title }}</h1>
           {%- if product.vendor != blank -%}
-            <p class="product-vendor">By {{ product.vendor }}</p>
+            <p class="product__vendor">By {{ product.vendor }}</p>
           {%- endif -%}
         </header>
 
-        <div class="product-buy-now" aria-label="Checkout pricing spotlight">
-          {%- render 'buy-now-pricing-block', product: product -%}
+        <div class="product__pricing">
+          {%- assign primary_variant = product.selected_or_first_available_variant -%}
+          <span class="product__price">{{ primary_variant.price | money }}</span>
+          {%- if primary_variant.compare_at_price > primary_variant.price -%}
+            <span class="product__price--compare">{{ primary_variant.compare_at_price | money }}</span>
+          {%- endif -%}
         </div>
 
         {%- if product.description != blank -%}
-          <div class="product-description">{{ product.description }}</div>
+          <div class="product__description">{{ product.description }}</div>
         {%- endif -%}
 
-        <div class="product-direct-checkout-note">
-          <p>Ready to get started? Head straight to checkout — no cart required.</p>
-        </div>
+        {%- form 'product', product, class: 'product-form' -%}
+          {%- if product.variants.size > 1 -%}
+            <label class="product-form__label" for="VariantSelector-{{ form.id }}">Choose an option</label>
+            <select
+              id="VariantSelector-{{ form.id }}"
+              name="id"
+              class="product-form__select"
+            >
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  {%- if variant == product.selected_or_first_available_variant -%} selected{%- endif -%}
+                  {%- unless variant.available -%} disabled{%- endunless -%}
+                >
+                  {{ variant.title }}{%- unless variant.available -%} — Sold out{%- endunless -%}
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- endif -%}
 
-        <div class="product-extra">
-          <h2>What makes this book special</h2>
-          <ul>
-            <li>Curated therapeutic practices to integrate each chapter.</li>
-            <li>Thoughtfully designed print with premium, eco-conscious materials.</li>
-            <li>Complimentary access to guided meditations and discussion circles.</li>
-          </ul>
-        </div>
-      </aside>
+          <label class="product-form__label" for="Quantity-{{ form.id }}">Quantity</label>
+          <input
+            id="Quantity-{{ form.id }}"
+            class="product-form__input"
+            type="number"
+            name="quantity"
+            min="1"
+            value="1"
+          >
+
+          <button
+            type="submit"
+            name="add"
+            class="product-form__submit"
+            {%- unless product.available -%} disabled{%- endunless -%}
+          >
+            {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+          </button>
+
+          {%- if product.available -%}
+            <div class="product-form__payment-button">
+              {{ form | payment_button }}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
     </div>
   </section>
 {%- endif -%}
+
+<style>
+  .product-unavailable {
+    padding: 6rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .product-unavailable__content {
+    max-width: 28rem;
+  }
+
+  .product-unavailable__content h1 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .product-unavailable__content p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+  }
+
+  .product {
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .product__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .product__media {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .product__media-gallery {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .product__media-item {
+    margin: 0;
+  }
+
+  .product__media-image {
+    width: 100%;
+    border-radius: 1rem;
+    display: block;
+  }
+
+  .product__media-placeholder {
+    padding: 4rem 2rem;
+    border: 2px dashed #d1d5db;
+    border-radius: 1rem;
+    text-align: center;
+    color: #6b7280;
+  }
+
+  .product__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .product__header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.2;
+  }
+
+  .product__vendor {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  .product__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .product__price {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .product__price--compare {
+    color: #9ca3af;
+    text-decoration: line-through;
+    font-size: 1rem;
+  }
+
+  .product__description {
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: 2rem;
+  }
+
+  .product-form {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .product-form__label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .product-form__select,
+  .product-form__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+  }
+
+  .product-form__submit {
+    padding: 0.9rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    background-color: #111827;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .product-form__submit:hover:not([disabled]) {
+    background-color: #0b1220;
+    transform: translateY(-1px);
+  }
+
+  .product-form__submit[disabled] {
+    cursor: not-allowed;
+    background-color: #d1d5db;
+    color: #6b7280;
+  }
+
+  .product-form__payment-button .shopify-payment-button__button--unbranded {
+    border-radius: 9999px;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 720px) {
+    .product {
+      padding: 2rem 1rem;
+    }
+
+    .product__pricing {
+      margin: 1rem 0;
+    }
+  }
+</style>
