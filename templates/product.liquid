@@ -1,1 +1,116 @@
-{%- render 'product-landing', product: product -%}
+{%- if product == blank -%}
+  <section class="product-unavailable">
+    <div class="product-unavailable__content">
+      <h1>Product coming soon</h1>
+      <p>We're preparing our next release. Please check back soon for full details.</p>
+    </div>
+  </section>
+{%- else -%}
+  {%- assign form_id = 'product-form-' | append: product.id -%}
+  {%- assign quantity_id = 'quantity-' | append: product.id -%}
+
+  <section class="product-page" aria-labelledby="product-title">
+    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">&rsaquo;</span>
+      <span>{{ product.title }}</span>
+    </nav>
+
+    <div class="product-content">
+      <div class="product-gallery">
+        {%- if product.media.size > 0 -%}
+          <div class="product-media-list" role="list">
+            {%- for media in product.media -%}
+              <figure class="product-media-thumb" role="listitem">
+                {{ media | media_tag: class: 'product-media-image', loading: 'lazy' }}
+                {%- if media.alt != blank -%}
+                  <figcaption class="visually-hidden">{{ media.alt }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-media-featured">
+          {%- if product.featured_media -%}
+            {{ product.featured_media | media_tag: class: 'product-media-main', loading: 'eager' }}
+          {%- else -%}
+            <div class="product-media-placeholder">No media available</div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <aside class="product-details">
+        <header class="product-header">
+          <h1 id="product-title">{{ product.title }}</h1>
+          {%- if product.vendor != blank -%}
+            <p class="product-vendor">By {{ product.vendor }}</p>
+          {%- endif -%}
+        </header>
+
+        <div class="product-pricing">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-price product-price--sale">{{ product.price | money }}</span>
+            <span class="product-price product-price--compare">{{ product.compare_at_price | money }}</span>
+          {%- else -%}
+            <span class="product-price">{{ product.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="product-description">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- form 'product', product, id: form_id, class: 'product-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          {%- if product.variants.size > 1 -%}
+            <div class="product-options">
+              {%- for option in product.options_with_values -%}
+                <fieldset class="product-option">
+                  <legend>{{ option.name }}</legend>
+                  <div class="product-option-values">
+                    {%- for value in option.values -%}
+                      {%- assign option_id = option.name | handleize | append: '-' | append: value | handleize -%}
+                      <label class="product-option-value" for="{{ option_id }}">
+                        <input
+                          id="{{ option_id }}"
+                          type="radio"
+                          name="options[{{ option.name }}]"
+                          value="{{ value }}"
+                          {%- if option.selected_value == value -%}checked{%- endif -%}
+                        >
+                        <span>{{ value }}</span>
+                      </label>
+                    {%- endfor -%}
+                  </div>
+                </fieldset>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="product-cta">
+            <label class="product-quantity" for="{{ quantity_id }}">Quantity</label>
+            <input id="{{ quantity_id }}" name="quantity" type="number" min="1" value="1" inputmode="numeric">
+            <button type="submit" class="button button-primary" {%- unless product.available -%}disabled{%- endunless -%}>
+              {%- if product.available -%}
+                Add to cart
+              {%- else -%}
+                Sold out
+              {%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="product-extra">
+          <h2>What makes this book special</h2>
+          <ul>
+            <li>Curated therapeutic practices to integrate each chapter.</li>
+            <li>Thoughtfully designed print with premium, eco-conscious materials.</li>
+            <li>Complimentary access to guided meditations and discussion circles.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+{%- endif -%}
