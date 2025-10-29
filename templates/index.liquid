@@ -17,13 +17,14 @@
 
 <style>
   :root {
-    --bg-gradient-start: #f8fafc;
-    --bg-gradient-end: #ffffff;
+    --bg-gradient-start: #eff6ff;
+    --bg-gradient-mid: rgba(255, 255, 255, 0.94);
+    --bg-gradient-end: #dbeafe;
     --color-primary: #2563eb;
-    --color-text: #1e293b;
-    --color-muted: #4b5563;
-    --color-surface: #ffffff;
-    --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.08);
+    --color-text: #1f2937;
+    --color-muted: #475569;
+    --color-surface: rgba(255, 255, 255, 0.88);
+    --shadow-soft: 0 28px 70px rgba(15, 23, 42, 0.12);
     --radius-xl: 28px;
     font-family: "Inter", "Poppins", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
@@ -34,13 +35,31 @@
   }
 
   .page-wrapper {
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    position: relative;
+    background: radial-gradient(circle at 28% 35%, rgba(59, 130, 246, 0.22), transparent 58%),
+      radial-gradient(circle at 75% 18%, rgba(14, 165, 233, 0.16), transparent 60%),
+      linear-gradient(125deg, var(--bg-gradient-start) 5%, var(--bg-gradient-mid) 52%, var(--bg-gradient-end) 100%);
     min-height: 100vh;
     overflow: hidden;
     font-family: "Inter", "Poppins", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
+  .page-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 25%, rgba(37, 99, 235, 0.28), transparent 55%),
+      radial-gradient(circle at 68% 70%, rgba(96, 165, 250, 0.16), transparent 65%),
+      linear-gradient(140deg, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
+    filter: blur(32px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .content-max {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: 3.5rem 1.75rem;
@@ -58,28 +77,28 @@
     padding-bottom: 6rem;
   }
 
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 55%),
-      radial-gradient(circle at bottom left, rgba(15, 118, 110, 0.05), transparent 60%),
-      linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, transparent 55%);
-    opacity: 0.75;
-    pointer-events: none;
-  }
-
   .hero-inner {
     position: relative;
     display: grid;
-    gap: 3rem;
-    align-items: stretch;
-    animation: fadeInUp 0.9s ease forwards;
+    gap: clamp(1.75rem, 4vw, 2.75rem);
+    align-items: start;
   }
 
-  @media (min-width: 960px) {
+  @media (min-width: 1024px) {
     .hero-inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .hero-card {
+      margin: 0 auto;
+    }
+
+    .hero-showcase {
+      width: min(100%, 420px);
+      margin: 0 auto;
     }
   }
 
@@ -87,12 +106,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: calc(var(--radius-xl) + 8px);
-    padding: clamp(2rem, 3vw, 2.75rem);
-    box-shadow: 0 35px 60px rgba(15, 23, 42, 0.15);
-    backdrop-filter: blur(12px);
+    gap: 2.25rem;
+    background: var(--color-surface);
+    border-radius: calc(var(--radius-xl) + 10px);
+    padding: clamp(2.6rem, 3vw, 3.2rem);
+    box-shadow: 0 44px 82px rgba(15, 23, 42, 0.15);
+    backdrop-filter: blur(18px);
+  }
+
+  @media (max-width: 639px) {
+    .hero-card {
+      padding: 2.2rem;
+    }
   }
 
   @media (prefers-reduced-transparency: reduce) {
@@ -115,16 +140,17 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.125rem;
+    gap: 1.4rem;
+    max-width: 600px;
     z-index: 1;
   }
 
   .hero-badge {
     align-self: flex-start;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.08));
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(37, 99, 235, 0.08));
     color: var(--color-primary);
     font-weight: 600;
-    padding: 0.45rem 1.25rem;
+    padding: 0.5rem 1.35rem;
     border-radius: 999px;
     font-size: 0.82rem;
     letter-spacing: 0.12em;
@@ -132,34 +158,37 @@
   }
 
   h1.hero-title {
-    font-size: clamp(2.55rem, 6vw, 3.9rem);
-    line-height: 1.05;
-    font-weight: 700;
+    font-size: clamp(3.4rem, 6vw, 5rem);
+    line-height: 1.02;
+    font-weight: 600;
     color: var(--color-text);
+    letter-spacing: -0.025em;
   }
 
   .hero-subtitle {
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
-    color: rgba(30, 41, 59, 0.86);
-    line-height: 1.65;
+    font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+    color: rgba(30, 41, 59, 0.78);
+    line-height: 1.9;
+    font-weight: 400;
   }
 
   .hero-points {
     display: grid;
-    gap: 0.85rem;
+    gap: 1.1rem;
     margin: 0;
     padding: 0;
     list-style: none;
     z-index: 1;
+    max-width: 600px;
   }
 
   .hero-points li {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.75rem;
     align-items: flex-start;
-    font-size: 0.98rem;
-    color: var(--color-muted);
-    line-height: 1.55;
+    font-size: 1.05rem;
+    color: rgba(71, 85, 105, 0.88);
+    line-height: 1.7;
   }
 
   .hero-points li svg {
@@ -173,34 +202,40 @@
   .hero-cta {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+    align-items: flex-start;
     z-index: 1;
   }
 
-  @media (min-width: 640px) {
-    .hero-cta {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
+  .hero-purchase-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 22px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 28px 56px rgba(15, 23, 42, 0.12);
+    max-width: 360px;
+    backdrop-filter: blur(14px);
   }
 
   .hero-price {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.45rem;
+    min-width: 0;
   }
 
   .hero-price-amount {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.4rem;
+    font-weight: 600;
     color: var(--color-text);
   }
 
   .hero-price-caption {
-    font-size: 0.95rem;
-    color: var(--color-muted);
+    font-size: 1rem;
+    color: rgba(71, 85, 105, 0.78);
   }
 
   .button-primary {
@@ -208,7 +243,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    padding: 0.95rem 2.5rem;
+    padding: 0.95rem 2.4rem;
     background-color: var(--color-primary);
     color: #ffffff;
     border-radius: 999px;
@@ -217,12 +252,19 @@
     box-shadow: 0 18px 30px rgba(37, 99, 235, 0.25);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-purchase-card .button-primary {
+    width: 100%;
+    justify-content: center;
   }
 
   .button-primary:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 22px 38px rgba(37, 99, 235, 0.32);
+    opacity: 0.96;
+    transform: translateY(-2px);
+    box-shadow: 0 24px 46px rgba(37, 99, 235, 0.3);
   }
 
   .button-primary:focus {
@@ -230,17 +272,43 @@
     outline-offset: 4px;
   }
 
+  .button-primary[aria-busy="true"],
+  .button-primary[data-loading="true"] {
+    opacity: 0.9;
+    transform: none;
+    box-shadow: 0 14px 26px rgba(37, 99, 235, 0.25);
+  }
+
+  .button-primary[aria-busy="true"]::after,
+  .button-primary[data-loading="true"]::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-top-color: #ffffff;
+    animation: spin 0.9s linear infinite;
+    right: 1.4rem;
+  }
+
   .hero-trust {
-    color: var(--color-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: rgba(71, 85, 105, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.8;
     z-index: 1;
+    max-width: 600px;
+    margin-top: 0.5rem;
   }
 
   .hero-visual {
     position: relative;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    align-self: stretch;
+    margin-top: clamp(0.5rem, 2vw, 1.5rem);
   }
 
   .hero-visual::before,
@@ -271,37 +339,57 @@
     position: relative;
     width: min(100%, 480px);
     display: grid;
-    gap: 1.75rem;
+    gap: 2rem;
     z-index: 1;
+    justify-items: stretch;
+  }
+
+  @media (max-width: 719px) {
+    .hero-showcase {
+      width: 100%;
+      gap: 1.25rem;
+    }
   }
 
   .hero-showcase-card {
-    background: #ffffff;
-    border-radius: calc(var(--radius-xl) + 4px);
-    padding: 1.75rem;
-    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
-    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: calc(var(--radius-xl) + 6px);
+    padding: 2rem;
+    box-shadow: 0 28px 62px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    backdrop-filter: blur(12px);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
   }
 
-  .hero-showcase-card:first-child {
-    transform: translateX(-6%);
+  .hero-showcase-card:hover {
+    transform: translateY(26px);
+    box-shadow: 0 32px 72px rgba(15, 23, 42, 0.16);
   }
 
-  .hero-showcase-card:last-child {
-    transform: translateX(12%);
-  }
+  @media (max-width: 719px) {
+    .hero-purchase-card {
+      width: 100%;
+    }
 
-  @media (max-width: 959px) {
-    .hero-showcase-card:first-child,
-    .hero-showcase-card:last-child {
-      transform: none;
+    .button-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .hero-showcase-card {
+      padding: 1.75rem;
     }
   }
 
   .hero-showcase-card h3 {
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0.85rem;
+    margin-bottom: 1.1rem;
     color: var(--color-text);
   }
 
@@ -315,35 +403,47 @@
 
   .hero-showcase-list li {
     display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.95rem;
-    color: var(--color-muted);
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    color: rgba(71, 85, 105, 0.88);
+    line-height: 1.7;
   }
 
   .hero-showcase-list li svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     color: var(--color-primary);
+    margin-top: 0.1rem;
   }
 
   .hero-testimonial {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    color: var(--color-muted);
-    line-height: 1.55;
+    gap: 1.2rem;
+    font-size: 1.05rem;
+    color: rgba(71, 85, 105, 0.88);
+    line-height: 1.75;
+    background: linear-gradient(160deg, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.96));
+    border: 1px solid rgba(37, 99, 235, 0.14);
+    box-shadow: 0 32px 70px rgba(37, 99, 235, 0.14);
+  }
+
+  .hero-testimonial p {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: rgba(30, 41, 59, 0.9);
   }
 
   .hero-testimonial strong {
     color: var(--color-text);
     font-weight: 600;
+    font-size: 1.05rem;
   }
 
   .hero-testimonial span[aria-hidden="true"] {
-    font-size: 1.05rem;
-    letter-spacing: 0.15em;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
     color: #f59e0b;
   }
 
@@ -681,6 +781,28 @@
     opacity: 0.9;
   }
 
+  body.animate-ready [data-animate] {
+    opacity: 0;
+    transform: translateY(42px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  body.animate-ready [data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.animate-ready [data-animate] {
+      opacity: 1;
+      transform: none;
+    }
+
+    body.animate-ready [data-animate].is-visible {
+      transition: none;
+    }
+  }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -703,6 +825,23 @@
     }
   }
 
+  @keyframes floatFade {
+    from {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   @keyframes fadeLoop {
     0%, 20% {
       opacity: 1;
@@ -717,54 +856,56 @@
   <div class="content-max">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
-        <article class="hero-card">
+        <article class="hero-card" data-animate="fade-up">
           <div class="hero-header">
-            <span class="hero-badge">Therapy Resource Library</span>
-            <h1 id="hero-title" class="hero-title">CBT Worksheets Mega Bundle</h1>
-            <p class="hero-subtitle">Therapist &amp; Counselor Therapy Resources crafted by Psychology Books to help you deliver evidence-based change with clarity, compassion, and confidence.</p>
+            <span class="hero-badge">Professional CBT Toolkit</span>
+            <h1 id="hero-title" class="hero-title">Therapy Resource Library</h1>
+            <p class="hero-subtitle">A comprehensive bundle of CBT worksheets, guides, and trackers that helps therapists deliver structured, evidence-based care with clarity and confidence.</p>
           </div>
           <ul class="hero-points">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              <span>Evidence-based CBT frameworks tailored to anxiety, depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders.</span>
+              <span>Condition-specific CBT frameworks covering anxiety, depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="14" rx="2" />
                 <path d="M7 8h10M7 12h6" />
               </svg>
-              <span>Printable worksheets, guided cards, and reflection journals refined for professional 1:1 and group sessions.</span>
+              <span>Printable worksheets, guided cards, and reflection journals designed for both 1:1 sessions and group programs.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 13l4 4L19 7" />
               </svg>
-              <span>Ready-to-use resources that blend psychoeducation, skills practice, and progress tracking for every stage of care.</span>
+              <span>Step-by-step resources that weave psychoeducation, skills practice, and measurable progress tracking into every stage of care.</span>
             </li>
           </ul>
           <div class="hero-cta">
-            <div class="hero-price">
-              <span class="hero-price-amount">$29.00</span>
-              <span class="hero-price-caption">Instant digital download</span>
+            <div class="hero-purchase-card" data-animate="fade-up" data-animate-delay="0.1">
+              <div class="hero-price">
+                <span class="hero-price-amount">$29.00</span>
+                <span class="hero-price-caption">Instant digital download</span>
+              </div>
+              <a
+                class="button button-primary"
+                href="{{ featured_product.url | default: routes.root_url }}"
+                {% if direct_checkout_variant_id %}
+                  data-checkout-variant="{{ direct_checkout_variant_id }}"
+                  data-checkout-quantity="1"
+                  data-checkout-redirect="{{ routes.checkout_url }}"
+                  data-checkout-loading-text="Loading checkout&hellip;"
+                {% endif %}
+              >Buy Now</a>
             </div>
-            <a
-              class="button button-primary"
-              href="{{ featured_product.url | default: routes.root_url }}"
-              {% if direct_checkout_variant_id %}
-                data-checkout-variant="{{ direct_checkout_variant_id }}"
-                data-checkout-quantity="1"
-                data-checkout-redirect="{{ routes.checkout_url }}"
-                data-checkout-loading-text="Redirecting&hellip;"
-              {% endif %}
-            >Buy Now</a>
           </div>
-          <p class="hero-trust">Developed for licensed professionals supporting clients navigating anxiety, depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders.</p>
+          <p class="hero-trust">Created for licensed clinicians guiding clients through anxiety, depression, OCD, ADHD, insomnia, addiction, chronic pain, and eating disorders.</p>
         </article>
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-showcase">
-            <div class="hero-showcase-card">
+            <div class="hero-showcase-card" data-animate="fade-up" data-animate-delay="0.15">
               <h3>Inside the Mega Bundle</h3>
               <ul class="hero-showcase-list">
                 <li>
@@ -795,7 +936,7 @@
                 </li>
               </ul>
             </div>
-            <div class="hero-showcase-card hero-testimonial">
+            <div class="hero-showcase-card hero-testimonial" data-animate="fade-up" data-animate-delay="0.3">
               <div>
                 <span aria-hidden="true">⭐️⭐️⭐️⭐️⭐️</span>
                 <p>“These CBT worksheets have transformed how I run sessions — practical, clear, and effective.”</p>
@@ -984,10 +1125,52 @@
             data-checkout-variant="{{ direct_checkout_variant_id }}"
             data-checkout-quantity="1"
             data-checkout-redirect="{{ routes.checkout_url }}"
-            data-checkout-loading-text="Redirecting&hellip;"
+            data-checkout-loading-text="Loading checkout&hellip;"
           {% endif %}
         >Checkout Now</a>
       </div>
     </section>
   </div>
 </div>
+
+<script>
+  if (document.body) {
+    document.body.classList.add('animate-ready');
+  } else {
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('animate-ready');
+    }, { once: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var animated = document.querySelectorAll('[data-animate]');
+    if (!animated.length) {
+      return;
+    }
+
+    var activate = function (el) {
+      var delay = el.getAttribute('data-animate-delay');
+      if (delay) {
+        el.style.transitionDelay = delay + 's';
+      }
+      el.classList.add('is-visible');
+    };
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            activate(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      animated.forEach(function (el) {
+        observer.observe(el);
+      });
+    } else {
+      animated.forEach(activate);
+    }
+  });
+</script>
