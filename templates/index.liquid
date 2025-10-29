@@ -33,6 +33,48 @@
   </div>
 </section>
 
+{% assign featured_collection = collections['frontpage'] %}
+{% if featured_collection == nil or featured_collection.products_count == 0 %}
+  {% assign featured_collection = collections['all'] %}
+{% endif %}
+
+{% if featured_collection and featured_collection.products_count > 0 %}
+  <section class="product-showcase" aria-labelledby="product-showcase-title">
+    <div class="section-heading">
+      <h2 id="product-showcase-title">See the bundle in action</h2>
+      <p>Preview real pages from the CBT Worksheets Mega Bundle and explore the variety of therapist-ready resources.</p>
+    </div>
+    <div class="product-showcase-grid">
+      {% for product in featured_collection.products limit: 3 %}
+        <article class="product-card">
+          <a class="product-card__link" href="{{ product.url }}">
+            {% if product.featured_image %}
+              <img
+                class="product-card__image"
+                src="{{ product.featured_image | img_url: '720x' }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
+              >
+            {% else %}
+              <div class="product-card__placeholder" aria-hidden="true">
+                {{ product.title | escape }}
+              </div>
+            {% endif %}
+            <div class="product-card__content">
+              <h3 class="product-card__title">{{ product.title | escape }}</h3>
+              {% if product.price %}
+                <p class="product-card__price">{{ product.price | money }}</p>
+              {% endif %}
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
 <section class="features" id="features" aria-labelledby="features-title">
   <div class="section-heading">
     <h2 id="features-title">Everything inside the Mega Bundle</h2>
