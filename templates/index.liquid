@@ -33,6 +33,65 @@
   </div>
 </section>
 
+{% assign featured_collection = collections['frontpage'] %}
+{% if featured_collection == nil or featured_collection.products_count == 0 %}
+  {% assign featured_collection = collections['all'] %}
+{% endif %}
+
+{% if featured_collection and featured_collection.products_count > 0 %}
+  {% assign featured_product = featured_collection.products | first %}
+  {% if featured_product %}
+    <section class="product-highlight" aria-labelledby="product-highlight-title">
+      <div class="section-heading">
+        <h2 id="product-highlight-title">Inside the CBT Worksheets Mega Bundle</h2>
+        <p>Get a closer look at the flagship product included with your purchase.</p>
+      </div>
+      <div class="product-highlight__body">
+        <div class="product-highlight__gallery" role="list">
+          {% if featured_product.images.size > 0 %}
+            {% for image in featured_product.images limit: 3 %}
+              <figure class="product-highlight__frame" role="listitem">
+                <img
+                  class="product-highlight__image"
+                  src="{{ image | img_url: '900x' }}"
+                  alt="{{ image.alt | default: featured_product.title | escape }}"
+                  loading="lazy"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                >
+              </figure>
+            {% endfor %}
+          {% elsif featured_product.featured_image %}
+            <figure class="product-highlight__frame" role="listitem">
+              <img
+                class="product-highlight__image"
+                src="{{ featured_product.featured_image | img_url: '900x' }}"
+                alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}"
+                loading="lazy"
+                width="{{ featured_product.featured_image.width }}"
+                height="{{ featured_product.featured_image.height }}"
+              >
+            </figure>
+          {% else %}
+            <div class="product-highlight__placeholder" role="listitem" aria-hidden="true">
+              {{ featured_product.title | escape }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="product-highlight__meta">
+          <h3 class="product-highlight__title">{{ featured_product.title | escape }}</h3>
+          {% if featured_product.description != blank %}
+            <p class="product-highlight__description">
+              {{ featured_product.description | strip_html | truncate: 160 }}
+            </p>
+          {% endif %}
+          <a class="button button-primary" href="{{ featured_product.url }}">View product details</a>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endif %}
+
 <section class="features" id="features" aria-labelledby="features-title">
   <div class="section-heading">
     <h2 id="features-title">Everything inside the Mega Bundle</h2>
