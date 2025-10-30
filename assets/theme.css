@@ -1546,3 +1546,7 @@ a:focus {
     min-width: auto;
   }
 }
+
+.hero-column h1 {
+  word-break: keep-all;
+}
