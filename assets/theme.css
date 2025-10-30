@@ -509,6 +509,20 @@ a:focus {
   gap: 4.5rem;
 }
 
+.site-main--full-bleed {
+  max-width: none;
+  width: 100%;
+  padding: 0 0 5rem;
+}
+
+.site-main--full-bleed > * {
+  width: 100%;
+}
+
+.site-main--full-bleed .page-wrapper {
+  margin: 0;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
