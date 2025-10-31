@@ -157,20 +157,6 @@
               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
             {%- endif -%}
 
-            <div class="product-form__quantity">
-              <label class="product-form__label" for="Quantity-{{ form.id }}">Quantity</label>
-              <input
-                id="Quantity-{{ form.id }}"
-                class="product-form__quantity-input"
-                type="number"
-                name="quantity"
-                value="1"
-                min="1"
-                inputmode="numeric"
-                pattern="[0-9]*"
-              >
-            </div>
-
             {{ form | payment_terms }}
 
             {%- if product.available -%}
