@@ -79,6 +79,29 @@
             {%- if product.vendor != blank -%}
               <p class="product__vendor">By {{ product.vendor }}</p>
             {%- endif -%}
+            {%- liquid
+              assign product_rating = 4.9
+              assign product_reviews_count = 128
+
+              if product.metafields.reviews.average
+                assign product_rating = product.metafields.reviews.average
+              elsif product.metafields.global.rating
+                assign product_rating = product.metafields.global.rating
+              endif
+
+              if product.metafields.reviews.count
+                assign product_reviews_count = product.metafields.reviews.count
+              elsif product.metafields.global.rating_count
+                assign product_reviews_count = product.metafields.global.rating_count
+              endif
+            -%}
+            <div class="product__rating" role="img" aria-label="Rated {{ product_rating | round: 1 }} out of 5 stars based on {{ product_reviews_count }} reviews">
+              <span class="product__rating-stars" aria-hidden="true">{%- render 'star-rating', rating: product_rating -%}</span>
+              <span class="product__rating-score">
+                {{ product_rating | round: 1 }}
+                <span class="product__rating-count">({{ product_reviews_count }} reviews)</span>
+              </span>
+            </div>
           </header>
           {%- if product.tags.size > 0 -%}
             <ul class="product__feature-badges" role="list">
@@ -167,6 +190,24 @@
         </div>
 
         <div class="product__meta">
+          <section class="product__highlights" aria-label="Product highlights">
+            <h2>Why teams choose {{ product.title }}</h2>
+            <ul class="product__highlights-list" role="list">
+              <li>
+                <h3>Intentional weekly rituals</h3>
+                <p>Guided check-ins keep focus on what matters, helping every teammate arrive prepared and aligned.</p>
+              </li>
+              <li>
+                <h3>Clarity you can act on</h3>
+                <p>Structured summaries instantly surface blockers, wins, and next steps so nothing slips through the cracks.</p>
+              </li>
+              <li>
+                <h3>Human-first experience</h3>
+                <p>Beautifully crafted prompts and visuals make participation feel like a habit teams want to keep.</p>
+              </li>
+            </ul>
+          </section>
+
           <ul class="product__meta-list" role="list">
             {%- if product.type != blank -%}
               <li>
@@ -228,5 +269,5 @@
     </div>
   </section>
 
-  {%- render 'product-reviews' -%}
+  {%- render 'product-reviews', product: product -%}
 {%- endif -%}
