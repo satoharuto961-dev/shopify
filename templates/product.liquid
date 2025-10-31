@@ -8,17 +8,51 @@
 {%- else -%}
   <section class="product" aria-labelledby="product-title">
     <div class="product__grid">
-      <div class="product__media">
-        {%- if product.media.size > 0 -%}
-          <div class="product__media-gallery" role="list">
+      <div class="product__gallery">
+        {%- assign featured_media = product.featured_media -%}
+        {%- if featured_media -%}
+          <figure class="product__gallery-stage">
+            {{
+              featured_media
+              | media_tag:
+                class: 'product__media-image product__media-image--primary',
+                loading: 'lazy',
+                image_size: '2048x2048'
+            }}
+            {%- if featured_media.alt != blank -%}
+              <figcaption class="visually-hidden">{{ featured_media.alt }}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- elsif product.media.size > 0 -%}
+          <figure class="product__gallery-stage">
+            {{
+              product.media.first
+              | media_tag:
+                class: 'product__media-image product__media-image--primary',
+                loading: 'lazy',
+                image_size: '2048x2048'
+            }}
+            {%- if product.media.first.alt != blank -%}
+              <figcaption class="visually-hidden">{{ product.media.first.alt }}</figcaption>
+            {%- endif -%}
+          </figure>
+        {%- else -%}
+          <div class="product__media-placeholder">No media available</div>
+        {%- endif -%}
+
+        {%- if product.media.size > 1 -%}
+          <div class="product__thumbnail-grid" role="list">
             {%- for media in product.media -%}
-              <figure class="product__media-item" role="listitem">
+              {%- if featured_media and media.id == featured_media.id -%}
+                {%- continue -%}
+              {%- endif -%}
+              <figure class="product__thumbnail" role="listitem">
                 {{
                   media
                   | media_tag:
-                    class: 'product__media-image',
+                    class: 'product__media-image product__media-image--thumbnail',
                     loading: 'lazy',
-                    image_size: '2048x2048'
+                    image_size: '1024x1024'
                 }}
                 {%- if media.alt != blank -%}
                   <figcaption class="visually-hidden">{{ media.alt }}</figcaption>
@@ -26,62 +60,170 @@
               </figure>
             {%- endfor -%}
           </div>
-        {%- else -%}
-          <div class="product__media-placeholder">No media available</div>
         {%- endif -%}
       </div>
 
       <div class="product__details">
-        <header class="product__header">
-          <h1 id="product-title">{{ product.title }}</h1>
-          {%- if product.vendor != blank -%}
-            <p class="product__vendor">By {{ product.vendor }}</p>
+        {%- assign primary_variant = product.selected_or_first_available_variant -%}
+        {%- assign primary_collection = product.collections | first -%}
+        <div class="product__intro">
+          {%- if primary_collection != blank -%}
+            <nav class="product__breadcrumb" aria-label="Breadcrumb">
+              <a href="/collections/{{ primary_collection.handle }}">{{ primary_collection.title }}</a>
+              <span aria-hidden="true">•</span>
+              <span>{{ product.title }}</span>
+            </nav>
           {%- endif -%}
-        </header>
-
-        <div class="product__pricing">
-          {%- assign primary_variant = product.selected_or_first_available_variant -%}
-          <span class="product__price">{{ primary_variant.price | money }}</span>
-          {%- if primary_variant.compare_at_price > primary_variant.price -%}
-            <span class="product__price--compare">{{ primary_variant.compare_at_price | money }}</span>
+          <header class="product__header">
+            <h1 id="product-title">{{ product.title }}</h1>
+            {%- if product.vendor != blank -%}
+              <p class="product__vendor">By {{ product.vendor }}</p>
+            {%- endif -%}
+          </header>
+          {%- if product.tags.size > 0 -%}
+            <ul class="product__feature-badges" role="list">
+              {%- for tag in product.tags limit: 4 -%}
+                <li>{{ tag }}</li>
+              {%- endfor -%}
+            </ul>
           {%- endif -%}
         </div>
 
-        {%- if product.description != blank -%}
-          <div class="product__description">{{ product.description }}</div>
-        {%- endif -%}
-
-        {%- form 'product', product, class: 'product-form' -%}
-          {{ form.errors | default_errors }}
-          {%- if product.variants.size > 1 -%}
-            <label class="product-form__label" for="VariantSelector-{{ form.id }}">Choose an option</label>
-            <select
-              id="VariantSelector-{{ form.id }}"
-              name="id"
-              class="product-form__select"
-            >
-              {%- for variant in product.variants -%}
-                <option
-                  value="{{ variant.id }}"
-                  {%- if variant == product.selected_or_first_available_variant -%} selected{%- endif -%}
-                  {%- unless variant.available -%} disabled{%- endunless -%}
-                >
-                  {{ variant.title }}{%- unless variant.available -%} — Sold out{%- endunless -%}
-                </option>
-              {%- endfor -%}
-            </select>
-          {%- else -%}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <div class="product__purchase-panel">
+          <div class="product__pricing">
+            <span class="product__price">{{ primary_variant.price | money }}</span>
+            {%- if primary_variant.compare_at_price > primary_variant.price -%}
+              <span class="product__price--compare">{{ primary_variant.compare_at_price | money }}</span>
+            {%- endif -%}
+          </div>
+          {%- if primary_variant.unit_price_measurement -%}
+            <p class="product__unit-price">
+              {{ primary_variant.unit_price | money }}
+              <span>/ {{ primary_variant.unit_price_measurement.reference_value }}{{ primary_variant.unit_price_measurement.reference_unit }}</span>
+            </p>
           {%- endif -%}
 
-          {{ form | payment_terms }}
+          <p class="product__inventory {% if primary_variant.available %}product__inventory--in-stock{% else %}product__inventory--sold-out{% endif %}" role="status">
+            {%- if primary_variant.available -%}
+              In stock and ready to ship
+            {%- else -%}
+              Currently sold out
+            {%- endif -%}
+          </p>
 
-          {%- if product.available -%}
-            <div class="product-form__payment-button">
-              {{ form | payment_button }}
+          {%- form 'product', product, class: 'product-form' -%}
+            {{ form.errors | default_errors }}
+            {%- if product.variants.size > 1 -%}
+              <label class="product-form__label" for="VariantSelector-{{ form.id }}">Choose an option</label>
+              <select
+                id="VariantSelector-{{ form.id }}"
+                name="id"
+                class="product-form__select"
+              >
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {%- if variant == product.selected_or_first_available_variant -%} selected{%- endif -%}
+                    {%- unless variant.available -%} disabled{%- endunless -%}
+                  >
+                    {{ variant.title }}{%- unless variant.available -%} — Sold out{%- endunless -%}
+                  </option>
+                {%- endfor -%}
+              </select>
+            {%- else -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {%- endif -%}
+
+            <div class="product-form__quantity">
+              <label class="product-form__label" for="Quantity-{{ form.id }}">Quantity</label>
+              <input
+                id="Quantity-{{ form.id }}"
+                class="product-form__quantity-input"
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                inputmode="numeric"
+                pattern="[0-9]*"
+              >
             </div>
-          {%- endif -%}
-        {%- endform -%}
+
+            {{ form | payment_terms }}
+
+            {%- if product.available -%}
+              <div class="product-form__payment-button">
+                {{ form | payment_button }}
+              </div>
+            {%- else -%}
+              <p class="product-form__sold-out-note">Notify me when back in stock</p>
+            {%- endif -%}
+          {%- endform -%}
+
+          <ul class="product__policies" role="list">
+            <li>Free carbon-neutral shipping on orders over $75</li>
+            <li>30-day happiness guarantee with easy returns</li>
+            <li>Secure checkout powered by Shopify Payments</li>
+          </ul>
+        </div>
+
+        <div class="product__meta">
+          <ul class="product__meta-list" role="list">
+            {%- if product.type != blank -%}
+              <li>
+                <span class="product__meta-label">Category</span>
+                <span class="product__meta-value">{{ product.type }}</span>
+              </li>
+            {%- endif -%}
+            {%- if primary_variant.sku != blank -%}
+              <li>
+                <span class="product__meta-label">SKU</span>
+                <span class="product__meta-value">{{ primary_variant.sku }}</span>
+              </li>
+            {%- endif -%}
+            {%- if primary_variant.weight > 0 -%}
+              <li>
+                <span class="product__meta-label">Weight</span>
+                <span class="product__meta-value">{{ primary_variant.weight | weight_with_unit }}</span>
+              </li>
+            {%- endif -%}
+            {%- if product.collections.size > 0 -%}
+              <li>
+                <span class="product__meta-label">Collections</span>
+                <span class="product__meta-value">
+                  {%- for collection in product.collections limit: 3 -%}
+                    <a href="/collections/{{ collection.handle }}">{{ collection.title }}</a>{% if forloop.last == false %}, {% endif %}
+                  {%- endfor -%}
+                </span>
+              </li>
+            {%- endif -%}
+          </ul>
+
+          <div class="product__accordion">
+            <details open>
+              <summary>Product details</summary>
+              <div class="product__accordion-content">
+                {%- if product.description != blank -%}
+                  {{ product.description }}
+                {%- else -%}
+                  <p>Discover mindful essentials designed to support your daily rituals.</p>
+                {%- endif -%}
+              </div>
+            </details>
+            <details>
+              <summary>Shipping &amp; returns</summary>
+              <div class="product__accordion-content">
+                <p>Orders ship within 2 business days. Express options are available at checkout.</p>
+                <p>If it’s not a perfect fit, return it within 30 days for a full refund.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Care instructions</summary>
+              <div class="product__accordion-content">
+                <p>Store in a cool, dry place away from direct sunlight. Follow the included care card for best results.</p>
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </div>
   </section>
