@@ -1,0 +1,35 @@
+{%- assign max_stars = 5 -%}
+{%- assign rating_number = rating | default: 0 | plus: 0.0 -%}
+{%- if rating_number < 0 -%}
+  {%- assign rating_number = 0 -%}
+{%- endif -%}
+{%- if rating_number > max_stars -%}
+  {%- assign rating_number = max_stars -%}
+{%- endif -%}
+{%- assign full_stars = rating_number | floor -%}
+{%- assign fractional = rating_number | minus: full_stars -%}
+{%- assign has_half_star = 0 -%}
+{%- if fractional >= 0.75 -%}
+  {%- assign full_stars = full_stars | plus: 1 -%}
+{%- elsif fractional >= 0.25 -%}
+  {%- assign has_half_star = 1 -%}
+{%- endif -%}
+{%- assign empty_stars = max_stars | minus: full_stars | minus: has_half_star -%}
+{%- if empty_stars < 0 -%}
+  {%- assign empty_stars = 0 -%}
+{%- endif -%}
+<span class="rating-stars">
+  {%- if full_stars > 0 -%}
+    {%- for _ in (1..full_stars) -%}
+      <span class="rating-star rating-star--full">★</span>
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if has_half_star > 0 -%}
+    <span class="rating-star rating-star--half" aria-hidden="true">★</span>
+  {%- endif -%}
+  {%- if empty_stars > 0 -%}
+    {%- for _ in (1..empty_stars) -%}
+      <span class="rating-star rating-star--empty">☆</span>
+    {%- endfor -%}
+  {%- endif -%}
+</span>
