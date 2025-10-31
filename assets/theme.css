@@ -895,23 +895,25 @@ a:focus {
    ========================================================= */
 .product {
   width: 100%;
-  max-width: 1200px;
+  max-width: min(1200px, 90vw);
   margin: 0 auto;
-  padding: 80px 2rem;
+  padding: 60px 2rem;
   display: block;
   background: #fff;
 }
 
 .product__grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
   gap: 3rem;
   width: 100%;
 }
 
-.product__media {
+.product__media,
+.product__details {
   width: 100%;
+  max-width: 100%;
 }
 
 .product__media img,
@@ -928,8 +930,6 @@ a:focus {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  width: 100%;
-  max-width: 600px;
 }
 
 .product__header h1 {
@@ -1017,26 +1017,28 @@ a:focus {
    RESPONSIVE BREAKPOINTS
    ====================== */
 @media (max-width: 1080px) {
-  .product__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
   .product {
-    padding: 60px 1.5rem;
-  }
-  .product__details {
-    max-width: 100%;
+    padding: 50px 1.75rem;
   }
 }
 
 @media (max-width: 720px) {
   .product {
-    padding: 40px 1.25rem;
+    padding: 40px 1.5rem;
   }
   .product__header h1 {
     font-size: clamp(1.8rem, 5vw + 1rem, 2.4rem);
   }
   .product__purchase-panel {
     padding: 1.5rem;
+  }
+}
+@media (max-width: 980px) {
+  .product__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .product {
+    padding: 40px 1.5rem;
   }
 }
