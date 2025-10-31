@@ -240,6 +240,203 @@ a:focus {
   border-color: rgba(14, 124, 75, 0.32);
 }
 
+/* ---------------- CART PAGE ---------------- */
+.cart-redirect,
+.cart-limit {
+  padding: 5rem 1.5rem;
+  background: radial-gradient(circle at top right, rgba(14, 124, 75, 0.08), transparent 55%),
+    radial-gradient(circle at bottom left, rgba(14, 124, 75, 0.08), transparent 45%);
+}
+
+.cart-redirect-content,
+.cart-limit-content {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 3rem clamp(1.5rem, 5vw, 3.25rem);
+  border: 1px solid rgba(14, 124, 75, 0.12);
+  box-shadow: 0 32px 60px -40px rgba(12, 26, 23, 0.4);
+}
+
+.cart-redirect-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.cart-limit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.cart-redirect-content h1,
+.cart-limit-content h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.1rem, 3vw + 1rem, 2.85rem);
+  line-height: 1.05;
+}
+
+.cart-redirect-content p,
+.cart-limit-content p {
+  margin: 0 0 2rem;
+  color: var(--color-muted);
+}
+
+.cart-limit-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cart-limit-item {
+  background: var(--color-surface);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid rgba(12, 26, 23, 0.08);
+  box-shadow: 0 18px 45px -36px rgba(12, 26, 23, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-limit-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14, 124, 75, 0.12), transparent 65%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.cart-limit-item-details {
+  display: grid;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cart-limit-item h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.cart-limit-item p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.cart-limit-item-quantity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cart-limit-item-quantity-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cart-limit-item-quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(12, 26, 23, 0.12);
+  background: rgba(14, 124, 75, 0.06);
+}
+
+.cart-limit-quantity-form {
+  margin: 0;
+}
+
+.cart-limit-item-quantity-button {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--color-accent);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cart-limit-item-quantity-button:hover,
+.cart-limit-item-quantity-button:focus {
+  background: var(--color-accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.cart-limit-item-quantity-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 124, 75, 0.3);
+}
+
+.cart-limit-item-quantity-button[disabled] {
+  background: rgba(12, 26, 23, 0.08);
+  color: rgba(12, 26, 23, 0.4);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cart-limit-item-quantity-value {
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.cart-review-checkout {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-review-checkout .button {
+  width: min(100%, 320px);
+}
+
+@media (max-width: 720px) {
+  .cart-redirect,
+  .cart-limit {
+    padding: 3.5rem 1rem;
+  }
+
+  .cart-redirect-content,
+  .cart-limit-content {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .cart-limit-item {
+    padding: 1.5rem;
+  }
+
+  .cart-limit-item-quantity {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-review-checkout {
+    margin-top: 2rem;
+  }
+}
+
 /* ---------------- FOOTER ---------------- */
 .site-footer {
   background: #0c1a17;
