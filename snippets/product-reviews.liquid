@@ -1,6 +1,6 @@
 {%- liquid
   assign product_obj = product | default: nil
-  assign product_rating = 4.9
+  assign product_rating = 5
   assign product_reviews_count = 128
 
   if product_obj and product_obj.metafields.reviews.average
@@ -24,12 +24,12 @@
         <p>Real readers share how this book helped them understand, heal, and grow through trauma.</p>
       </div>
       <div class="product-reviews__summary" role="img" aria-label="Rated {{ product_rating | round: 1 }} out of 5 stars based on {{ product_reviews_count }} reviews">
-        <span class="product-reviews__summary-stars" aria-hidden="true">{%- render 'star-rating', rating: product_rating -%}</span>
+        <span class="product-reviews__summary-stars" aria-hidden="true">★★★★★</span>
         <div class="product-reviews__summary-score">
           <strong>{{ product_rating | round: 1 }}</strong>
-          <span>Average rating</span>
+          <span>out of 5</span>
         </div>
-        <p class="product-reviews__summary-count">Based on {{ product_reviews_count }} verified reviews</p>
+        <p class="product-reviews__summary-count">{{ product_reviews_count }} global ratings</p>
       </div>
     </header>
 
@@ -49,10 +49,6 @@
         <blockquote class="product-reviews__quote">
           <p>One of the best books that I have read to help understand trauma. I highly recommend.</p>
         </blockquote>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Vicki L. Ball as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -70,10 +66,6 @@
         <blockquote class="product-reviews__quote">
           <p>Excellent book. Great information that everyone should be aware of. Interesting and engaging, not boring and clinical.</p>
         </blockquote>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Alyson Pearson as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -99,10 +91,6 @@
         </blockquote>
         <p class="product-reviews__customer-image">Customer image</p>
         <p class="product-reviews__helpful-count">15 people found this helpful</p>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Tre L. Loadholt as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -125,10 +113,6 @@
           <p>The beginning of this book is detailed with how an infant experiences trauma. Dr. Perry has discovered this to be false! Infants experience trauma as their brains are just forming concepts about the safety of their world at that time. It is important to save how he proves this to be true for the reader. Sorry, I cannot spoil this book for others, it is in the individual's own reading that true and unbiased opinions and realizations will develop independent of my own professional and personal opinion on this topic.</p>
         </blockquote>
         <p class="product-reviews__helpful-count">67 people found this helpful</p>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Amy as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -146,10 +130,6 @@
         <blockquote class="product-reviews__quote">
           <p>This book changed my perspective on life. As a medical provider I wish that I had read it earlier in my career. I would recommend it 1000 times and I have told all of my colleagues and friends about it. Please purchase it. The ending is bittersweet it was hard to read. Honestly, I had to do it in pauses, but once I got into it, it was amazing.</p>
         </blockquote>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Bobbi as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -168,10 +148,6 @@
           <p>Brilliant. It has so much knowledge about CPTSD and deeper. Instead of what is wrong with you … it helps a person connect the dots as to what happened to you and how it may affect your feelings, thoughts, behaviors.</p>
         </blockquote>
         <p class="product-reviews__helpful-count">One person found this helpful</p>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Amazon Customer as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
 
       <article class="product-reviews__card" role="listitem">
@@ -194,10 +170,6 @@
           <p>Now I'm making what happened to me matter and addressing it. I've been unknowingly locked up in the painful trauma for years. Having to pretend to be fine being around the abusers. Even after remembering. It was hard to stand my ground at first. It's getting easier the more I learn so I can heal. Figuring out how to move on carrying this burden is the hardest part. I'm still working on the healing.</p>
         </blockquote>
         <p class="product-reviews__helpful-count">88 people found this helpful</p>
-        <footer class="product-reviews__footer">
-          <button type="button" class="product-reviews__helpful" aria-label="Mark review by Liza_Nightshade as helpful">Helpful</button>
-          <button type="button" class="product-reviews__report">Report</button>
-        </footer>
       </article>
     </div>
   </div>
