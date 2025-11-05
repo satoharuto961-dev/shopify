@@ -145,6 +145,34 @@
     }
   }
 
+  @media (max-width: 479px) {
+    .hero {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .hero-container {
+      padding: 2.8rem 1rem;
+      gap: 1.75rem;
+    }
+
+    .hero-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-card::after {
+      inset: 10px;
+    }
+
+    h1.hero-title {
+      font-size: clamp(2.85rem, 10vw, 3.35rem);
+      line-height: 1.05;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 4.6vw, 1.3rem);
+    }
+  }
+
   @media (prefers-reduced-transparency: reduce) {
     .hero-card {
       background: #ffffff;
