@@ -459,6 +459,55 @@
     word-break: break-word;
   }
 
+  .hero-community {
+    background: linear-gradient(165deg, rgba(14, 116, 144, 0.1), rgba(255, 255, 255, 0.94));
+    border: 1px solid rgba(13, 148, 136, 0.2);
+    box-shadow: 0 32px 64px rgba(13, 148, 136, 0.14);
+  }
+
+  .hero-community p {
+    margin: 0;
+    color: rgba(45, 55, 72, 0.9);
+    line-height: 1.75;
+  }
+
+  .hero-community-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hero-community-highlights span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: rgba(13, 148, 136, 0.92);
+    background: rgba(13, 148, 136, 0.12);
+  }
+
+  .hero-community-link {
+    align-self: flex-start;
+    font-weight: 600;
+    color: rgba(14, 116, 144, 0.95);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .hero-community-link::after {
+    content: "→";
+    transition: transform 0.3s ease;
+  }
+
+  .hero-community-link:hover::after {
+    transform: translateX(4px);
+  }
+
   .hero-showcase-list {
     display: grid;
     gap: 0.75rem;
@@ -1129,6 +1178,16 @@
                   Beautifully designed editions made to be shared
                 </li>
               </ul>
+            </div>
+            <div class="hero-showcase-card hero-community" data-animate="fade-up" data-animate-delay="0.22">
+              <h3>Join Our Learning Community</h3>
+              <p>Weekly prompts, live sessions, and curated insights to keep your curiosity engaged long after the first chapter.</p>
+              <div class="hero-community-highlights" role="list">
+                <span role="listitem">Live Q&amp;As</span>
+                <span role="listitem">Reading Guides</span>
+                <span role="listitem">Downloadable Exercises</span>
+              </div>
+              <a class="hero-community-link" href="{{ routes.all_products_collection_url }}">See Upcoming Topics</a>
             </div>
             <div class="hero-showcase-card hero-testimonial" data-animate="fade-up" data-animate-delay="0.3">
               <div>
