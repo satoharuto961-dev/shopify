@@ -1128,16 +1128,6 @@
           <div class="hero-cta">
             <div class="hero-purchase-card" data-animate="fade-up" data-animate-delay="0.1">
               {% assign total_products = all_products_collection.products_count | default: featured_collection.products_count | default: 0 %}
-              <div class="hero-price">
-                <span class="hero-price-amount">{{ total_products }}</span>
-                <span class="hero-price-caption">
-                  {% if total_products == 1 %}
-                    Product Ready to Shop
-                  {% else %}
-                    Products Ready to Shop
-                  {% endif %}
-                </span>
-              </div>
               <a
                 class="button button-primary"
                 href="#product-gallery"
