@@ -29,9 +29,73 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2H2S2ZK"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">gr</span>
+          <span class="brand-text">
+            <span class="brand-name">{{ shop.name | default: 'PsychoReads' | escape }}</span>
+            <span class="brand-tagline">Readers' community</span>
+          </span>
+        </a>
+        <div class="header-navigation">
+          <nav class="primary-nav" aria-label="Primary navigation">
+            <ul>
+              <li><a href="/#lists">Lists</a></li>
+              <li><a href="/#new-releases">New Releases</a></li>
+              <li><a href="/#community">Community</a></li>
+              <li><a href="/#quotes">Quotes</a></li>
+            </ul>
+          </nav>
+          <div class="header-auth">
+            <a class="header-auth__link" href="/account/login">Sign in</a>
+            <a class="header-auth__cta" href="/account/register">Join {{ shop.name | default: 'PsychoReads' | escape }}</a>
+          </div>
+        </div>
+      </div>
+    </header>
     <main class="site-main{% if template.name == 'index' or template == 'index' %} site-main--full-bleed{% endif %}" role="main">
       {{ content_for_layout }}
     </main>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark brand-mark--footer" aria-hidden="true">gr</span>
+          <p>Track the books you&apos;re reading, discover recommendations, and join conversations with readers everywhere.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Discover</h3>
+          <ul>
+            <li><a href="/#lists">Trending lists</a></li>
+            <li><a href="/#new-releases">New releases</a></li>
+            <li><a href="/collections/all">Browse all books</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="/account/register">Create an account</a></li>
+            <li><a href="/#community">Join discussions</a></li>
+            <li><a href="/pages/contact">Contact support</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="mailto:{{ shop.email | default: 'support@example.com' | escape }}">Email us</a></li>
+            <li><a href="https://www.instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+            <li><a href="https://www.facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© {{ 'now' | date: '%Y' }} {{ shop.name | default: 'PsychoReads' | escape }}. All rights reserved.</span>
+        <div class="footer-bottom__links">
+          <a href="/policies/privacy-policy">Privacy</a>
+          <a href="/policies/terms-of-service">Terms</a>
+        </div>
+      </div>
+    </footer>
     {{ 'theme.js' | asset_url | script_tag }}
     {{ content_for_footer }}
   </body>
