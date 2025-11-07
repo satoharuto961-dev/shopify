@@ -3,1518 +3,575 @@
   {% assign featured_collection = collections['all'] %}
 {% endif %}
 
-{% assign featured_product = nil %}
+{% assign hero_product = nil %}
 {% if featured_collection and featured_collection.products_count > 0 %}
-  {% assign featured_product = featured_collection.products | first %}
+  {% assign hero_product = featured_collection.products | first %}
 {% endif %}
-{% assign all_products_collection = collections['all'] %}
 
 <style>
   :root {
-    --bg-gradient-start: #eff6ff;
-    --bg-gradient-mid: rgba(255, 255, 255, 0.94);
-    --bg-gradient-end: #dbeafe;
-    --color-primary: #2563eb;
-    --color-text: #1f2937;
-    --color-muted: #475569;
-    --color-surface: rgba(255, 255, 255, 0.88);
-    --shadow-soft: 0 28px 70px rgba(15, 23, 42, 0.12);
-    --radius-xl: 28px;
-    font-family: "Inter", "Poppins", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --goodreads-green: #382110;
+    --goodreads-gold: #f4f1ea;
+    --goodreads-sage: #4a7c59;
+    --goodreads-sand: #ede6d6;
+    --goodreads-ink: #1f1a13;
+    --goodreads-muted: #6b6048;
+    --goodreads-border: #d6cfbf;
+    --goodreads-card: #ffffff;
+    font-family: "Georgia", "Merriweather", "Times New Roman", serif;
   }
 
   body {
-    background-color: var(--bg-gradient-end);
-    color: var(--color-text);
+    background-color: var(--goodreads-gold);
+    color: var(--goodreads-ink);
+    margin: 0;
   }
 
-  .page-wrapper {
-    position: relative;
-    background: radial-gradient(circle at 28% 35%, rgba(59, 130, 246, 0.22), transparent 58%),
-      radial-gradient(circle at 75% 18%, rgba(14, 165, 233, 0.16), transparent 60%),
-      linear-gradient(125deg, var(--bg-gradient-start) 5%, var(--bg-gradient-mid) 52%, var(--bg-gradient-end) 100%);
+  .goodreads-page {
     min-height: 100vh;
-    overflow: hidden;
-    font-family: "Inter", "Poppins", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-image: linear-gradient(180deg, rgba(237, 230, 214, 0.8), rgba(244, 241, 234, 0.95));
+    padding-bottom: 4rem;
   }
 
-  .page-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 25%, rgba(37, 99, 235, 0.28), transparent 55%),
-      radial-gradient(circle at 68% 70%, rgba(96, 165, 250, 0.16), transparent 65%),
-      linear-gradient(140deg, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
-    filter: blur(32px);
-    opacity: 0.85;
-    pointer-events: none;
-    z-index: 0;
+  .goodreads-button {
+    background: transparent;
+    border: 1px solid var(--goodreads-border);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--goodreads-green);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .content-max {
-    position: relative;
-    z-index: 1;
-    max-width: min(100%, 1360px);
+  .goodreads-button.primary {
+    background: var(--goodreads-green);
+    color: #fff;
+    border-color: var(--goodreads-green);
+    box-shadow: 0 12px 24px rgba(56, 33, 16, 0.18);
+  }
+
+  .goodreads-button.primary:hover {
+    background: #4e2e14;
+  }
+
+  .goodreads-button:hover {
+    background: var(--goodreads-sand);
+  }
+
+  .goodreads-hero {
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 3.5rem 1.75rem;
-  }
-
-  @media (min-width: 1024px) {
-    .content-max {
-      padding: 5rem 2.5rem;
-    }
-  }
-
-  .hero {
-    position: relative;
-    padding: clamp(1.5rem, 4vw, 2.75rem) 0;
-  }
-
-  .hero-container {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    gap: clamp(2rem, 4vw, 3.5rem);
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: clamp(3rem, 6vw, 4.75rem) clamp(1.5rem, 4vw, 2.75rem);
-    box-sizing: border-box;
-    overflow-x: hidden;
-  }
-
-  .hero-column {
-    flex: 1 1 clamp(300px, 43vw, 560px);
-    max-width: clamp(340px, 46vw, 620px);
-    min-width: 0;
-  }
-
-  .hero-column h1,
-  .hero-column p {
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  @media (max-width: 1023px) {
-    .hero-container {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 2rem;
-    }
-
-    .hero-column {
-      width: min(100%, 720px);
-      max-width: none;
-      min-width: auto;
-    }
-  }
-
-  @media (max-width: 1023px) {
-    .hero-card {
-      margin: 0 auto;
-    }
-
-    .hero-showcase {
-      width: min(100%, 480px);
-      margin: 0 auto;
-    }
-  }
-
-  .hero-card {
-    position: relative;
+    padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 2rem);
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-auto-rows: max-content;
-    gap: clamp(1.75rem, 2.8vw, 2.4rem);
-    background: var(--color-surface);
-    border-radius: calc(var(--radius-xl) + 10px);
-    padding: clamp(2.6rem, 3vw, 3.4rem);
-    box-shadow: 0 44px 82px rgba(15, 23, 42, 0.15);
-    backdrop-filter: blur(18px);
-    width: 100%;
-    align-content: start;
-    align-self: stretch;
-    min-width: 0;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    align-items: stretch;
   }
 
-  @media (max-width: 639px) {
-    .hero-card {
-      padding: 2.2rem;
-    }
-  }
-
-  @media (max-width: 479px) {
-    .hero {
-      padding: 2.5rem 0 2rem;
-    }
-
-    .hero-container {
-      padding: 2.8rem 1rem;
-      gap: 1.75rem;
-    }
-
-    .hero-card {
-      padding: 2rem 1.5rem;
-    }
-
-    .hero-card::after {
-      inset: 10px;
-    }
-
-    h1.hero-title {
-      font-size: clamp(2.85rem, 10vw, 3.35rem);
-      line-height: 1.05;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 4.6vw, 1.3rem);
-    }
-  }
-
-  @media (prefers-reduced-transparency: reduce) {
-    .hero-card {
-      background: #ffffff;
-      backdrop-filter: none;
-    }
-  }
-
-  .hero-card::after {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border-radius: calc(var(--radius-xl) + 2px);
-    border: 1px solid rgba(37, 99, 235, 0.08);
-    pointer-events: none;
-  }
-
-  .hero-header {
-    position: relative;
+  .hero-text {
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
-    max-width: 600px;
-    z-index: 1;
+    gap: 1.6rem;
   }
 
   .hero-badge {
-    align-self: flex-start;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(37, 99, 235, 0.08));
-    color: var(--color-primary);
-    font-weight: 600;
-    padding: 0.5rem 1.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--goodreads-sand);
+    color: var(--goodreads-muted);
+    padding: 0.45rem 0.95rem;
     border-radius: 999px;
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
     text-transform: uppercase;
+    font-weight: 700;
   }
 
-  h1.hero-title {
-    font-size: clamp(3.4rem, 6vw, 5rem);
-    line-height: 1.02;
-    font-weight: 600;
-    color: var(--color-text);
-    letter-spacing: -0.025em;
-    overflow-wrap: break-word;
-    word-break: break-word;
+  .hero-title {
+    font-size: clamp(2.75rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--goodreads-green);
   }
 
   .hero-subtitle {
-    font-size: clamp(1.2rem, 2.4vw, 1.45rem);
-    color: rgba(30, 41, 59, 0.78);
-    line-height: 1.9;
-    font-weight: 400;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .hero-points {
-    display: grid;
-    gap: 1.1rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    z-index: 1;
-    max-width: 600px;
-  }
-
-  .hero-points li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    font-size: 1.05rem;
-    color: rgba(71, 85, 105, 0.88);
+    font-size: 1.1rem;
+    color: var(--goodreads-muted);
     line-height: 1.7;
-  }
-
-  .hero-points li svg {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    color: var(--color-primary);
-    margin-top: 0.1rem;
-  }
-
-  .hero-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    align-items: stretch;
-    width: min(100%, 360px);
-    z-index: 1;
-  }
-
-  .hero-purchase-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.22);
-    border-radius: 22px;
-    padding: 1.6rem 1.8rem;
-    box-shadow: 0 28px 56px rgba(15, 23, 42, 0.12);
-    backdrop-filter: blur(14px);
-  }
-
-  .hero-price {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    min-width: 0;
-  }
-
-  .hero-price-amount {
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .hero-price-caption {
-    font-size: 1rem;
-    color: rgba(71, 85, 105, 0.78);
-  }
-
-  .button-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 0.95rem 2.4rem;
-    background-color: var(--color-primary);
-    color: #ffffff;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 1.05rem;
-    box-shadow: 0 18px 30px rgba(37, 99, 235, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-purchase-card .button-primary {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .button-primary:hover {
-    opacity: 0.96;
-    transform: translateY(-2px);
-    box-shadow: 0 24px 46px rgba(37, 99, 235, 0.3);
-  }
-
-  .button-primary:focus {
-    outline: 3px solid rgba(37, 99, 235, 0.35);
-    outline-offset: 4px;
-  }
-
-  .button-primary[aria-busy="true"],
-  .button-primary[data-loading="true"] {
-    opacity: 0.9;
-    transform: none;
-    box-shadow: 0 14px 26px rgba(37, 99, 235, 0.25);
-  }
-
-  .button-primary[aria-busy="true"]::after,
-  .button-primary[data-loading="true"]::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-top-color: #ffffff;
-    animation: spin 0.9s linear infinite;
-    right: 1.4rem;
-  }
-
-  .hero-trust {
-    color: rgba(71, 85, 105, 0.85);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    z-index: 1;
     max-width: 520px;
-    margin-top: 0.35rem;
   }
 
-  .hero-visual {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    background: var(--color-surface);
-    border-radius: calc(var(--radius-xl) + 10px);
-    padding: clamp(2.4rem, 3vw, 3rem);
-    box-shadow: 0 44px 82px rgba(15, 23, 42, 0.15);
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    backdrop-filter: blur(18px);
-    align-self: stretch;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .hero-visual::before,
-  .hero-visual::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .hero-visual::before {
-    background: radial-gradient(circle at 78% 18%, rgba(59, 130, 246, 0.25), transparent 58%),
-      radial-gradient(circle at 18% 82%, rgba(16, 185, 129, 0.18), transparent 65%);
-    opacity: 0.85;
-  }
-
-  .hero-visual::after {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 55%);
-    opacity: 0.9;
-  }
-
-  .hero-visual > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-showcase {
-    position: relative;
-    width: 100%;
-    max-width: 640px;
+  .hero-search {
     display: grid;
-    gap: clamp(1.4rem, 2.4vw, 2.1rem);
-    z-index: 1;
-    justify-items: stretch;
-    justify-self: stretch;
-    align-content: start;
+    grid-template-columns: 1fr auto;
+    background: #fff;
+    border: 1px solid var(--goodreads-border);
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 18px 36px rgba(41, 25, 13, 0.12);
   }
 
-  @media (max-width: 719px) {
-    .hero-showcase {
-      width: 100%;
-      gap: 1.25rem;
-    }
+  .hero-search input[type="search"] {
+    border: none;
+    padding: 0.9rem 1.4rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--goodreads-ink);
+    outline: none;
   }
 
-  .hero-showcase-card {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: calc(var(--radius-xl) + 6px);
-    padding: clamp(1.75rem, 2.2vw, 2.3rem);
-    box-shadow: 0 28px 62px rgba(15, 23, 42, 0.12);
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    backdrop-filter: blur(12px);
-    transition: box-shadow 0.35s ease, transform 0.35s ease;
+  .hero-search button {
+    border: none;
+    background: var(--goodreads-green);
+    color: #fff;
+    padding: 0 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .hero-metrics {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .hero-metric-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--goodreads-border);
+    border-radius: 18px;
+    padding: 1rem 1.4rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 1.1rem;
+    gap: 0.35rem;
+    text-align: left;
   }
 
-  @media (min-width: 1200px) {
-    .hero-card {
-      grid-auto-rows: auto;
-    }
-
-    .hero-cta {
-      margin-top: 0.25rem;
-    }
-
-    .hero-purchase-card {
-      position: sticky;
-      top: 6.5rem;
-    }
-
-    .hero-showcase {
-      grid-auto-rows: auto;
-      align-content: start;
-    }
-
-    .hero-showcase-card {
-      height: auto;
-    }
+  .hero-metric-card strong {
+    font-size: 1.65rem;
+    color: var(--goodreads-green);
   }
 
-  .hero-showcase-card:hover {
-    transform: translateY(12px);
-    box-shadow: 0 32px 72px rgba(15, 23, 42, 0.16);
-  }
-
-  @media (max-width: 719px) {
-    .hero-purchase-card {
-      width: 100%;
-    }
-
-    .button-primary {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .hero-showcase-card {
-      padding: 1.75rem;
-    }
-  }
-
-  .hero-showcase-card h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1.1rem;
-    color: var(--color-text);
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .hero-community {
-    background: linear-gradient(165deg, rgba(14, 116, 144, 0.1), rgba(255, 255, 255, 0.94));
-    border: 1px solid rgba(13, 148, 136, 0.2);
-    box-shadow: 0 32px 64px rgba(13, 148, 136, 0.14);
-  }
-
-  .hero-community p {
-    margin: 0;
-    color: rgba(45, 55, 72, 0.9);
-    line-height: 1.75;
-  }
-
-  .hero-community-highlights {
+  .hero-product-card {
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid var(--goodreads-border);
+    box-shadow: 0 24px 48px rgba(32, 21, 12, 0.15);
+    padding: 2rem;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .hero-product-card::after {
+    content: "Reader's pick";
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--goodreads-muted);
+  }
+
+  .hero-product-info {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
   }
 
-  .hero-community-highlights span {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.4rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    color: rgba(13, 148, 136, 0.92);
-    background: rgba(13, 148, 136, 0.12);
-  }
-
-  .hero-community-link {
-    align-self: flex-start;
-    font-weight: 600;
-    color: rgba(14, 116, 144, 0.95);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .hero-community-link::after {
-    content: "→";
-    transition: transform 0.3s ease;
-  }
-
-  .hero-community-link:hover::after {
-    transform: translateX(4px);
-  }
-
-  .hero-showcase-list {
-    display: grid;
-    gap: 0.75rem;
+  .hero-product-info h3 {
+    font-size: 1.4rem;
     margin: 0;
-    padding: 0;
-    list-style: none;
   }
 
-  .hero-showcase-list li {
+  .hero-product-info .price {
+    font-weight: 700;
+    color: var(--goodreads-green);
+  }
+
+  .hero-product-cta {
     display: flex;
-    align-items: flex-start;
-    gap: 0.95rem;
-    font-size: 1.12rem;
-    font-weight: 500;
-    color: rgba(30, 41, 59, 0.95);
-    line-height: 1.8;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
-  .hero-showcase-list li svg {
-    width: 24px;
-    height: 24px;
-    color: var(--color-primary);
-    margin-top: 0.1rem;
-    flex-shrink: 0;
+  .section {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vw, 3.75rem) clamp(1.25rem, 4vw, 2rem);
+    display: grid;
+    gap: 2rem;
   }
 
-  @media (max-width: 719px) {
-    .hero-showcase-card {
-      margin-inline: clamp(-1.1rem, -4vw, -0.75rem);
-      padding: 2rem;
-    }
-
-    .hero-showcase-list li {
-      font-size: 1.08rem;
-      line-height: 1.75;
-    }
-
-    .hero-showcase-list li svg {
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .hero-testimonial {
+  .section header {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    font-size: 1.05rem;
-    color: rgba(71, 85, 105, 0.88);
-    line-height: 1.7;
-    background: linear-gradient(160deg, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.96));
-    border: 1px solid rgba(37, 99, 235, 0.14);
-    box-shadow: 0 32px 64px rgba(37, 99, 235, 0.16);
+    gap: 0.5rem;
   }
 
-  .hero-testimonial p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(30, 41, 59, 0.9);
+  .section-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+    color: var(--goodreads-green);
   }
 
-  .hero-testimonial strong {
-    color: var(--color-text);
-    font-weight: 600;
-    font-size: 1.05rem;
+  .section-subtitle {
+    color: var(--goodreads-muted);
+    max-width: 620px;
   }
 
-  .hero-testimonial span[aria-hidden="true"] {
-    font-size: 1.15rem;
-    letter-spacing: 0.18em;
-    color: #f59e0b;
-  }
-
-  .product-gallery {
-    background: #ffffff;
-    border-radius: 32px;
-    padding: clamp(3rem, 5vw, 4rem);
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
-    margin: clamp(3rem, 6vw, 5rem) 0;
-  }
-
-  .product-gallery header {
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto clamp(2rem, 4vw, 2.75rem);
-  }
-
-  .product-gallery h2 {
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    margin-bottom: 0.75rem;
-  }
-
-  .product-gallery p {
-    color: var(--color-muted);
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-
-  .product-gallery-grid {
+  .featured-lists {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .list-card {
+    background: #fff;
+    border: 1px solid var(--goodreads-border);
+    border-radius: 18px;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 12px 24px rgba(32, 21, 12, 0.08);
+  }
+
+  .list-card strong {
+    font-size: 1.1rem;
+    color: var(--goodreads-ink);
+  }
+
+  .list-card span {
+    color: var(--goodreads-muted);
+  }
+
+  .product-grid {
+    display: grid;
+    gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .product-card {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 24px;
-    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.08);
-    overflow: hidden;
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid var(--goodreads-border);
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
-  }
-
-  .product-card a {
-    color: inherit;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .product-image {
-    position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.04));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    aspect-ratio: 4 / 3;
-    border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+    box-shadow: 0 16px 32px rgba(32, 21, 12, 0.1);
   }
 
-  .product-image img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+  .product-card img {
     display: block;
-  }
-
-  @supports not (aspect-ratio: 1) {
-    .product-image {
-      padding-top: 72%;
-    }
-
-    .product-image img {
-      position: absolute;
-      inset: 1rem;
-      width: calc(100% - 2rem);
-      height: calc(100% - 2rem);
-      max-width: none;
-      max-height: none;
-      object-fit: contain;
-    }
-  }
-
-  .product-info {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    flex-grow: 1;
-  }
-
-  .product-info h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .product-price {
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--color-primary);
-  }
-
-  .product-price del {
-    font-size: 0.95rem;
-    color: rgba(71, 85, 105, 0.65);
-    margin-left: 0.5rem;
-  }
-
-  .product-card-footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95rem;
-    color: rgba(71, 85, 105, 0.85);
-  }
-
-  section {
-    margin: 0;
-    padding: 4rem 0;
-  }
-
-  .section-heading {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 2.75rem;
-  }
-
-  .section-heading h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1rem;
-  }
-
-  .section-heading p {
-    color: var(--color-muted);
-    font-size: 1.05rem;
-    line-height: 1.65;
-  }
-
-  .who {
-    background: #ffffff;
-  }
-
-  .who-grid {
-    display: grid;
-    gap: 1.75rem;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  }
-
-  .who-card {
-    background: #f8fafc;
-    border-radius: 24px;
-    padding: 1.75rem;
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: left;
-    transform: translateY(30px);
-    opacity: 0;
-    animation: slideUp 0.9s ease forwards;
-  }
-
-  .who-card:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .who-card:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-
-  .who-card:nth-child(4) {
-    animation-delay: 0.3s;
-  }
-
-  .who-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    background: rgba(37, 99, 235, 0.12);
-    display: grid;
-    place-items: center;
-    color: var(--color-primary);
-    font-size: 1.5rem;
-  }
-
-  .inside {
-    display: grid;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  @media (min-width: 960px) {
-    .inside {
-      grid-template-columns: 1fr 1.2fr;
-    }
-  }
-
-  .inside-visual {
-    position: relative;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-soft);
-    background: #f1f5f9;
-    min-height: 360px;
-  }
-
-  .inside-visual img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 3/4;
     object-fit: cover;
+    background: var(--goodreads-sand);
   }
 
-  .inside-visual::after {
-    content: "Professional Worksheet Preview";
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    background: rgba(15, 23, 42, 0.75);
-    color: #fff;
-    padding: 0.65rem 1rem;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
+  .product-card-content {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .inside-list {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .inside-list h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-
-  .inside-list ul {
-    list-style: none;
+  .product-card-content h3 {
+    font-size: 1.1rem;
     margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
+    color: var(--goodreads-ink);
   }
 
-  .inside-list li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem;
-    align-items: start;
-    color: var(--color-text);
-    font-size: 1.05rem;
-    line-height: 1.6;
+  .product-card-content .price {
+    font-weight: 700;
+    color: var(--goodreads-green);
   }
 
-  .inside-list li svg {
-    color: var(--color-primary);
-    width: 22px;
-    height: 22px;
+  .product-card-content .rating {
+    color: #c47f24;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
   }
 
-  .why {
-    background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(248, 250, 252, 0.7));
-    border-radius: 32px;
-    padding: 4rem 3rem;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-    margin-top: 4rem;
-  }
-
-  .why-list {
+  .quotes-grid {
     display: grid;
     gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
-  .why-list li {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    padding: 1.5rem;
-    color: var(--color-muted);
+  .quote-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid var(--goodreads-border);
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 14px 28px rgba(32, 21, 12, 0.08);
+    font-size: 1rem;
     line-height: 1.7;
   }
 
-  .testimonials {
-    position: relative;
+  .quote-card span {
+    color: var(--goodreads-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
-  .testimonial-track {
+  .community-section {
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid var(--goodreads-border);
+    padding: clamp(2rem, 4vw, 3rem);
     display: grid;
     gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    box-shadow: 0 24px 36px rgba(32, 21, 12, 0.1);
   }
 
-  @media (min-width: 900px) {
-    .testimonial-track {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .testimonial-card {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 2.25rem;
-    box-shadow: var(--shadow-soft);
-    position: relative;
-    overflow: hidden;
-    min-height: 220px;
+  .community-card {
+    background: var(--goodreads-gold);
+    border-radius: 18px;
+    padding: 1.6rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    opacity: 0;
-    animation: fadeLoop 12s ease-in-out infinite;
+    gap: 0.75rem;
+    border: 1px solid var(--goodreads-border);
   }
 
-  .testimonial-card:nth-child(2) {
-    animation-delay: 4s;
-  }
-
-  .testimonial-card:nth-child(3) {
-    animation-delay: 8s;
-  }
-
-  .testimonial-card::before {
-    content: "\201C";
-    position: absolute;
-    top: 1.25rem;
-    left: 1.75rem;
-    font-size: 4rem;
-    color: rgba(37, 99, 235, 0.15);
-    font-family: "Georgia", serif;
-  }
-
-  .testimonial-text {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--color-text);
-  }
-
-  .testimonial-author {
-    font-weight: 600;
-    color: var(--color-muted);
-  }
-
-  .how {
-    background: #f8fafc;
-    border-radius: 32px;
-    padding: 3.5rem;
-    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
-  }
-
-  .steps {
+  .newsletter {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 22px;
+    border: 1px solid var(--goodreads-border);
+    padding: clamp(2rem, 4vw, 3rem);
     display: grid;
-    gap: 1.75rem;
+    gap: 1rem;
+    box-shadow: 0 18px 34px rgba(32, 21, 12, 0.08);
+    text-align: center;
+  }
+
+  .newsletter form {
+    display: grid;
+    gap: 0.75rem;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
-  .step-card {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 1.75rem;
-    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
-    display: grid;
-    gap: 1rem;
-    position: relative;
-    overflow: hidden;
-    transform: translateY(40px);
-    opacity: 0;
-    animation: slideUp 0.9s ease forwards;
+  .newsletter input[type="email"] {
+    border-radius: 999px;
+    border: 1px solid var(--goodreads-border);
+    padding: 0.85rem 1.25rem;
+    font-family: inherit;
   }
 
-  .step-card:nth-child(1) { animation-delay: 0.05s; }
-  .step-card:nth-child(2) { animation-delay: 0.15s; }
-  .step-card:nth-child(3) { animation-delay: 0.25s; }
-
-  .step-number {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(37, 99, 235, 0.1);
-    display: grid;
-    place-items: center;
-    color: var(--color-primary);
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  .faq {
-    padding-bottom: 5rem;
-  }
-
-  .faq-list {
-    max-width: 860px;
-    margin: 0 auto;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .faq-list details {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 1.5rem 1.75rem;
-    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
-  }
-
-  .faq-list summary {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--color-text);
-  }
-
-  .faq-list p {
-    margin-top: 0.85rem;
-    color: var(--color-muted);
-    line-height: 1.7;
-  }
-
-  .cta-final {
-    padding-bottom: 6rem;
-  }
-
-  .cta-card {
-    max-width: 960px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.75));
-    border-radius: 36px;
-    padding: 3.5rem 3rem;
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 22px 46px rgba(37, 99, 235, 0.35);
-    animation: fadeInUp 1s ease forwards;
-  }
-
-  .cta-card h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1rem;
-  }
-
-  .cta-card p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.92);
-  }
-
-  .cta-card .button-primary {
-    background: #ffffff;
-    color: var(--color-primary);
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
-  }
-
-  .cta-card .button-primary:hover {
-    opacity: 0.9;
-  }
-
-  body.animate-ready [data-animate] {
-    opacity: 0;
-    transform: translateY(42px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  body.animate-ready [data-animate].is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    body.animate-ready [data-animate] {
-      opacity: 1;
-      transform: none;
+  @media (max-width: 768px) {
+    .hero-search {
+      grid-template-columns: 1fr;
+      border-radius: 18px;
     }
 
-    body.animate-ready [data-animate].is-visible {
-      transition: none;
+    .hero-search button {
+      border-radius: 0 0 18px 18px;
+      padding: 0.9rem 1.2rem;
     }
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(45px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes floatFade {
-    from {
-      opacity: 0;
-      transform: translateY(36px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes fadeLoop {
-    0%, 20% {
-      opacity: 1;
-    }
-    33%, 100% {
-      opacity: 0;
+  @media (max-width: 540px) {
+    .hero-product-card::after {
+      position: static;
+      align-self: flex-start;
+      margin-bottom: -0.5rem;
     }
   }
 </style>
 
-<div class="page-wrapper">
-  <div class="content-max">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-container">
-        <article class="hero-card hero-column" data-animate="fade-up">
-          <div class="hero-header">
-            <span class="hero-badge">Curated Psychology Collection</span>
-            <h1 id="hero-title" class="hero-title">Psychology Book Discovery</h1>
-            <p class="hero-subtitle">Explore insightful titles that illuminate the mind, strengthen resilience, and translate the latest psychological research into everyday understanding.</p>
-          </div>
-          <ul class="hero-points">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>Insightful reads spanning cognitive science, emotional wellbeing, relationships, creativity, and lifelong learning.</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="14" rx="2" />
-                <path d="M7 8h10M7 12h6" />
-              </svg>
-              <span>Hardcovers, paperbacks, and workbooks crafted by leading researchers, clinicians, and storytellers.</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-              <span>Guides that weave science, practice, and personal stories to help readers grow, teach, and support others.</span>
-            </li>
-          </ul>
-          <div class="hero-cta">
-            <div class="hero-purchase-card" data-animate="fade-up" data-animate-delay="0.1">
-              {% assign total_products = all_products_collection.products_count | default: featured_collection.products_count | default: 0 %}
-              <a
-                class="button button-primary"
-                href="#product-gallery"
-              >Browse All Products</a>
-            </div>
-          </div>
-          <p class="hero-trust">Handpicked for students, practitioners, and curious readers exploring the many dimensions of psychology.</p>
-        </article>
-        <div class="hero-visual hero-column" aria-hidden="true">
-          <div class="hero-showcase">
-            <div class="hero-showcase-card" data-animate="fade-up" data-animate-delay="0.15">
-              <h3>What You'll Discover</h3>
-              <ul class="hero-showcase-list">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Thought-provoking bestsellers &amp; timeless classics
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="14" rx="2" />
-                    <path d="M7 8h10M7 12h6" />
-                  </svg>
-                  Field guides, workbooks &amp; reflective journals
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20s8-4 8-10a8 8 0 1 0-16 0c0 6 8 10 8 10z" />
-                  </svg>
-                  Perspectives from clinical practice to everyday wellbeing
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  Beautifully designed editions made to be shared
-                </li>
-              </ul>
-            </div>
-            <div class="hero-showcase-card hero-community" data-animate="fade-up" data-animate-delay="0.22">
-              <h3>Join Our Learning Community</h3>
-              <p>Weekly prompts, live sessions, and curated insights to keep your curiosity engaged long after the first chapter.</p>
-              <div class="hero-community-highlights" role="list">
-                <span role="listitem">Live Q&amp;As</span>
-                <span role="listitem">Reading Guides</span>
-                <span role="listitem">Downloadable Exercises</span>
-              </div>
-              <a class="hero-community-link" href="{{ routes.all_products_collection_url }}">See Upcoming Topics</a>
-            </div>
-            <div class="hero-showcase-card hero-testimonial" data-animate="fade-up" data-animate-delay="0.3">
-              <div>
-                <span aria-hidden="true">⭐️⭐️⭐️⭐️⭐️</span>
-                <p>“Every recommendation feels tailored—these books make complex psychology approachable and inspiring.”</p>
-              </div>
-              <strong>— Behavioral Science Educator</strong>
-            </div>
-          </div>
+<div class="goodreads-page">
+  <main>
+    <section class="goodreads-hero">
+      <div class="hero-text">
+        <span class="hero-badge">Readers' Haven</span>
+        <h1 class="hero-title">Meet your next favorite book.</h1>
+        <p class="hero-subtitle">Search and browse millions of titles, track what you want to read next, and see what your friends are reading. Welcome to your literary community.</p>
+        <form class="hero-search" action="/search" method="get" role="search">
+          <input type="search" name="q" placeholder="Search books, authors, or ISBN" aria-label="Search books">
+          <button type="submit">Search</button>
+        </form>
+        <div class="hero-metrics" aria-label="Community highlights">
+          <article class="hero-metric-card">
+            <strong>90M+</strong>
+            <span>Members sharing reviews and recommendations</span>
+          </article>
+          <article class="hero-metric-card">
+            <strong>2.6B</strong>
+            <span>Books shelved and tracked by readers</span>
+          </article>
+          <article class="hero-metric-card">
+            <strong>50M</strong>
+            <span>Reviews that help you decide what to read next</span>
+          </article>
         </div>
+      </div>
+
+      <aside class="hero-product-card" aria-label="Featured book">
+        {% if hero_product %}
+          <div class="hero-product-info">
+            {% if hero_product.featured_image %}
+              <img src="{{ hero_product.featured_image | img_url: '400x' }}" alt="{{ hero_product.title | escape }} cover" style="width: 160px; align-self: center; border-radius: 12px; box-shadow: 0 16px 32px rgba(32, 21, 12, 0.18);" />
+            {% endif %}
+            <h3>{{ hero_product.title }}</h3>
+            {% if hero_product.vendor %}
+              <span>{{ hero_product.vendor }}</span>
+            {% endif %}
+            <p class="price">{{ hero_product.price | money }}</p>
+            {% if hero_product.metafields.reviews.rating %}
+              <span class="rating">Rating: {{ hero_product.metafields.reviews.rating }} / 5</span>
+            {% endif %}
+          </div>
+          <div class="hero-product-cta">
+            <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
+            <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
+          </div>
+        {% else %}
+          <div class="hero-product-info">
+            <h3>Discover stories tailored to you</h3>
+            <p class="price">Browse curated picks from our shelves.</p>
+          </div>
+          <div class="hero-product-cta">
+            <a class="goodreads-button primary" href="/collections/all">Explore books</a>
+          </div>
+        {% endif %}
+      </aside>
+    </section>
+
+    <section id="lists" class="section">
+      <header>
+        <h2 class="section-title">Trending on PsychoReads</h2>
+        <p class="section-subtitle">Shelves and collections readers are loving this week. Dive into themed lists and discover what everyone is talking about.</p>
+      </header>
+      <div class="featured-lists">
+        <article class="list-card">
+          <strong>Summer Reading Challenge</strong>
+          <span>Breezy beach reads, thrillers, and romances to fill your sunny afternoons.</span>
+          <a class="goodreads-button" href="/collections/all">Browse list</a>
+        </article>
+        <article class="list-card">
+          <strong>Book Club Favorites</strong>
+          <span>Handpicked selections that spark discussion and stay with you long after the last page.</span>
+          <a class="goodreads-button" href="/collections/all">See picks</a>
+        </article>
+        <article class="list-card">
+          <strong>Debuts You'll Love</strong>
+          <span>Fresh voices making waves in fiction, memoir, and speculative storytelling.</span>
+          <a class="goodreads-button" href="/collections/all">Discover debuts</a>
+        </article>
+        <article class="list-card">
+          <strong>Editors' Choice</strong>
+          <span>Curated by our team from the latest releases and timeless classics.</span>
+          <a class="goodreads-button" href="/collections/all">Explore shelves</a>
+        </article>
       </div>
     </section>
 
-    {% if all_products_collection and all_products_collection.products_count > 0 %}
-      <section class="product-gallery" aria-labelledby="product-gallery-title" id="product-gallery">
-        <header data-animate="fade-up">
-          <h2 id="product-gallery-title">Explore Our Products</h2>
-          <p>Browse every item currently available in the store and dive into the resources that best fit your curiosity.</p>
-        </header>
-        <div class="product-gallery-grid">
-          {% for product in all_products_collection.products %}
-            <article class="product-card" data-animate="fade-up" data-animate-delay="{{ forloop.index0 | times: 0.05 }}">
-              <a href="{{ product.url }}">
-                <div class="product-image">
-                  {% if product.featured_image %}
-                    <img
-                      src="{{ product.featured_image | img_url: '540x' }}"
-                      alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                      loading="lazy"
-                    >
-                  {% else %}
-                    {% assign placeholder_id = 'product-card-placeholder-' | append: forloop.index0 %}
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ product.title | escape }}">
-                      <defs>
-                        <linearGradient id="{{ placeholder_id }}" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0%" stop-color="#bfdbfe" />
-                          <stop offset="100%" stop-color="#2563eb" />
-                        </linearGradient>
-                      </defs>
-                      <rect width="400" height="300" rx="28" fill="url(#{{ placeholder_id }})" />
-                      <rect x="70" y="70" width="260" height="48" rx="14" fill="rgba(255,255,255,0.7)" />
-                      <rect x="70" y="140" width="210" height="36" rx="12" fill="rgba(255,255,255,0.55)" />
-                      <rect x="70" y="196" width="170" height="32" rx="10" fill="rgba(255,255,255,0.45)" />
-                    </svg>
-                  {% endif %}
-                </div>
-                <div class="product-info">
-                  <h3>{{ product.title }}</h3>
-                  {% if product.description != blank %}
-                    <p>{{ product.description | strip_html | truncate: 100 }}</p>
-                  {% endif %}
-                  <div class="product-price">
-                    {{ product.price | money }}
-                    {% if product.compare_at_price_max > product.price %}
-                      <del>{{ product.compare_at_price_max | money }}</del>
-                    {% endif %}
-                  </div>
-                  <div class="product-card-footer">
-                    {% if product.available %}
-                      <span>In stock</span>
-                    {% else %}
-                      <span>Sold out</span>
-                    {% endif %}
-                    <span>View details →</span>
-                  </div>
-                </div>
-              </a>
+    <section id="new-releases" class="section">
+      <header>
+        <h2 class="section-title">New releases from our bookstore</h2>
+        <p class="section-subtitle">Keep your to-read list fresh with the latest arrivals loved by the PsychoReads community.</p>
+      </header>
+      <div class="product-grid">
+        {% if featured_collection and featured_collection.products_count > 0 %}
+          {% for product in featured_collection.products limit: 6 %}
+            <article class="product-card">
+              {% if product.featured_image %}
+                <a href="{{ product.url }}">
+                  <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title | escape }} cover">
+                </a>
+              {% endif %}
+              <div class="product-card-content">
+                <h3><a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a></h3>
+                {% if product.vendor %}
+                  <span>{{ product.vendor }}</span>
+                {% endif %}
+                <span class="price">{{ product.price | money }}</span>
+                <span class="rating">★★★★★</span>
+              </div>
             </article>
           {% endfor %}
-        </div>
-      </section>
-    {% endif %}
-
-    <section class="who" aria-labelledby="who-title">
-      <div class="section-heading">
-        <h2 id="who-title">Curated for Curious Minds &amp; Professionals</h2>
-        <p>Discover titles that support academic study, professional practice, and personal exploration across the landscape of psychology.</p>
-      </div>
-      <div class="who-grid">
-        <div class="who-card">
-          <div class="who-icon">🧠</div>
-          <h3>Foundations of Mind</h3>
-          <p>Dive into cognitive science, neuropsychology, and developmental theories from trusted scholars and educators.</p>
-        </div>
-        <div class="who-card">
-          <div class="who-icon">🔍</div>
-          <h3>Behavior &amp; Motivation</h3>
-          <p>Examine habit formation, attention, and executive function through research-backed frameworks and practical insights.</p>
-        </div>
-        <div class="who-card">
-          <div class="who-icon">🌙</div>
-          <h3>Wellbeing &amp; Resilience</h3>
-          <p>Explore mindfulness, restorative rest, and whole-person wellness with approachable guidance and reflective exercises.</p>
-        </div>
-        <div class="who-card">
-          <div class="who-icon">❤️</div>
-          <h3>Relationships &amp; Community</h3>
-          <p>Understand family systems, connection, and cultural context through compassionate narratives and research.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="inside" aria-labelledby="inside-title">
-      <div class="inside-visual" aria-hidden="true">
-        {% if featured_product and featured_product.featured_image %}
-          <img
-            src="{{ featured_product.featured_image | img_url: '900x' }}"
-            alt="{{ featured_product.featured_image.alt | default: featured_product.title | escape }}"
-            loading="lazy"
-          >
         {% else %}
-          <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#93c5fd" />
-                <stop offset="100%" stop-color="#2563eb" />
-              </linearGradient>
-            </defs>
-            <rect width="400" height="320" fill="url(#grad)" rx="32" />
-            <rect x="60" y="60" width="280" height="60" rx="16" fill="rgba(255,255,255,0.7)" />
-            <rect x="60" y="140" width="220" height="40" rx="12" fill="rgba(255,255,255,0.5)" />
-            <rect x="60" y="200" width="160" height="40" rx="12" fill="rgba(255,255,255,0.4)" />
-          </svg>
+          <p>No books are available yet. Check back soon!</p>
         {% endif %}
       </div>
-      <div class="inside-list">
-        <h2 id="inside-title">Explore Our Global Library</h2>
-        <h3>Discover a world of insights curated for learners, families, and practitioners everywhere.</h3>
-        <ul>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            <span><strong>Worldwide perspectives &amp; voices:</strong> Authors and experts share culturally rich approaches to growth and wellbeing.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            <span><strong>Guides for every journey:</strong> From quick-start playbooks to deep research collections, find resources that match your goals.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            <span><strong>Formats for how you learn:</strong> Print, audio, and digital experiences support classrooms, clinics, and homes alike.</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            <span><strong>Always-on inspiration:</strong> Fresh ideas, global events, and community highlights keep curiosity thriving.</span>
-          </li>
-        </ul>
+    </section>
+
+    <section class="section" aria-labelledby="community-highlights">
+      <header>
+        <h2 id="community-highlights" class="section-title">Because your friends are reading</h2>
+        <p class="section-subtitle">See what other readers are adding to their shelves and keep track of your own reading journey.</p>
+      </header>
+      <div class="community-section">
+        <article class="community-card">
+          <strong>Track your reading</strong>
+          <p>Create shelves, rate books, and jot down notes on every story you finish.</p>
+          <a class="goodreads-button primary" href="/account/register">Start tracking</a>
+        </article>
+        <article class="community-card">
+          <strong>Follow friends & authors</strong>
+          <p>See updates from the people who inspire your reading and share your latest finds.</p>
+          <a class="goodreads-button" href="/collections/all">Find recommendations</a>
+        </article>
+        <article class="community-card">
+          <strong>Join discussions</strong>
+          <p>Thousands of book clubs are chatting now. Jump in and talk about the plot twists.</p>
+          <a class="goodreads-button" href="/pages/contact">Browse clubs</a>
+        </article>
       </div>
     </section>
 
-    <section class="why" aria-labelledby="why-title">
-      <div class="section-heading">
-        <h2 id="why-title">Why Readers Choose Us</h2>
-        <p>Thoughtfully curated psychology books that inspire curiosity, deepen knowledge, and encourage compassionate action.</p>
-      </div>
-      <ul class="why-list">
-        <li><strong>Research meets readability:</strong> Each title blends academic rigor with engaging storytelling and real-world application.</li>
-        <li><strong>Diverse viewpoints:</strong> Collections highlight global voices, cultural nuance, and interdisciplinary perspectives.</li>
-        <li><strong>Trusted sources:</strong> Selected by the Psychology Books team to ensure quality, credibility, and lasting impact.</li>
-      </ul>
-    </section>
-
-    <section class="testimonials" aria-labelledby="testimonials-title">
-      <div class="section-heading">
-        <h2 id="testimonials-title">Readers Share Their Experience</h2>
-        <p>Reflections from lifelong learners, educators, and clinicians who explore our psychology shelves.</p>
-      </div>
-      <div class="testimonial-track">
-        <div class="testimonial-card">
-          <p class="testimonial-text">“Each book I’ve picked up has reshaped how I understand the people in my life—accessible, evidence-informed, and beautifully written.”</p>
-          <p class="testimonial-author">⭐️⭐️⭐️⭐️⭐️ — University Counselor</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">“Our book club keeps returning because the selections spark meaningful conversations about emotions, culture, and resilience.”</p>
-          <p class="testimonial-author">⭐️⭐️⭐️⭐️⭐️ — Community Facilitator</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">“As a clinician, I appreciate the balance of theory and practical application. It’s my go-to source when recommending reads.”</p>
-          <p class="testimonial-author">⭐️⭐️⭐️⭐️⭐️ — Licensed Psychologist</p>
-        </div>
+    <section id="quotes" class="section">
+      <header>
+        <h2 class="section-title">Quotes we&apos;re loving</h2>
+        <p class="section-subtitle">Words that linger. Shareable lines from bestselling authors and timeless classics.</p>
+      </header>
+      <div class="quotes-grid">
+        <article class="quote-card">
+          <p>“A room without books is like a body without a soul.”</p>
+          <span>— Marcus Tullius Cicero</span>
+        </article>
+        <article class="quote-card">
+          <p>“We tell ourselves stories in order to live.”</p>
+          <span>— Joan Didion</span>
+        </article>
+        <article class="quote-card">
+          <p>“You can never get a cup of tea large enough or a book long enough to suit me.”</p>
+          <span>— C.S. Lewis</span>
+        </article>
+        <article class="quote-card">
+          <p>“Books are mirrors: you only see in them what you already have inside you.”</p>
+          <span>— Carlos Ruiz Zafón</span>
+        </article>
       </div>
     </section>
 
-    <section class="how" aria-labelledby="how-title">
-      <div class="section-heading">
-        <h2 id="how-title">How to Explore</h2>
-        <p>Simple steps to discover the psychology books that resonate with your interests and goals.</p>
-      </div>
-      <div class="steps">
-        <div class="step-card">
-          <span class="step-number">1</span>
-          <h3>Browse curated collections</h3>
-          <p>Start with our themed shelves—whether you’re studying, teaching, or seeking personal growth.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">2</span>
-          <h3>Select the titles you love</h3>
-          <p>Preview descriptions, author backgrounds, and key takeaways to choose the perfect addition to your reading list.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">3</span>
-          <h3>Read, learn, and share</h3>
-          <p>Enjoy your books in print or digital formats, revisit favorite insights, and recommend them to colleagues and friends.</p>
-        </div>
+    <section class="section" id="community">
+      <header>
+        <h2 class="section-title">Join the PsychoReads newsletter</h2>
+        <p class="section-subtitle">Weekly updates featuring trending reviews, new releases, and tailored recommendations.</p>
+      </header>
+      <div class="newsletter">
+        <p>Stay on top of the literary world with curated highlights delivered to your inbox.</p>
+        <form action="/contact" method="post">
+          <input type="hidden" name="form_type" value="customer" />
+          <input type="hidden" name="utf8" value="✓" />
+          <input type="email" name="contact[email]" placeholder="Enter your email" aria-label="Email address">
+          <button class="goodreads-button primary" type="submit">Subscribe</button>
+        </form>
       </div>
     </section>
-
-    <section class="faq" aria-labelledby="faq-title">
-      <div class="section-heading">
-        <h2 id="faq-title">Frequently Asked Questions</h2>
-        <p>Everything you need to know about shopping our psychology bookstore.</p>
-      </div>
-      <div class="faq-list">
-        <details>
-          <summary>How do I receive my books?</summary>
-          <p>Choose from print or digital formats at checkout. Physical copies ship promptly, while digital editions arrive instantly via download link.</p>
-        </details>
-        <details>
-          <summary>Are these books suitable for professional development?</summary>
-          <p>Yes. Many of our titles are adopted in classrooms, therapy practices, and coaching programs to deepen expertise and spark new ideas.</p>
-        </details>
-        <details>
-          <summary>Do you offer recommendations?</summary>
-          <p>Our team highlights staff picks and curated reading lists to help you find titles that match your goals—reach out anytime for personalized suggestions.</p>
-        </details>
-        <details>
-          <summary>Can I read on my favorite devices?</summary>
-          <p>Digital purchases are provided in widely compatible formats so you can enjoy them on tablets, e-readers, or laptops with ease.</p>
-        </details>
-      </div>
-    </section>
-
-    <section class="cta-final" aria-labelledby="cta-title">
-      <div class="cta-card">
-        <h2 id="cta-title">Start Your Next Psychology Reading Journey.</h2>
-        <p>From foundational theory to practical guides, discover books that broaden your perspective and inspire meaningful change.</p>
-        <a
-          class="button button-primary"
-          href="#product-gallery"
-        >Browse the Collection</a>
-      </div>
-    </section>
-  </div>
+  </main>
 </div>
-
-<script>
-  if (document.body) {
-    document.body.classList.add('animate-ready');
-  } else {
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('animate-ready');
-    }, { once: true });
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var animated = document.querySelectorAll('[data-animate]');
-    if (!animated.length) {
-      return;
-    }
-
-    var activate = function (el) {
-      var delay = el.getAttribute('data-animate-delay');
-      if (delay) {
-        el.style.transitionDelay = delay + 's';
-      }
-      el.classList.add('is-visible');
-    };
-
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            activate(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      animated.forEach(function (el) {
-        observer.observe(el);
-      });
-    } else {
-      animated.forEach(activate);
-    }
-  });
-</script>
