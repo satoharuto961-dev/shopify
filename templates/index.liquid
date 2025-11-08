@@ -3,9 +3,9 @@
   {% assign featured_collection = collections['all'] %}
 {% endif %}
 
-{% assign hero_product = nil %}
+{% assign hero_products_exist = false %}
 {% if featured_collection and featured_collection.products_count > 0 %}
-  {% assign hero_product = featured_collection.products | first %}
+  {% assign hero_products_exist = true %}
 {% endif %}
 
 <style>
@@ -157,6 +157,33 @@
     color: var(--goodreads-green);
   }
 
+  .hero-picks {
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid var(--goodreads-border);
+    box-shadow: 0 24px 48px rgba(32, 21, 12, 0.15);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-picks-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .hero-picks-header p {
+    margin: 0;
+    color: var(--goodreads-muted);
+  }
+
+  .hero-product-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
   .hero-product-card {
     background: #fff;
     border-radius: 24px;
@@ -166,18 +193,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    position: relative;
-  }
-
-  .hero-product-card::after {
-    content: "Reader's pick";
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--goodreads-muted);
   }
 
   .hero-product-info {
@@ -384,10 +399,8 @@
   }
 
   @media (max-width: 540px) {
-    .hero-product-card::after {
-      position: static;
-      align-self: flex-start;
-      margin-bottom: -0.5rem;
+    .hero-product-card {
+      padding: 1.6rem;
     }
   }
 </style>
@@ -419,32 +432,46 @@
         </div>
       </div>
 
-      <aside class="hero-product-card" aria-label="Featured book">
-        {% if hero_product %}
-          <div class="hero-product-info">
-            {% if hero_product.featured_image %}
-              <img src="{{ hero_product.featured_image | img_url: '400x' }}" alt="{{ hero_product.title | escape }} cover" style="width: 160px; align-self: center; border-radius: 12px; box-shadow: 0 16px 32px rgba(32, 21, 12, 0.18);" />
-            {% endif %}
-            <h3>{{ hero_product.title }}</h3>
-            {% if hero_product.vendor %}
-              <span>{{ hero_product.vendor }}</span>
-            {% endif %}
-            <p class="price">{{ hero_product.price | money }}</p>
-            {% if hero_product.metafields.reviews.rating %}
-              <span class="rating">Rating: {{ hero_product.metafields.reviews.rating }} / 5</span>
-            {% endif %}
+      <aside class="hero-picks" aria-label="Featured books">
+        {% if hero_products_exist %}
+          <div class="hero-picks-header">
+            <span class="hero-badge">Reader's picks</span>
+            <p>Our community highlights to jump-start your reading list.</p>
           </div>
-          <div class="hero-product-cta">
-            <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
-            <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
+          <div class="hero-product-list">
+            {% for hero_product in featured_collection.products limit: 2 %}
+              <article class="hero-product-card">
+                <div class="hero-product-info">
+                  {% if hero_product.featured_image %}
+                    <img src="{{ hero_product.featured_image | img_url: '400x' }}" alt="{{ hero_product.title | escape }} cover" style="width: 160px; align-self: center; border-radius: 12px; box-shadow: 0 16px 32px rgba(32, 21, 12, 0.18);" />
+                  {% endif %}
+                  <h3>{{ hero_product.title }}</h3>
+                  {% if hero_product.vendor %}
+                    <span>{{ hero_product.vendor }}</span>
+                  {% endif %}
+                  <p class="price">{{ hero_product.price | money }}</p>
+                  {% if hero_product.metafields.reviews.rating %}
+                    <span class="rating">Rating: {{ hero_product.metafields.reviews.rating }} / 5</span>
+                  {% endif %}
+                </div>
+                <div class="hero-product-cta">
+                  <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
+                  <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
+                </div>
+              </article>
+            {% endfor %}
           </div>
         {% else %}
-          <div class="hero-product-info">
-            <h3>Discover stories tailored to you</h3>
-            <p class="price">Browse curated picks from our shelves.</p>
-          </div>
-          <div class="hero-product-cta">
-            <a class="goodreads-button primary" href="/collections/all">Explore books</a>
+          <div class="hero-product-list">
+            <article class="hero-product-card">
+              <div class="hero-product-info">
+                <h3>Discover stories tailored to you</h3>
+                <p class="price">Browse curated picks from our shelves.</p>
+              </div>
+              <div class="hero-product-cta">
+                <a class="goodreads-button primary" href="/collections/all">Explore books</a>
+              </div>
+            </article>
           </div>
         {% endif %}
       </aside>
