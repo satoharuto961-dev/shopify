@@ -1,4 +1,10 @@
-{% assign featured_collection = collections['frontpage'] %}
+{% assign featured_collection = nil %}
+{% if settings.home_featured_collection != blank %}
+  {% assign featured_collection = collections[settings.home_featured_collection] %}
+{% endif %}
+{% if featured_collection == nil or featured_collection.products_count == 0 %}
+  {% assign featured_collection = collections['frontpage'] %}
+{% endif %}
 {% if featured_collection == nil or featured_collection.products_count == 0 %}
   {% assign featured_collection = collections['all'] %}
 {% endif %}
