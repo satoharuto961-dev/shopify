@@ -229,8 +229,30 @@
     box-shadow: 0 24px 48px rgba(32, 21, 12, 0.15);
     padding: 2rem;
     display: flex;
+    gap: 1.75rem;
+    align-items: stretch;
+  }
+
+  .hero-product-media {
+    flex: 0 0 160px;
+    max-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-product-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 16px 32px rgba(32, 21, 12, 0.18);
+  }
+
+  .hero-product-body {
+    flex: 1 1 auto;
+    display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .hero-product-info {
@@ -253,6 +275,10 @@
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+  }
+
+  .hero-product-card--empty {
+    flex-direction: column;
   }
 
   .section {
@@ -440,6 +466,32 @@
     }
   }
 
+  @media (max-width: 720px) {
+    .hero-product-card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .hero-product-media {
+      flex: 0 0 auto;
+      max-width: 220px;
+      width: 100%;
+    }
+
+    .hero-product-body {
+      align-items: center;
+    }
+
+    .hero-product-info {
+      align-items: center;
+    }
+
+    .hero-product-cta {
+      justify-content: center;
+    }
+  }
+
   @media (max-width: 540px) {
     .hero-product-card {
       padding: 1.6rem;
@@ -483,35 +535,41 @@
           <div class="hero-product-list">
             {% for hero_product in featured_collection.products limit: 2 %}
               <article class="hero-product-card">
-                <div class="hero-product-info">
-                  {% if hero_product.featured_image %}
-                    <img src="{{ hero_product.featured_image | img_url: '400x' }}" alt="{{ hero_product.title | escape }} cover" style="width: 160px; align-self: center; border-radius: 12px; box-shadow: 0 16px 32px rgba(32, 21, 12, 0.18);" />
-                  {% endif %}
-                  <h3>{{ hero_product.title }}</h3>
-                  {% if hero_product.vendor %}
-                    <span>{{ hero_product.vendor }}</span>
-                  {% endif %}
-                  <p class="price">{{ hero_product.price | money }}</p>
-                  {% if hero_product.metafields.reviews.rating %}
-                    <span class="rating">Rating: {{ hero_product.metafields.reviews.rating }} / 5</span>
-                  {% endif %}
-                </div>
-                <div class="hero-product-cta">
-                  <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
-                  <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
+                {% if hero_product.featured_image %}
+                  <div class="hero-product-media">
+                    <img src="{{ hero_product.featured_image | img_url: '400x' }}" alt="{{ hero_product.title | escape }} cover" />
+                  </div>
+                {% endif %}
+                <div class="hero-product-body">
+                  <div class="hero-product-info">
+                    <h3>{{ hero_product.title }}</h3>
+                    {% if hero_product.vendor %}
+                      <span>{{ hero_product.vendor }}</span>
+                    {% endif %}
+                    <p class="price">{{ hero_product.price | money }}</p>
+                    {% if hero_product.metafields.reviews.rating %}
+                      <span class="rating">Rating: {{ hero_product.metafields.reviews.rating }} / 5</span>
+                    {% endif %}
+                  </div>
+                  <div class="hero-product-cta">
+                    <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
+                    <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
+                  </div>
                 </div>
               </article>
             {% endfor %}
           </div>
         {% else %}
           <div class="hero-product-list">
-            <article class="hero-product-card">
-              <div class="hero-product-info">
-                <h3>Discover stories tailored to you</h3>
-                <p class="price">Browse curated picks from our shelves.</p>
-              </div>
-              <div class="hero-product-cta">
-                <a class="goodreads-button primary" href="/collections/all">Explore books</a>
+            <article class="hero-product-card hero-product-card--empty">
+              <div class="hero-product-body">
+                <div class="hero-product-info">
+                  <h3>Discover stories tailored to you</h3>
+                  <p class="price">Browse curated picks from our shelves.</p>
+                </div>
+                <div class="hero-product-cta">
+                  <a class="goodreads-button primary" href="/collections/all">Explore books</a>
+                </div>
               </div>
             </article>
           </div>
