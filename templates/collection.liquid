@@ -1,0 +1,168 @@
+{% comment %}
+  Collection template for displaying products in a grid with pagination.
+  Inspired by the homepage aesthetic to keep visual consistency.
+{% endcomment %}
+
+{% paginate collection.products by 24 %}
+  <style>
+    .collection-page {
+      background: #f4f1ea;
+      color: #1f1a13;
+      font-family: "Georgia", "Merriweather", "Times New Roman", serif;
+      min-height: 100vh;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .collection-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .collection-header {
+      display: grid;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .collection-title {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      color: #382110;
+      margin: 0;
+    }
+
+    .collection-description {
+      color: #6b6048;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 720px;
+    }
+
+    .collection-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .collection-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #d6cfbf;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 16px 32px rgba(32, 21, 12, 0.1);
+    }
+
+    .collection-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      background: #ede6d6;
+    }
+
+    .collection-card-content {
+      padding: 1.2rem 1.4rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .collection-card-content h3 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: #1f1a13;
+    }
+
+    .collection-card-content .vendor {
+      color: #6b6048;
+      font-size: 0.95rem;
+    }
+
+    .collection-card-content .price {
+      font-weight: 700;
+      color: #4a7c59;
+    }
+
+    .collection-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .collection-pagination a,
+    .collection-pagination span {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid #d6cfbf;
+      text-decoration: none;
+      color: #382110;
+      font-weight: 600;
+      background: #ffffff;
+    }
+
+    .collection-pagination .current {
+      background: #382110;
+      color: #ffffff;
+      border-color: #382110;
+    }
+
+    .collection-empty {
+      text-align: center;
+      color: #6b6048;
+      font-size: 1.1rem;
+    }
+  </style>
+
+  <div class="collection-page">
+    <div class="collection-wrapper">
+      <header class="collection-header">
+        <h1 class="collection-title">{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div class="collection-description">{{ collection.description }}</div>
+        {% endif %}
+      </header>
+
+      {% if collection.all_products_count > 0 %}
+        <div class="collection-grid">
+          {% for product in collection.products %}
+            <article class="collection-card">
+              {% if product.featured_image %}
+                <a href="{{ product.url }}">
+                  <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}">
+                </a>
+              {% endif %}
+              <div class="collection-card-content">
+                <h3><a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a></h3>
+                {% if product.vendor %}
+                  <span class="vendor">{{ product.vendor }}</span>
+                {% endif %}
+                <span class="price">{{ product.price | money }}</span>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="collection-empty">No products are currently available in this collection. Please check back soon.</p>
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <nav class="collection-pagination" role="navigation" aria-label="Pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}">&larr; Previous</a>
+          {% endif %}
+
+          <span class="current">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}">Next &rarr;</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+  </div>
+{% endpaginate %}
