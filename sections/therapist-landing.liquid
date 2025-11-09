@@ -280,13 +280,16 @@
               {{ landing_product.price | money_with_currency }}
             </div>
           {% endif %}
-          <div class="landing-benefits">
-            <ul>
-              {% for block in section.blocks where block.type == 'benefit' %}
-                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+          {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+          {% if benefit_blocks.size > 0 %}
+            <div class="landing-benefits">
+              <ul>
+                {% for block in benefit_blocks %}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
           <button
             class="landing-button"
             type="button"
