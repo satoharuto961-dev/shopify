@@ -69,8 +69,8 @@
             {% endif %}
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    {% endunless %}
     <main class="site-main{% if template.name == 'index' or template == 'index' %} site-main--full-bleed{% endif %}" role="main">
       {{ content_for_layout }}
     </main>
@@ -105,15 +105,15 @@
             <li><a href="https://www.facebook.com" rel="noopener noreferrer" target="_blank">Facebook</a></li>
           </ul>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© {{ 'now' | date: '%Y' }} {{ shop.name | default: 'PsychoReads' | escape }}. All rights reserved.</span>
-        <div class="footer-bottom__links">
-          <a href="/policies/privacy-policy">Privacy</a>
-          <a href="/policies/terms-of-service">Terms</a>
+        <div class="footer-bottom">
+          <span>© {{ 'now' | date: '%Y' }} {{ shop.name | default: 'PsychoReads' | escape }}. All rights reserved.</span>
+          <div class="footer-bottom__links">
+            <a href="/policies/privacy-policy">Privacy</a>
+            <a href="/policies/terms-of-service">Terms</a>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    {% endunless %}
     {{ 'theme.js' | asset_url | script_tag }}
     {{ content_for_footer }}
   </body>
