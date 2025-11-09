@@ -272,21 +272,24 @@
           <div class="landing-eyebrow">Digital Download</div>
           <h1 id="landing-headline-{{ section.id }}" class="landing-headline">{{ section.settings.headline }}</h1>
           <p class="landing-subhead">{{ section.settings.subhead }}</p>
-          {% if request.design_mode and landing_product == nil %}
-            <div class="landing-error">Update the product handle to a valid product so this landing page can render.</div>
+          {% if landing_product == nil %}
+            <div class="landing-error">Update the product handle to a valid product so this landing page can render purchase details.</div>
           {% endif %}
           {% if landing_product %}
             <div class="landing-price">
               {{ landing_product.price | money_with_currency }}
             </div>
           {% endif %}
-          <div class="landing-benefits">
-            <ul>
-              {% for block in section.blocks where block.type == 'benefit' %}
-                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+          {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+          {% if benefit_blocks.size > 0 %}
+            <div class="landing-benefits">
+              <ul>
+                {% for block in benefit_blocks %}
+                  <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
           <button
             class="landing-button"
             type="button"

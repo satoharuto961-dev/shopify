@@ -1,5 +1,14 @@
+{% liquid
+  assign is_therapist_landing = false
+  assign template_string = template | append: ''
+  if template_string == 'page.therapist-landing' or template_string == 'page.therapist-landing.json'
+    assign is_therapist_landing = true
+  elsif template.name and template.name == 'page' and template.suffix == 'therapist-landing'
+    assign is_therapist_landing = true
+  endif
+%}
 <!doctype html>
-<html lang="en">
+<html lang="en"{% if is_therapist_landing %} class="therapist-landing-html"{% endif %}>
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKJWGBWMK"></script>
@@ -24,7 +33,7 @@
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
-  <body class="template-{{ template | replace: '.', '-' }}{% if template.name %} template-name-{{ template.name | handleize }}{% endif %}{% if template.suffix %} template-suffix-{{ template.suffix | handleize }}{% endif %}">
+  <body class="template-{{ template | replace: '.', '-' }}{% if template.name %} template-name-{{ template.name | handleize }}{% endif %}{% if template.suffix %} template-suffix-{{ template.suffix | handleize }}{% endif %}{% if is_therapist_landing %} template-page-therapist-landing{% endif %}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2H2S2ZK"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -74,7 +83,7 @@
           <h3>Discover</h3>
           <ul>
             <li><a href="/#lists">Trending lists</a></li>
-            <li><a href="/#new-releases">New releases</a></li>
+            <li><a href="/#new-releases">New Releases</a></li>
             <li><a href="/collections/all">Browse all books</a></li>
           </ul>
         </div>
