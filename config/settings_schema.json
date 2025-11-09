@@ -20,6 +20,12 @@
         "label": "Homepage featured collection",
         "info": "Select the collection used for homepage product listings.",
         "default": "frontpage"
+      },
+      {
+        "type": "page",
+        "id": "therapist_landing_page",
+        "label": "Therapist landing page",
+        "info": "Select the page that should be used for the therapist landing experience."
       }
     ]
   }

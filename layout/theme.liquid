@@ -6,6 +6,19 @@
   elsif template.name and template.name == 'page' and template.suffix == 'therapist-landing'
     assign is_therapist_landing = true
   endif
+  assign therapist_page_handle = settings.therapist_landing_page
+  assign therapist_page_url = ''
+  assign therapist_page_title = ''
+  if therapist_page_handle != blank
+    assign therapist_page = pages[therapist_page_handle]
+    if therapist_page
+      assign therapist_page_url = therapist_page.url
+      assign therapist_page_title = therapist_page.title
+    endif
+  endif
+  if therapist_page_url == ''
+    assign therapist_page_url = '/pages/therapist-landing'
+  endif
 %}
 <!doctype html>
 <html lang="en"{% if is_therapist_landing %} class="therapist-landing-html"{% endif %}>
@@ -38,6 +51,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2H2S2ZK"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    {% unless is_therapist_landing %}
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a class="brand" href="/">
@@ -53,7 +67,7 @@
               <li><a href="/#lists">Lists</a></li>
               <li><a href="/#new-releases">New Releases</a></li>
               <li><a href="/#community">Community</a></li>
-              <li><a href="/pages/therapist-landing">For Therapists</a></li>
+              <li><a href="{{ therapist_page_url }}">{{ therapist_page_title | default: 'For Therapists' }}</a></li>
               <li><a href="/#quotes">Quotes</a></li>
             </ul>
           </nav>
@@ -74,6 +88,7 @@
     <main class="site-main{% if template.name == 'index' or template == 'index' %} site-main--full-bleed{% endif %}" role="main">
       {{ content_for_layout }}
     </main>
+    {% unless is_therapist_landing %}
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <div class="footer-brand">
@@ -86,7 +101,7 @@
             <li><a href="/#lists">Trending lists</a></li>
             <li><a href="/#new-releases">New Releases</a></li>
             <li><a href="/collections/all">Browse all books</a></li>
-            <li><a href="/pages/therapist-landing">Therapist Landing</a></li>
+            <li><a href="{{ therapist_page_url }}">{{ therapist_page_title | default: 'Therapist Landing' }}</a></li>
           </ul>
         </div>
         <div class="footer-links">
