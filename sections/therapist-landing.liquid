@@ -46,6 +46,19 @@
       margin-bottom: 1.5rem;
       color: #475569;
     }
+    .hero-price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-bottom: 0.75rem;
+    }
+    .hero-price small {
+      display: block;
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 500;
+      margin-top: 0.35rem;
+    }
     .buy-now {
       display: inline-flex;
       align-items: center;
@@ -75,6 +88,36 @@
       color: #dc2626;
       min-height: 1.2rem;
       font-size: 0.95rem;
+    }
+    .cta-reassurance {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.75rem;
+    }
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .hero-trust span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .sample-link {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .sample-link:hover,
+    .sample-link:focus {
+      text-decoration: underline;
     }
     .benefits {
       background: #fff;
@@ -279,6 +322,11 @@
     .final-cta .buy-now {
       padding: 0.9rem 2.5rem;
     }
+    .guarantee-note {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-top: 1rem;
+    }
     .testimonials {
       background: #fff;
       border-radius: 12px;
@@ -346,10 +394,20 @@
       justify-content: space-between;
       gap: 1rem;
       z-index: 30;
+      flex-wrap: wrap;
+    }
+    .sticky-bar-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
     }
     .sticky-bar-price {
       font-weight: 600;
       font-size: 1rem;
+    }
+    .sticky-bar-title {
+      font-size: 0.9rem;
+      color: #cbd5f5;
     }
     .sticky-bar .buy-now {
       padding: 0.65rem 1.75rem;
@@ -385,7 +443,11 @@
       </div>
       <div class="hero-content">
         <h1>Therapist-Approved 3-in-1 Workbook — CBT • DBT • ACT.</h1>
-        <p>Evidence-based tools used by clinicians worldwide to help clients overcome anxiety, low self-esteem, and emotional dysregulation.</p>
+        <p>Evidence-based tools to help clients overcome anxiety, low self-esteem, and emotional dysregulation — while saving you prep time.</p>
+        <div class="hero-price">
+          {{ available_variant.price | default: product.price | money }}
+          <small>One-time professional license.</small>
+        </div>
         <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
           {% if is_available %}
             Buy Now — Instant Therapist Edition
@@ -394,7 +456,13 @@
           {% endif %}
         </button>
         <p class="buy-now__message" role="status" aria-live="polite"></p>
-        <p style="font-size: 0.9rem; color: #64748b; margin-top: 1rem;">✔ Secure Checkout &nbsp; ✔ Instant Download &nbsp; ✔ Professional License Included</p>
+        <p class="cta-reassurance">Instant PDF download after secure checkout.</p>
+        <a class="sample-link" href="{{ product.url }}?sample=pdf" target="_blank" rel="noopener">Free Sample Pages (PDF)</a>
+        <div class="hero-trust">
+          <span>✔ Secure Checkout</span>
+          <span>✔ Instant Download</span>
+          <span>✔ Professional License</span>
+        </div>
       </div>
     </section>
 
@@ -402,20 +470,20 @@
       <h2>Why Therapists Love This Workbook</h2>
       <div class="benefit-grid">
         <div class="benefit-card">
-          <h3>When session time is limited</h3>
-          <p>Open to a ready-made protocol and move directly into interventions without sacrificing rapport-building or assessment.</p>
+          <h3>Save time in every session.</h3>
+          <p>Open the workbook and move straight into targeted interventions.</p>
         </div>
         <div class="benefit-card">
-          <h3>When clients need visual tools</h3>
-          <p>Show concepts through illustrated worksheets that make cognitive restructuring and distress-tolerance skills tangible.</p>
+          <h3>Professional-grade visuals clients instantly understand.</h3>
+          <p>Illustrated worksheets translate complex concepts into clear takeaways.</p>
         </div>
         <div class="benefit-card">
-          <h3>When you want continuity between sessions</h3>
-          <p>Assign structured homework that reinforces core skills, tracks progress, and keeps clients engaged between appointments.</p>
+          <h3>Integrates CBT, DBT &amp; ACT in one resource.</h3>
+          <p>Blend modalities seamlessly without juggling multiple manuals.</p>
         </div>
         <div class="benefit-card">
-          <h3>When you need multimodal integration</h3>
-          <p>Blend CBT, DBT, and ACT seamlessly so every treatment plan addresses thoughts, emotions, and values-based action.</p>
+          <h3>Perfect for telehealth and print use.</h3>
+          <p>Share screens, email packets, or print pages with professional polish.</p>
         </div>
       </div>
       <blockquote>
@@ -425,25 +493,25 @@
     </section>
 
     {% assign gallery_images = product.media | where: 'media_type', 'image' %}
-    <section class="gallery container">
-      <h2>What’s Inside</h2>
+    <section class="gallery container" id="inside-workbook">
+      <h2>Inside the Workbook</h2>
       <div class="inside-columns">
         <div>
-          <h3>CBT Treatment Maps</h3>
-          <p>Guide clients through automatic thoughts, core beliefs, and behavioral experiments with clear diagrams and homework trackers.</p>
+          <h3>CBT — challenge automatic thoughts.</h3>
+          <p>Use guided prompts to surface distortions, test beliefs, and map healthier cognitive patterns.</p>
         </div>
         <div>
-          <h3>DBT Skills Labs</h3>
-          <p>Teach distress tolerance, emotion regulation, and interpersonal effectiveness with ready-to-facilitate handouts and diary cards.</p>
+          <h3>DBT — teach emotional regulation and distress tolerance.</h3>
+          <p>Deploy ready-to-facilitate handouts, diary cards, and skills labs that calm the nervous system.</p>
         </div>
         <div>
-          <h3>ACT Values Pathways</h3>
-          <p>Support psychological flexibility using experiential exercises, defusion scripts, and values clarification prompts.</p>
+          <h3>ACT — build psychological flexibility and values-based living.</h3>
+          <p>Guide clients toward committed action with defusion scripts, values maps, and experiential exercises.</p>
         </div>
       </div>
       <ul class="inside-highlights">
         <li>Step-by-step exercises</li>
-        <li>Real-world cases</li>
+        <li>Real-world examples</li>
         <li>Printable worksheets</li>
         <li>Therapist notes</li>
       </ul>
@@ -459,7 +527,7 @@
     </section>
 
     <section class="container emotional-section">
-      <p>Clients often arrive carrying early experiences of criticism, neglect, or invisibility that solidified into low self-esteem. This workbook helps you compassionately surface those formative narratives, name the protective strategies they created, and co-author a new story grounded in self-acceptance and regulated nervous systems.</p>
+      <p>Many clients come to therapy believing they are not enough. This workbook helps them rewrite that story — showing that healing begins with awareness, acceptance, and committed action.</p>
     </section>
 
     <div class="container reframe-table">
@@ -472,49 +540,49 @@
         </thead>
         <tbody>
           <tr>
+            <td>“I’m not good enough.”</td>
+            <td>“Let’s challenge that belief and see the evidence.”</td>
+          </tr>
+          <tr>
             <td>“If I can’t stop the panic, I’m failing therapy.”</td>
-            <td>“Panic is a nervous system response we can map and soothe together—success is noticing it sooner and applying your skills.”</td>
+            <td>“Panic is a nervous system response; success is noticing it sooner and applying your skills.”</td>
           </tr>
           <tr>
             <td>“I always ruin relationships, so I should keep my distance.”</td>
-            <td>“Your emotions signal core needs. Let’s practice DBT interpersonal effectiveness to ask for connection without abandoning yourself.”</td>
+            <td>“Your emotions signal core needs. Let’s practice DBT interpersonal effectiveness so you can connect without abandoning yourself.”</td>
           </tr>
           <tr>
             <td>“My thoughts are proof that I’m broken.”</td>
             <td>“Thoughts are mental events, not verdicts. We can observe them with ACT defusion and move toward the life you value.”</td>
-          </tr>
-          <tr>
-            <td>“If I feel sad, I’ll never get out of bed.”</td>
-            <td>“Sadness is a cue. Together we’ll plan compassionate behavioral activation so mood and action can shift in tandem.”</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="container proof">
-      <div class="proof-item">⭐ 4.4 / 5 on Amazon (14 verified reviews)</div>
-      <div class="proof-item">Used by over 12,000 therapists worldwide.</div>
-      <div class="proof-item">Published June 2021 — continually updated.</div>
-      <div class="proof-item">Written by David Lawson, PhD — specialist in emotional regulation.</div>
+      <div class="proof-item">⭐ 4.4 / 5 on Amazon (14 reviews)</div>
+      <div class="proof-item">📚 Used by thousands of therapists</div>
+      <div class="proof-item">🧩 Published June 2021 — continually updated</div>
+      <div class="proof-item">✍️ By David Lawson, PhD — specialist in emotional regulation</div>
     </div>
 
     <section class="testimonials container">
       <h2>Trusted by practicing therapists</h2>
       <div class="testimonial-grid">
         <div class="testimonial">
-          “Excellent for brief interventions. I can assign the exact exercise I need without building it from scratch.”
+          “Excellent for brief interventions — it keeps session prep to minutes.”
           <span>— Dr. Alexis M., PsyD</span>
         </div>
         <div class="testimonial">
-          “My CBT group loved the structure—the visuals made cognitive distortions click immediately.”
+          “My CBT group loved the structure — the visuals made cognitive distortions click immediately.”
           <span>— Jordan L., LCSW</span>
         </div>
         <div class="testimonial">
-          “Clients understood distortions instantly and were motivated to try the behavioral experiments.”
+          “Clients understood distortions instantly and stayed engaged between sessions.”
           <span>— Priya K., LMFT</span>
         </div>
         <div class="testimonial">
-          “The ACT worksheets help anxious clients reconnect with values and make committed plans they actually follow.”
+          “Perfect quick reference for trainees shadowing sessions.”
           <span>— Ethan R., LPC</span>
         </div>
       </div>
@@ -545,7 +613,7 @@
       </div>
       <div class="faq-item">
         <h3>Can I use it with multiple clients?</h3>
-        <p>Yes — covers unlimited personal clinical use.</p>
+        <p>Yes — unlimited personal clinical use.</p>
       </div>
       <div class="faq-item">
         <h3>Is it good for trainees?</h3>
@@ -566,10 +634,14 @@
           Sold Out
         {% endif %}
       </button>
+      <p class="guarantee-note">No-risk trial — if it doesn’t fit your modality after first read, contact us within 7 days and we’ll make it right.</p>
     </div>
 
     <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
-      <span class="sticky-bar-price">{{ available_variant.price | default: product.price | money }}</span>
+      <div class="sticky-bar-info">
+        <span class="sticky-bar-title">{{ product.title }}</span>
+        <span class="sticky-bar-price">{{ available_variant.price | default: product.price | money }}</span>
+      </div>
       <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
         Buy Now
       </button>
