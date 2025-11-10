@@ -22,6 +22,38 @@
     .therapist-landing-page h3 {
       color: #101620;
     }
+    .page-header {
+      background: #0f172a;
+      color: #fff;
+      padding: 1.25rem 0;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+    }
+    .page-header .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .page-header .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .page-header nav {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    .page-header nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .page-header nav a:hover,
+    .page-header nav a:focus {
+      color: #60a5fa;
+    }
     .hero {
       display: grid;
       gap: 2rem;
@@ -152,21 +184,6 @@
     .hero-guarantee strong {
       font-weight: 700;
     }
-    .hero-guarantee {
-      margin-top: 1rem;
-      background: #ecfdf5;
-      color: #047857;
-      border-radius: 12px;
-      padding: 0.9rem 1rem;
-      font-size: 0.95rem;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-    .hero-guarantee strong {
-      font-weight: 700;
-    }
     .hero-trust {
       display: flex;
       flex-wrap: wrap;
@@ -179,30 +196,6 @@
       display: flex;
       align-items: center;
       gap: 0.35rem;
-    }
-    .sample-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #1d4ed8;
-      text-decoration: none;
-      padding: 0.55rem 0.95rem;
-      background: #e0e7ff;
-      border-radius: 999px;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
-    }
-    .sample-link svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-    .sample-link:hover,
-    .sample-link:focus {
-      background: #c7d2fe;
-      color: #1e3a8a;
     }
     .benefits {
       background: #fff;
@@ -421,6 +414,33 @@
       margin-top: 1rem;
       font-weight: 500;
     }
+    .page-footer {
+      margin-top: 4rem;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2.5rem 0;
+    }
+    .page-footer .footer-content {
+      display: grid;
+      gap: 1rem;
+      justify-items: center;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .page-footer .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .page-footer .footer-links a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .page-footer .footer-links a:hover,
+    .page-footer .footer-links a:focus {
+      color: #bfdbfe;
+    }
     .testimonials {
       background: #fff;
       border-radius: 12px;
@@ -529,6 +549,17 @@
       <p>Product not found. Please check back later.</p>
     </div>
   {% else %}
+    <header class="page-header">
+      <div class="container header-content">
+        <span class="logo">Mental Health Workbook</span>
+        <nav aria-label="Primary">
+          <a href="#inside-workbook">Inside the Workbook</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#faqs">FAQs</a>
+        </nav>
+      </div>
+    </header>
+
     <section class="hero container">
       <div class="hero-image">
         {% if product.featured_image %}
@@ -557,20 +588,12 @@
           </button>
           <p class="buy-now__message" role="status" aria-live="polite"></p>
           <p class="cta-reassurance">Instant PDF download after secure checkout — add it to your next client plan in minutes.</p>
-          <a class="sample-link" href="{{ product.url }}?sample=pdf" target="_blank" rel="noopener">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 0 1 6.707 8.293L9 10.586V3a1 1 0 0 1 1-1Zm-6 11a1 1 0 0 1 1 1v1h10v-1a1 1 0 1 1 2 0v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a1 1 0 0 1 1-1Z"/></svg>
-            Download 5 sample pages (PDF)
-          </a>
         </div>
         <div class="hero-trust">
           <span>✔ Secure Checkout</span>
           <span>✔ Instant Download</span>
           <span>✔ Professional License</span>
           <span>✔ 7-day Therapist Guarantee</span>
-        </div>
-        <div class="hero-guarantee">
-          <strong>Therapist Guarantee:</strong>
-          If it doesn’t fit your style within 7 days, email us and we’ll make it right.
         </div>
         <div class="hero-guarantee">
           <strong>Therapist Guarantee:</strong>
@@ -694,7 +717,7 @@
       <div class="proof-item">✍️ By David Lawson, PhD — specialist in emotional regulation</div>
     </div>
 
-    <section class="testimonials container">
+    <section class="testimonials container" id="testimonials">
       <h2>Trusted by practicing therapists</h2>
       <div class="testimonial-grid">
         <div class="testimonial">
@@ -734,7 +757,7 @@
       </div>
     </section>
 
-    <section class="faq container">
+    <section class="faq container" id="faqs">
       <h2>Frequently asked questions</h2>
       <div class="faq-item">
         <h3>Is it digital or physical?</h3>
@@ -765,6 +788,18 @@
       </button>
       <p class="guarantee-note">Therapist Guarantee: Try it risk-free for 7 days — if it isn’t a match, email us and we’ll make it right.</p>
     </div>
+
+    <footer class="page-footer">
+      <div class="container footer-content">
+        <span>&copy; {{ 'now' | date: '%Y' }} Mental Health Workbook. All rights reserved.</span>
+        <div class="footer-links" role="list">
+          <a href="/pages/contact">Contact</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/terms-of-service">Terms of Service</a>
+        </div>
+        <span>Built for clinicians who want evidence-based tools without the overwhelm.</span>
+      </div>
+    </footer>
 
     <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
       <div class="sticky-bar-info">
