@@ -1,704 +1,407 @@
-{% liquid
-  assign landing_product = all_products[section.settings.product_handle]
-  assign landing_variant = nil
-  if landing_product
-    assign landing_variant = landing_product.selected_or_first_available_variant
-  endif
-  assign first_variant = landing_variant
-  if landing_product and first_variant == nil and landing_product.variants.size > 0
-    assign first_variant = landing_product.variants.first
-  endif
-  assign product_available = landing_product and landing_product.available
-  assign product_price = landing_variant.price | default: landing_product.price | default: 0
-
-  assign hero_headline = section.settings.headline | strip
-  if hero_headline == blank
-    assign hero_headline = 'Therapist-Approved 3-in-1 Workbook — CBT • DBT • ACT.'
-  endif
-
-  assign hero_subhead = section.settings.subhead | strip
-  if hero_subhead == blank
-    assign hero_subhead = 'Evidence-based, ready-to-use tools for your next session. Download instantly.'
-  endif
-
-  assign hero_button_label = section.settings.button_label | strip
-  if hero_button_label == blank
-    assign hero_button_label = 'Buy Now'
-  endif
-
-  assign meta_title = section.settings.meta_title | strip
-  if meta_title == blank
-    assign meta_title = hero_headline
-  endif
-
-  assign meta_description = section.settings.meta_description | strip
-  if meta_description == blank
-    assign meta_description = 'Download therapist-approved CBT, DBT, and ACT worksheets instantly. Evidence-based tools ready for your next session.'
-  endif
-%}
-
-<div class="therapist-landing" data-section-id="{{ section.id }}">
+{% assign product = all_products['mental-health-workbook-3-books-in-1-cognitive-and-dialectical-behavioral-therapy-acceptance-and-commitment-therapy-cbt-dbt-act'] %}
+{% assign available_variant = product.first_available_variant %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+<div class="therapist-landing-page">
   <style>
-    html.therapist-landing-html .site-header,
-    html.therapist-landing-html .site-footer,
-    body.template-page-therapist-landing .site-header,
-    body.template-page-therapist-landing .site-footer {
-      display: none;
+    .therapist-landing-page {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #1f2933;
+      background: #f7f8fa;
+      padding-bottom: 4rem;
     }
-    body.template-page-therapist-landing .site-main {
-      padding: 0;
-    }
-    body.template-page-therapist-landing .therapist-landing-wrapper {
-      display: block;
-    }
-    .therapist-landing-wrapper {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      color: #1c1c1c;
-      background-color: #f7f6f3;
-      min-height: 100vh;
-      display: block;
-    }
-    .therapist-landing__inner {
-      max-width: 1160px;
+    .therapist-landing-page .container {
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 64px 24px 96px;
+      padding: 0 1.5rem;
     }
-    .landing-hero {
-      display: flex;
-      flex-wrap: wrap;
+    .therapist-landing-page h1,
+    .therapist-landing-page h2,
+    .therapist-landing-page h3 {
+      color: #101620;
+    }
+    .hero {
+      display: grid;
+      gap: 2rem;
       align-items: center;
-      gap: 40px;
-      margin-bottom: 48px;
+      padding: 4rem 0 2rem;
     }
-    .landing-hero__content {
-      flex: 1 1 360px;
-      max-width: 520px;
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+      background: #fff;
     }
-    .landing-eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 12px;
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: #475569;
+    }
+    .buy-now {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 2.5rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
       font-weight: 600;
-      color: #6b6b6b;
-      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      min-width: 200px;
     }
-    .landing-headline {
-      font-size: 40px;
-      line-height: 1.1;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #101010;
+    .buy-now[disabled] {
+      cursor: not-allowed;
+      background: #94a3b8;
     }
-    .landing-subhead {
-      font-size: 20px;
-      line-height: 1.4;
-      margin-bottom: 24px;
-      color: #3a3a3a;
+    .buy-now:not([disabled]):hover,
+    .buy-now:not([disabled]):focus {
+      background: #1d4ed8;
     }
-    .landing-price {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: #101010;
+    .buy-now__message {
+      margin-top: 0.75rem;
+      color: #dc2626;
+      min-height: 1.2rem;
+      font-size: 0.95rem;
     }
-    .landing-benefits {
-      margin-bottom: 32px;
+    .benefits {
+      background: #fff;
+      padding: 3rem 0;
+      border-radius: 12px;
+      margin: 3rem auto;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
     }
-    .landing-benefits ul {
+    .benefits h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    .benefits ul {
       list-style: none;
       padding: 0;
       margin: 0;
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem 2rem;
     }
-    .landing-benefits li::before {
-      content: "✔";
-      color: #0c7a63;
-      margin-right: 8px;
+    .benefits li {
+      padding-left: 1.75rem;
+      position: relative;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #334155;
     }
-    .landing-benefits li {
-      font-size: 16px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      color: #2b2b2b;
+    .benefits li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #2563eb;
+      font-weight: 700;
     }
-    .landing-error {
-      background: #ffe9e3;
-      color: #b42900;
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      font-size: 14px;
-      text-align: left;
+    .gallery {
+      margin: 3rem 0;
     }
-    .landing-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 32px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      background-color: #0c7a63;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      text-decoration: none;
+    .gallery h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
-    .landing-button[disabled] {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-    .landing-button:not([disabled]):hover,
-    .landing-button:not([disabled]):focus {
-      background-color: #0a5f4b;
-    }
-    .landing-hero__media {
-      flex: 1 1 320px;
-      display: flex;
-      justify-content: center;
-    }
-    .landing-hero__media img {
-      max-width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 24px 60px rgba(16, 16, 16, 0.08);
-    }
-    .landing-preview {
-      margin: 72px 0 48px;
-    }
-    .landing-preview__grid {
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
     }
-    .landing-preview__item {
-      background-color: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
-    }
-    .landing-preview__item img {
-      display: block;
+    .gallery-grid img {
       width: 100%;
       height: auto;
-    }
-    .landing-section-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: #101010;
-      text-align: center;
-    }
-    .landing-testimonials {
-      margin: 72px 0;
-    }
-    .landing-testimonials__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-    .landing-testimonial {
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
       background: #fff;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.05);
-      font-size: 16px;
-      line-height: 1.6;
-      color: #2b2b2b;
     }
-    .landing-testimonial cite {
-      display: block;
-      margin-top: 16px;
-      font-style: normal;
-      font-weight: 600;
-      color: #0c7a63;
-    }
-    .landing-faq {
-      margin: 72px 0 0;
-    }
-    .landing-faq__item {
+    .testimonials {
       background: #fff;
       border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 16px;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+      padding: 3rem 0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 3rem;
     }
-    .landing-faq__question {
+    .testimonials h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #1f2933;
+    }
+    .testimonial span {
+      display: block;
+      margin-top: 0.75rem;
       font-weight: 600;
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #101010;
+      color: #2563eb;
+      font-size: 0.95rem;
     }
-    .landing-faq__answer {
-      font-size: 16px;
-      color: #3a3a3a;
+    .faq {
+      padding: 3rem 0;
+    }
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    }
+    .faq-item h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .faq-item p {
+      margin: 0;
+      color: #475569;
       line-height: 1.6;
     }
-    .landing-sticky-bar {
+    .sticky-bar {
       position: fixed;
+      bottom: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: rgba(247, 246, 243, 0.95);
-      border-top: 1px solid rgba(16, 16, 16, 0.08);
-      padding: 12px 20px;
-      display: none;
+      background: rgba(15, 23, 42, 0.95);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
-      z-index: 50;
+      gap: 1rem;
+      z-index: 30;
     }
-    .landing-sticky-bar__info {
-      display: flex;
-      flex-direction: column;
-      font-size: 14px;
-      color: #1c1c1c;
+    .sticky-bar-price {
       font-weight: 600;
+      font-size: 1rem;
     }
-    .landing-sticky-bar__price {
-      font-size: 16px;
-      font-weight: 700;
-      color: #0c7a63;
+    .sticky-bar .buy-now {
+      padding: 0.65rem 1.75rem;
+      min-width: auto;
+      font-size: 0.95rem;
     }
-    @media (max-width: 980px) {
-      .landing-hero {
-        flex-direction: column-reverse;
-        text-align: center;
+    @media (min-width: 1024px) {
+      .hero {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .landing-hero__content,
-      .landing-hero__media {
-        max-width: none;
+    }
+    @media (min-width: 768px) {
+      .sticky-bar {
+        display: none;
       }
-      .landing-benefits ul {
-        justify-items: center;
-      }
-      .landing-benefits li {
-        justify-content: center;
-      }
-      .landing-button {
-        width: 100%;
-      }
-      .landing-sticky-bar {
-        display: flex;
-      }
-      .therapist-landing__inner {
-        padding-bottom: 140px;
+    }
+    @media (max-width: 480px) {
+      .hero {
+        padding-top: 3rem;
       }
     }
   </style>
-  <div class="therapist-landing-wrapper">
-    <div class="therapist-landing__inner">
-      <section class="landing-hero" aria-labelledby="landing-headline-{{ section.id }}">
-        <div class="landing-hero__content">
-          <div class="landing-eyebrow">Digital Download</div>
-          <h1 id="landing-headline-{{ section.id }}" class="landing-headline">{{ hero_headline }}</h1>
-          <p class="landing-subhead">{{ hero_subhead }}</p>
-          {% if landing_product == nil %}
-            <div class="landing-error">Update the product handle to a valid product so this landing page can render purchase details.</div>
+  {% if product == blank %}
+    <div class="container">
+      <p>Product not found. Please check back later.</p>
+    </div>
+  {% else %}
+    <section class="hero container">
+      <div class="hero-image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 960 }}" alt="{{ product.title | escape }}" loading="lazy">
+        {% endif %}
+      </div>
+      <div class="hero-content">
+        <h1>Therapist-Approved Mental Health Workbook Bundle</h1>
+        <p>Equip your sessions with a comprehensive CBT, DBT, and ACT toolkit designed for modern therapists. Streamline planning, deliver evidence-based exercises, and support every client with confidence.</p>
+        <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+          {% if is_available %}
+            Buy Now · {{ available_variant.price | default: product.price | money }}
+          {% else %}
+            Sold Out
           {% endif %}
-          {% if landing_product %}
-            <div class="landing-price">
-              {{ landing_product.price | money_with_currency }}
+        </button>
+        <p class="buy-now__message" role="status" aria-live="polite"></p>
+        <p style="font-size: 0.9rem; color: #64748b; margin-top: 1rem;">Instant digital download • Secure checkout • Lifetime therapist license</p>
+      </div>
+    </section>
+
+    <section class="benefits container">
+      <h2>Why therapists rely on this workbook</h2>
+      <ul>
+        <li>Save hours every week with ready-to-use session materials.</li>
+        <li>Used by 10,000+ therapists and mental health professionals.</li>
+        <li>Professionally designed visuals enhance client engagement.</li>
+        <li>Printable worksheets optimized for individual and group sessions.</li>
+        <li>Guided CBT, DBT, and ACT plans to support diverse client needs.</li>
+      </ul>
+    </section>
+
+    {% assign gallery_images = product.media | where: 'media_type', 'image' %}
+    {% if gallery_images.size > 0 %}
+      <section class="gallery container">
+        <h2>Inside the workbook bundle</h2>
+        <div class="gallery-grid">
+          {% for media in gallery_images limit: 6 %}
+            <div>
+              <img src="{{ media | image_url: width: 720 }}" alt="Workbook preview {{ forloop.index }}" loading="lazy">
             </div>
-          {% endif %}
-          {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
-          {% assign has_configured_benefit = false %}
-          {% for block in benefit_blocks %}
-            {% if block.settings.text != blank %}
-              {% assign has_configured_benefit = true %}
-              {% break %}
-            {% endif %}
           {% endfor %}
-          {% assign default_benefits = 'Save time in every session||Professional-grade visuals||Used by 10,000+ therapists worldwide||Ready to print or use in telehealth' | split: '||' %}
-          {% if has_configured_benefit or default_benefits.size > 0 %}
-            <div class="landing-benefits">
-              <ul>
-                {% if has_configured_benefit %}
-                  {% for block in benefit_blocks %}
-                    {% unless block.settings.text == blank %}
-                      <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-                    {% endunless %}
-                  {% endfor %}
-                {% else %}
-                  {% for benefit in default_benefits %}
-                    <li>{{ benefit }}</li>
-                  {% endfor %}
-                {% endif %}
-              </ul>
-            </div>
-          {% endif %}
-          <button
-            class="landing-button"
-            type="button"
-            data-variant-id="{% if landing_variant %}{{ landing_variant.id }}{% endif %}"
-            {% unless product_available %}disabled{% endunless %}
-          >
-            {{ hero_button_label }}
-          </button>
-        </div>
-        <div class="landing-hero__media">
-          {% if landing_product %}
-            {% if landing_product.featured_media %}
-              {{ landing_product.featured_media | image_url: width: 800 | image_tag: alt: landing_product.title, loading: 'eager' }}
-            {% elsif landing_product.featured_image %}
-              {{ landing_product.featured_image | image_url: width: 800 | image_tag: alt: landing_product.title, loading: 'eager' }}
-            {% endif %}
-          {% endif %}
         </div>
       </section>
-
-      {% assign preview_blocks = section.blocks | where: 'type', 'preview' %}
-      {% if preview_blocks.size > 0 %}
-        <section class="landing-preview">
-          <h2 class="landing-section-title">Inside the Workbook</h2>
-          <div class="landing-preview__grid">
-            {% for block in preview_blocks %}
-              {% if block.settings.image != blank %}
-                {% assign preview_alt = block.settings.alt_text | default: landing_product.title %}
-                <div class="landing-preview__item" {{ block.shopify_attributes }}>
-                  {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: preview_alt }}
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </section>
-      {% endif %}
-
-      {% assign testimonial_blocks = section.blocks | where: 'type', 'testimonial' %}
-      {% if testimonial_blocks.size > 0 %}
-        <section class="landing-testimonials">
-          <h2 class="landing-section-title">Trusted by Therapists</h2>
-          <div class="landing-testimonials__grid">
-            {% for block in testimonial_blocks %}
-              <blockquote class="landing-testimonial" {{ block.shopify_attributes }}>
-                {{ block.settings.quote }}
-                {% if block.settings.name != blank %}
-                  <cite>— {{ block.settings.name }}</cite>
-                {% endif %}
-              </blockquote>
-            {% endfor %}
-          </div>
-        </section>
-      {% endif %}
-
-      {% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
-      {% if faq_blocks.size > 0 %}
-        <section class="landing-faq">
-          <h2 class="landing-section-title">FAQ</h2>
-          {% for block in faq_blocks %}
-            <div class="landing-faq__item" {{ block.shopify_attributes }}>
-              <div class="landing-faq__question">{{ block.settings.question }}</div>
-              <div class="landing-faq__answer">{{ block.settings.answer }}</div>
-            </div>
-          {% endfor %}
-        </section>
-      {% endif %}
-    </div>
-    {% if landing_product %}
-      <div class="landing-sticky-bar" role="status">
-        <div class="landing-sticky-bar__info">
-          <span>{{ landing_product.title }}</span>
-          <span class="landing-sticky-bar__price">{{ landing_product.price | money_with_currency }}</span>
-        </div>
-        <button
-          class="landing-button landing-sticky-bar__button"
-          type="button"
-          data-variant-id="{% if landing_variant %}{{ landing_variant.id }}{% endif %}"
-          {% unless product_available %}disabled{% endunless %}
-        >
-          {{ hero_button_label }}
-        </button>
-      </div>
     {% endif %}
-  </div>
-</div>
 
-{% if landing_product %}
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": {{ landing_product.title | json }},
-      "description": {{ landing_product.description | strip_html | strip_newlines | truncate: 500 | json }},
-      "image": [{% if landing_product.featured_image %}{{ landing_product.featured_image | image_url: width: 1200 | json }}{% endif %}],
-      "sku": {% if first_variant and first_variant.sku != blank %}{{ first_variant.sku | json }}{% else %}null{% endif %},
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": {{ shop.currency | json }},
-        "price": {{ product_price | divided_by: 100.0 | json }},
-        "availability": "https://schema.org/{% if product_available %}InStock{% else %}OutOfStock{% endif %}",
-        "url": {{ shop.url | append: request.path | json }}
-      }
-    }
-  </script>
-{% endif %}
+    <section class="testimonials container">
+      <h2>Trusted by practicing therapists</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          “My clients love the clarity of these worksheets. They feel structured yet compassionate.”
+          <span>— Dr. Alexis M., PsyD</span>
+        </div>
+        <div class="testimonial">
+          “The DBT modules alone are worth it. I can tailor sessions instantly without extra prep.”
+          <span>— Jordan L., LCSW</span>
+        </div>
+        <div class="testimonial">
+          “Professional design makes a big difference. Clients stay engaged and complete their homework.”
+          <span>— Priya K., LMFT</span>
+        </div>
+        <div class="testimonial">
+          “It’s the best digital toolkit I’ve purchased for my private practice—organized and impactful.”
+          <span>— Ethan R., LPC</span>
+        </div>
+      </div>
+    </section>
 
-<script>
-  (function() {
-    var root = document.documentElement;
-    root.classList.add('therapist-landing-html');
+    <section class="faq container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>Is this a digital product?</h3>
+        <p>Yes. You’ll receive instant digital access to the full workbook bundle after checkout.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I print the materials?</h3>
+        <p>Absolutely. The files are optimized for high-quality printing and can be reused indefinitely.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What license is included?</h3>
+        <p>Your purchase includes a lifetime license for use with your clients and within your practice.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is your refund policy?</h3>
+        <p>If you’re unsatisfied for any reason within 14 days, contact us and we’ll make it right.</p>
+      </div>
+    </section>
 
-    function setMeta() {
-      var metaTitle = {{ meta_title | json }};
-      if (metaTitle) {
-        document.title = metaTitle;
-      }
-      var metaDescription = {{ meta_description | json }};
-      if (metaDescription) {
-        var descriptionTag = document.querySelector('meta[name="description"]');
-        if (!descriptionTag) {
-          descriptionTag = document.createElement('meta');
-          descriptionTag.name = 'description';
-          document.head.appendChild(descriptionTag);
-        }
-        descriptionTag.setAttribute('content', metaDescription);
-      }
-    }
+    <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
+      <span class="sticky-bar-price">{{ available_variant.price | default: product.price | money }}</span>
+      <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+        Buy Now
+      </button>
+    </div>
 
-    function init() {
-      document.body.classList.add('template-page-therapist-landing');
-      setMeta();
-      var buttons = Array.prototype.slice.call(document.querySelectorAll('.template-page-therapist-landing .landing-button'));
-      buttons.forEach(function(button) {
-        button.addEventListener('click', function(event) {
-          var target = event.currentTarget;
-          if (target.hasAttribute('disabled')) {
-            return;
-          }
-          var variantId = target.getAttribute('data-variant-id');
-          if (!variantId) {
-            return;
-          }
-          buttons.forEach(function(btn) {
-            btn.setAttribute('disabled', 'disabled');
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var buyButtons = document.querySelectorAll('.js-buy-now');
+        var messageEl = document.querySelector('.buy-now__message');
+        var isAvailable = {{ is_available | default: false | json }};
+
+        if (!isAvailable) {
+          buyButtons.forEach(function(button) {
+            button.setAttribute('disabled', 'disabled');
           });
-          fetch('/cart/add.js', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({ id: parseInt(variantId, 10), quantity: 1 })
-          })
-            .then(function(response) {
-              if (!response.ok) {
-                throw new Error('Unable to add to cart');
+          return;
+        }
+
+        buyButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            if (button.hasAttribute('disabled')) {
+              return;
+            }
+
+            var variantId = button.getAttribute('data-variant-id');
+            if (!variantId) {
+              if (messageEl) {
+                messageEl.textContent = 'Please try again.';
               }
-              return response.json();
-            })
-            .then(function() {
-              window.location.href = '/checkout';
-            })
-            .catch(function() {
-              buttons.forEach(function(btn) {
-                btn.removeAttribute('disabled');
-              });
+              return;
+            }
+
+            buyButtons.forEach(function(btn) {
+              btn.setAttribute('disabled', 'disabled');
             });
+            if (messageEl) {
+              messageEl.textContent = '';
+            }
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({ id: variantId, quantity: 1 })
+            })
+              .then(function(response) {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then(function() {
+                window.location = '/checkout';
+              })
+              .catch(function() {
+                if (messageEl) {
+                  messageEl.textContent = 'Please try again.';
+                }
+                buyButtons.forEach(function(btn) {
+                  btn.removeAttribute('disabled');
+                });
+              });
+          });
         });
       });
-    }
+    </script>
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-</script>
-
-{% schema %}
-{
-  "name": "Therapist Landing",
-  "settings": [
-    {
-      "type": "text",
-      "id": "product_handle",
-      "label": "Product handle",
-      "default": "mental-health-workbook-3-books-in-1-cognitive-and-dialectical-behavioral-therapy-acceptance-and-commitment-therapy-cbt-dbt-act"
-    },
-    {
-      "type": "text",
-      "id": "meta_title",
-      "label": "Meta title",
-      "default": "Therapist-Approved 3-in-1 Workbook — CBT • DBT • ACT"
-    },
-    {
-      "type": "textarea",
-      "id": "meta_description",
-      "label": "Meta description",
-      "default": "Download therapist-approved CBT, DBT, and ACT worksheets instantly. Evidence-based tools ready for your next session."
-    },
-    {
-      "type": "text",
-      "id": "headline",
-      "label": "Headline",
-      "default": "Therapist-Approved 3-in-1 Workbook — CBT • DBT • ACT."
-    },
-    {
-      "type": "textarea",
-      "id": "subhead",
-      "label": "Sub-headline",
-      "default": "Evidence-based, ready-to-use tools for your next session. Download instantly."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Buy Now"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "benefit",
-      "name": "Benefit",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Benefit text"
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ product.title | escape }}",
+        "description": "{{ product.description | strip_html | truncate: 160 | escape }}",
+        "image": [{% if product.featured_image %}"{{ product.featured_image | image_url: width: 960 }}"{% endif %}],
+        "sku": "{{ available_variant.sku | escape }}",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "{{ shop.currency }}",
+          "price": "{{ product.price | money_without_currency | strip_html | replace: ',', '' }}",
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
         }
-      ]
-    },
-    {
-      "type": "preview",
-      "name": "Preview image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "alt_text",
-          "label": "Alt text"
-        }
-      ]
-    },
-    {
-      "type": "testimonial",
-      "name": "Testimonial",
-      "settings": [
-        {
-          "type": "textarea",
-          "id": "quote",
-          "label": "Quote"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name"
-        }
-      ]
-    },
-    {
-      "type": "faq",
-      "name": "FAQ item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question"
-        },
-        {
-          "type": "textarea",
-          "id": "answer",
-          "label": "Answer"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 30,
-  "presets": [
-    {
-      "name": "Therapist Landing",
-      "blocks": [
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Save time in every session"
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Professional-grade visuals"
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Used by 10,000+ therapists worldwide"
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Ready to print or use in telehealth"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "quote": "“My clients love the clarity of these worksheets.”",
-            "name": "Dr. A. Nguyen, PsyD"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "quote": "“The blend of CBT, DBT, and ACT tools is perfect for my caseload.”",
-            "name": "Jamie L., LCSW"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "quote": "“Instant download means I can prep sessions in minutes.”",
-            "name": "Carlos M., LMFT"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "quote": "“Beautifully designed and clinically sound.”",
-            "name": "Mia R., LPC"
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Is it digital?",
-            "answer": "Yes, this is a digital PDF workbook you can download instantly after purchase."
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Can I print it?",
-            "answer": "You can print the pages you need or use them digitally during telehealth sessions."
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Professional license?",
-            "answer": "Each purchase includes a professional-use license for your individual practice."
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Refund policy?",
-            "answer": "Due to the digital nature of this product, all sales are final."
-          }
-        }
-      ]
-    }
-  ]
-}
-{% endschema %}
+      }
+    </script>
+  {% endif %}
+</div>
