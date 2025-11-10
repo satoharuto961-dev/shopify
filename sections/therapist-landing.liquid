@@ -398,10 +398,16 @@
         "offers": {
           "@type": "Offer",
           "priceCurrency": "{{ shop.currency }}",
-          "price": "{{ product.price | money_without_currency | strip_html | replace: ',', '' }}",
+          "price": "{{ available_variant.price | default: product.price | money_without_currency | strip_html | replace: ',', '' }}",
           "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
         }
       }
     </script>
   {% endif %}
 </div>
+{% schema %}
+{
+  "name": "Therapist landing",
+  "settings": []
+}
+{% endschema %}
