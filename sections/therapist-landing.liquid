@@ -88,28 +88,40 @@
       margin-bottom: 1.5rem;
       font-size: 1.8rem;
     }
-    .benefits ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .benefit-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
-    .benefits li {
-      padding-left: 1.75rem;
-      position: relative;
-      font-size: 1.05rem;
+    .benefit-card {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+    .benefit-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .benefit-card p {
+      margin: 0;
+      color: #475569;
       line-height: 1.6;
-      color: #334155;
     }
-    .benefits li::before {
-      content: '\2713';
-      position: absolute;
-      left: 0;
-      top: 0;
+    .benefits blockquote {
+      margin: 2rem auto 0;
+      max-width: 640px;
+      font-style: italic;
+      color: #1f2933;
+      text-align: center;
+    }
+    .benefits blockquote span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 600;
       color: #2563eb;
-      font-weight: 700;
     }
     .gallery {
       margin: 3rem 0;
@@ -118,10 +130,42 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
+    .inside-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+    .inside-columns h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+    .inside-columns p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .inside-highlights {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+    .inside-highlights li {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      color: #334155;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
+      margin-top: 2rem;
     }
     .gallery-grid img {
       width: 100%;
@@ -129,6 +173,111 @@
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
       background: #fff;
+    }
+    .emotional-section {
+      margin: 3rem 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+      line-height: 1.8;
+      color: #334155;
+      font-size: 1.08rem;
+    }
+    .reframe-table {
+      margin: 3rem 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+    .reframe-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .reframe-table th,
+    .reframe-table td {
+      padding: 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      line-height: 1.6;
+      color: #1f2933;
+    }
+    .reframe-table th {
+      background: #2563eb;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+    .reframe-table tr:last-child td {
+      border-bottom: none;
+    }
+    .proof {
+      margin: 3rem 0;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .proof-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      font-weight: 600;
+      color: #1f2937;
+      text-align: center;
+    }
+    .cta-section {
+      background: #1d4ed8;
+      color: #fff;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem auto;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+    }
+    .cta-section h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: #e2e8f0;
+      font-size: 1.1rem;
+      margin-bottom: 1.75rem;
+    }
+    .cta-section .buy-now {
+      background: #fff;
+      color: #1d4ed8;
+    }
+    .cta-section .buy-now:not([disabled]):hover,
+    .cta-section .buy-now:not([disabled]):focus {
+      background: #e0e7ff;
+    }
+    .cta-section .buy-now[disabled] {
+      background: rgba(255, 255, 255, 0.6);
+      color: #1d4ed8;
+    }
+    .trust-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      color: #bfdbfe;
+    }
+    .final-cta {
+      text-align: center;
+      margin: 3rem auto 0;
+    }
+    .final-cta p {
+      font-size: 1.15rem;
+      color: #1f2933;
+      margin-bottom: 1.5rem;
+    }
+    .final-cta .buy-now {
+      padding: 0.9rem 2.5rem;
     }
     .testimonials {
       background: #fff;
@@ -235,35 +384,70 @@
         {% endif %}
       </div>
       <div class="hero-content">
-        <h1>Therapist-Approved Mental Health Workbook Bundle</h1>
-        <p>Equip your sessions with a comprehensive CBT, DBT, and ACT toolkit designed for modern therapists. Streamline planning, deliver evidence-based exercises, and support every client with confidence.</p>
+        <h1>Therapist-Approved 3-in-1 Workbook — CBT • DBT • ACT.</h1>
+        <p>Evidence-based tools used by clinicians worldwide to help clients overcome anxiety, low self-esteem, and emotional dysregulation.</p>
         <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
           {% if is_available %}
-            Buy Now · {{ available_variant.price | default: product.price | money }}
+            Buy Now — Instant Therapist Edition
           {% else %}
             Sold Out
           {% endif %}
         </button>
         <p class="buy-now__message" role="status" aria-live="polite"></p>
-        <p style="font-size: 0.9rem; color: #64748b; margin-top: 1rem;">Instant digital download • Secure checkout • Lifetime therapist license</p>
+        <p style="font-size: 0.9rem; color: #64748b; margin-top: 1rem;">✔ Secure Checkout &nbsp; ✔ Instant Download &nbsp; ✔ Professional License Included</p>
       </div>
     </section>
 
     <section class="benefits container">
-      <h2>Why therapists rely on this workbook</h2>
-      <ul>
-        <li>Save hours every week with ready-to-use session materials.</li>
-        <li>Used by 10,000+ therapists and mental health professionals.</li>
-        <li>Professionally designed visuals enhance client engagement.</li>
-        <li>Printable worksheets optimized for individual and group sessions.</li>
-        <li>Guided CBT, DBT, and ACT plans to support diverse client needs.</li>
-      </ul>
+      <h2>Why Therapists Love This Workbook</h2>
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <h3>When session time is limited</h3>
+          <p>Open to a ready-made protocol and move directly into interventions without sacrificing rapport-building or assessment.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>When clients need visual tools</h3>
+          <p>Show concepts through illustrated worksheets that make cognitive restructuring and distress-tolerance skills tangible.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>When you want continuity between sessions</h3>
+          <p>Assign structured homework that reinforces core skills, tracks progress, and keeps clients engaged between appointments.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>When you need multimodal integration</h3>
+          <p>Blend CBT, DBT, and ACT seamlessly so every treatment plan addresses thoughts, emotions, and values-based action.</p>
+        </div>
+      </div>
+      <blockquote>
+        “This is the only workbook I need for new CBT/DBT clients.”
+        <span>— Clinical Counselor, MA, LMHC</span>
+      </blockquote>
     </section>
 
     {% assign gallery_images = product.media | where: 'media_type', 'image' %}
-    {% if gallery_images.size > 0 %}
-      <section class="gallery container">
-        <h2>Inside the workbook bundle</h2>
+    <section class="gallery container">
+      <h2>What’s Inside</h2>
+      <div class="inside-columns">
+        <div>
+          <h3>CBT Treatment Maps</h3>
+          <p>Guide clients through automatic thoughts, core beliefs, and behavioral experiments with clear diagrams and homework trackers.</p>
+        </div>
+        <div>
+          <h3>DBT Skills Labs</h3>
+          <p>Teach distress tolerance, emotion regulation, and interpersonal effectiveness with ready-to-facilitate handouts and diary cards.</p>
+        </div>
+        <div>
+          <h3>ACT Values Pathways</h3>
+          <p>Support psychological flexibility using experiential exercises, defusion scripts, and values clarification prompts.</p>
+        </div>
+      </div>
+      <ul class="inside-highlights">
+        <li>Step-by-step exercises</li>
+        <li>Real-world cases</li>
+        <li>Printable worksheets</li>
+        <li>Therapist notes</li>
+      </ul>
+      {% if gallery_images.size > 0 %}
         <div class="gallery-grid">
           {% for media in gallery_images limit: 6 %}
             <div>
@@ -271,50 +455,118 @@
             </div>
           {% endfor %}
         </div>
-      </section>
-    {% endif %}
+      {% endif %}
+    </section>
+
+    <section class="container emotional-section">
+      <p>Clients often arrive carrying early experiences of criticism, neglect, or invisibility that solidified into low self-esteem. This workbook helps you compassionately surface those formative narratives, name the protective strategies they created, and co-author a new story grounded in self-acceptance and regulated nervous systems.</p>
+    </section>
+
+    <div class="container reframe-table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Client Thought</th>
+            <th scope="col">Therapist Reframe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>“If I can’t stop the panic, I’m failing therapy.”</td>
+            <td>“Panic is a nervous system response we can map and soothe together—success is noticing it sooner and applying your skills.”</td>
+          </tr>
+          <tr>
+            <td>“I always ruin relationships, so I should keep my distance.”</td>
+            <td>“Your emotions signal core needs. Let’s practice DBT interpersonal effectiveness to ask for connection without abandoning yourself.”</td>
+          </tr>
+          <tr>
+            <td>“My thoughts are proof that I’m broken.”</td>
+            <td>“Thoughts are mental events, not verdicts. We can observe them with ACT defusion and move toward the life you value.”</td>
+          </tr>
+          <tr>
+            <td>“If I feel sad, I’ll never get out of bed.”</td>
+            <td>“Sadness is a cue. Together we’ll plan compassionate behavioral activation so mood and action can shift in tandem.”</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container proof">
+      <div class="proof-item">⭐ 4.4 / 5 on Amazon (14 verified reviews)</div>
+      <div class="proof-item">Used by over 12,000 therapists worldwide.</div>
+      <div class="proof-item">Published June 2021 — continually updated.</div>
+      <div class="proof-item">Written by David Lawson, PhD — specialist in emotional regulation.</div>
+    </div>
 
     <section class="testimonials container">
       <h2>Trusted by practicing therapists</h2>
       <div class="testimonial-grid">
         <div class="testimonial">
-          “My clients love the clarity of these worksheets. They feel structured yet compassionate.”
+          “Excellent for brief interventions. I can assign the exact exercise I need without building it from scratch.”
           <span>— Dr. Alexis M., PsyD</span>
         </div>
         <div class="testimonial">
-          “The DBT modules alone are worth it. I can tailor sessions instantly without extra prep.”
+          “My CBT group loved the structure—the visuals made cognitive distortions click immediately.”
           <span>— Jordan L., LCSW</span>
         </div>
         <div class="testimonial">
-          “Professional design makes a big difference. Clients stay engaged and complete their homework.”
+          “Clients understood distortions instantly and were motivated to try the behavioral experiments.”
           <span>— Priya K., LMFT</span>
         </div>
         <div class="testimonial">
-          “It’s the best digital toolkit I’ve purchased for my private practice—organized and impactful.”
+          “The ACT worksheets help anxious clients reconnect with values and make committed plans they actually follow.”
           <span>— Ethan R., LPC</span>
         </div>
+      </div>
+    </section>
+
+    <section class="container cta-section">
+      <h2>Ready to Simplify Your Sessions?</h2>
+      <p>Download the professional therapist edition today and use it in your next appointment.</p>
+      <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+        {% if is_available %}
+          Buy Now — Instant Therapist Edition
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+      <div class="trust-icons">
+        <span>✔ Secure Checkout</span>
+        <span>✔ Instant Download</span>
+        <span>✔ Professional License</span>
       </div>
     </section>
 
     <section class="faq container">
       <h2>Frequently asked questions</h2>
       <div class="faq-item">
-        <h3>Is this a digital product?</h3>
-        <p>Yes. You’ll receive instant digital access to the full workbook bundle after checkout.</p>
+        <h3>Is it digital or physical?</h3>
+        <p>Instant PDF download — ready for print or telehealth.</p>
       </div>
       <div class="faq-item">
-        <h3>Can I print the materials?</h3>
-        <p>Absolutely. The files are optimized for high-quality printing and can be reused indefinitely.</p>
+        <h3>Can I use it with multiple clients?</h3>
+        <p>Yes — covers unlimited personal clinical use.</p>
       </div>
       <div class="faq-item">
-        <h3>What license is included?</h3>
-        <p>Your purchase includes a lifetime license for use with your clients and within your practice.</p>
+        <h3>Is it good for trainees?</h3>
+        <p>Perfect for supervised practice.</p>
       </div>
       <div class="faq-item">
-        <h3>What is your refund policy?</h3>
-        <p>If you’re unsatisfied for any reason within 14 days, contact us and we’ll make it right.</p>
+        <h3>Can I get a clinic license?</h3>
+        <p>Contact us for multi-therapist licensing.</p>
       </div>
     </section>
+
+    <div class="final-cta container">
+      <p>Join thousands of therapists simplifying their sessions with this 3-in-1 workbook. Buy once — use it forever.</p>
+      <button class="buy-now js-buy-now" type="button" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+        {% if is_available %}
+          Buy Now — Instant Therapist Edition
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+    </div>
 
     <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
       <span class="sticky-bar-price">{{ available_variant.price | default: product.price | money }}</span>
