@@ -4,5 +4,7 @@
       "type": "cbt-worksheets-landing"
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
