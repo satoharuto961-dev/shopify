@@ -185,6 +185,13 @@
       }
     }
   </style>
+  {% assign hero_bullets = section.blocks | where: 'type', 'hero_bullet' %}
+  {% assign inside_items = section.blocks | where: 'type', 'inside_item' %}
+  {% assign benefit_items = section.blocks | where: 'type', 'benefit_item' %}
+  {% assign who_items = section.blocks | where: 'type', 'who_item' %}
+  {% assign testimonials = section.blocks | where: 'type', 'testimonial' %}
+  {% assign guarantee_block = section.blocks | where: 'type', 'guarantee' | first %}
+  {% assign final_cta_block = section.blocks | where: 'type', 'final_cta' | first %}
   <div class="cbt-container">
     <section class="hero">
       <div class="cbt-grid hero-grid">
@@ -196,13 +203,15 @@
           {% if section.settings.hero_subtitle != blank %}
             <p class="cbt-hero-subtitle">{{ section.settings.hero_subtitle }}</p>
           {% endif %}
-          {% if section.settings.hero_bullets.size > 0 %}
+          {% if hero_bullets.size > 0 %}
             <ul class="cbt-bullets">
-              {% for bullet in section.settings.hero_bullets %}
-                <li>
-                  <span>•</span>
-                  <div>{{ bullet }}</div>
-                </li>
+              {% for block in hero_bullets %}
+                {% if block.settings.bullet_text != blank %}
+                  <li>
+                    <span>•</span>
+                    <div>{{ block.settings.bullet_text }}</div>
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
           {% endif %}
@@ -224,10 +233,12 @@
           {% if section.settings.inside_title != blank %}
             <h2>{{ section.settings.inside_title }}</h2>
           {% endif %}
-          {% if section.settings.inside_list.size > 0 %}
+          {% if inside_items.size > 0 %}
             <ul class="cbt-list">
-              {% for item in section.settings.inside_list %}
-                <li>{{ item }}</li>
+              {% for block in inside_items %}
+                {% if block.settings.item_text != blank %}
+                  <li>{{ block.settings.item_text }}</li>
+                {% endif %}
               {% endfor %}
             </ul>
           {% endif %}
@@ -244,12 +255,14 @@
       {% if section.settings.benefits_title != blank %}
         <h2>{{ section.settings.benefits_title }}</h2>
       {% endif %}
-      {% if section.settings.benefits_list.size > 0 %}
+      {% if benefit_items.size > 0 %}
         <div class="cbt-cards-grid">
-          {% for benefit in section.settings.benefits_list %}
-            <div class="cbt-card">
-              <p>{{ benefit }}</p>
-            </div>
+          {% for block in benefit_items %}
+            {% if block.settings.item_text != blank %}
+              <div class="cbt-card">
+                <p>{{ block.settings.item_text }}</p>
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
       {% endif %}
@@ -259,47 +272,55 @@
       {% if section.settings.who_title != blank %}
         <h2>{{ section.settings.who_title }}</h2>
       {% endif %}
-      {% if section.settings.who_list.size > 0 %}
+      {% if who_items.size > 0 %}
         <div class="cbt-two-column">
-          {% for audience in section.settings.who_list %}
-            <div class="cbt-card">
-              <p>{{ audience }}</p>
-            </div>
+          {% for block in who_items %}
+            {% if block.settings.item_text != blank %}
+              <div class="cbt-card">
+                <p>{{ block.settings.item_text }}</p>
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
       {% endif %}
     </section>
 
-    {% if section.settings.testimonials.size > 0 %}
+    {% if testimonials.size > 0 %}
       <section class="cbt-section">
-        <h2>What Clinicians Are Saying</h2>
+        {% if section.settings.testimonials_title != blank %}
+          <h2>{{ section.settings.testimonials_title }}</h2>
+        {% endif %}
         <div class="cbt-cards-grid">
-          {% for testimonial in section.settings.testimonials %}
-            <div class="cbt-card cbt-testimonial">
-              {% if testimonial.text != blank %}
-                <p>“{{ testimonial.text }}”</p>
-              {% endif %}
-              {% if testimonial.name != blank %}
-                <strong>{{ testimonial.name }}</strong>
-              {% endif %}
-            </div>
+          {% for block in testimonials %}
+            {% if block.settings.quote != blank or block.settings.name != blank %}
+              <div class="cbt-card cbt-testimonial">
+                {% if block.settings.quote != blank %}
+                  <p>“{{ block.settings.quote }}”</p>
+                {% endif %}
+                {% if block.settings.name != blank %}
+                  <strong>{{ block.settings.name }}</strong>
+                {% endif %}
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
       </section>
     {% endif %}
 
-    <section class="cbt-section cbt-guarantee">
-      {% if section.settings.guarantee_title != blank %}
-        <h2>{{ section.settings.guarantee_title }}</h2>
-      {% endif %}
-      {% if section.settings.guarantee_text != blank %}
-        <p>{{ section.settings.guarantee_text }}</p>
-      {% endif %}
-    </section>
+    {% if guarantee_block %}
+      <section class="cbt-section cbt-guarantee">
+        {% if guarantee_block.settings.guarantee_title != blank %}
+          <h2>{{ guarantee_block.settings.guarantee_title }}</h2>
+        {% endif %}
+        {% if guarantee_block.settings.guarantee_text != blank %}
+          <p>{{ guarantee_block.settings.guarantee_text }}</p>
+        {% endif %}
+      </section>
+    {% endif %}
 
     <section class="cbt-final-cta">
-      {% if section.settings.final_cta_text != blank and section.settings.final_cta_link != blank %}
-        <a class="cbt-btn" href="{{ section.settings.final_cta_link }}">{{ section.settings.final_cta_text }}</a>
+      {% if final_cta_block and final_cta_block.settings.final_cta_text != blank and final_cta_block.settings.final_cta_link != blank %}
+        <a class="cbt-btn" href="{{ final_cta_block.settings.final_cta_link }}">{{ final_cta_block.settings.final_cta_text }}</a>
       {% endif %}
     </section>
   </div>
@@ -320,16 +341,6 @@
       "id": "hero_subtitle",
       "label": "Hero subtitle",
       "default": "A complete evidence-based toolkit to help clients challenge thoughts, regulate emotions, and build new behaviors."
-    },
-    {
-      "type": "list",
-      "id": "hero_bullets",
-      "label": "Hero bullets",
-      "default": [
-        "Fully evidence-based CBT worksheets",
-        "Printable & reusable",
-        "Designed for anxiety, depression, trauma & more"
-      ]
     },
     {
       "type": "image_picker",
@@ -355,21 +366,6 @@
       "default": "What’s Inside the 65 CBT Worksheets"
     },
     {
-      "type": "list",
-      "id": "inside_list",
-      "label": "What's inside list",
-      "default": [
-        "Cognitive Restructuring Worksheets",
-        "Thought Record Sheets",
-        "Behavioral Activation Plans",
-        "Exposure Worksheets",
-        "Emotion Regulation Tools",
-        "Core Belief Modification Sheets",
-        "Mindfulness & Values Worksheets",
-        "Anxiety, Depression & PTSD Worksheets"
-      ]
-    },
-    {
       "type": "image_picker",
       "id": "inside_image",
       "label": "What's inside image"
@@ -381,42 +377,67 @@
       "default": "Clinical Benefits for You and Your Clients"
     },
     {
-      "type": "list",
-      "id": "benefits_list",
-      "label": "Benefits list",
-      "default": [
-        "Deliver session-ready interventions backed by current CBT research.",
-        "Streamline treatment planning with structured prompts for every phase.",
-        "Support homework compliance with clear, therapist-approved guidance.",
-        "Adapt worksheets instantly to anxiety, depression, trauma, and more.",
-        "Reinforce client insight with visually organized exercises.",
-        "Enhance outcomes tracking with repeatable, printable tools."
-      ]
-    },
-    {
       "type": "text",
       "id": "who_title",
       "label": "Who it's for title",
       "default": "Who This Workbook is For"
     },
     {
-      "type": "list",
-      "id": "who_list",
-      "label": "Who it's for list",
-      "default": [
-        "Licensed therapists seeking premium CBT homework tools.",
-        "Supervisors equipping interns with structured interventions.",
-        "Group practice owners standardizing client resources.",
-        "Clinical coaches integrating CBT into hybrid programs.",
-        "School counselors supporting evidence-based SEL plans.",
-        "Private practitioners who want ready-to-use worksheets."
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Testimonials title",
+      "default": "What Clinicians Are Saying"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_bullet",
+      "name": "Hero bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "bullet_text",
+          "label": "Bullet text"
+        }
       ]
     },
     {
-      "type": "list",
-      "id": "testimonials",
-      "label": "Testimonials",
-      "properties": [
+      "type": "inside_item",
+      "name": "Inside list item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "benefit_item",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "who_item",
+      "name": "Who it's for item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
         {
           "type": "text",
           "id": "name",
@@ -424,48 +445,129 @@
         },
         {
           "type": "textarea",
-          "id": "text",
+          "id": "quote",
           "label": "Quote"
-        }
-      ],
-      "default": [
-        {
-          "name": "Dr. Mariah Ellis, PsyD",
-          "text": "My clients leave each session with a clear CBT assignment that we can review together the following week."
-        },
-        {
-          "name": "Anthony Ruiz, LCSW",
-          "text": "The worksheets mirror what I’d build myself—structured, practical, and flexible for diverse diagnoses."
-        },
-        {
-          "name": "Janelle Park, LMFT",
-          "text": "Having 65 printable tools ready to go has saved me hours every month while improving outcomes."
         }
       ]
     },
     {
-      "type": "text",
-      "id": "guarantee_title",
-      "label": "Guarantee title",
-      "default": "Instant Access + Lifetime Use"
+      "type": "guarantee",
+      "name": "Guarantee",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "guarantee_title",
+          "label": "Guarantee title",
+          "default": "Instant Access + Lifetime Use"
+        },
+        {
+          "type": "textarea",
+          "id": "guarantee_text",
+          "label": "Guarantee text",
+          "default": "Download immediately, print forever, and use across all clinical settings."
+        }
+      ]
     },
     {
-      "type": "textarea",
-      "id": "guarantee_text",
-      "label": "Guarantee text",
-      "default": "Download immediately, print forever, and use across all clinical settings."
-    },
+      "type": "final_cta",
+      "name": "Final CTA",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "final_cta_text",
+          "label": "Final CTA text",
+          "default": "Download Your CBT Worksheets Now"
+        },
+        {
+          "type": "url",
+          "id": "final_cta_link",
+          "label": "Final CTA link",
+          "default": "/products/cbt-worksheets"
+        }
+      ]
+    }
+  ],
+  "presets": [
     {
-      "type": "text",
-      "id": "final_cta_text",
-      "label": "Final CTA text",
-      "default": "Download Your CBT Worksheets Now"
-    },
-    {
-      "type": "url",
-      "id": "final_cta_link",
-      "label": "Final CTA link",
-      "default": "/products/cbt-worksheets"
+      "name": "CBT worksheets landing",
+      "blocks": [
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Fully evidence-based CBT worksheets"
+          }
+        },
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Printable & reusable"
+          }
+        },
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Designed for anxiety, depression, trauma & more"
+          }
+        },
+        {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Cognitive Restructuring Worksheets"
+          }
+        },
+        {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Thought Record Sheets"
+          }
+        },
+        {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Behavioral Activation Plans"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Deliver session-ready interventions backed by current CBT research."
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Streamline treatment planning with structured prompts for every phase."
+          }
+        },
+        {
+          "type": "who_item",
+          "settings": {
+            "item_text": "Licensed therapists seeking premium CBT homework tools."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Dr. Mariah Ellis, PsyD",
+            "quote": "My clients leave each session with a clear CBT assignment that we can review together the following week."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anthony Ruiz, LCSW",
+            "quote": "The worksheets mirror what I’d build myself—structured, practical, and flexible for diverse diagnoses."
+          }
+        },
+        {
+          "type": "guarantee"
+        },
+        {
+          "type": "final_cta"
+        }
+      ]
     }
   ]
 }
