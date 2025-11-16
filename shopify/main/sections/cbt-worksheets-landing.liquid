@@ -1,0 +1,236 @@
+<section class="cbt-worksheets-landing">
+  <div class="cbt-hero">
+    <div class="cbt-hero__content">
+      {% if section.settings.hero_title != blank %}
+        <h1>{{ section.settings.hero_title | escape }}</h1>
+      {% endif %}
+      {% if section.settings.hero_subtitle != blank %}
+        <p class="cbt-hero__subtitle">{{ section.settings.hero_subtitle | escape }}</p>
+      {% endif %}
+      {% assign hero_bullets = section.blocks | where: 'type', 'hero_bullet' %}
+      {% if hero_bullets.size > 0 %}
+        <ul class="cbt-hero__bullets">
+          {% for block in hero_bullets %}
+            <li {{ block.shopify_attributes }}>{{ block.settings.bullet_text | escape }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if section.settings.hero_cta_text != blank and section.settings.hero_cta_link != blank %}
+        <a class="cbt-hero__cta" href="{{ section.settings.hero_cta_link }}">{{ section.settings.hero_cta_text | escape }}</a>
+      {% endif %}
+    </div>
+    {% if section.settings.hero_image != blank %}
+      <div class="cbt-hero__image">
+        <img src="{{ section.settings.hero_image | image_url: width: 1200 }}" alt="{{ section.settings.hero_title | default: 'CBT worksheets' | escape }}">
+      </div>
+    {% endif %}
+  </div>
+
+  {% assign inside_items = section.blocks | where: 'type', 'inside_item' %}
+  {% if inside_items.size > 0 %}
+    <div class="cbt-inside">
+      <h2>What's Inside</h2>
+      <ul>
+        {% for block in inside_items %}
+          <li {{ block.shopify_attributes }}>{{ block.settings.item_text | escape }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% assign benefits = section.blocks | where: 'type', 'benefit_item' %}
+  {% if benefits.size > 0 %}
+    <div class="cbt-benefits">
+      <h2>Benefits</h2>
+      <ul>
+        {% for block in benefits %}
+          <li {{ block.shopify_attributes }}>{{ block.settings.item_text | escape }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% assign who_items = section.blocks | where: 'type', 'who_item' %}
+  {% if who_items.size > 0 %}
+    <div class="cbt-who">
+      <h2>Who It's For</h2>
+      <ul>
+        {% for block in who_items %}
+          <li {{ block.shopify_attributes }}>{{ block.settings.item_text | escape }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% assign testimonials = section.blocks | where: 'type', 'testimonial' %}
+  {% if testimonials.size > 0 %}
+    <div class="cbt-testimonials">
+      <h2>Testimonials</h2>
+      {% for block in testimonials %}
+        <blockquote {{ block.shopify_attributes }}>
+          <p>{{ block.settings.quote | escape }}</p>
+          <cite>{{ block.settings.name | escape }}</cite>
+        </blockquote>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% assign guarantees = section.blocks | where: 'type', 'guarantee' %}
+  {% if guarantees.size > 0 %}
+    <div class="cbt-guarantee">
+      {% for block in guarantees %}
+        <div {{ block.shopify_attributes }}>
+          {% if block.settings.guarantee_title != blank %}
+            <h2>{{ block.settings.guarantee_title | escape }}</h2>
+          {% endif %}
+          {% if block.settings.guarantee_text != blank %}
+            <p>{{ block.settings.guarantee_text | escape }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% assign final_ctas = section.blocks | where: 'type', 'final_cta' %}
+  {% if final_ctas.size > 0 %}
+    <div class="cbt-final-cta">
+      {% for block in final_ctas %}
+        {% if block.settings.final_cta_text != blank and block.settings.final_cta_link != blank %}
+          <a {{ block.shopify_attributes }} href="{{ block.settings.final_cta_link }}">{{ block.settings.final_cta_text | escape }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "CBT Worksheets Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "Hero button text"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "Hero button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_bullet",
+      "name": "Hero bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "bullet_text",
+          "label": "Bullet text"
+        }
+      ]
+    },
+    {
+      "type": "inside_item",
+      "name": "Inside item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "benefit_item",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "who_item",
+      "name": "Who item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Guarantee",
+      "settings": [
+        {
+          "type": "text",
+          "id": "guarantee_title",
+          "label": "Guarantee title"
+        },
+        {
+          "type": "textarea",
+          "id": "guarantee_text",
+          "label": "Guarantee text"
+        }
+      ]
+    },
+    {
+      "type": "final_cta",
+      "name": "Final CTA",
+      "settings": [
+        {
+          "type": "text",
+          "id": "final_cta_text",
+          "label": "Final CTA text"
+        },
+        {
+          "type": "url",
+          "id": "final_cta_link",
+          "label": "Final CTA link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CBT Worksheets Landing"
+    }
+  ]
+}
+{% endschema %}
