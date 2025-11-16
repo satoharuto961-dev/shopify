@@ -1,0 +1,131 @@
+{% schema %}
+{
+  "name": "CBT Worksheets Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_bullet",
+      "name": "Hero bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "bullet_text",
+          "label": "Bullet text"
+        }
+      ]
+    },
+    {
+      "type": "inside_item",
+      "name": "Inside item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item text"
+        }
+      ]
+    },
+    {
+      "type": "benefit_item",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Benefit text"
+        }
+      ]
+    },
+    {
+      "type": "who_item",
+      "name": "Who item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Who is this for?"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Guarantee",
+      "settings": [
+        {
+          "type": "text",
+          "id": "guarantee_title",
+          "label": "Guarantee title"
+        },
+        {
+          "type": "textarea",
+          "id": "guarantee_text",
+          "label": "Guarantee text"
+        }
+      ]
+    },
+    {
+      "type": "final_cta",
+      "name": "Final CTA",
+      "settings": [
+        {
+          "type": "text",
+          "id": "final_cta_text",
+          "label": "Final CTA text"
+        },
+        {
+          "type": "url",
+          "id": "final_cta_link",
+          "label": "Final CTA link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CBT Worksheets Landing"
+    }
+  ]
+}
+{% endschema %}
