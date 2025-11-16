@@ -56,16 +56,20 @@
           {% endif %}
           <p>65 ready-to-use CBT worksheets designed to guide sessions, reinforce homework, and help clients regulate emotion, challenge unhelpful thoughts, and practice new skills between visits.</p>
 
-          {% capture hero_bullets %}
-            {% for block in section.blocks %}
-              {% if block.type == 'hero_bullet' and block.settings.bullet_text != blank %}
-                <li><span class="cbt-bullet-icon">✓</span>{{ block.settings.bullet_text }}</li>
-              {% endif %}
-            {% endfor %}
-          {% endcapture %}
-          {% if hero_bullets | strip != '' %}
+          {% assign has_hero_bullets = false %}
+          {% for block in section.blocks %}
+            {% if block.type == 'hero_bullet' and block.settings.bullet_text != blank %}
+              {% assign has_hero_bullets = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if has_hero_bullets %}
             <ul class="cbt-bullets">
-              {{ hero_bullets }}
+              {% for block in section.blocks %}
+                {% if block.type == 'hero_bullet' and block.settings.bullet_text != blank %}
+                  <li><span class="cbt-bullet-icon">✓</span>{{ block.settings.bullet_text }}</li>
+                {% endif %}
+              {% endfor %}
             </ul>
           {% endif %}
 
@@ -82,131 +86,155 @@
     </div>
   </section>
 
-  {% capture inside_items %}
-    {% for block in section.blocks %}
-      {% if block.type == 'inside_item' and block.settings.item_text != blank %}
-        <li>{{ block.settings.item_text }}</li>
-      {% endif %}
-    {% endfor %}
-  {% endcapture %}
-  {% if inside_items | strip != '' %}
+  {% assign has_inside_items = false %}
+  {% for block in section.blocks %}
+    {% if block.type == 'inside_item' and block.settings.item_text != blank %}
+      {% assign has_inside_items = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if has_inside_items %}
     <section class="cbt-section cbt-section--muted">
       <div class="page-width">
         <h2>What’s Inside the CBT Worksheets Bundle?</h2>
         <p class="section-subtitle">Curated prompts, psychoeducation handouts, progress trackers, and intervention worksheets that are ready for print or digital use.</p>
         <ul class="cbt-card-list">
-          {{ inside_items }}
+          {% for block in section.blocks %}
+            {% if block.type == 'inside_item' and block.settings.item_text != blank %}
+              <li>{{ block.settings.item_text }}</li>
+            {% endif %}
+          {% endfor %}
         </ul>
       </div>
     </section>
   {% endif %}
 
-  {% capture benefit_items %}
-    {% for block in section.blocks %}
-      {% if block.type == 'benefit_item' and block.settings.item_text != blank %}
-        <div class="cbt-benefit-card">
-          <h3>{{ block.settings.item_text | split: '|' | first }}</h3>
-          {% assign benefit_details = block.settings.item_text | split: '|' | last %}
-          {% if benefit_details != block.settings.item_text %}
-            <p>{{ benefit_details }}</p>
-          {% else %}
-            <p>Practical support to move clients from insight to action.</p>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
-  {% endcapture %}
-  {% if benefit_items | strip != '' %}
+  {% assign has_benefit_items = false %}
+  {% for block in section.blocks %}
+    {% if block.type == 'benefit_item' and block.settings.item_text != blank %}
+      {% assign has_benefit_items = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if has_benefit_items %}
     <section class="cbt-section">
       <div class="page-width">
         <h2>Key Benefits for Your Practice</h2>
         <p class="section-subtitle">Every worksheet is designed for real-world sessions so you can stay present, productive, and confident.</p>
         <div class="cbt-benefits">
-          {{ benefit_items }}
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit_item' and block.settings.item_text != blank %}
+              <div class="cbt-benefit-card">
+                <h3>{{ block.settings.item_text | split: '|' | first }}</h3>
+                {% assign benefit_details = block.settings.item_text | split: '|' | last %}
+                {% if benefit_details != block.settings.item_text %}
+                  <p>{{ benefit_details }}</p>
+                {% else %}
+                  <p>Practical support to move clients from insight to action.</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </section>
   {% endif %}
 
-  {% capture who_items %}
-    {% for block in section.blocks %}
-      {% if block.type == 'who_item' and block.settings.item_text != blank %}
-        <li>{{ block.settings.item_text }}</li>
-      {% endif %}
-    {% endfor %}
-  {% endcapture %}
-  {% if who_items | strip != '' %}
+  {% assign has_who_items = false %}
+  {% for block in section.blocks %}
+    {% if block.type == 'who_item' and block.settings.item_text != blank %}
+      {% assign has_who_items = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if has_who_items %}
     <section class="cbt-section cbt-section--muted">
       <div class="page-width">
         <h2>Who Is It For?</h2>
         <p class="section-subtitle">From solo practitioners to group practices, these worksheets adapt to your caseload and modality.</p>
         <ul class="cbt-who-list">
-          {{ who_items }}
+          {% for block in section.blocks %}
+            {% if block.type == 'who_item' and block.settings.item_text != blank %}
+              <li>{{ block.settings.item_text }}</li>
+            {% endif %}
+          {% endfor %}
         </ul>
       </div>
     </section>
   {% endif %}
 
-  {% capture testimonial_blocks %}
-    {% for block in section.blocks %}
-      {% if block.type == 'testimonial' and block.settings.quote != blank %}
-        <div class="cbt-testimonial">
-          <p>“{{ block.settings.quote }}”</p>
-          {% if block.settings.name != blank %}
-            <strong>{{ block.settings.name }}</strong>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
-  {% endcapture %}
-  {% if testimonial_blocks | strip != '' %}
+  {% assign has_testimonials = false %}
+  {% for block in section.blocks %}
+    {% if block.type == 'testimonial' and block.settings.quote != blank %}
+      {% assign has_testimonials = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if has_testimonials %}
     <section class="cbt-section">
       <div class="page-width">
         <h2>Therapists Love These Worksheets</h2>
         <p class="section-subtitle">Join thousands of clinicians who use these tools to motivate change and keep therapy momentum between visits.</p>
         <div class="cbt-testimonials">
-          {{ testimonial_blocks }}
+          {% for block in section.blocks %}
+            {% if block.type == 'testimonial' and block.settings.quote != blank %}
+              <div class="cbt-testimonial">
+                <p>“{{ block.settings.quote }}”</p>
+                {% if block.settings.name != blank %}
+                  <strong>{{ block.settings.name }}</strong>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </section>
   {% endif %}
 
-  {% assign guarantee_block = nil %}
+  {% assign has_guarantee = false %}
   {% for block in section.blocks %}
-    {% if block.type == 'guarantee' %}
-      {% assign guarantee_block = block %}
+    {% if block.type == 'guarantee' and (block.settings.guarantee_title != blank or block.settings.guarantee_text != blank) %}
+      {% assign has_guarantee = true %}
       {% break %}
     {% endif %}
   {% endfor %}
-  {% if guarantee_block and (guarantee_block.settings.guarantee_title != blank or guarantee_block.settings.guarantee_text != blank) %}
+  {% if has_guarantee %}
     <section class="cbt-section cbt-section--muted">
       <div class="page-width">
         <div class="cbt-guarantee">
-          {% if guarantee_block.settings.guarantee_title != blank %}
-            <h3>{{ guarantee_block.settings.guarantee_title }}</h3>
-          {% endif %}
-          {% if guarantee_block.settings.guarantee_text != blank %}
-            <p>{{ guarantee_block.settings.guarantee_text }}</p>
-          {% endif %}
+          {% for block in section.blocks %}
+            {% if block.type == 'guarantee' and (block.settings.guarantee_title != blank or block.settings.guarantee_text != blank) %}
+              {% if block.settings.guarantee_title != blank %}
+                <h3>{{ block.settings.guarantee_title }}</h3>
+              {% endif %}
+              {% if block.settings.guarantee_text != blank %}
+                <p>{{ block.settings.guarantee_text }}</p>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </section>
   {% endif %}
 
-  {% assign final_cta_block = nil %}
+  {% assign has_final_cta = false %}
   {% for block in section.blocks %}
-    {% if block.type == 'final_cta' %}
-      {% assign final_cta_block = block %}
+    {% if block.type == 'final_cta' and block.settings.final_cta_text != blank and block.settings.final_cta_link != blank %}
+      {% assign has_final_cta = true %}
       {% break %}
     {% endif %}
   {% endfor %}
-  {% if final_cta_block and final_cta_block.settings.final_cta_text != blank and final_cta_block.settings.final_cta_link != blank %}
+  {% if has_final_cta %}
     <section class="cbt-section">
       <div class="page-width">
         <div class="cbt-final-cta">
           <h3>Ready to Motivate Change With Every Session?</h3>
           <p>Download the full library of CBT worksheets and give your clients the structure, inspiration, and accountability they crave.</p>
-          <a class="cbt-button cbt-button--light" href="{{ final_cta_block.settings.final_cta_link }}">{{ final_cta_block.settings.final_cta_text }}</a>
+          {% for block in section.blocks %}
+            {% if block.type == 'final_cta' and block.settings.final_cta_text != blank and block.settings.final_cta_link != blank %}
+              <a class="cbt-button cbt-button--light" href="{{ block.settings.final_cta_link }}">{{ block.settings.final_cta_text }}</a>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </section>
