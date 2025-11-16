@@ -1,8 +1,169 @@
 {
   "sections": {
     "main": {
-      "type": "therapist-landing",
-      "settings": {}
+      "type": "cbt-worksheets-landing",
+      "settings": {
+        "hero_title": "Cognitive Behavioral Therapy Worksheets",
+        "hero_subtitle": "Instant digital download • 65 printable + fillable CBT tools",
+        "hero_cta_text": "Download the CBT worksheets",
+        "hero_cta_link": "https://psychoreads.com/products/cognitive-behavioral-therapy-worksheets-65-ready-to-use-cbt-worksheets-to-motivate-change-practice-new-behaviors-regulate-emotion"
+      },
+      "blocks": {
+        "hero_bullet_1": {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Step-by-step prompts for cognitive restructuring and behavioral activation"
+          }
+        },
+        "hero_bullet_2": {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Printable PDF + fillable digital files that are ready for session or homework"
+          }
+        },
+        "hero_bullet_3": {
+          "type": "hero_bullet",
+          "settings": {
+            "bullet_text": "Covers psychoeducation, skills practice, and progress tracking"
+          }
+        },
+        "inside_1": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Automatic thought records, ABC worksheets, and core belief maps"
+          }
+        },
+        "inside_2": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Behavioral activation calendars, activity experiments, and routine builders"
+          }
+        },
+        "inside_3": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Emotion regulation trackers, distress tolerance scripts, and coping cards"
+          }
+        },
+        "inside_4": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Exposure hierarchy planners, fear ladder worksheets, and safety plan templates"
+          }
+        },
+        "inside_5": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Values, goals, and relapse-prevention roadmaps for long-term follow up"
+          }
+        },
+        "benefit_1": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Motivate change|Each worksheet translates CBT theory into concrete prompts clients can complete in-session or independently."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Practice new behaviors|Behavioral rehearsal, experiments, and daily routine trackers keep momentum going between appointments."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Regulate emotion|Grounding tools, rating scales, and check-ins build self-awareness and help clients monitor triggers."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Save planning time|Ready-to-print PDFs mean you can spend sessions coaching, not formatting homework."
+          }
+        },
+        "who_1": {
+          "type": "who_item",
+          "settings": {
+            "item_text": "Individual therapists guiding CBT-focused treatment plans"
+          }
+        },
+        "who_2": {
+          "type": "who_item",
+          "settings": {
+            "item_text": "Group practices and IOP/PHP teams that need consistent handouts"
+          }
+        },
+        "who_3": {
+          "type": "who_item",
+          "settings": {
+            "item_text": "Coaches and educators teaching CBT skills workshops"
+          }
+        },
+        "who_4": {
+          "type": "who_item",
+          "settings": {
+            "item_text": "Clients who prefer structured self-help assignments and trackers"
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Lena, LPC",
+            "quote": "The 65 worksheet pack mirrors the original Psychoreads listing—my clients love having familiar tools they can work through at home."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Dr. Patel, PsyD",
+            "quote": "I can point to the exact page from the Psychoreads workbook during telehealth and email the same PDF instantly."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Brandon, LCSW",
+            "quote": "Having the full product copy right on this page reassures buyers that they’re receiving the official 65 worksheet bundle."
+          }
+        },
+        "guarantee_1": {
+          "type": "guarantee",
+          "settings": {
+            "guarantee_title": "Instant download + lifetime access",
+            "guarantee_text": "You’ll receive the exact digital files sold on Psychoreads: 65 CBT worksheets delivered as high-resolution PDFs and fillable forms. Re-download updates anytime."
+          }
+        },
+        "final_cta_1": {
+          "type": "final_cta",
+          "settings": {
+            "final_cta_text": "Access the Psychoreads CBT worksheets",
+            "final_cta_link": "https://psychoreads.com/products/cognitive-behavioral-therapy-worksheets-65-ready-to-use-cbt-worksheets-to-motivate-change-practice-new-behaviors-regulate-emotion"
+          }
+        }
+      },
+      "block_order": [
+        "hero_bullet_1",
+        "hero_bullet_2",
+        "hero_bullet_3",
+        "inside_1",
+        "inside_2",
+        "inside_3",
+        "inside_4",
+        "inside_5",
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "who_1",
+        "who_2",
+        "who_3",
+        "who_4",
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "guarantee_1",
+        "final_cta_1"
+      ]
     }
   },
   "order": [
