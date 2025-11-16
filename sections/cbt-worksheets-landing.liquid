@@ -1,408 +1,1054 @@
-<div class="cbt-landing">
+{% assign product = all_products['cognitive-behavioral-therapy-worksheets'] %}
+{% if product == blank %}
+  {% assign product = all_products['cbt-worksheets-bundle'] %}
+{% endif %}
+{% assign available_variant = nil %}
+{% if product %}
+  {% assign available_variant = product.first_available_variant %}
+{% endif %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+<div class="therapist-landing-page">
   <style>
-    .cbt-landing .page-width {max-width: 1200px; margin: 0 auto; padding: 0 2rem;}
-    .cbt-hero {padding: 64px 0;}
-    .cbt-hero__inner {display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem;}
-    .cbt-hero__text {flex: 1 1 320px;}
-    .cbt-hero__image {flex: 1 1 320px; text-align: center;}
-    .cbt-hero__image img {max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.08);}
-    .cbt-pretitle {text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.9rem; color: #7a5af8; margin-bottom: 0.75rem; font-weight: 600;}
-    .cbt-hero h1 {font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 1rem;}
-    .cbt-hero p {font-size: 1.1rem; color: #4a4a4a;}
-    .cbt-bullets {list-style: none; padding: 0; margin: 1.75rem 0; display: grid; gap: 0.75rem;}
-    .cbt-bullets li {display: flex; align-items: center; gap: 0.75rem; font-weight: 600; color: #1d1d1d;}
-    .cbt-bullet-icon {width: 28px; height: 28px; border-radius: 999px; background: #e6f6ef; color: #1f8a62; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;}
-    .cbt-section {padding: 72px 0;}
-    .cbt-section--muted {background: #f8f8fb;}
-    .cbt-section h2 {font-size: clamp(1.9rem, 3vw, 2.6rem); margin-bottom: 1rem; text-align: center;}
-    .cbt-section p.section-subtitle {max-width: 720px; margin: 0 auto 2.5rem; text-align: center; color: #5c5c5c;}
-    .cbt-card-list {list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;}
-    .cbt-card-list li {background: #fff; border-radius: 14px; padding: 1.25rem 1.5rem; box-shadow: 0 15px 40px rgba(18,12,39,0.08); font-weight: 600; color: #2d2d2d;}
-    .cbt-benefits {display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2rem;}
-    .cbt-benefit-card {background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.06);}
-    .cbt-benefit-card h3 {margin-bottom: 0.5rem; font-size: 1.2rem;}
-    .cbt-benefit-card p {margin: 0; color: #4c4c4c;}
-    .cbt-who-list {list-style: none; padding: 0; margin: 2rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;}
-    .cbt-who-list li {background: #fff; border: 1px solid #e2e2ea; border-radius: 12px; padding: 1.25rem; font-weight: 600; color: #2a2a2a;}
-    .cbt-testimonials {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem;}
-    .cbt-testimonial {background: #fff; border-radius: 18px; padding: 1.75rem; box-shadow: 0 12px 35px rgba(31, 24, 71, 0.08);}
-    .cbt-testimonial p {font-style: italic; margin-bottom: 1rem; color: #3c3c3c;}
-    .cbt-testimonial strong {display: block; font-size: 1rem; color: #1f1f1f;}
-    .cbt-guarantee {background: #fff9ec; border-radius: 20px; padding: 2rem; border: 1px solid #f8d28c; text-align: center; box-shadow: inset 0 0 0 1px #ffe8bd;}
-    .cbt-final-cta {background: linear-gradient(135deg, #5b4ef1, #7a5af8); color: #fff; border-radius: 24px; padding: 2.5rem; text-align: center;}
-    .cbt-final-cta h3 {font-size: 2rem; margin-bottom: 1rem;}
-    .cbt-final-cta p {font-size: 1.1rem; margin-bottom: 1.5rem;}
-    .cbt-button {display: inline-flex; align-items: center; justify-content: center; padding: 0.95rem 2.4rem; border-radius: 999px; font-weight: 600; text-decoration: none; transition: opacity 0.2s ease;}
-    .cbt-button--primary {background: #1f8a62; color: #fff;}
-    .cbt-button--light {background: #fff; color: #4b3ce8;}
-    .cbt-button:hover {opacity: 0.9;}
-    @media (max-width: 749px) {
-      .cbt-hero {padding-top: 32px;}
-      .cbt-hero__inner {flex-direction: column;}
-      .cbt-hero__text {text-align: center;}
-      .cbt-bullets li {justify-content: center;}
+    .therapist-landing-page {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #1f2933;
+      background: #f7f8fa;
+      padding-bottom: 4rem;
+    }
+    .therapist-landing-page .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .therapist-landing-page h1,
+    .therapist-landing-page h2,
+    .therapist-landing-page h3 {
+      color: #101620;
+    }
+    .page-header {
+      background: #0f172a;
+      color: #fff;
+      padding: 1.25rem 0;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+    }
+    .page-header .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .page-header .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .page-header nav {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    .page-header nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .page-header nav a:hover,
+    .page-header nav a:focus {
+      color: #60a5fa;
+    }
+    .hero {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      padding: 4rem 0 2rem;
+    }
+    .hero-topline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1d4ed8;
+    }
+    .hero-price-pill {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .hero-image {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+    }
+    .hero-image__frame {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border-radius: 16px;
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+    }
+    .hero-image__frame figcaption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #475569;
+      text-align: center;
+      font-weight: 600;
+    }
+    .hero-image__img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+    }
+    .hero-image__stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+    .hero-image__stack-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.14);
+      border: 1px solid #e2e8f0;
+      background: #fff;
+    }
+    .hero-image__badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(37, 99, 235, 0.95);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    }
+    .hero-image--empty {
+      min-height: 260px;
+      border-radius: 16px;
+      background: repeating-linear-gradient(135deg, #e2e8f0, #e2e8f0 8px, #f8fafc 8px, #f8fafc 16px);
+      box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.6);
+    }
+    .hero-image__placeholder svg {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: #475569;
+    }
+    .hero-offer {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1.5rem;
+    }
+    .hero-price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .hero-price span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1d4ed8;
+    }
+    .hero-license-note {
+      font-size: 0.9rem;
+      color: #475569;
+      margin: 0;
+    }
+    .hero-license-note a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero-license-note a:hover,
+    .hero-license-note a:focus {
+      text-decoration: underline;
+    }
+    .buy-now-form {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .buy-now-form--inline {
+      width: auto;
+    }
+    .buy-now {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 2.5rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      min-width: 200px;
+    }
+    .buy-now[disabled] {
+      cursor: not-allowed;
+      background: #94a3b8;
+    }
+    .buy-now:not([disabled]):hover,
+    .buy-now:not([disabled]):focus {
+      background: #1d4ed8;
+    }
+    .buy-now__message {
+      margin-top: 0.75rem;
+      color: #dc2626;
+      min-height: 1.2rem;
+      font-size: 0.95rem;
+    }
+    .cta-reassurance {
+      font-size: 0.9rem;
+      color: #475569;
+      margin: 0;
+    }
+    .hero-guarantee {
+      margin-top: 1rem;
+      background: #ecfdf5;
+      color: #047857;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .hero-guarantee strong {
+      font-weight: 700;
+    }
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .hero-trust span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .benefits {
+      background: #fff;
+      padding: 3rem 0;
+      border-radius: 12px;
+      margin: 3rem auto;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    .benefits h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .benefit-card {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+    .benefit-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .benefit-card p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .benefits blockquote {
+      margin: 2rem auto 0;
+      max-width: 640px;
+      font-style: italic;
+      color: #1f2933;
+      text-align: center;
+    }
+    .benefits blockquote span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .gallery {
+      margin: 3rem 0;
+    }
+    .gallery h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .inside-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+    .inside-columns h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+    .inside-columns p {
+      margin: 0 0 0.75rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .inside-bullets {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: #334155;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+    }
+    .inside-highlights {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+    .inside-highlights li {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      color: #334155;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+      background: #fff;
+    }
+    .emotional-section {
+      margin: 3rem 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+      line-height: 1.8;
+      color: #334155;
+      font-size: 1.08rem;
+    }
+    .reframe-table {
+      margin: 3rem 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+    .reframe-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .reframe-table th,
+    .reframe-table td {
+      padding: 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      line-height: 1.6;
+      color: #1f2933;
+    }
+    .reframe-table th {
+      background: #2563eb;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+    .reframe-table tr:last-child td {
+      border-bottom: none;
+    }
+    .proof {
+      margin: 3rem 0;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .proof-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      font-weight: 600;
+      color: #1f2937;
+      text-align: center;
+    }
+    .cta-section {
+      background: #1d4ed8;
+      color: #fff;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem auto;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+    }
+    .cta-section h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: #e2e8f0;
+      font-size: 1.1rem;
+      margin-bottom: 1.75rem;
+    }
+    .cta-section .buy-now-form {
+      margin: 0 auto;
+    }
+    .cta-section .buy-now {
+      background: #fff;
+      color: #1d4ed8;
+    }
+    .cta-section .buy-now:not([disabled]):hover,
+    .cta-section .buy-now:not([disabled]):focus {
+      background: #e0e7ff;
+    }
+    .cta-section .buy-now[disabled] {
+      background: rgba(255, 255, 255, 0.6);
+      color: #1d4ed8;
+    }
+    .trust-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      color: #bfdbfe;
+    }
+    .final-cta {
+      text-align: center;
+      margin: 3rem auto 0;
+    }
+    .final-cta p {
+      font-size: 1.15rem;
+      color: #1f2933;
+      margin-bottom: 1.5rem;
+    }
+    .final-cta .buy-now {
+      padding: 0.9rem 2.5rem;
+    }
+    .guarantee-note {
+      font-size: 0.95rem;
+      color: #0f172a;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+    .page-footer {
+      margin-top: 4rem;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2.5rem 0;
+    }
+    .page-footer .footer-content {
+      display: grid;
+      gap: 1rem;
+      justify-items: center;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .page-footer .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .page-footer .footer-links a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .page-footer .footer-links a:hover,
+    .page-footer .footer-links a:focus {
+      color: #bfdbfe;
+    }
+    .testimonials {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3rem 0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 3rem;
+    }
+    .testimonials h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #1f2933;
+    }
+    .testimonial span {
+      display: block;
+      margin-top: 0.75rem;
+      font-weight: 600;
+      color: #2563eb;
+      font-size: 0.95rem;
+    }
+    .faq {
+      padding: 3rem 0;
+    }
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    }
+    .faq-item h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .faq-item p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      z-index: 30;
+      flex-wrap: wrap;
+    }
+    .sticky-bar-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .sticky-bar-price {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .sticky-bar-title {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+    }
+    .sticky-bar .buy-now {
+      padding: 0.65rem 1.75rem;
+      min-width: auto;
+      font-size: 0.95rem;
+    }
+    @media (min-width: 1024px) {
+      .hero {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 768px) {
+      .sticky-bar {
+        display: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero {
+        padding-top: 3rem;
+      }
     }
   </style>
-
-  <section class="cbt-hero">
-    <div class="page-width">
-      <div class="cbt-hero__inner">
-        <div class="cbt-hero__text">
-          {% if section.settings.hero_subtitle != blank %}
-            <p class="cbt-pretitle">{{ section.settings.hero_subtitle }}</p>
-          {% endif %}
-          {% if section.settings.hero_title != blank %}
-            <h1>{{ section.settings.hero_title }}</h1>
-          {% endif %}
-          <p>65 ready-to-use CBT worksheets designed to guide sessions, reinforce homework, and help clients regulate emotion, challenge unhelpful thoughts, and practice new skills between visits.</p>
-
-          {% assign has_hero_bullets = false %}
-          {% for block in section.blocks %}
-            {% if block.type == 'hero_bullet' %}
-              {% if block.settings.bullet_text != blank %}
-                {% assign has_hero_bullets = true %}
-                {% break %}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-          {% if has_hero_bullets %}
-            <ul class="cbt-bullets">
-              {% for block in section.blocks %}
-                {% if block.type == 'hero_bullet' %}
-                  {% if block.settings.bullet_text != blank %}
-                    <li><span class="cbt-bullet-icon">✓</span>{{ block.settings.bullet_text }}</li>
-                  {% endif %}
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-
-          {% if section.settings.hero_cta_text != blank %}
-            {% if section.settings.hero_cta_link != blank %}
-              <a class="cbt-button cbt-button--primary" href="{{ section.settings.hero_cta_link }}">{{ section.settings.hero_cta_text }}</a>
-            {% endif %}
-          {% endif %}
-        </div>
-        <div class="cbt-hero__image">
-          {% if section.settings.hero_image != blank %}
-            {{ section.settings.hero_image | image_url: width: 960 | image_tag: loading: 'lazy', alt: section.settings.hero_title }}
-          {% endif %}
-        </div>
-      </div>
+  {% if product == blank %}
+    <div class="container">
+      <p>Product not found. Please check back later.</p>
     </div>
-  </section>
-
-  {% assign has_inside_items = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'inside_item' %}
-      {% if block.settings.item_text != blank %}
-        {% assign has_inside_items = true %}
-        {% break %}
-      {% endif %}
+  {% else %}
+    {% assign product_images = product.media | where: 'media_type', 'image' %}
+    {% assign hero_primary_image = product_images | first %}
+    {% if hero_primary_image == blank %}
+      {% assign hero_primary_image = product.featured_media %}
     {% endif %}
-  {% endfor %}
-  {% if has_inside_items %}
-    <section class="cbt-section cbt-section--muted">
-      <div class="page-width">
-        <h2>What’s Inside the CBT Worksheets Bundle?</h2>
-        <p class="section-subtitle">Curated prompts, psychoeducation handouts, progress trackers, and intervention worksheets that are ready for print or digital use.</p>
-        <ul class="cbt-card-list">
-          {% for block in section.blocks %}
-            {% if block.type == 'inside_item' %}
-              {% if block.settings.item_text != blank %}
-                <li>{{ block.settings.item_text }}</li>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    </section>
-  {% endif %}
-
-  {% assign has_benefit_items = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'benefit_item' %}
-      {% if block.settings.item_text != blank %}
-        {% assign has_benefit_items = true %}
-        {% break %}
-      {% endif %}
+    {% if hero_primary_image == blank %}
+      {% assign hero_primary_image = product.featured_image %}
     {% endif %}
-  {% endfor %}
-  {% if has_benefit_items %}
-    <section class="cbt-section">
-      <div class="page-width">
-        <h2>Key Benefits for Your Practice</h2>
-        <p class="section-subtitle">Every worksheet is designed for real-world sessions so you can stay present, productive, and confident.</p>
-        <div class="cbt-benefits">
-          {% for block in section.blocks %}
-            {% if block.type == 'benefit_item' %}
-              {% if block.settings.item_text != blank %}
-                <div class="cbt-benefit-card">
-                  <h3>{{ block.settings.item_text | split: '|' | first }}</h3>
-                  {% assign benefit_details = block.settings.item_text | split: '|' | last %}
-                  {% if benefit_details != block.settings.item_text %}
-                    <p>{{ benefit_details }}</p>
-                  {% else %}
-                    <p>Practical support to move clients from insight to action.</p>
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-  {% endif %}
-
-  {% assign has_who_items = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'who_item' %}
-      {% if block.settings.item_text != blank %}
-        {% assign has_who_items = true %}
-        {% break %}
-      {% endif %}
+    {% assign hero_primary_alt = hero_primary_image.alt | default: product.title %}
+    {% assign hero_secondary_image = blank %}
+    {% assign hero_tertiary_image = blank %}
+    {% if product_images.size > 1 %}
+      {% assign hero_secondary_image = product_images[1] %}
     {% endif %}
-  {% endfor %}
-  {% if has_who_items %}
-    <section class="cbt-section cbt-section--muted">
-      <div class="page-width">
-        <h2>Who Is It For?</h2>
-        <p class="section-subtitle">From solo practitioners to group practices, these worksheets adapt to your caseload and modality.</p>
-        <ul class="cbt-who-list">
-          {% for block in section.blocks %}
-            {% if block.type == 'who_item' %}
-              {% if block.settings.item_text != blank %}
-                <li>{{ block.settings.item_text }}</li>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    </section>
-  {% endif %}
-
-  {% assign has_testimonials = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'testimonial' %}
-      {% if block.settings.quote != blank %}
-        {% assign has_testimonials = true %}
-        {% break %}
-      {% endif %}
+    {% if product_images.size > 2 %}
+      {% assign hero_tertiary_image = product_images[2] %}
     {% endif %}
-  {% endfor %}
-  {% if has_testimonials %}
-    <section class="cbt-section">
-      <div class="page-width">
-        <h2>Therapists Love These Worksheets</h2>
-        <p class="section-subtitle">Join thousands of clinicians who use these tools to motivate change and keep therapy momentum between visits.</p>
-        <div class="cbt-testimonials">
-          {% for block in section.blocks %}
-            {% if block.type == 'testimonial' %}
-              {% if block.settings.quote != blank %}
-                <div class="cbt-testimonial">
-                  <p>“{{ block.settings.quote }}”</p>
-                  {% if block.settings.name != blank %}
-                    <strong>{{ block.settings.name }}</strong>
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-  {% endif %}
 
-  {% assign has_guarantee = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'guarantee' %}
-      {% if block.settings.guarantee_title != blank or block.settings.guarantee_text != blank %}
-        {% assign has_guarantee = true %}
-        {% break %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  {% if has_guarantee %}
-    <section class="cbt-section cbt-section--muted">
-      <div class="page-width">
-        <div class="cbt-guarantee">
-          {% for block in section.blocks %}
-            {% if block.type == 'guarantee' %}
-              {% if block.settings.guarantee_title != blank or block.settings.guarantee_text != blank %}
-                {% if block.settings.guarantee_title != blank %}
-                  <h3>{{ block.settings.guarantee_title }}</h3>
-                {% endif %}
-                {% if block.settings.guarantee_text != blank %}
-                  <p>{{ block.settings.guarantee_text }}</p>
-                {% endif %}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
+    <header class="page-header">
+      <div class="container header-content">
+        <span class="logo">CBT Worksheets</span>
+        <nav aria-label="Primary">
+          <a href="#inside-workbook">Inside the CBT Worksheets</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#faqs">FAQs</a>
+        </nav>
       </div>
-    </section>
-  {% endif %}
+    </header>
 
-  {% assign has_final_cta = false %}
-  {% for block in section.blocks %}
-    {% if block.type == 'final_cta' %}
-      {% if block.settings.final_cta_text != blank %}
-        {% if block.settings.final_cta_link != blank %}
-          {% assign has_final_cta = true %}
-          {% break %}
+    <section class="hero container">
+      <div class="hero-image {% if hero_primary_image == blank %}hero-image--empty{% endif %}">
+        {% if hero_primary_image %}
+          <figure class="hero-image__frame">
+            {{ hero_primary_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'hero-image__img', alt: hero_primary_alt }}
+            <figcaption>Cognitive Behavioral Therapy worksheets preview</figcaption>
+          </figure>
+        {% else %}
+          <figure class="hero-image__frame hero-image__placeholder">
+            {{ 'image' | placeholder_svg_tag: 'hero-image__img' }}
+            <figcaption>Cognitive Behavioral Therapy worksheets preview</figcaption>
+          </figure>
         {% endif %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  {% if has_final_cta %}
-    <section class="cbt-section">
-      <div class="page-width">
-        <div class="cbt-final-cta">
-          <h3>Ready to Motivate Change With Every Session?</h3>
-          <p>Download the full library of CBT worksheets and give your clients the structure, inspiration, and accountability they crave.</p>
-          {% for block in section.blocks %}
-            {% if block.type == 'final_cta' %}
-              {% if block.settings.final_cta_text != blank %}
-                {% if block.settings.final_cta_link != blank %}
-                  <a class="cbt-button cbt-button--light" href="{{ block.settings.final_cta_link }}">{{ block.settings.final_cta_text }}</a>
-                {% endif %}
-              {% endif %}
+        {% if hero_secondary_image or hero_tertiary_image %}
+          <div class="hero-image__stack" aria-hidden="true">
+            {% if hero_secondary_image %}
+              {{ hero_secondary_image | image_url: width: 640 | image_tag: loading: 'lazy', class: 'hero-image__stack-img', alt: '' }}
             {% endif %}
-          {% endfor %}
+            {% if hero_tertiary_image %}
+              {{ hero_tertiary_image | image_url: width: 640 | image_tag: loading: 'lazy', class: 'hero-image__stack-img', alt: '' }}
+            {% endif %}
+          </div>
+        {% endif %}
+        <span class="hero-image__badge">Digital download</span>
+      </div>
+      <div class="hero-content">
+        <div class="hero-topline">
+          <span class="hero-price-pill">{{ available_variant.price | default: product.price | money }}</span>
+          <span>65 Ready-to-use CBT Worksheets for Faster Progress</span>
+        </div>
+        <h1>Cognitive Behavioral Therapy Worksheets</h1>
+        <p>65 Ready-to-use CBT Worksheets for Faster Progress. Guide clients through cognitive restructuring, behavioral activation, and emotional tracking without building anything from scratch.</p>
+        <div class="hero-offer" role="region" aria-label="CBT worksheet purchase details">
+          <div class="hero-price">
+            {{ available_variant.price | default: product.price | money }}
+            <span>One-time professional license — yours to use forever.</span>
+          </div>
+          <p class="hero-license-note">One license covers one clinician with unlimited clients using the CBT worksheets. Need a clinic license? <a href="/pages/contact">Contact us.</a></p>
+          <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
+            <input type="hidden" name="id" value="{{ available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+              {% if is_available %}
+                Download the CBT Worksheets
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+          </form>
+          <p class="buy-now__message" role="status" aria-live="polite" data-buy-now-message></p>
+          <p class="cta-reassurance">Instant PDF download after secure checkout — add the CBT worksheets to your next client plan in minutes.</p>
+        </div>
+        <div class="hero-trust">
+          <span>✔ Secure Checkout</span>
+          <span>✔ Instant Download</span>
+          <span>✔ Professional License</span>
+          <span>✔ 7-day CBT Worksheet Guarantee</span>
+        </div>
+        <div class="hero-guarantee">
+          <strong>Therapist Guarantee:</strong>
+          If the CBT worksheets don’t fit your style within 7 days, email us and we’ll make it right.
         </div>
       </div>
     </section>
+
+    <section class="benefits container">
+      <h2>Why Therapists Love These CBT Worksheets</h2>
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <h3>Prep CBT interventions in under five minutes.</h3>
+          <p>Drop in ready-to-use prompts, agendas, and homework so you can focus entirely on cognitive restructuring.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Visual tools clients instantly understand.</h3>
+          <p>Use illustrated distortion maps and step-by-step instructions so concepts click in a single glance.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Behavioral activation stays on track.</h3>
+          <p>Daily experiment planners and activation calendars keep momentum going between appointments.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Print, screen-share, or assign digitally.</h3>
+          <p>Share CBT worksheets in the format each client needs, from telehealth screen shares to in-office folders.</p>
+        </div>
+      </div>
+      <blockquote>
+        “This pack covers every CBT skill I teach, so new clients get structure from day one.”
+        <span>— Clinical Counselor, MA, LMHC</span>
+      </blockquote>
+    </section>
+
+    {% assign gallery_images = product.media | where: 'media_type', 'image' %}
+    <section class="gallery container" id="inside-workbook">
+      <h2>Inside the CBT Worksheet Bundle</h2>
+      <div class="inside-columns">
+        <div>
+          <h3>Cognitive restructuring &amp; thought records.</h3>
+          <p>Lead clients through evidence-based thought records, core belief maps, and cognitive distortion checklists.</p>
+          <ul class="inside-bullets">
+            <li>Automatic thought record templates</li>
+            <li>ABC and core belief worksheets</li>
+            <li>Homework planners that boost follow-through</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Behavioral activation &amp; experiments.</h3>
+          <p>Drop in activation calendars, values-to-action maps, and habit trackers that keep clients moving.</p>
+          <ul class="inside-bullets">
+            <li>Activity scheduling calendars</li>
+            <li>Behavioral experiment planners</li>
+            <li>Reward and accountability trackers</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Emotion regulation &amp; relapse prevention.</h3>
+          <p>Guide clients through trigger logs, coping cards, and relapse-prevention roadmaps rooted in CBT skills.</p>
+          <ul class="inside-bullets">
+            <li>Mood + trigger tracking charts</li>
+            <li>Coping statement cards</li>
+            <li>Relapse-prevention plans with next steps</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="inside-highlights">
+        <li>Ready for teletherapy and print</li>
+        <li>Instant PDF download</li>
+        <li>Editable fields for digital use</li>
+        <li>Clinician notes beside each CBT tool</li>
+      </ul>
+      {% if gallery_images.size > 0 %}
+        <div class="gallery-grid">
+          {% for media in gallery_images limit: 6 %}
+            <div>
+              <img src="{{ media | image_url: width: 720 }}" alt="CBT worksheet preview {{ forloop.index }}" loading="lazy">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+
+    <section class="container emotional-section">
+      <p>Clients who spiral through distortions crave structure. These CBT worksheets give them language for their thoughts, space for new behaviors, and proof that change is built one written prompt at a time.</p>
+    </section>
+
+    <div class="container reframe-table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Client Thought</th>
+            <th scope="col">CBT Reframe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>“I can’t control my thoughts, so CBT won’t work.”</td>
+            <td>“We don’t need to control them — we track, challenge, and reframe them one worksheet at a time.”</td>
+          </tr>
+          <tr>
+            <td>“Scheduling activities feels pointless when I’m tired.”</td>
+            <td>“Let’s use the behavioral activation planner to design one experiment and note the outcome.”</td>
+          </tr>
+          <tr>
+            <td>“If I slip once, the progress is gone.”</td>
+            <td>“Relapse-prevention pages prove each skill is a tool you can pick back up — not a pass/fail test.”</td>
+          </tr>
+          <tr>
+            <td>“My anxiety means something is wrong with me.”</td>
+            <td>“The symptom tracker helps us separate facts from fears and choose coping statements that fit the moment.”</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container proof">
+      <div class="proof-item">⭐ Official 65-page CBT worksheet bundle from Psychoreads</div>
+      <div class="proof-item">📚 Trusted by thousands of CBT therapists and coaches</div>
+      <div class="proof-item">💻 Printable + fillable PDF delivery for flexible use</div>
+      <div class="proof-item">🧠 Covers cognitive restructuring, activation, and relapse prevention</div>
+    </div>
+
+    <section class="testimonials container" id="testimonials">
+      <h2>Trusted by practicing therapists</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          “Every CBT intake leaves with three of these worksheets — it keeps session prep to minutes.”
+          <span>— Dr. Alexis M., PsyD</span>
+        </div>
+        <div class="testimonial">
+          “My CBT group loved the structure — the visuals made cognitive distortions click immediately.”
+          <span>— Jordan L., LCSW</span>
+        </div>
+        <div class="testimonial">
+          “Clients stayed engaged between sessions because the behavioral activation logs are so simple to follow.”
+          <span>— Priya K., LMFT</span>
+        </div>
+        <div class="testimonial">
+          “Perfect quick reference for trainees shadowing CBT sessions — they can see the exact prompts.”
+          <span>— Ethan R., LPC</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="container cta-section">
+      <h2>Ready to Share Structured CBT Homework?</h2>
+      <p>Download the 65-page CBT worksheet bundle today and have it open for your next appointment.</p>
+      <form class="buy-now-form buy-now-form--inline js-buy-now-form" method="post" action="/cart/add" novalidate>
+        <input type="hidden" name="id" value="{{ available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+          {% if is_available %}
+            Download the CBT Worksheets
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      </form>
+      <p class="guarantee-note">Therapist Guarantee: Try the CBT worksheets for 7 days — if they don’t fit your approach, we’ll make it right.</p>
+      <div class="trust-icons">
+        <span>✔ Secure Checkout</span>
+        <span>✔ Instant Download</span>
+        <span>✔ Professional License</span>
+      </div>
+    </section>
+
+    <section class="faq container" id="faqs">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>Is it digital or physical?</h3>
+        <p>Instant PDF download — print for session, email as homework, or screen-share during telehealth.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What exactly is included?</h3>
+        <p>All 65 CBT worksheets from the Psychoreads listing: thought records, behavioral activation planners, coping cards, exposure maps, and relapse-prevention roadmaps.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I edit the files?</h3>
+        <p>Yes — every worksheet includes fillable form fields plus high-resolution PDFs for printing or annotating on a tablet.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How does the license work?</h3>
+        <p><strong>One clinician is fully covered.</strong> Use the CBT worksheets with unlimited clients forever. Need more seats? Reach out for clinic-wide options with volume pricing.</p>
+      </div>
+    </section>
+
+    <div class="final-cta container">
+      <p>Join thousands of therapists simplifying their CBT sessions with these worksheets. Buy once — use them forever.</p>
+      <form class="buy-now-form buy-now-form--inline js-buy-now-form" method="post" action="/cart/add" novalidate>
+        <input type="hidden" name="id" value="{{ available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+          {% if is_available %}
+            Download the CBT Worksheets
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      </form>
+      <p class="guarantee-note">Therapist Guarantee: Try the CBT worksheets risk-free for 7 days — if they aren’t a match, email us and we’ll make it right.</p>
+    </div>
+
+    <footer class="page-footer">
+      <div class="container footer-content">
+        <span>&copy; {{ 'now' | date: '%Y' }} CBT Worksheets. All rights reserved.</span>
+        <div class="footer-links" role="list">
+          <a href="/pages/contact">Contact</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/terms-of-service">Terms of Service</a>
+        </div>
+        <span>Built for clinicians who want CBT tools without the overwhelm.</span>
+      </div>
+    </footer>
+
+    <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
+      <div class="sticky-bar-info">
+        <span class="sticky-bar-title">{{ product.title }}</span>
+        <span class="sticky-bar-price">{{ available_variant.price | default: product.price | money }}</span>
+      </div>
+      <form class="buy-now-form buy-now-form--inline js-buy-now-form" method="post" action="/cart/add" novalidate>
+        <input type="hidden" name="id" value="{{ available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+          Download the CBT Worksheets
+        </button>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (!window.fetch) {
+          return;
+        }
+
+        var buyNowForms = document.querySelectorAll('.js-buy-now-form');
+        var messageEl = document.querySelector('[data-buy-now-message]');
+        var isAvailable = {{ is_available | default: false | json }};
+
+        if (!buyNowForms.length) {
+          return;
+        }
+
+        var toggleButtons = function(shouldDisable) {
+          buyNowForms.forEach(function(form) {
+            var button = form.querySelector('.buy-now');
+            if (!button) {
+              return;
+            }
+            if (shouldDisable) {
+              button.setAttribute('disabled', 'disabled');
+            } else if (isAvailable) {
+              button.removeAttribute('disabled');
+            }
+          });
+        };
+
+        if (!isAvailable) {
+          toggleButtons(true);
+          return;
+        }
+
+        buyNowForms.forEach(function(form) {
+          form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var button = form.querySelector('.buy-now');
+            if (button && button.hasAttribute('disabled')) {
+              return;
+            }
+
+            var variantInput = form.querySelector('input[name="id"]');
+            var variantId = variantInput && variantInput.value ? variantInput.value : (button ? button.getAttribute('data-variant-id') : null);
+
+            if (!variantId) {
+              if (messageEl) {
+                messageEl.textContent = 'Please try again.';
+              }
+              return;
+            }
+
+            toggleButtons(true);
+            if (messageEl) {
+              messageEl.textContent = '';
+            }
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({ id: variantId, quantity: 1 })
+            })
+              .then(function(response) {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then(function() {
+                window.location.assign('/checkout');
+              })
+              .catch(function() {
+                if (messageEl) {
+                  messageEl.textContent = 'Please try again.';
+                }
+                toggleButtons(false);
+                form.submit();
+              });
+          });
+        });
+      });
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ product.title | escape }}",
+        "description": "{{ product.description | strip_html | truncate: 160 | escape }}",
+        "image": [{% if product.featured_image %}"{{ product.featured_image | image_url: width: 960 }}"{% endif %}],
+        "sku": "{{ available_variant.sku | escape }}",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "{{ shop.currency }}",
+          "price": "{{ available_variant.price | default: product.price | money_without_currency | strip_html | replace: ',', '' }}",
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+        }
+      }
+    </script>
   {% endif %}
 </div>
-
 {% schema %}
 {
   "name": "CBT Worksheets Landing",
-  "settings": [
-    {
-      "type": "text",
-      "id": "hero_title",
-      "label": "Hero title"
-    },
-    {
-      "type": "text",
-      "id": "hero_subtitle",
-      "label": "Hero subtitle"
-    },
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero image"
-    },
-    {
-      "type": "text",
-      "id": "hero_cta_text",
-      "label": "CTA text"
-    },
-    {
-      "type": "url",
-      "id": "hero_cta_link",
-      "label": "CTA link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "hero_bullet",
-      "name": "Hero bullet",
-      "settings": [
-        {
-          "type": "text",
-          "id": "bullet_text",
-          "label": "Bullet text"
-        }
-      ]
-    },
-    {
-      "type": "inside_item",
-      "name": "Inside item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "item_text",
-          "label": "Item text"
-        }
-      ]
-    },
-    {
-      "type": "benefit_item",
-      "name": "Benefit item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "item_text",
-          "label": "Benefit text"
-        }
-      ]
-    },
-    {
-      "type": "who_item",
-      "name": "Who item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "item_text",
-          "label": "Who is this for?"
-        }
-      ]
-    },
-    {
-      "type": "testimonial",
-      "name": "Testimonial",
-      "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name"
-        },
-        {
-          "type": "textarea",
-          "id": "quote",
-          "label": "Quote"
-        }
-      ]
-    },
-    {
-      "type": "guarantee",
-      "name": "Guarantee",
-      "settings": [
-        {
-          "type": "text",
-          "id": "guarantee_title",
-          "label": "Guarantee title"
-        },
-        {
-          "type": "textarea",
-          "id": "guarantee_text",
-          "label": "Guarantee text"
-        }
-      ]
-    },
-    {
-      "type": "final_cta",
-      "name": "Final CTA",
-      "settings": [
-        {
-          "type": "text",
-          "id": "final_cta_text",
-          "label": "Final CTA text"
-        },
-        {
-          "type": "url",
-          "id": "final_cta_link",
-          "label": "Final CTA link"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "CBT Worksheets Landing"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

@@ -5,6 +5,10 @@
     assign is_therapist_landing = true
   elsif template.name and template.name == 'page' and template.suffix == 'therapist-landing'
     assign is_therapist_landing = true
+  elsif template_string == 'page.cbt-worksheets' or template_string == 'page.cbt-worksheets.json'
+    assign is_therapist_landing = true
+  elsif template.name and template.name == 'page' and template.suffix == 'cbt-worksheets'
+    assign is_therapist_landing = true
   endif
   assign therapist_page_handle = settings.therapist_landing_page
   assign therapist_page_url = ''
