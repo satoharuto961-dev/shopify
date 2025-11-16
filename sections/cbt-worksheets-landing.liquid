@@ -689,7 +689,6 @@
             {{ available_variant.price | default: product.price | money }}
             <span>One-time professional license — yours to use forever.</span>
           </div>
-          <p class="hero-license-note">One license covers one clinician with unlimited clients using the CBT worksheets. Need a clinic license? <a href="/pages/contact">Contact us.</a></p>
           <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
             <input type="hidden" name="id" value="{{ available_variant.id }}">
             <input type="hidden" name="quantity" value="1">
