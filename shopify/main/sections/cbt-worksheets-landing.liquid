@@ -1,346 +1,266 @@
-<div class="cbt-landing" data-section-type="cbt-worksheets-landing">
-  <style>
-    .cbt-landing {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background-color: #EEF6FF;
-      color: #475569;
-      padding: 4rem 0 5rem;
-    }
-    .cbt-landing .cbt-container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1.75rem;
-    }
-    .cbt-landing h1,
-    .cbt-landing h2,
-    .cbt-landing h3 {
-      color: #0F172A;
-      margin: 0;
-    }
-    .cbt-landing .cbt-grid {
-      display: grid;
-      gap: 2.5rem;
-    }
-    .cbt-landing .cbt-grid.hero-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      align-items: center;
-    }
-    .cbt-landing .cbt-hero-title {
-      font-size: clamp(2.3rem, 5vw, 3.4rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .cbt-landing .cbt-hero-subtitle {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-    .cbt-landing .cbt-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: #fff;
-      color: #1E3A8A;
-      font-weight: 600;
-      border-radius: 999px;
-      padding: 0.35rem 1rem;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-    }
-    .cbt-landing .cbt-bullets {
-      display: grid;
-      gap: 0.75rem;
-      margin: 0 0 1.75rem;
-      padding: 0;
-      list-style: none;
-    }
-    .cbt-landing .cbt-bullets li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    .cbt-landing .cbt-bullets li span {
-      width: 1.25rem;
-      height: 1.25rem;
-      border-radius: 999px;
-      background: #1E3A8A;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-    .cbt-landing .cbt-btn {
-      background: #1E3A8A;
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 0.95rem 2.5rem;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 18px 35px rgba(30, 58, 138, 0.35);
-      transition: opacity 0.2s ease;
-    }
-    .cbt-landing .cbt-btn:hover,
-    .cbt-landing .cbt-btn:focus {
-      opacity: 0.9;
-    }
-    .cbt-landing .cbt-image-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
-    }
-    .cbt-landing .cbt-image-card img {
-      width: 100%;
-      display: block;
-      border-radius: 16px;
-    }
-    .cbt-landing .cbt-section {
-      margin-top: 4rem;
-      background: #fff;
-      border-radius: 24px;
-      padding: 3rem;
-      box-shadow: 0 25px 65px rgba(15, 23, 42, 0.08);
-    }
-    .cbt-landing .cbt-section + .cbt-section {
-      margin-top: 2.5rem;
-    }
-    .cbt-landing .cbt-section h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-      margin-bottom: 1.5rem;
-    }
-    .cbt-landing .cbt-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.9rem;
-    }
-    .cbt-landing .cbt-list li {
-      display: flex;
-      gap: 0.9rem;
-      align-items: flex-start;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-    .cbt-landing .cbt-list li::before {
-      content: "";
-      width: 0.65rem;
-      height: 0.65rem;
-      background: #1E3A8A;
-      border-radius: 50%;
-      margin-top: 0.6rem;
-      flex-shrink: 0;
-    }
-    .cbt-landing .cbt-two-column {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .cbt-landing .cbt-cards-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-    .cbt-landing .cbt-card {
-      background: #F8FBFF;
-      border-radius: 18px;
-      padding: 1.5rem;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-    }
-    .cbt-landing .cbt-testimonial {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .cbt-landing .cbt-testimonial p {
-      font-size: 1rem;
-      line-height: 1.7;
-      margin: 0;
-    }
-    .cbt-landing .cbt-testimonial strong {
-      font-size: 0.95rem;
-      color: #0F172A;
-    }
-    .cbt-landing .cbt-guarantee {
-      text-align: center;
-    }
-    .cbt-landing .cbt-final-cta {
-      text-align: center;
-      margin-top: 3rem;
-    }
-    @media (max-width: 640px) {
-      .cbt-landing .cbt-section {
-        padding: 2rem;
-      }
-    }
-  </style>
-  {% assign hero_bullets = section.blocks | where: 'type', 'hero_bullet' %}
-  {% assign inside_items = section.blocks | where: 'type', 'inside_item' %}
-  {% assign benefit_items = section.blocks | where: 'type', 'benefit_item' %}
-  {% assign who_items = section.blocks | where: 'type', 'who_item' %}
-  {% assign testimonials = section.blocks | where: 'type', 'testimonial' %}
-  {% assign guarantee_block = section.blocks | where: 'type', 'guarantee' | first %}
-  {% assign final_cta_block = section.blocks | where: 'type', 'final_cta' | first %}
-  <div class="cbt-container">
-    <section class="hero">
-      <div class="cbt-grid hero-grid">
-        <div>
-          <div class="cbt-pill">Evidence-Based CBT Tools</div>
-          {% if section.settings.hero_title != blank %}
-            <h1 class="cbt-hero-title">{{ section.settings.hero_title }}</h1>
-          {% endif %}
-          {% if section.settings.hero_subtitle != blank %}
-            <p class="cbt-hero-subtitle">{{ section.settings.hero_subtitle }}</p>
-          {% endif %}
-          {% if hero_bullets.size > 0 %}
-            <ul class="cbt-bullets">
-              {% for block in hero_bullets %}
-                {% if block.settings.bullet_text != blank %}
-                  <li>
-                    <span>•</span>
-                    <div>{{ block.settings.bullet_text }}</div>
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-          {% if section.settings.hero_cta_text != blank and section.settings.hero_cta_link != blank %}
-            <a class="cbt-btn" href="{{ section.settings.hero_cta_link }}">{{ section.settings.hero_cta_text }}</a>
-          {% endif %}
-        </div>
-        {% if section.settings.hero_image != blank %}
-          <div class="cbt-image-card hero-image">
-            {{ section.settings.hero_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.hero_title }}
-          </div>
-        {% endif %}
+<section class="cbt-landing">
+  <div class="cbt-landing__hero">
+    <div class="cbt-landing__hero-content">
+      {% if section.settings.hero_title != blank %}
+        <h1 class="cbt-landing__hero-title">{{ section.settings.hero_title }}</h1>
+      {% endif %}
+      {% if section.settings.hero_subtitle != blank %}
+        <p class="cbt-landing__hero-subtitle">{{ section.settings.hero_subtitle }}</p>
+      {% endif %}
+      {% liquid
+        assign has_bullets = false
+        for block in section.blocks
+          if block.type == 'hero_bullet'
+            assign has_bullets = true
+            break
+          endif
+        endfor
+      %}
+      {% if has_bullets %}
+        <ul class="cbt-landing__hero-bullets">
+          {% for block in section.blocks %}
+            {% if block.type == 'hero_bullet' %}
+              <li class="cbt-landing__hero-bullet" {{ block.shopify_attributes }}>
+                {{ block.settings.bullet_text }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if section.settings.hero_cta_text != blank and section.settings.hero_cta_link != blank %}
+        <a class="cbt-landing__hero-cta" href="{{ section.settings.hero_cta_link }}">
+          {{ section.settings.hero_cta_text }}
+        </a>
+      {% endif %}
+    </div>
+    {% if section.settings.hero_image != blank %}
+      <div class="cbt-landing__hero-media">
+        {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'cbt-landing__hero-image' }}
       </div>
-    </section>
-
-    <section class="cbt-section">
-      <div class="cbt-grid hero-grid">
-        <div>
-          {% if section.settings.inside_title != blank %}
-            <h2>{{ section.settings.inside_title }}</h2>
-          {% endif %}
-          {% if inside_items.size > 0 %}
-            <ul class="cbt-list">
-              {% for block in inside_items %}
-                {% if block.settings.item_text != blank %}
-                  <li>{{ block.settings.item_text }}</li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-        {% if section.settings.inside_image != blank %}
-          <div class="cbt-image-card">
-            {{ section.settings.inside_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.inside_title }}
-          </div>
-        {% endif %}
-      </div>
-    </section>
-
-    <section class="cbt-section">
-      {% if section.settings.benefits_title != blank %}
-        <h2>{{ section.settings.benefits_title }}</h2>
-      {% endif %}
-      {% if benefit_items.size > 0 %}
-        <div class="cbt-cards-grid">
-          {% for block in benefit_items %}
-            {% if block.settings.item_text != blank %}
-              <div class="cbt-card">
-                <p>{{ block.settings.item_text }}</p>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
-    </section>
-
-    <section class="cbt-section">
-      {% if section.settings.who_title != blank %}
-        <h2>{{ section.settings.who_title }}</h2>
-      {% endif %}
-      {% if who_items.size > 0 %}
-        <div class="cbt-two-column">
-          {% for block in who_items %}
-            {% if block.settings.item_text != blank %}
-              <div class="cbt-card">
-                <p>{{ block.settings.item_text }}</p>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
-    </section>
-
-    {% if testimonials.size > 0 %}
-      <section class="cbt-section">
-        {% if section.settings.testimonials_title != blank %}
-          <h2>{{ section.settings.testimonials_title }}</h2>
-        {% endif %}
-        <div class="cbt-cards-grid">
-          {% for block in testimonials %}
-            {% if block.settings.quote != blank or block.settings.name != blank %}
-              <div class="cbt-card cbt-testimonial">
-                {% if block.settings.quote != blank %}
-                  <p>“{{ block.settings.quote }}”</p>
-                {% endif %}
-                {% if block.settings.name != blank %}
-                  <strong>{{ block.settings.name }}</strong>
-                {% endif %}
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </section>
     {% endif %}
-
-    {% if guarantee_block %}
-      <section class="cbt-section cbt-guarantee">
-        {% if guarantee_block.settings.guarantee_title != blank %}
-          <h2>{{ guarantee_block.settings.guarantee_title }}</h2>
-        {% endif %}
-        {% if guarantee_block.settings.guarantee_text != blank %}
-          <p>{{ guarantee_block.settings.guarantee_text }}</p>
-        {% endif %}
-      </section>
-    {% endif %}
-
-    <section class="cbt-final-cta">
-      {% if final_cta_block and final_cta_block.settings.final_cta_text != blank and final_cta_block.settings.final_cta_link != blank %}
-        <a class="cbt-btn" href="{{ final_cta_block.settings.final_cta_link }}">{{ final_cta_block.settings.final_cta_text }}</a>
-      {% endif %}
-    </section>
   </div>
-</div>
+
+  {% liquid
+    assign has_inside_items = false
+    assign has_benefit_items = false
+    assign has_who_items = false
+    assign has_testimonials = false
+    assign has_guarantees = false
+    assign has_final_ctas = false
+
+    for block in section.blocks
+      case block.type
+        when 'inside_item'
+          assign has_inside_items = true
+        when 'benefit_item'
+          assign has_benefit_items = true
+        when 'who_item'
+          assign has_who_items = true
+        when 'testimonial'
+          assign has_testimonials = true
+        when 'guarantee'
+          assign has_guarantees = true
+        when 'final_cta'
+          assign has_final_ctas = true
+      endcase
+    endfor
+  %}
+
+  {% if has_inside_items %}
+    <section class="cbt-landing__section cbt-landing__section--inside">
+      <h2 class="cbt-landing__section-title">What's inside</h2>
+      <ul class="cbt-landing__list">
+        {% for block in section.blocks %}
+          {% if block.type == 'inside_item' %}
+            <li class="cbt-landing__list-item" {{ block.shopify_attributes }}>
+              {{ block.settings.item_text }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if has_benefit_items %}
+    <section class="cbt-landing__section cbt-landing__section--benefits">
+      <h2 class="cbt-landing__section-title">Benefits</h2>
+      <ul class="cbt-landing__list">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit_item' %}
+            <li class="cbt-landing__list-item" {{ block.shopify_attributes }}>
+              {{ block.settings.item_text }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if has_who_items %}
+    <section class="cbt-landing__section cbt-landing__section--who">
+      <h2 class="cbt-landing__section-title">Who it's for</h2>
+      <ul class="cbt-landing__list">
+        {% for block in section.blocks %}
+          {% if block.type == 'who_item' %}
+            <li class="cbt-landing__list-item" {{ block.shopify_attributes }}>
+              {{ block.settings.item_text }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if has_testimonials %}
+    <section class="cbt-landing__section cbt-landing__section--testimonials">
+      <h2 class="cbt-landing__section-title">Testimonials</h2>
+      <div class="cbt-landing__testimonials">
+        {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+            <article class="cbt-landing__testimonial" {{ block.shopify_attributes }}>
+              {% if block.settings.quote != blank %}
+                <blockquote class="cbt-landing__testimonial-quote">{{ block.settings.quote }}</blockquote>
+              {% endif %}
+              {% if block.settings.name != blank %}
+                <p class="cbt-landing__testimonial-name">{{ block.settings.name }}</p>
+              {% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if has_guarantees %}
+    <section class="cbt-landing__section cbt-landing__section--guarantee">
+      {% for block in section.blocks %}
+        {% if block.type == 'guarantee' %}
+          <div class="cbt-landing__guarantee" {{ block.shopify_attributes }}>
+            {% if block.settings.guarantee_title != blank %}
+              <h3 class="cbt-landing__section-title">{{ block.settings.guarantee_title }}</h3>
+            {% endif %}
+            {% if block.settings.guarantee_text != blank %}
+              <p class="cbt-landing__guarantee-text">{{ block.settings.guarantee_text }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  {% if has_final_ctas %}
+    <section class="cbt-landing__section cbt-landing__section--final-cta">
+      {% for block in section.blocks %}
+        {% if block.type == 'final_cta' %}
+          {% if block.settings.final_cta_text != blank and block.settings.final_cta_link != blank %}
+            <a class="cbt-landing__final-cta" href="{{ block.settings.final_cta_link }}" {{ block.shopify_attributes }}>
+              {{ block.settings.final_cta_text }}
+            </a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </section>
+  {% endif %}
+</section>
+
+<style>
+  .cbt-landing {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 3rem 1rem;
+  }
+  .cbt-landing__hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    align-items: center;
+  }
+  .cbt-landing__hero-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.75rem;
+  }
+  .cbt-landing__hero-subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+  .cbt-landing__hero-bullets,
+  .cbt-landing__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .cbt-landing__hero-bullets {
+    margin-bottom: 1.5rem;
+  }
+  .cbt-landing__hero-bullet::before,
+  .cbt-landing__list-item::before {
+    content: '\2713';
+    margin-right: 0.5rem;
+    color: #008060;
+  }
+  .cbt-landing__hero-cta,
+  .cbt-landing__final-cta {
+    display: inline-block;
+    background-color: #008060;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .cbt-landing__hero-media {
+    text-align: center;
+  }
+  .cbt-landing__hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .cbt-landing__section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .cbt-landing__testimonials {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .cbt-landing__testimonial {
+    padding: 1.5rem;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    background: #fff;
+  }
+  .cbt-landing__testimonial-quote {
+    font-style: italic;
+    margin: 0 0 0.75rem;
+  }
+  .cbt-landing__testimonial-name {
+    font-weight: 600;
+    margin: 0;
+  }
+  .cbt-landing__guarantee {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: #f6f6f6;
+  }
+</style>
 
 {% schema %}
 {
-  "name": "CBT worksheets landing",
+  "name": "CBT Worksheets Landing",
   "settings": [
     {
       "type": "text",
       "id": "hero_title",
-      "label": "Hero title",
-      "default": "65 Ready-to-Use CBT Worksheets for Lasting Clinical Change"
+      "label": "Hero title"
     },
     {
       "type": "text",
       "id": "hero_subtitle",
-      "label": "Hero subtitle",
-      "default": "A complete evidence-based toolkit to help clients challenge thoughts, regulate emotions, and build new behaviors."
+      "label": "Hero subtitle"
     },
     {
       "type": "image_picker",
@@ -350,49 +270,19 @@
     {
       "type": "text",
       "id": "hero_cta_text",
-      "label": "Hero CTA text",
-      "default": "Download Your CBT Worksheets Now"
+      "label": "Hero button text"
     },
     {
       "type": "url",
       "id": "hero_cta_link",
-      "label": "Hero CTA link",
-      "default": "/products/cbt-worksheets"
-    },
-    {
-      "type": "text",
-      "id": "inside_title",
-      "label": "What's inside title",
-      "default": "What’s Inside the 65 CBT Worksheets"
-    },
-    {
-      "type": "image_picker",
-      "id": "inside_image",
-      "label": "What's inside image"
-    },
-    {
-      "type": "text",
-      "id": "benefits_title",
-      "label": "Benefits title",
-      "default": "Clinical Benefits for You and Your Clients"
-    },
-    {
-      "type": "text",
-      "id": "who_title",
-      "label": "Who it's for title",
-      "default": "Who This Workbook is For"
-    },
-    {
-      "type": "text",
-      "id": "testimonials_title",
-      "label": "Testimonials title",
-      "default": "What Clinicians Are Saying"
+      "label": "Hero button link"
     }
   ],
   "blocks": [
     {
       "type": "hero_bullet",
       "name": "Hero bullet",
+      "limit": 6,
       "settings": [
         {
           "type": "text",
@@ -403,7 +293,7 @@
     },
     {
       "type": "inside_item",
-      "name": "Inside list item",
+      "name": "Inside item",
       "settings": [
         {
           "type": "text",
@@ -419,18 +309,18 @@
         {
           "type": "text",
           "id": "item_text",
-          "label": "Item text"
+          "label": "Benefit text"
         }
       ]
     },
     {
       "type": "who_item",
-      "name": "Who it's for item",
+      "name": "Who item",
       "settings": [
         {
           "type": "text",
           "id": "item_text",
-          "label": "Item text"
+          "label": "Description"
         }
       ]
     },
@@ -458,14 +348,12 @@
         {
           "type": "text",
           "id": "guarantee_title",
-          "label": "Guarantee title",
-          "default": "Instant Access + Lifetime Use"
+          "label": "Guarantee title"
         },
         {
           "type": "textarea",
           "id": "guarantee_text",
-          "label": "Guarantee text",
-          "default": "Download immediately, print forever, and use across all clinical settings."
+          "label": "Guarantee text"
         }
       ]
     },
@@ -477,89 +365,34 @@
         {
           "type": "text",
           "id": "final_cta_text",
-          "label": "Final CTA text",
-          "default": "Download Your CBT Worksheets Now"
+          "label": "Final button text"
         },
         {
           "type": "url",
           "id": "final_cta_link",
-          "label": "Final CTA link",
-          "default": "/products/cbt-worksheets"
+          "label": "Final button link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "CBT worksheets landing",
+      "name": "CBT Worksheets Landing",
       "blocks": [
         {
-          "type": "hero_bullet",
-          "settings": {
-            "bullet_text": "Fully evidence-based CBT worksheets"
-          }
+          "type": "hero_bullet"
         },
         {
-          "type": "hero_bullet",
-          "settings": {
-            "bullet_text": "Printable & reusable"
-          }
+          "type": "inside_item"
         },
         {
-          "type": "hero_bullet",
-          "settings": {
-            "bullet_text": "Designed for anxiety, depression, trauma & more"
-          }
+          "type": "benefit_item"
         },
         {
-          "type": "inside_item",
-          "settings": {
-            "item_text": "Cognitive Restructuring Worksheets"
-          }
+          "type": "who_item"
         },
         {
-          "type": "inside_item",
-          "settings": {
-            "item_text": "Thought Record Sheets"
-          }
-        },
-        {
-          "type": "inside_item",
-          "settings": {
-            "item_text": "Behavioral Activation Plans"
-          }
-        },
-        {
-          "type": "benefit_item",
-          "settings": {
-            "item_text": "Deliver session-ready interventions backed by current CBT research."
-          }
-        },
-        {
-          "type": "benefit_item",
-          "settings": {
-            "item_text": "Streamline treatment planning with structured prompts for every phase."
-          }
-        },
-        {
-          "type": "who_item",
-          "settings": {
-            "item_text": "Licensed therapists seeking premium CBT homework tools."
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "name": "Dr. Mariah Ellis, PsyD",
-            "quote": "My clients leave each session with a clear CBT assignment that we can review together the following week."
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "name": "Anthony Ruiz, LCSW",
-            "quote": "The worksheets mirror what I’d build myself—structured, practical, and flexible for diverse diagnoses."
-          }
+          "type": "testimonial"
         },
         {
           "type": "guarantee"
