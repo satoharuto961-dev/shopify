@@ -3,46 +3,46 @@
     "main": {
       "type": "cbt-worksheets-landing",
       "blocks": {
-        "b1": {
+        "block1": {
           "type": "benefit_item",
           "settings": {
             "item_text": "Guide clients through evidence-based exercises with ease"
           }
         },
-        "b2": {
+        "block2": {
           "type": "benefit_item",
           "settings": {
             "item_text": "Save hours on prep with ready-to-share worksheets"
           }
         },
-        "i1": {
+        "block3": {
           "type": "inside_item",
           "settings": {
             "item_text": "Printable CBT logs, prompts, and session tools"
           }
         },
-        "t1": {
+        "block4": {
           "type": "testimonial",
           "settings": {
             "name": "Dr. Patel",
             "quote": "My clients actually complete their homework now."
           }
         },
-        "s1": {
+        "block5": {
           "type": "social_proof",
           "settings": {
             "stat": "2,500+",
             "caption": "Therapists downloaded"
           }
         },
-        "f1": {
+        "block6": {
           "type": "faq_item",
           "settings": {
             "question": "How do I receive the worksheets?",
             "answer": "You get instant access via email as a PDF download."
           }
         },
-        "cta": {
+        "block7": {
           "type": "final_cta",
           "settings": {
             "text": "Need help? Contact us",
@@ -51,13 +51,13 @@
         }
       },
       "block_order": [
-        "b1",
-        "b2",
-        "i1",
-        "t1",
-        "s1",
-        "f1",
-        "cta"
+        "block1",
+        "block2",
+        "block3",
+        "block4",
+        "block5",
+        "block6",
+        "block7"
       ],
       "settings": {
         "hero_title": "CBT Worksheets Bundle",
