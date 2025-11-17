@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "main": {
+      "type": "cbt-worksheets-landing",
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Guide clients through evidence-based exercises with ease"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit_item",
+          "settings": {
+            "item_text": "Save hours on prep with ready-to-share worksheets"
+          }
+        },
+        "inside-1": {
+          "type": "inside_item",
+          "settings": {
+            "item_text": "Printable CBT logs, prompts, and session tools"
+          }
+        },
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Dr. Patel",
+            "quote": "My clients actually complete their homework now."
+          }
+        },
+        "social-1": {
+          "type": "social_proof",
+          "settings": {
+            "stat": "2,500+",
+            "caption": "Therapists downloaded"
+          }
+        },
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I receive the worksheets?",
+            "answer": "You get instant access via email as a PDF download."
+          }
+        },
+        "final-link-1": {
+          "type": "final_cta",
+          "settings": {
+            "text": "Need help? Contact us",
+            "link": "mailto:hello@example.com"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "inside-1",
+        "testimonial-1",
+        "social-1",
+        "faq-1",
+        "final-link-1"
+      ],
+      "settings": {
+        "hero_title": "CBT Worksheets Bundle",
+        "hero_subtitle": "THERAPIST TOOLKIT",
+        "hero_cta_text": "Download now",
+        "hero_cta_link": "#inside",
+        "emotional_story": "<p>Give every client clarity with a structured, compassionate framework.</p>",
+        "feature_table_title": "Details",
+        "feature_table_enabled": true,
+        "final_cta_heading": "Bring CBT to life in every session",
+        "final_cta_subtext": "<p>Download immediately and start using these therapist-approved worksheets.</p>"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
