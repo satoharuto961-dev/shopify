@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "cbt-65-worksheets-landing",
+      "type": "cbt-worksheets-landing",
       "settings": {}
     }
   },
