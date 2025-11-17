@@ -1,13 +1,12 @@
 {% liquid
   assign is_therapist_landing = false
   assign template_string = template | append: ''
-  if template_string == 'page.therapist-landing' or template_string == 'page.therapist-landing.json'
+  assign landing_templates = 'page.therapist-landing,page.therapist-landing.json,page.cbt-worksheets,page.cbt-worksheets.json,page.cbt-worksheets-landing,page.cbt-worksheets-landing.json,page.cbt-65-worksheets-landing,page.cbt-65-worksheets-landing.json' | split: ','
+  assign landing_suffixes = 'therapist-landing,cbt-worksheets,cbt-worksheets-landing,cbt-65-worksheets-landing' | split: ','
+
+  if landing_templates contains template_string
     assign is_therapist_landing = true
-  elsif template.name and template.name == 'page' and template.suffix == 'therapist-landing'
-    assign is_therapist_landing = true
-  elsif template_string == 'page.cbt-worksheets' or template_string == 'page.cbt-worksheets.json'
-    assign is_therapist_landing = true
-  elsif template.name and template.name == 'page' and template.suffix == 'cbt-worksheets'
+  elsif template.name and template.name == 'page' and template.suffix and landing_suffixes contains template.suffix
     assign is_therapist_landing = true
   endif
   assign therapist_page_handle = settings.therapist_landing_page
