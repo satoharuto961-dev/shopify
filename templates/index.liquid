@@ -613,7 +613,7 @@
       </header>
       <div class="product-grid">
         {% if featured_collection and featured_collection.products_count > 0 %}
-          {% for product in featured_collection.products %}
+          {% for product in featured_collection.products limit: 6 %}
             <article class="product-card">
               {% if product.featured_image %}
                 <a href="{{ product.url }}">
