@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "name": "Homepage",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "home_featured_collection",
+        "label": "Featured collection",
+        "info": "Used to populate the hero spots and any other featured products on the homepage."
+      },
+      {
+        "type": "collection",
+        "id": "home_new_releases_collection",
+        "label": "New releases collection",
+        "info": "Overrides the default collection used in the \"New releases from our bookstore\" grid."
+      }
+    ]
+  }
+]

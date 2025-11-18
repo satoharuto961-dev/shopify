@@ -46,6 +46,14 @@
   {% assign hero_products_exist = true %}
 {% endif %}
 
+{% assign new_releases_collection = featured_collection %}
+{% if settings.home_new_releases_collection != blank %}
+  {% assign new_release_candidate = collections[settings.home_new_releases_collection] %}
+  {% if new_release_candidate and new_release_candidate.products_count > 0 %}
+    {% assign new_releases_collection = new_release_candidate %}
+  {% endif %}
+{% endif %}
+
 <style>
   :root {
     --goodreads-green: #2563EB;
@@ -612,8 +620,8 @@
         <p class="section-subtitle">Keep your to-read list fresh with the latest arrivals loved by the PsychoReads community.</p>
       </header>
       <div class="product-grid">
-        {% if featured_collection and featured_collection.products_count > 0 %}
-          {% for product in featured_collection.products limit: 6 %}
+        {% if new_releases_collection and new_releases_collection.products_count > 0 %}
+          {% for product in new_releases_collection.products limit: 6 %}
             <article class="product-card">
               {% if product.featured_image %}
                 <a href="{{ product.url }}">
