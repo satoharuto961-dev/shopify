@@ -28,38 +28,6 @@
     .therapist-landing-page h3 {
       color: #101620;
     }
-    .page-header {
-      background: #0f172a;
-      color: #fff;
-      padding: 1.25rem 0;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
-    }
-    .page-header .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .page-header .logo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-    .page-header nav {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.95rem;
-      flex-wrap: wrap;
-    }
-    .page-header nav a {
-      color: #e2e8f0;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .page-header nav a:hover,
-    .page-header nav a:focus {
-      color: #60a5fa;
-    }
     .hero {
       display: grid;
       gap: 2rem;
@@ -488,33 +456,6 @@
       margin-top: 1rem;
       font-weight: 500;
     }
-    .page-footer {
-      margin-top: 4rem;
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 2.5rem 0;
-    }
-    .page-footer .footer-content {
-      display: grid;
-      gap: 1rem;
-      justify-items: center;
-      text-align: center;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .page-footer .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .page-footer .footer-links a {
-      color: #93c5fd;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .page-footer .footer-links a:hover,
-    .page-footer .footer-links a:focus {
-      color: #bfdbfe;
-    }
     .testimonials {
       background: #fff;
       border-radius: 12px;
@@ -640,17 +581,6 @@
     {% if product_images.size > 2 %}
       {% assign hero_tertiary_image = product_images[2] %}
     {% endif %}
-
-    <header class="page-header">
-      <div class="container header-content">
-        <span class="logo">CBT Worksheets</span>
-        <nav aria-label="Primary">
-          <a href="#inside-workbook">Inside the CBT Worksheets</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#faqs">FAQs</a>
-        </nav>
-      </div>
-    </header>
 
     <section class="hero container">
       <div class="hero-image {% if hero_primary_image == blank %}hero-image--empty{% endif %}">
@@ -913,18 +843,6 @@
       </form>
       <p class="guarantee-note">Therapist Guarantee: Try the CBT worksheets risk-free for 7 days — if they aren’t a match, email us and we’ll make it right.</p>
     </div>
-
-    <footer class="page-footer">
-      <div class="container footer-content">
-        <span>&copy; {{ 'now' | date: '%Y' }} CBT Worksheets. All rights reserved.</span>
-        <div class="footer-links" role="list">
-          <a href="/pages/contact">Contact</a>
-          <a href="/policies/privacy-policy">Privacy Policy</a>
-          <a href="/policies/terms-of-service">Terms of Service</a>
-        </div>
-        <span>Built for clinicians who want CBT tools without the overwhelm.</span>
-      </div>
-    </footer>
 
     <div class="sticky-bar" {% unless is_available %}style="display:none;"{% endunless %}>
       <div class="sticky-bar-info">
