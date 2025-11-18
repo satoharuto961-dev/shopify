@@ -126,13 +126,11 @@
             </p>
           {%- endif -%}
 
-          <p class="product__inventory {% if primary_variant.available %}product__inventory--in-stock{% else %}product__inventory--sold-out{% endif %}" role="status">
-            {%- if primary_variant.available -%}
-              In stock and ready to ship
-            {%- else -%}
+          {%- unless primary_variant.available -%}
+            <p class="product__inventory product__inventory--sold-out" role="status">
               Currently sold out
-            {%- endif -%}
-          </p>
+            </p>
+          {%- endunless -%}
 
           {%- form 'product', product, class: 'product-form' -%}
             {{ form.errors | default_errors }}
