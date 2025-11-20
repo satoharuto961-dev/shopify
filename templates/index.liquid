@@ -285,6 +285,10 @@
     flex-wrap: wrap;
   }
 
+  .hero-product-cta form {
+    display: inline-flex;
+  }
+
   .hero-product-card--empty {
     flex-direction: column;
   }
@@ -389,6 +393,31 @@
     color: #2563EB;
     font-size: 0.9rem;
     letter-spacing: 0.06em;
+  }
+
+  .product-card-actions {
+    display: flex;
+    padding: 0 1.4rem 1.4rem;
+  }
+
+  .product-card-actions form {
+    width: 100%;
+  }
+
+  .product-card-actions .goodreads-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sold-out-badge {
+    padding: 0.5rem 0.8rem;
+    background: var(--goodreads-sand);
+    color: var(--goodreads-muted);
+    border-radius: 12px;
+    border: 1px solid var(--goodreads-border);
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
   }
 
   .quotes-grid {
@@ -560,7 +589,17 @@
                     {% endif %}
                   </div>
                   <div class="hero-product-cta">
-                    <a class="goodreads-button primary" href="{{ hero_product.url }}">Add to shelf</a>
+                    {% if hero_product.available %}
+                      {% assign hero_variant = hero_product.selected_or_first_available_variant %}
+                      {% if hero_variant %}
+                        <form method="post" action="/cart/add">
+                          <input type="hidden" name="id" value="{{ hero_variant.id }}">
+                          <button class="goodreads-button primary" type="submit">Add to cart</button>
+                        </form>
+                      {% endif %}
+                    {% else %}
+                      <span class="sold-out-badge">Sold out</span>
+                    {% endif %}
                     <a class="goodreads-button" href="{{ hero_product.url }}">Read more</a>
                   </div>
                 </div>
@@ -635,6 +674,19 @@
                 {% endif %}
                 <span class="price">{{ product.price | money }}</span>
                 <span class="rating">★★★★★</span>
+              </div>
+              <div class="product-card-actions">
+                {% if product.available %}
+                  {% assign product_variant = product.selected_or_first_available_variant %}
+                  {% if product_variant %}
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product_variant.id }}">
+                      <button class="goodreads-button primary" type="submit">Add to cart</button>
+                    </form>
+                  {% endif %}
+                {% else %}
+                  <span class="sold-out-badge">Sold out</span>
+                {% endif %}
               </div>
             </article>
           {% endfor %}
