@@ -6,8 +6,8 @@
 {% paginate collection.products by 24 %}
   <style>
     .collection-page {
-      background: #F3F4F6;
-      color: #111827;
+      background: #E9F2FF;
+      color: #0A1A2A;
       font-family: "Georgia", "Merriweather", "Times New Roman", serif;
       min-height: 100vh;
       padding: 3rem 1.5rem 4rem;
@@ -28,12 +28,12 @@
 
     .collection-title {
       font-size: clamp(2.2rem, 4vw, 3rem);
-      color: #111827;
+      color: #0A1A2A;
       margin: 0;
     }
 
     .collection-description {
-      color: #4B5563;
+      color: #4A5B70;
       line-height: 1.6;
       margin: 0 auto;
       max-width: 720px;
@@ -48,7 +48,7 @@
     .collection-card {
       background: #FFFFFF;
       border-radius: 18px;
-      border: 1px solid #E5E7EB;
+      border: 1px solid rgba(30, 77, 140, 0.2);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -60,7 +60,7 @@
       width: 100%;
       aspect-ratio: 3/4;
       object-fit: cover;
-      background: #F3F4F6;
+      background: #E9F2FF;
     }
 
     .collection-card-content {
@@ -73,17 +73,22 @@
     .collection-card-content h3 {
       font-size: 1.1rem;
       margin: 0;
-      color: #111827;
+      color: #0A1A2A;
+    }
+
+    .collection-card-content h3 a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .collection-card-content .vendor {
-      color: #4B5563;
+      color: #4A5B70;
       font-size: 0.95rem;
     }
 
     .collection-card-content .price {
       font-weight: 700;
-      color: #2563EB;
+      color: #1E4D8C;
     }
 
     .collection-pagination {
@@ -98,22 +103,22 @@
     .collection-pagination span {
       padding: 0.6rem 1.1rem;
       border-radius: 999px;
-      border: 1px solid #E5E7EB;
+      border: 1px solid rgba(30, 77, 140, 0.2);
       text-decoration: none;
-      color: #111827;
+      color: #0A1A2A;
       font-weight: 600;
       background: #FFFFFF;
     }
 
     .collection-pagination .current {
-      background: #111827;
+      background: #1E4D8C;
       color: #FFFFFF;
-      border-color: #111827;
+      border-color: #1E4D8C;
     }
 
     .collection-empty {
       text-align: center;
-      color: #4B5563;
+      color: #4A5B70;
       font-size: 1.1rem;
     }
   </style>
@@ -137,7 +142,7 @@
                 </a>
               {% endif %}
               <div class="collection-card-content">
-                <h3><a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a></h3>
+                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
                 {% if product.vendor %}
                   <span class="vendor">{{ product.vendor }}</span>
                 {% endif %}

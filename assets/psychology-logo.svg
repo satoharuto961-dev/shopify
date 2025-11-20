@@ -1,15 +1,15 @@
 <svg width="112" height="112" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="12" y1="12" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A855F7" />
-      <stop offset="1" stop-color="#EC4899" />
+      <stop stop-color="#1E4D8C" />
+      <stop offset="1" stop-color="#E9F2FF" />
     </linearGradient>
   </defs>
   <rect x="6" y="20" width="100" height="72" rx="18" fill="url(#grad)" opacity="0.18" />
   <path d="M24 40C24 34.4772 28.4772 30 34 30H56C61.5228 30 66 34.4772 66 40V78H34C28.4772 78 24 73.5228 24 68V40Z" fill="white" />
-  <path d="M46 26C51.5228 26 56 30.4772 56 36V74H36C30.4772 74 26 69.5228 26 64V36C26 30.4772 30.4772 26 36 26H46Z" stroke="#7C3AED" stroke-width="4" stroke-linejoin="round" />
+  <path d="M46 26C51.5228 26 56 30.4772 56 36V74H36C30.4772 74 26 69.5228 26 64V36C26 30.4772 30.4772 26 36 26H46Z" stroke="#1E4D8C" stroke-width="4" stroke-linejoin="round" />
   <path d="M88 40C88 34.4772 83.5228 30 78 30H56C50.4772 30 46 34.4772 46 40V78H78C83.5228 78 88 73.5228 88 68V40Z" fill="white" />
-  <path d="M66 26C60.4772 26 56 30.4772 56 36V74H76C81.5228 74 86 69.5228 86 64V36C86 30.4772 81.5228 26 76 26H66Z" stroke="#EC4899" stroke-width="4" stroke-linejoin="round" />
-  <path d="M56 48C56 37.5066 64.5066 29 75 29C85.4934 29 94 37.5066 94 48C94 56.1572 88.9302 63.0779 81.8267 65.9246C80.6483 66.387 79.7676 67.3786 79.497 68.6149C78.9681 71.0595 77.0786 73 74.5921 73H64" stroke="#2F1B47" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="75" cy="46" r="5" fill="#7C3AED" />
+  <path d="M66 26C60.4772 26 56 30.4772 56 36V74H76C81.5228 74 86 69.5228 86 64V36C86 30.4772 81.5228 26 76 26H66Z" stroke="#1C4781" stroke-width="4" stroke-linejoin="round" />
+  <path d="M56 48C56 37.5066 64.5066 29 75 29C85.4934 29 94 37.5066 94 48C94 56.1572 88.9302 63.0779 81.8267 65.9246C80.6483 66.387 79.7676 67.3786 79.497 68.6149C78.9681 71.0595 77.0786 73 74.5921 73H64" stroke="#0A1A2A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="75" cy="46" r="5" fill="#1E4D8C" />
 </svg>

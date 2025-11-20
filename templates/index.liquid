@@ -56,13 +56,14 @@
 
 <style>
   :root {
-    --goodreads-green: #2563EB;
-    --goodreads-gold: #F3F4F6;
-    --goodreads-sage: #1D4ED8;
-    --goodreads-sand: #E0F2FE;
-    --goodreads-ink: #111827;
-    --goodreads-muted: #4B5563;
-    --goodreads-border: #E5E7EB;
+    --goodreads-green: #1E4D8C;
+    --goodreads-green-dark: #1C4781;
+    --goodreads-gold: #E9F2FF;
+    --goodreads-sage: #1E4D8C;
+    --goodreads-sand: #E9F2FF;
+    --goodreads-ink: #0A1A2A;
+    --goodreads-muted: #4A5B70;
+    --goodreads-border: rgba(30, 77, 140, 0.2);
     --goodreads-card: #FFFFFF;
     font-family: "Georgia", "Merriweather", "Times New Roman", serif;
   }
@@ -75,37 +76,39 @@
 
   .goodreads-page {
     min-height: 100vh;
-    background-image: linear-gradient(180deg, rgba(243, 244, 246, 0.8), rgba(243, 244, 246, 0.95));
+    background-image: linear-gradient(180deg, rgba(233, 242, 255, 0.8), rgba(233, 242, 255, 0.95));
     padding-bottom: 4rem;
   }
 
   .goodreads-button {
-    background: transparent;
-    border: 1px solid var(--goodreads-border);
+    background: var(--goodreads-green);
+    border: 1px solid var(--goodreads-green);
     border-radius: 999px;
     padding: 0.6rem 1.2rem;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--goodreads-green);
+    color: #fff;
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 12px 24px rgba(10, 26, 42, 0.12);
   }
 
   .goodreads-button.primary {
     background: var(--goodreads-green);
     color: #fff;
     border-color: var(--goodreads-green);
-    box-shadow: 0 12px 24px rgba(17, 24, 39, 0.18);
   }
 
   .goodreads-button.primary:hover {
-    background: #1D4ED8;
+    background: var(--goodreads-green-dark);
   }
 
   .goodreads-button:hover {
-    background: var(--goodreads-sand);
+    background: var(--goodreads-green-dark);
+    color: #fff;
+    transform: translateY(-1px);
   }
 
   .goodreads-hero {
@@ -384,13 +387,18 @@
     color: var(--goodreads-ink);
   }
 
+  .product-card-content h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .product-card-content .price {
     font-weight: 700;
     color: var(--goodreads-green);
   }
 
   .product-card-content .rating {
-    color: #2563EB;
+    color: #1E4D8C;
     font-size: 0.9rem;
     letter-spacing: 0.06em;
   }
@@ -668,7 +676,7 @@
                 </a>
               {% endif %}
               <div class="product-card-content">
-                <h3><a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a></h3>
+                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
                 {% if product.vendor %}
                   <span>{{ product.vendor }}</span>
                 {% endif %}
