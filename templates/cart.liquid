@@ -60,10 +60,10 @@
     </div>
   </section>
 {% else %}
-  <section class="cart-limit">
+  <section class="cart-limit cart-review">
     <div class="cart-limit-content">
-      <h1>One order at a time</h1>
-      <p>Your cart contains multiple items. Please remove extra items so you can continue to checkout with a single order.</p>
+      <h1>Review your order</h1>
+      <p>Update the quantities below or continue to secure checkout.</p>
       <ul class="cart-limit-items">
         {% for item in cart.items %}
           <li class="cart-limit-item">
@@ -106,6 +106,9 @@
       </ul>
       <div class="cart-review-actions">
         <a class="button button-secondary" href="/">Continue shopping</a>
+        <form method="post" action="{{ routes.checkout_url }}" class="cart-review-checkout">
+          <button type="submit" name="checkout" class="button button-primary">Continue to checkout</button>
+        </form>
       </div>
     </div>
   </section>
