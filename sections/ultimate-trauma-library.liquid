@@ -361,9 +361,11 @@
               <button class="u-cta-btn u-cta-primary" type="submit">Add bundle to cart</button>
             </form>
 
-            <a class="u-cta-btn u-cta-secondary" href="/checkout?add={{ product.variants.first.id }}">
-              Buy now
-            </a>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <input type="hidden" name="return_to" value="/checkout">
+              <button class="u-cta-btn u-cta-secondary" type="submit">Buy now</button>
+            </form>
           </div>
         </div>
       </div>
@@ -535,9 +537,11 @@
       <button class="u-cta-btn u-cta-primary" type="submit">Add bundle to cart</button>
     </form>
 
-    <a class="u-cta-btn u-cta-secondary" href="/checkout?add={{ product.variants.first.id }}">
-      Buy now
-    </a>
+    <form method="post" action="/cart/add" style="display:inline-block;">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button class="u-cta-btn u-cta-secondary" type="submit">Buy now</button>
+    </form>
   </div>
 
   <script>
