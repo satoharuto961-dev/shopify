@@ -1,0 +1,395 @@
+<div class="ultimate-library">
+  <style>
+    .ultimate-library {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #0a1a2a;
+      background: #f7fafc;
+      padding: 3rem 0 4rem;
+    }
+    .ultimate-library .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .ultimate-library h1,
+    .ultimate-library h2,
+    .ultimate-library h3 {
+      color: #0a1a2a;
+      margin: 0 0 0.75rem;
+      line-height: 1.2;
+    }
+    .ultimate-library h1 {
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+    .ultimate-library h2 {
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      margin-top: 2rem;
+    }
+    .ultimate-library h3 {
+      font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+      margin-top: 1.25rem;
+    }
+    .ultimate-hero {
+      background: linear-gradient(135deg, #e1edff, #ffffff);
+      border: 1px solid rgba(14, 64, 131, 0.12);
+      border-radius: 16px;
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+      box-shadow: 0 18px 45px rgba(10, 26, 42, 0.08);
+    }
+    .ultimate-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #0e60d8;
+      color: #ffffff;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-size: 0.95rem;
+    }
+    .ultimate-hero__subtitle {
+      font-size: 1.05rem;
+      color: #1f3b57;
+      margin: 0 0 1.25rem;
+    }
+    .ultimate-hero__stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.85rem;
+      font-weight: 600;
+      color: #0e60d8;
+      margin-bottom: 1.5rem;
+    }
+    .ultimate-hero__stack span {
+      background: rgba(14, 96, 216, 0.1);
+      padding: 0.35rem 0.8rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+    .ultimate-hero__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .ultimate-hero__card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.25rem;
+      border: 1px solid rgba(14, 64, 131, 0.08);
+      box-shadow: 0 12px 30px rgba(10, 26, 42, 0.05);
+    }
+    .ultimate-hero__list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      color: #1f3b57;
+      display: grid;
+      gap: 0.35rem;
+    }
+    .ultimate-books {
+      margin-top: 2.5rem;
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(14, 64, 131, 0.08);
+      box-shadow: 0 12px 30px rgba(10, 26, 42, 0.05);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .book-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(14, 64, 131, 0.08);
+    }
+    .book-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .book-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      align-items: baseline;
+      color: #0e60d8;
+      font-weight: 700;
+    }
+    .book-rating {
+      color: #f59e0b;
+      font-weight: 700;
+    }
+    .book-item p {
+      margin: 0.4rem 0 0.75rem;
+      color: #1f3b57;
+      line-height: 1.6;
+    }
+    .book-item ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #1f3b57;
+      display: grid;
+      gap: 0.35rem;
+    }
+    .bundle-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .benefit-card {
+      background: #0e60d8;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 12px 30px rgba(14, 96, 216, 0.25);
+    }
+    .benefit-card h3 {
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+    .benefit-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+    .cta-section {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2.4rem 1.5rem;
+      background: linear-gradient(135deg, #0e60d8, #0a3f9e);
+      border-radius: 16px;
+      color: #ffffff;
+      box-shadow: 0 18px 40px rgba(14, 96, 216, 0.4);
+    }
+    .cta-section h2 {
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+    .cta-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.9rem 1.8rem;
+      background: #ffffff;
+      color: #0a3f9e;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 38px rgba(255, 255, 255, 0.3);
+    }
+    .cta-button:active {
+      transform: translateY(0);
+    }
+    @media (max-width: 640px) {
+      .ultimate-hero__subtitle {
+        font-size: 0.98rem;
+      }
+      .ultimate-hero__grid {
+        grid-template-columns: 1fr;
+      }
+      .book-item {
+        padding: 1rem 0;
+      }
+      .cta-section {
+        padding: 2rem 1.25rem;
+      }
+    }
+  </style>
+  <div class="container">
+    <div class="ultimate-hero">
+      <div class="ultimate-hero__eyebrow">The Ultimate Trauma &amp; Healing Library – 7 Bestselling Workbooks</div>
+      <h1>The Ultimate Trauma &amp; Healing Library – 7 Bestselling Workbooks</h1>
+      <p class="ultimate-hero__subtitle">Unlock a complete therapeutic toolkit with 7 world-renowned workbooks trusted by therapists, clinicians, coaches, and psychology students.</p>
+      <div class="ultimate-hero__stack">
+        <span>Attachment</span>
+        <span>CBT</span>
+        <span>Somatic Therapy</span>
+        <span>Polyvagal</span>
+        <span>Trauma Recovery</span>
+        <span>Addiction</span>
+      </div>
+      <div class="ultimate-hero__grid">
+        <div class="ultimate-hero__card">
+          <h3>Comprehensive Coverage</h3>
+          <ul class="ultimate-hero__list">
+            <li>Attachment, CBT, polyvagal theory, and somatic therapy</li>
+            <li>Evidence-based exercises for trauma healing and recovery</li>
+            <li>Trusted by mental health professionals worldwide</li>
+          </ul>
+        </div>
+        <div class="ultimate-hero__card">
+          <h3>Ready to Use</h3>
+          <ul class="ultimate-hero__list">
+            <li>Printable worksheets and visuals for sessions</li>
+            <li>Guided prompts to reinforce emotional safety</li>
+            <li>Clear diagrams and step-by-step interventions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ultimate-books">
+      <h2>📚 Included in This 7-Book Collection</h2>
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>1. The Polysecure Workbook – Jessica Fern</h3>
+          <span class="book-rating">4.7 ★ (133 reviews)</span>
+        </div>
+        <p>Learn how to build secure attachment in relationships, understand your attachment patterns, and explore practical exercises that help create emotional safety.</p>
+        <p>This workbook guides you through:</p>
+        <ul>
+          <li>Examining your attachment history</li>
+          <li>Understanding non-monogamy &amp; relationship structures</li>
+          <li>Building personal security</li>
+          <li>Creating healthy connection habits</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>2. The CBT Flip Chart – Seth Gillihan, PhD</h3>
+          <span class="book-rating">4.6 ★ (358 reviews)</span>
+        </div>
+        <p>Therapist-approved psychoeducational diagrams for explaining CBT in sessions. Includes:</p>
+        <ul>
+          <li>27 full-color diagrams</li>
+          <li>Cognitive distortions</li>
+          <li>Core beliefs</li>
+          <li>Behavioral activation</li>
+          <li>Exposure therapy</li>
+          <li>Mindfulness-based CBT</li>
+          <li>Diagrams for anxiety, PTSD, OCD, anger, insomnia, and more</li>
+          <li>Also includes Section 1 &amp; Section 2 full TOC.</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>3. Polyvagal Flip Chart – Deb Dana</h3>
+          <span class="book-rating">4.7 ★ (1,213 reviews)</span>
+        </div>
+        <p>A complete visual tool to explain the autonomic nervous system using Polyvagal Theory. Helps clients understand:</p>
+        <ul>
+          <li>Their autonomic state</li>
+          <li>Survival responses</li>
+          <li>The hierarchy: safety → mobilization → shutdown</li>
+          <li>Nervous system patterns</li>
+          <li>How to track internal shifts</li>
+          <li>Color illustrations throughout.</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>4. Somatic Therapy Workbook (5-in-1) – Anika Sullivan</h3>
+          <span class="book-rating">4.7 ★ (181 reviews)</span>
+        </div>
+        <p>A complete body-based healing system including:</p>
+        <ul>
+          <li>Somatic therapy toolbox</li>
+          <li>Grounding &amp; breathwork</li>
+          <li>Coping skills</li>
+          <li>Trauma-release exercises</li>
+          <li>Yoga &amp; movement practices</li>
+          <li>Journaling prompts &amp; tracking tools</li>
+          <li>A holistic nervous-system-healing guide.</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>5. Complex PTSD: From Surviving to Thriving – Pete Walker</h3>
+          <span class="book-rating">4.8 ★ (11,384 reviews)</span>
+        </div>
+        <p>One of the most acclaimed trauma-healing books ever written. Helps readers:</p>
+        <ul>
+          <li>Understand childhood trauma</li>
+          <li>Navigate emotional flashbacks</li>
+          <li>Heal survival responses</li>
+          <li>Build self-compassion</li>
+          <li>Recover from long-term CPTSD patterns</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>6. Polyvagal Exercises for Safety &amp; Connection – Deb Dana</h3>
+          <span class="book-rating">4.7 ★ (1,765 reviews)</span>
+        </div>
+        <p>Includes 50 practical Polyvagal exercises that help clients:</p>
+        <ul>
+          <li>Regulate their autonomic state</li>
+          <li>Build internal safety</li>
+          <li>Strengthen connection</li>
+          <li>Reduce overwhelm</li>
+          <li>Understand their nervous system responses</li>
+          <li>Perfect for therapists &amp; clients.</li>
+        </ul>
+      </div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <h3>7. The Mindfulness Workbook for Addiction – Williams &amp; Kraft</h3>
+          <span class="book-rating">4.6 ★ (848 reviews)</span>
+        </div>
+        <p>A research-based workbook combining ACT, CBT, and DBT to heal addiction by addressing:</p>
+        <ul>
+          <li>Grief</li>
+          <li>Emotional dysregulation</li>
+          <li>Stress</li>
+          <li>Depression</li>
+          <li>Trauma triggers</li>
+          <li>Includes mindfulness training, grief processing, and coping strategies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ultimate-hero" style="margin-top: 2rem;">
+      <h2>🔥 Why This Bundle Is Essential</h2>
+      <div class="bundle-benefits">
+        <div class="benefit-card">
+          <h3>Value Packed</h3>
+          <ul>
+            <li>7 bestselling therapy books</li>
+            <li>Printable, easy-to-use worksheets</li>
+            <li>Evidence-based tools</li>
+          </ul>
+        </div>
+        <div class="benefit-card">
+          <h3>Professional Trust</h3>
+          <ul>
+            <li>Trusted by mental health professionals</li>
+            <li>Covers the full spectrum of trauma healing</li>
+            <li>Saves money vs. buying each separately</li>
+          </ul>
+        </div>
+        <div class="benefit-card">
+          <h3>Perfect For</h3>
+          <ul>
+            <li>Therapists &amp; coaches</li>
+            <li>Psychology students &amp; trauma survivors</li>
+            <li>Anyone seeking emotional healing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section" id="download">
+      <h2>Download the Complete 7-Book Trauma &amp; Healing Library Today</h2>
+      <p>Access the full collection instantly and bring evidence-based tools to every session.</p>
+      <a class="cta-button" href="/cart">Download Now</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ultimate Trauma Library",
+  "settings": []
+}
+{% endschema %}
