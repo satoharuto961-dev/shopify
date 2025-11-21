@@ -1,287 +1,561 @@
-<div class="ultimate-landing" id="page-root">
+<div id="ultimate-root" class="ultimate-landing">
 
   <style>
-
-    /* GLOBAL */
     :root {
       --bg: #ffffff;
-      --text: #0a2538;
-      --card: #f8fbff;
-      --accent-blue: #0058d6;
+      --text: #071827;
+      --muted: #597089;
+      --card: #f7fbff;
+      --accent-blue: #0056d6;
       --accent-green: #00a46b;
-      --shadow: rgba(0,0,0,.08);
+      --border-soft: rgba(7,24,39,0.08);
+      --shadow-soft: 0 14px 40px rgba(4,18,36,0.12);
     }
 
-    /* DARK MODE VARIABLES */
-    .dark-mode {
-      --bg: #0d1b27;
-      --text: #eaf4ff;
-      --card: #142736;
-      --shadow: rgba(255,255,255,.06);
-    }
-
-    body.dark-mode {
-      background: var(--bg);
+    #ultimate-root.dark {
+      --bg: #050b11;
+      --text: #ecf3ff;
+      --muted: #9bb0c9;
+      --card: #101d29;
+      --accent-blue: #4d8dff;
+      --accent-green: #28c48a;
+      --border-soft: rgba(240,247,255,0.12);
+      --shadow-soft: 0 16px 40px rgba(0,0,0,0.7);
     }
 
     .ultimate-landing {
-      font-family: Helvetica, Arial, sans-serif;
-      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg);
+      color: var(--text);
     }
 
-    .section {
-      max-width: 1200px;
+    .u-section {
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem;
     }
 
     h1, h2, h3 {
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.1;
       color: var(--text);
+      margin: 0 0 0.75rem;
     }
 
-    h1 { font-size: clamp(2.3rem, 5vw, 3.2rem); }
-    h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
-    h3 { font-size: clamp(1.3rem, 3vw, 1.6rem); }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.3rem); }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.4rem); }
+    h3 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); }
 
-    p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; color: var(--text); }
-
-    /* DARK MODE TOGGLE */
-    .dark-toggle {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      background: var(--accent-blue);
-      padding: 0.7rem 1.2rem;
-      color: #ffffff;
-      border-radius: 12px;
-      cursor: pointer;
-      z-index: 300;
-      font-size: 0.95rem;
+    p {
+      margin: 0 0 1rem;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: var(--muted);
     }
 
     /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #eef7ff, #ffffff);
-      padding: 4rem 1.5rem 3rem;
-      text-align: center;
+    .u-hero-wrap {
+      background: radial-gradient(circle at top left, #e3f1ff 0, #f5f9ff 38%, #ffffff 100%);
+      border-bottom: 1px solid var(--border-soft);
     }
 
-    .product-hero {
+    .u-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .u-hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: .75rem;
+    }
+
+    .u-hero-bullets {
+      margin-top: 1rem;
+      display: grid;
+      gap: .4rem;
+    }
+
+    .u-hero-bullets span {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .u-hero-bullets span::before {
+      content: "•";
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .u-hero-cta-row {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      gap: .75rem;
       align-items: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 1.6rem;
     }
 
-    .product-hero img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 14px;
-      box-shadow: 0px 12px 40px var(--shadow);
-    }
-
-    .price {
-      font-size: 1.8rem;
+    .u-price {
+      font-size: 1.55rem;
       font-weight: 700;
       color: var(--accent-blue);
-      margin-bottom: 1.2rem;
     }
 
-    .cta-btn {
-      display: block;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      background: var(--accent-blue);
-      color: #fff;
-      text-align: center;
-      font-size: 1.15rem;
-      margin-bottom: 0.8rem;
-      text-decoration: none;
+    .u-compare {
+      font-size: .9rem;
+      text-decoration: line-through;
+      opacity: .6;
+      margin-left: .35rem;
+    }
+
+    .u-cta-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: .9rem 1.9rem;
+      border-radius: 999px;
+      font-size: 1rem;
       font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    .cta-btn.buy-now {
-      background: var(--accent-green);
+    .u-cta-primary {
+      background: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0,86,214,0.45);
     }
 
-    /* COUNTDOWN */
-    .countdown {
-      background: #ffecec;
-      padding: 0.8rem 1rem;
-      border-radius: 12px;
-      font-size: 1.2rem;
+    .u-cta-secondary {
+      background: #e9f2ff;
+      color: var(--accent-blue);
+    }
+
+    .u-countdown {
+      background: #ffe7e7;
+      color: #a21b1b;
+      padding: .8rem 1.2rem;
+      border-radius: 999px;
       font-weight: 700;
-      color: #a30000;
-      display: inline-block;
-      margin: 1rem auto;
+      font-size: .95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.1rem;
     }
 
-    /* BOOK MOCKUPS */
-    .mockups {
+    #u-countdown-value {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .u-hero-right {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 1.9rem 1.8rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      text-align: center;
+    }
+
+    .u-hero-mockup {
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 1.3rem;
+    }
+
+    .u-hero-mockup img {
+      width: 100%;
+      display: block;
+    }
+
+    .u-hero-badge {
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      color: var(--muted);
+    }
+
+    /* BOOK GRID */
+    .u-books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.9rem;
+      margin-top: 2.2rem;
+    }
+
+    .u-book-card {
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem 1.3rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(4,18,36,0.08);
+    }
+
+    .u-book-img {
+      height: 190px;
+      margin-bottom: .9rem;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
+      align-items: center;
     }
 
-    .mockups img {
-      width: 160px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px var(--shadow);
+    .u-book-img img {
+      max-height: 100%;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.15);
     }
 
-    /* ICON GRID */
-    .icon-grid {
+    .u-book-meta {
+      font-size: .86rem;
+      color: var(--muted);
+      margin-bottom: .35rem;
+    }
+
+    /* VALUE ICONS */
+    .u-icon-grid {
       display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.9rem;
     }
 
-    .icon-card {
+    .u-icon-card {
       background: var(--card);
-      border-radius: 14px;
-      padding: 1.8rem;
-      border: 1px solid var(--shadow);
-      box-shadow: 0 4px 16px var(--shadow);
+      border-radius: 18px;
+      padding: 1.5rem 1.4rem;
+      border: 1px solid var(--border-soft);
     }
 
-    /* STAR REVIEWS */
-    .stars { color: #f9b500; font-size: 1.4rem; margin-bottom: .5rem; }
+    /* REVIEWS */
+    .u-stars {
+      color: #f6b600;
+      margin-bottom: .35rem;
+      font-size: 1.1rem;
+    }
 
-    .testimonial {
+    .u-review {
       background: var(--card);
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 4px 16px var(--shadow);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--border-soft);
+      margin-bottom: 1rem;
+    }
+
+    .u-review-name {
+      font-weight: 600;
+      font-size: .95rem;
+      margin-top: .2rem;
+      color: var(--text);
     }
 
     /* GUARANTEE */
-    .guarantee {
+    .u-guarantee {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ecf9f3;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      border: 1px solid rgba(0,164,107,0.25);
+    }
+
+    #ultimate-root.dark .u-guarantee {
+      background: #072318;
+      border-color: rgba(40,196,138,0.6);
+    }
+
+    /* BOTTOM CTA */
+    .u-bottom-cta {
       text-align: center;
-      background: #eefbf3;
-      border-radius: 14px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px var(--shadow);
     }
 
-    /* CTA */
-    .bottom-cta {
-      text-align:center;
-      padding: 4rem 1.5rem;
-      background: #eaf3ff;
+    .u-bottom-cta p {
+      max-width: 520px;
+      margin: 0.25rem auto 1.4rem;
     }
 
+    /* DARK MODE TOGGLE */
+    .u-toggle {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      z-index: 50;
+      padding: .65rem 1rem;
+      border-radius: 999px;
+      background: rgba(7,24,39,0.88);
+      color: #fdfdfd;
+      font-size: .82rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 860px) {
+      .u-hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .u-hero-right {
+        order: -1;
+      }
+      .u-hero {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .u-section {
+        padding-inline: 1.1rem;
+      }
+    }
   </style>
 
-  <!-- DARK MODE BUTTON -->
-  <div class="dark-toggle" onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</div>
+  <button class="u-toggle" type="button" onclick="(function(){var r=document.getElementById('ultimate-root');r.classList.toggle('dark');})();">
+    Toggle dark mode
+  </button>
+
+  {% assign product = all_products['the-ultimate-trauma-healing-library-7-bestselling-workbooks-for-attachment-cbt-somatic-therapy-recovery'] %}
 
   <!-- HERO -->
-  <div class="hero">
-    <h1>The Ultimate Trauma & Healing Library</h1>
-    <p style="max-width:700px;margin:1rem auto 0;">
-      A complete therapeutic system of 7 evidence-based workbooks trusted by mental health professionals worldwide.
-    </p>
-
-    <!-- COUNTDOWN -->
-    <div id="countdown-timer" class="countdown">Offer ends in: 00:00:00</div>
-
-    <script>
-      function startCountdown(hours) {
-        let end = new Date().getTime() + hours * 60 * 60 * 1000;
-        setInterval(() => {
-          let now = new Date().getTime();
-          let diff = end - now;
-          if (diff <= 0) return;
-
-          let h = Math.floor(diff / (1000*60*60));
-          let m = Math.floor((diff % (1000*60*60)) / (1000*60));
-          let s = Math.floor((diff % (1000*60)) / 1000);
-
-          document.getElementById("countdown-timer").textContent =
-            `Offer ends in: ${h}h ${m}m ${s}s`;
-        }, 1000);
-      }
-      startCountdown(6);
-    </script>
-
-    <!-- PRODUCT HERO -->
-    <div class="product-hero">
-      {% assign product = all_products['the-ultimate-trauma-healing-library-7-bestselling-workbooks-for-attachment-cbt-somatic-therapy-recovery'] %}
-
-      <img src="{{ product.featured_image | img_url: '600x600' }}">
-
+  <div class="u-hero-wrap">
+    <div class="u-section u-hero">
       <div>
-        <h2>{{ product.title }}</h2>
-        <div class="price">{{ product.price | money }}</div>
+        <div class="u-hero-eyebrow">Therapist toolkit · Digital bundle</div>
+        <h1>The Ultimate Trauma &amp; Healing Library</h1>
+        <p>A complete therapeutic system of 7 evidence-based workbooks for attachment,
+          CBT, somatic therapy, polyvagal regulation, CPTSD and addiction recovery.</p>
 
-        <form method="post" action="/cart/add">
-          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-          <button class="cta-btn">Add to Cart</button>
-        </form>
+        <div class="u-hero-bullets">
+          <span>Trusted by mental health professionals worldwide.</span>
+          <span>Perfect for in-session psychoeducation &amp; between-session work.</span>
+          <span>Instant digital access – no shipping or waiting.</span>
+        </div>
 
-        <a href="/checkout?add={{ product.variants.first.id }}" class="cta-btn buy-now">
-          Buy Now
-        </a>
+        <div id="u-countdown" class="u-countdown">
+          <span>Offer ends in:</span>
+          <span id="u-countdown-value">06h 00m 00s</span>
+        </div>
+
+        <div class="u-hero-cta-row">
+          <div>
+            <div class="u-price">
+              {{ product.price | money }}
+              {% if product.compare_at_price_max > product.price %}
+                <span class="u-compare">{{ product.compare_at_price_max | money }}</span>
+              {% endif %}
+            </div>
+            <small style="font-size:.85rem;color:var(--muted);">One-time purchase · 7 bestselling workbooks</small>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:.55rem;">
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button class="u-cta-btn u-cta-primary" type="submit">Add bundle to cart</button>
+            </form>
+
+            <a class="u-cta-btn u-cta-secondary" href="/checkout?add={{ product.variants.first.id }}">
+              Buy now
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- MOCKUPS -->
-    <div class="mockups">
-      <img src="/mnt/data/a.jpg">
-      <img src="/mnt/data/b.jpg">
-      <img src="/mnt/data/c.jpg">
-      <img src="/mnt/data/d.jpg">
-      <img src="/mnt/data/e.jpg">
-      <img src="/mnt/data/f.jpg">
-      <img src="/mnt/data/g.jpg">
+      <div class="u-hero-right">
+        <div class="u-hero-mockup">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '700x700' }}" alt="{{ product.title }}">
+          {% endif %}
+        </div>
+        <div class="u-hero-badge">
+          7 bestselling workbooks · Attachment · CBT · Somatic · Polyvagal · CPTSD · Addiction
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- VALUE -->
-  <div class="section">
-    <h2>Why Therapists Love This Library</h2>
+  <!-- BOOK GRID -->
+  <div class="u-section">
+    <h2>What’s inside the 7-book library</h2>
+    <p>Each workbook is a proven, therapist-trusted resource you can integrate directly into
+      your sessions or your own healing journey.</p>
 
-    <div class="icon-grid">
-      <div class="icon-card"><h3>🔬 Evidence-Based</h3><p>CBT, Polyvagal, ACT, DBT & somatic science.</p></div>
-      <div class="icon-card"><h3>📘 Session-Ready Tools</h3><p>Diagrams, worksheets & scripts.</p></div>
-      <div class="icon-card"><h3>🧠 Complete Healing System</h3><p>Mind, body, attachment & trauma recovery.</p></div>
-      <div class="icon-card"><h3>⚡ Faster Progress</h3><p>Clients understand & apply concepts faster.</p></div>
+    <div class="u-books-grid">
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_12c57441-1b02-4c6a-b286-09cbd5e092f1.jpg?v=1763754053" alt="The Polysecure Workbook">
+        </div>
+        <div class="u-book-meta">Attachment · Relationships</div>
+        <h3>The Polysecure Workbook</h3>
+        <p>Heal attachment wounds, understand relational patterns, and build secure, satisfying
+          connections.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/b.jpg?v=1763754053" alt="The CBT Flip Chart">
+        </div>
+        <div class="u-book-meta">CBT · Psychoeducation</div>
+        <h3>The CBT Flip Chart</h3>
+        <p>27 full-color diagrams to explain anxiety, depression, PTSD, OCD, insomnia and more –
+          perfect for in-session teaching.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/e.jpg?v=1763754053" alt="Polyvagal Flip Chart">
+        </div>
+        <div class="u-book-meta">Polyvagal Theory</div>
+        <h3>Polyvagal Flip Chart</h3>
+        <p>Make the autonomic nervous system easy for clients to see and understand with clear,
+          visual polyvagal diagrams.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/c.jpg?v=1763754053" alt="Somatic Therapy Workbook">
+        </div>
+        <div class="u-book-meta">Somatic · Body-based</div>
+        <h3>Somatic Therapy Workbook (5-in-1)</h3>
+        <p>Grounding, breathwork, movement, coping skills and journaling prompts to regulate the
+          nervous system from the inside out.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/d.jpg?v=1763754053" alt="Complex PTSD: From Surviving to Thriving">
+        </div>
+        <div class="u-book-meta">CPTSD · Childhood trauma</div>
+        <h3>Complex PTSD: From Surviving to Thriving</h3>
+        <p>The classic roadmap for recovering from childhood trauma and emotional flashbacks.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/f.jpg?v=1763754053" alt="Polyvagal Exercises for Safety and Connection">
+        </div>
+        <div class="u-book-meta">Polyvagal · Exercises</div>
+        <h3>Polyvagal Exercises for Safety &amp; Connection</h3>
+        <p>50 client-centered practices to build regulation, safety, connection and resilience in
+          everyday life.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/g.jpg?v=1763754053" alt="Mindfulness Workbook for Addiction">
+        </div>
+        <div class="u-book-meta">Addiction · Mindfulness</div>
+        <h3>Mindfulness Workbook for Addiction</h3>
+        <p>ACT, CBT and DBT-based exercises to process grief, regulate emotions and replace
+          addictive patterns with healthy coping.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUE / BENEFITS -->
+  <div class="u-section">
+    <h2>Why therapists and healers love this bundle</h2>
+
+    <div class="u-icon-grid">
+      <div class="u-icon-card">
+        <h3>🔬 Evidence-based</h3>
+        <p>Grounded in CBT, Polyvagal Theory, somatic therapy, ACT, DBT and modern trauma
+          science.</p>
+      </div>
+      <div class="u-icon-card">
+        <h3>📘 Session-ready tools</h3>
+        <p>Flip charts, diagrams and worksheets designed to be used directly with clients.</p>
+      </div>
+      <div class="u-icon-card">
+        <h3>🧠 Whole-person healing</h3>
+        <p>Mind, body, nervous system, attachment and behavior all addressed in one coherent
+          library.</p>
+      </div>
+      <div class="u-icon-card">
+        <h3>⚡ Faster client progress</h3>
+        <p>Clients “get it” more quickly with clear visuals and step-by-step practices they can
+          use between sessions.</p>
+      </div>
     </div>
   </div>
 
   <!-- REVIEWS -->
-  <div class="section">
-    <h2>⭐⭐⭐⭐⭐ What Professionals Say</h2>
+  <div class="u-section">
+    <h2>⭐ Loved by practitioners worldwide</h2>
 
-    <div class="testimonial"><div class="stars">★★★★★</div>“Clients finally understand their nervous system thanks to these visuals.” — Clinical Psychologist</div>
-    <div class="testimonial"><div class="stars">★★★★★</div>“The most complete trauma healing toolkit I’ve ever used.” — Licensed Therapist</div>
-    <div class="testimonial"><div class="stars">★★★★☆</div>“Immediate improvements in client engagement.” — Trauma Coach</div>
-  </div>
+    <div class="u-review">
+      <div class="u-stars">★★★★★</div>
+      <p>“Having CBT and polyvagal visuals in one place has completely changed how I teach
+        clients about their nervous system.”</p>
+      <div class="u-review-name">— Licensed Clinical Psychologist</div>
+    </div>
 
-  <!-- GUARANTEE -->
-  <div class="section">
-    <div class="guarantee">
-      <h2>🛡️ 30-Day Money-Back Guarantee</h2>
-      <p>Try the complete library risk-free. If you don’t see immediate improvement in your therapeutic work, get a full refund — no questions asked.</p>
+    <div class="u-review">
+      <div class="u-stars">★★★★★</div>
+      <p>“This bundle is my new go-to toolkit. I can pull diagrams, somatic practices and
+        mindfulness exercises in seconds.”</p>
+      <div class="u-review-name">— Trauma-informed Therapist</div>
+    </div>
+
+    <div class="u-review">
+      <div class="u-stars">★★★★☆</div>
+      <p>“My clients stay more engaged between sessions because they finally have structured
+        workbooks to follow.”</p>
+      <div class="u-review-name">— Recovery Coach</div>
     </div>
   </div>
 
-  <!-- CTA -->
-  <div class="bottom-cta">
-    <h2>Start Your Healing Journey Today</h2>
-    <p>Download all 7 workbooks instantly.</p>
-
-    <a class="cta-btn" href="/cart/add?id={{ product.variants.first.id }}">Add to Cart</a>
-    <a class="cta-btn buy-now" href="/checkout?add={{ product.variants.first.id }}">Buy Now</a>
+  <!-- GUARANTEE -->
+  <div class="u-section">
+    <div class="u-guarantee">
+      <h2>🛡️ 30-day therapist-friendly guarantee</h2>
+      <p>If you don’t feel this library adds real value to your sessions or your own healing
+        within 30 days, contact us for a full refund. No quizzes, no hassle.</p>
+      <p style="margin-bottom:0;font-size:.9rem;color:var(--muted);">
+        Keep any notes or worksheets you’ve already used — we want this to feel truly
+        risk-free.</p>
+    </div>
   </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="u-section u-bottom-cta">
+    <h2>Get instant access to all 7 workbooks</h2>
+    <p>One purchase. Lifetime access. Use the tools with your clients, students or for your
+      own healing journey.</p>
+
+    <form method="post" action="/cart/add" style="display:inline-block;margin-right:.6rem;">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <button class="u-cta-btn u-cta-primary" type="submit">Add bundle to cart</button>
+    </form>
+
+    <a class="u-cta-btn u-cta-secondary" href="/checkout?add={{ product.variants.first.id }}">
+      Buy now
+    </a>
+  </div>
+
+  <script>
+    (function(){
+      var end = Date.now() + 6 * 60 * 60 * 1000;
+      function tick(){
+        var diff = end - Date.now();
+        if(diff <= 0) return;
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000)/60000);
+        var s = Math.floor((diff % 60000)/1000);
+        var el = document.getElementById('u-countdown-value');
+        if(!el) return;
+        el.textContent = (h+'h '+('0'+m).slice(-2)+'m '+('0'+s).slice(-2)+'s');
+      }
+      tick();
+      setInterval(tick,1000);
+    })();
+  </script>
 
 </div>
