@@ -1,171 +1,287 @@
-{% assign product = all_products['the-ultimate-trauma-healing-library-7-bestselling-workbooks-for-attachment-cbt-somatic-therapy-recovery'] %}
-<div class="ultimate-library">
+<div class="ultimate-landing" id="page-root">
 
   <style>
-    .ultimate-library {
-      font-family: Helvetica, Arial, sans-serif;
-      padding: 3rem 1rem;
-      color: #012a4a;
+
+    /* GLOBAL */
+    :root {
+      --bg: #ffffff;
+      --text: #0a2538;
+      --card: #f8fbff;
+      --accent-blue: #0058d6;
+      --accent-green: #00a46b;
+      --shadow: rgba(0,0,0,.08);
     }
 
-    .ultimate-library .container {
+    /* DARK MODE VARIABLES */
+    .dark-mode {
+      --bg: #0d1b27;
+      --text: #eaf4ff;
+      --card: #142736;
+      --shadow: rgba(255,255,255,.06);
+    }
+
+    body.dark-mode {
+      background: var(--bg);
+    }
+
+    .ultimate-landing {
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .section {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 3rem 1.5rem;
     }
 
     h1, h2, h3 {
-      margin-bottom: 1rem;
-    }
-
-    h1 { font-size: clamp(2rem, 5vw, 3rem); }
-    h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-top: 2rem; }
-    h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); margin-top: 1.5rem; }
-
-    p { line-height: 1.6; margin-bottom: 1rem; }
-
-    .hero-product {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 3rem;
-      background: #f7fbff;
-      padding: 2rem;
-      border-radius: 14px;
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .hero-product img {
-      width: 100%;
-      max-width: 380px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .hero-details { flex: 1; }
-
-    .price {
-      font-size: 1.6rem;
       font-weight: 700;
-      color: #0052b3;
-      margin-bottom: 1rem;
+      line-height: 1.2;
+      color: var(--text);
     }
 
-    .cta-btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: #0052b3;
-      color: white;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      text-decoration: none;
-      margin-bottom: 0.75rem;
-      width: 100%;
-      max-width: 260px;
+    h1 { font-size: clamp(2.3rem, 5vw, 3.2rem); }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    h3 { font-size: clamp(1.3rem, 3vw, 1.6rem); }
+
+    p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; color: var(--text); }
+
+    /* DARK MODE TOGGLE */
+    .dark-toggle {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      background: var(--accent-blue);
+      padding: 0.7rem 1.2rem;
+      color: #ffffff;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 300;
+      font-size: 0.95rem;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #eef7ff, #ffffff);
+      padding: 4rem 1.5rem 3rem;
       text-align: center;
     }
 
-    .cta-btn.buy-now { background: #00a06d; }
-
-    @media (max-width: 768px) {
-      .hero-product { text-align: center; }
-      .hero-product img { margin: 0 auto; }
+    .product-hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
     }
+
+    .product-hero img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 14px;
+      box-shadow: 0px 12px 40px var(--shadow);
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-btn {
+      display: block;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      background: var(--accent-blue);
+      color: #fff;
+      text-align: center;
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .cta-btn.buy-now {
+      background: var(--accent-green);
+    }
+
+    /* COUNTDOWN */
+    .countdown {
+      background: #ffecec;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #a30000;
+      display: inline-block;
+      margin: 1rem auto;
+    }
+
+    /* BOOK MOCKUPS */
+    .mockups {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .mockups img {
+      width: 160px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
+    /* ICON GRID */
+    .icon-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 2rem;
+    }
+
+    .icon-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 1.8rem;
+      border: 1px solid var(--shadow);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    /* STAR REVIEWS */
+    .stars { color: #f9b500; font-size: 1.4rem; margin-bottom: .5rem; }
+
+    .testimonial {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    /* GUARANTEE */
+    .guarantee {
+      text-align: center;
+      background: #eefbf3;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    /* CTA */
+    .bottom-cta {
+      text-align:center;
+      padding: 4rem 1.5rem;
+      background: #eaf3ff;
+    }
+
   </style>
 
-  <div class="container">
+  <!-- DARK MODE BUTTON -->
+  <div class="dark-toggle" onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</div>
 
-    <!-- PRODUCT HERO AT TOP -->
-    <div class="hero-product">
-      <div class="hero-img">
-        {% if product.featured_image %}
-          <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}">
-        {% endif %}
-      </div>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>The Ultimate Trauma & Healing Library</h1>
+    <p style="max-width:700px;margin:1rem auto 0;">
+      A complete therapeutic system of 7 evidence-based workbooks trusted by mental health professionals worldwide.
+    </p>
 
-      <div class="hero-details">
-        <h1>{{ product.title }}</h1>
+    <!-- COUNTDOWN -->
+    <div id="countdown-timer" class="countdown">Offer ends in: 00:00:00</div>
+
+    <script>
+      function startCountdown(hours) {
+        let end = new Date().getTime() + hours * 60 * 60 * 1000;
+        setInterval(() => {
+          let now = new Date().getTime();
+          let diff = end - now;
+          if (diff <= 0) return;
+
+          let h = Math.floor(diff / (1000*60*60));
+          let m = Math.floor((diff % (1000*60*60)) / (1000*60));
+          let s = Math.floor((diff % (1000*60)) / 1000);
+
+          document.getElementById("countdown-timer").textContent =
+            `Offer ends in: ${h}h ${m}m ${s}s`;
+        }, 1000);
+      }
+      startCountdown(6);
+    </script>
+
+    <!-- PRODUCT HERO -->
+    <div class="product-hero">
+      {% assign product = all_products['the-ultimate-trauma-healing-library-7-bestselling-workbooks-for-attachment-cbt-somatic-therapy-recovery'] %}
+
+      <img src="{{ product.featured_image | img_url: '600x600' }}">
+
+      <div>
+        <h2>{{ product.title }}</h2>
         <div class="price">{{ product.price | money }}</div>
 
         <form method="post" action="/cart/add">
           <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-          <button class="cta-btn" type="submit">Add to Cart</button>
+          <button class="cta-btn">Add to Cart</button>
         </form>
 
-        <a
-          class="cta-btn buy-now"
-          href="/checkout?add={{ product.variants.first.id }}">
+        <a href="/checkout?add={{ product.variants.first.id }}" class="cta-btn buy-now">
           Buy Now
         </a>
       </div>
     </div>
 
-    <!-- INTRO -->
-    <h2>The Ultimate Trauma & Healing Library (7 Workbooks)</h2>
-    <p>
-      A complete therapeutic collection covering attachment, CBT, polyvagal theory,
-      somatic healing, trauma recovery, and addiction. Trusted by therapists,
-      coaches, psychology students, and trauma survivors.
-    </p>
-
-    <!-- BOOK DETAILS -->
-    <h2>Included Workbooks</h2>
-
-    <h3>1. The Polysecure Workbook – Jessica Fern</h3>
-    <p>
-      Build secure attachment, understand your relationship patterns, and explore
-      practical exercises to create emotional safety. Highly rated (4.7/5).
-    </p>
-
-    <h3>2. The CBT Flip Chart – Seth Gillihan, PhD</h3>
-    <p>
-      Includes 27 full-color diagrams, cognitive distortions, exposure therapy,
-      behavioral activation, mindfulness CBT, and diagrams for anxiety, PTSD, OCD, 
-      anger, insomnia, and more.
-    </p>
-
-    <h3>3. Polyvagal Flip Chart – Deb Dana</h3>
-    <p>
-      A visual guide to the autonomic nervous system. Helps clients understand safety,
-      mobilization, shutdown, and nervous system regulation.
-    </p>
-
-    <h3>4. Somatic Therapy Workbook (5-in-1) – Anika Sullivan</h3>
-    <p>
-      Combines grounding exercises, coping skills, breathwork, trauma release,
-      yoga, and journaling for holistic nervous system healing.
-    </p>
-
-    <h3>5. Complex PTSD: From Surviving to Thriving – Pete Walker</h3>
-    <p>
-      The most acclaimed CPTSD recovery manual. Helps with emotional flashbacks,
-      self-compassion, trauma patterns, and long-term healing.
-    </p>
-
-    <h3>6. Polyvagal Exercises for Safety & Connection – Deb Dana</h3>
-    <p>
-      Includes 50 Polyvagal-informed exercises for regulation, safety, connection, 
-      and navigating daily experiences with awareness.
-    </p>
-
-    <h3>7. The Mindfulness Workbook for Addiction – Williams & Kraft</h3>
-    <p>
-      Uses ACT + CBT + DBT to treat addiction by addressing grief, trauma, emotional 
-      dysregulation, and stress at the root of addictive behaviors.
-    </p>
-
-    <!-- BOTTOM CTA -->
-    <div style="text-align:center;margin-top:3rem;">
-      <a class="cta-btn" href="/cart/add?id={{ product.variants.first.id }}">Add to Cart</a>
-      <a class="cta-btn buy-now" href="/checkout?add={{ product.variants.first.id }}">Buy Now</a>
+    <!-- MOCKUPS -->
+    <div class="mockups">
+      <img src="/mnt/data/a.jpg">
+      <img src="/mnt/data/b.jpg">
+      <img src="/mnt/data/c.jpg">
+      <img src="/mnt/data/d.jpg">
+      <img src="/mnt/data/e.jpg">
+      <img src="/mnt/data/f.jpg">
+      <img src="/mnt/data/g.jpg">
     </div>
-
   </div>
-</div>
 
-{% schema %}
-{
-  "name": "Ultimate Trauma Library",
-  "settings": []
-}
-{% endschema %}
+  <!-- VALUE -->
+  <div class="section">
+    <h2>Why Therapists Love This Library</h2>
+
+    <div class="icon-grid">
+      <div class="icon-card"><h3>🔬 Evidence-Based</h3><p>CBT, Polyvagal, ACT, DBT & somatic science.</p></div>
+      <div class="icon-card"><h3>📘 Session-Ready Tools</h3><p>Diagrams, worksheets & scripts.</p></div>
+      <div class="icon-card"><h3>🧠 Complete Healing System</h3><p>Mind, body, attachment & trauma recovery.</p></div>
+      <div class="icon-card"><h3>⚡ Faster Progress</h3><p>Clients understand & apply concepts faster.</p></div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="section">
+    <h2>⭐⭐⭐⭐⭐ What Professionals Say</h2>
+
+    <div class="testimonial"><div class="stars">★★★★★</div>“Clients finally understand their nervous system thanks to these visuals.” — Clinical Psychologist</div>
+    <div class="testimonial"><div class="stars">★★★★★</div>“The most complete trauma healing toolkit I’ve ever used.” — Licensed Therapist</div>
+    <div class="testimonial"><div class="stars">★★★★☆</div>“Immediate improvements in client engagement.” — Trauma Coach</div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="section">
+    <div class="guarantee">
+      <h2>🛡️ 30-Day Money-Back Guarantee</h2>
+      <p>Try the complete library risk-free. If you don’t see immediate improvement in your therapeutic work, get a full refund — no questions asked.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bottom-cta">
+    <h2>Start Your Healing Journey Today</h2>
+    <p>Download all 7 workbooks instantly.</p>
+
+    <a class="cta-btn" href="/cart/add?id={{ product.variants.first.id }}">Add to Cart</a>
+    <a class="cta-btn buy-now" href="/checkout?add={{ product.variants.first.id }}">Buy Now</a>
+  </div>
+
+</div>
