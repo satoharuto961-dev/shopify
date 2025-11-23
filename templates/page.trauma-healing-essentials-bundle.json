@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "trauma-healing-essentials-bundle",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
