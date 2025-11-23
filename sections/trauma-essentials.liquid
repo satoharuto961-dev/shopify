@@ -53,11 +53,12 @@
     }
 
     .u-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 2.8rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 2.2rem;
       padding-block: .7rem;
+      text-align: center;
     }
 
     .u-hero-eyebrow {
@@ -73,6 +74,7 @@
       margin-top: 1rem;
       display: grid;
       gap: .4rem;
+      justify-items: center;
     }
 
     .u-hero-bullets span {
@@ -81,6 +83,7 @@
       gap: .4rem;
       font-size: .95rem;
       color: var(--text);
+      text-align: left;
     }
 
     .u-hero-bullets span::before {
@@ -94,6 +97,7 @@
       flex-wrap: wrap;
       gap: .75rem;
       align-items: center;
+      justify-content: center;
       margin-top: 1.6rem;
     }
 
@@ -126,31 +130,9 @@
       color: var(--accent-blue);
     }
 
-    .u-hero-right {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 1.9rem 1.8rem 1.6rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
-    }
-
-    .u-cover-stack {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .u-cover-card {
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--card);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
-      border: 1px solid var(--border-soft);
-    }
-
-    .u-cover-card img {
+    .u-hero-media {
       width: 100%;
-      display: block;
-      object-fit: cover;
+      max-width: 520px;
     }
 
     /* BOOK GRID */
@@ -249,12 +231,6 @@
 
     @media (max-width: 860px) {
       .u-hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .u-hero-right {
-        order: -1;
-      }
-      .u-hero {
         gap: 2rem;
       }
     }
@@ -271,17 +247,14 @@
   <!-- HERO -->
   <div class="u-hero-wrap">
     <div class="u-section u-hero">
-      <div>
-        <div class="flex justify-center">
-          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_b14d43fd-290d-480e-97ee-29408eeb41cc.jpg?v=1763902877"
-               class="w-full max-w-sm mx-auto rounded-xl shadow-lg mb-6" />
-        </div>
-        <div class="flex justify-center">
-          <a href="/cart/{{ all_products['trauma-healing-essentials-bundle-3-book-pdf-set'].selected_or_first_available_variant.id }}:1"
-             class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:opacity-90 transition mb-10 mx-auto">
-             Buy Now — Instant Download
-          </a>
-        </div>
+      <div class="u-hero-media">
+        <img 
+          src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/Screenshot2025-11-23at13.50.32.png?v=1763902247"
+          class="w-full max-w-sm mx-auto rounded-xl shadow-lg mb-8"
+        />
+      </div>
+
+      <div class="max-w-3xl">
         <div class="u-hero-eyebrow">Digital bundle · Instant access</div>
         <h1>Trauma Healing Essentials Bundle (3-Book PDF Set)</h1>
         <p>Three bestselling trauma recovery guides that work together to restore safety, regulation, and connection with step-by-step practices.</p>
@@ -298,18 +271,11 @@
         </div>
       </div>
 
-      <div class="u-hero-right">
-        <div class="u-cover-stack">
-          <div class="u-cover-card">
-            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/b_ab264ab0-7a1e-485a-b236-dba666afb45c.jpg?v=1763902877" alt="Trauma Healing Essentials cover 1">
-          </div>
-          <div class="u-cover-card">
-            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/c_e467ac80-4c1d-44ef-9e55-8911f49d0a31.jpg?v=1763902877" alt="Trauma Healing Essentials cover 2">
-          </div>
-          <div class="u-cover-card">
-            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_b14d43fd-290d-480e-97ee-29408eeb41cc.jpg?v=1763902877" alt="Trauma Healing Essentials cover 3">
-          </div>
-        </div>
+      <div class="flex justify-center w-full">
+        <a href="/cart/{{ all_products['trauma-healing-essentials-bundle-3-book-pdf-set'].selected_or_first_available_variant.id }}:1"
+           class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:opacity-90 transition mt-6 mb-2 mx-auto">
+           Buy Now — Instant Download
+        </a>
       </div>
     </div>
   </div>
