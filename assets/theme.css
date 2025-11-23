@@ -830,7 +830,7 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: clamp(320px, 38vw, 460px);
+  max-width: clamp(280px, 32vw, 420px);
   margin-inline: auto;
 }
 
@@ -863,6 +863,8 @@ a:focus {
 .product__media-image--primary {
   width: 100%;
   height: auto;
+  max-height: 520px;
+  object-fit: contain;
 }
 
 .product__thumbnail-grid {
