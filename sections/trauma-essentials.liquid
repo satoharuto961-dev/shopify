@@ -101,6 +101,11 @@
       margin-top: 1.6rem;
     }
 
+    .u-cta-form {
+      margin: 0;
+      display: inline-flex;
+    }
+
     .u-cta-btn {
       display: inline-flex;
       justify-content: center;
@@ -243,6 +248,7 @@
   </style>
 
   {% assign product = all_products['trauma-healing-essentials-bundle-3-book-pdf-set'] %}
+  {% assign checkout_product_variant_id = product.selected_or_first_available_variant.id %}
 
   <!-- HERO -->
   <div class="u-hero-wrap">
@@ -266,16 +272,26 @@
         </div>
 
         <div class="u-hero-cta-row">
-          <a class="u-cta-btn u-cta-primary" href="/products/trauma-healing-essentials-bundle-3-book-pdf-set">Download the bundle now</a>
+          <form class="u-cta-form" action="{{ routes.cart_add_url }}" method="post">
+            <input type="hidden" name="id" value="{{ checkout_product_variant_id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button class="u-cta-btn u-cta-primary" type="submit">Download the bundle now</button>
+          </form>
           <div style="font-size:.92rem;color:var(--muted);">Instant digital download · Lifetime access</div>
         </div>
       </div>
 
       <div class="flex justify-center w-full">
-        <a href="/products/trauma-healing-essentials-bundle-3-book-pdf-set"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:opacity-90 transition mt-6 mb-2 mx-auto">
-           Buy Now — Instant Download
-        </a>
+        <form class="u-cta-form" action="{{ routes.cart_add_url }}" method="post">
+          <input type="hidden" name="id" value="{{ checkout_product_variant_id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          <button type="submit"
+             class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:opacity-90 transition mt-6 mb-2 mx-auto">
+             Buy Now — Instant Download
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -366,7 +382,12 @@
     <h2>Begin your trauma healing essentials journey today</h2>
     <p>Download the 3-book PDF set to get somatic regulation tools, IFS-informed guidance, and daily practices that build lasting resilience.</p>
 
-    <a class="u-cta-btn u-cta-primary" href="/products/trauma-healing-essentials-bundle-3-book-pdf-set">Download the Trauma Healing Essentials Bundle</a>
+    <form class="u-cta-form" action="{{ routes.cart_add_url }}" method="post">
+      <input type="hidden" name="id" value="{{ checkout_product_variant_id }}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button class="u-cta-btn u-cta-primary" type="submit">Download the Trauma Healing Essentials Bundle</button>
+    </form>
   </div>
 
 </div>
