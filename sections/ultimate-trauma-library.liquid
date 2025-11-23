@@ -3,7 +3,7 @@
   <style>
     :root {
       --bg: #f5f9fc;
-      --text: #0a2a43;
+      --text: #354052;
       --muted: #4f667c;
       --card: #ffffff;
       --accent-blue: #0a2a43;
@@ -35,6 +35,10 @@
       padding: 3.5rem 1.5rem;
     }
 
+    .u-hero-wrap .u-section {
+      padding: 4.2rem 1.5rem 4.5rem;
+    }
+
     h1, h2, h3 {
       font-weight: 700;
       line-height: 1.1;
@@ -50,7 +54,7 @@
       margin: 0 0 1rem;
       font-size: 1.02rem;
       line-height: 1.7;
-      color: var(--muted);
+      color: var(--text);
     }
 
     /* HERO */
@@ -62,8 +66,9 @@
     .u-hero {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2.5rem;
+      gap: 2.8rem;
       align-items: center;
+      padding-block: .7rem;
     }
 
     .u-hero-eyebrow {
@@ -86,7 +91,7 @@
       align-items: center;
       gap: .4rem;
       font-size: .95rem;
-      color: var(--muted);
+      color: var(--text);
     }
 
     .u-hero-bullets span::before {
@@ -134,6 +139,10 @@
       background: var(--accent-blue);
       color: #ffffff;
       box-shadow: 0 10px 30px rgba(10,42,67,0.35);
+    }
+
+    .u-cta-primary:hover {
+      background: #103a5a;
     }
 
     .u-cta-secondary {
