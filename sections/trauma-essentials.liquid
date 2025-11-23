@@ -1,105 +1,399 @@
-<section class="w-full bg-slate-50 text-slate-700">
-  <div class="max-w-5xl mx-auto px-6 py-12 space-y-16">
-    <!-- Hero -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 order-1 lg:order-2">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/b_ab264ab0-7a1e-485a-b236-dba666afb45c.jpg?v=1763902877" alt="Trauma healing book cover 1" class="w-full h-full object-cover">
-        </div>
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/c_e467ac80-4c1d-44ef-9e55-8911f49d0a31.jpg?v=1763902877" alt="Trauma healing book cover 2" class="w-full h-full object-cover">
-        </div>
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_b14d43fd-290d-480e-97ee-29408eeb41cc.jpg?v=1763902877" alt="Trauma healing book cover 3" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="lg:col-span-2 order-2 lg:order-1 space-y-5 text-center lg:text-left">
-        <p class="text-sm font-semibold tracking-[0.2em] uppercase text-sky-700">Digital Bundle • Instant Access</p>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">Trauma Healing Essentials Bundle (3-Book PDF Set)</h1>
-        <p class="text-lg text-slate-700">Rebuild safety, regulation, and integration with three best-selling trauma recovery guides designed to work together.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left lg:text-left">
-          <span class="inline-flex items-start gap-3 bg-white shadow-lg rounded-xl px-4 py-3"><span class="text-teal-500 text-xl">•</span><span class="text-base">Somatic + IFS frameworks for deep healing</span></span>
-          <span class="inline-flex items-start gap-3 bg-white shadow-lg rounded-xl px-4 py-3"><span class="text-teal-500 text-xl">•</span><span class="text-base">Therapist-created, evidence-informed practices</span></span>
-          <span class="inline-flex items-start gap-3 bg-white shadow-lg rounded-xl px-4 py-3"><span class="text-teal-500 text-xl">•</span><span class="text-base">Step-by-step tools for PTSD and C-PTSD recovery</span></span>
-          <span class="inline-flex items-start gap-3 bg-white shadow-lg rounded-xl px-4 py-3"><span class="text-teal-500 text-xl">•</span><span class="text-base">Printable worksheets to build daily resilience</span></span>
-        </div>
-        <div class="flex flex-wrap justify-center lg:justify-start items-center gap-3 pt-2">
-          <a href="/products/trauma-healing-essentials-bundle-3-book-pdf-set" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:from-teal-600 hover:to-blue-700 transition">Download Bundle Now</a>
-          <div class="text-base font-semibold text-teal-600">Instant digital download • Lifetime access</div>
-        </div>
-      </div>
-    </div>
+<div id="trauma-essentials-root" class="ultimate-landing">
 
-    <!-- What's Inside -->
-    <div class="space-y-8">
-      <div class="space-y-2 text-center">
-        <p class="text-sm font-semibold tracking-[0.2em] uppercase text-sky-700">What’s Inside</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Three proven trauma healing guides</h2>
-        <p class="max-w-3xl mx-auto text-base sm:text-lg">Every book complements the others to help you understand trauma, reconnect with your body, and apply practical steps for lasting change.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 space-y-3 text-left">
-          <h3 class="text-xl font-bold text-slate-900 leading-tight">The Body Keeps the Score</h3>
-          <p class="text-base">Explore the neuroscience of trauma and how the body holds the story, with somatic tools to restore regulation.</p>
+  <style>
+    :root {
+      --bg: #f5f9fc;
+      --text: #354052;
+      --muted: #4f667c;
+      --card: #ffffff;
+      --accent-blue: #0a2a43;
+      --accent-green: #4ea8c7;
+      --border-soft: rgba(10,42,67,0.12);
+      --shadow-soft: 0 14px 40px rgba(10,42,67,0.12);
+    }
+
+    .ultimate-landing {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .u-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .u-hero-wrap .u-section {
+      padding: 4.2rem 1.5rem 4.5rem;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.1;
+      color: #0a2a43;
+      margin: 0 0 0.75rem;
+    }
+
+    h1 { font-size: clamp(2.4rem, 5vw, 3.3rem); }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.4rem); }
+    h3 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); }
+
+    p {
+      margin: 0 0 1rem;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* HERO */
+    .u-hero-wrap {
+      background: radial-gradient(circle at top left, #f5f9fc 0, #f5f9fc 38%, #ffffff 100%);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .u-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2.8rem;
+      align-items: center;
+      padding-block: .7rem;
+    }
+
+    .u-hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: .75rem;
+    }
+
+    .u-hero-bullets {
+      margin-top: 1rem;
+      display: grid;
+      gap: .4rem;
+    }
+
+    .u-hero-bullets span {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .95rem;
+      color: var(--text);
+    }
+
+    .u-hero-bullets span::before {
+      content: "•";
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .u-hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      margin-top: 1.6rem;
+    }
+
+    .u-cta-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: .9rem 1.9rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .u-cta-primary {
+      background: linear-gradient(90deg, #14b8a6, #2563eb);
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(10,42,67,0.35);
+    }
+
+    .u-cta-primary:hover {
+      filter: brightness(0.95);
+    }
+
+    .u-cta-secondary {
+      background: #e3f0f8;
+      color: var(--accent-blue);
+    }
+
+    .u-hero-right {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 1.9rem 1.8rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    .u-cover-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .u-cover-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+      border: 1px solid var(--border-soft);
+    }
+
+    .u-cover-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* BOOK GRID */
+    .u-books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.9rem;
+      margin-top: 2.2rem;
+    }
+
+    .u-book-card {
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem 1.3rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(4,18,36,0.08);
+    }
+
+    .u-book-img {
+      height: 190px;
+      margin-bottom: .9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .u-book-img img {
+      max-height: 100%;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.15);
+    }
+
+    .u-book-meta {
+      font-size: .86rem;
+      color: var(--muted);
+      margin-bottom: .35rem;
+    }
+
+    /* BENEFITS */
+    .u-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+      margin-top: 1.6rem;
+    }
+
+    .u-benefit-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 1.5rem 1.4rem;
+      border: 1px solid var(--border-soft);
+    }
+
+    /* CHECKLIST */
+    .u-checklist {
+      display: grid;
+      gap: .85rem;
+      margin-top: 1.2rem;
+    }
+
+    .u-checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .55rem;
+      font-size: 1rem;
+    }
+
+    .u-checklist-item::before {
+      content: "•";
+      color: var(--accent-green);
+      font-weight: 800;
+      margin-top: .1rem;
+    }
+
+    /* GUARANTEE */
+    .u-guarantee {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fef3c7;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      border: 1px solid #fcd34d;
+      box-shadow: 0 14px 36px rgba(250,204,21,0.25);
+    }
+
+    /* BOTTOM CTA */
+    .u-bottom-cta {
+      text-align: center;
+    }
+
+    .u-bottom-cta p {
+      max-width: 620px;
+      margin: 0.25rem auto 1.4rem;
+    }
+
+    @media (max-width: 860px) {
+      .u-hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .u-hero-right {
+        order: -1;
+      }
+      .u-hero {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .u-section {
+        padding-inline: 1.1rem;
+      }
+    }
+  </style>
+
+  {% assign product = all_products['trauma-healing-essentials-bundle-3-book-pdf-set'] %}
+
+  <!-- HERO -->
+  <div class="u-hero-wrap">
+    <div class="u-section u-hero">
+      <div>
+        <div class="u-hero-eyebrow">Digital bundle · Instant access</div>
+        <h1>Trauma Healing Essentials Bundle (3-Book PDF Set)</h1>
+        <p>Three bestselling trauma recovery guides that work together to restore safety, regulation, and connection with step-by-step practices.</p>
+
+        <div class="u-hero-bullets">
+          <span>Somatic and IFS-aligned tools for PTSD and C-PTSD healing.</span>
+          <span>Printable worksheets to track progress and regulate between sessions.</span>
+          <span>Therapist-trusted frameworks you can revisit anytime.</span>
         </div>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 space-y-3 text-left">
-          <h3 class="text-xl font-bold text-slate-900 leading-tight">Healing the Fragmented Selves of Trauma Survivors</h3>
-          <p class="text-base">Learn IFS-informed strategies to connect with parts, rebuild inner safety, and heal fragmentation.</p>
-        </div>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 space-y-3 text-left">
-          <h3 class="text-xl font-bold text-slate-900 leading-tight">Transforming the Living Legacy of Trauma</h3>
-          <p class="text-base">Follow structured exercises for emotional regulation, relational repair, and sustainable recovery.</p>
+
+        <div class="u-hero-cta-row">
+          <a class="u-cta-btn u-cta-primary" href="/products/trauma-healing-essentials-bundle-3-book-pdf-set">Download the bundle now</a>
+          <div style="font-size:.92rem;color:var(--muted);">Instant digital download · Lifetime access</div>
         </div>
       </div>
-    </div>
 
-    <!-- Why This Bundle Works -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-      <div class="space-y-3">
-        <p class="text-sm font-semibold tracking-[0.2em] uppercase text-sky-700">Why This Bundle Works</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">A cohesive roadmap for healing</h2>
-        <p class="text-base sm:text-lg">Somatic regulation, parts work, and trauma neuroscience combine to give you practical steps you can trust. Built for therapists, survivors, and anyone ready to move from overwhelm to grounded resilience.</p>
+      <div class="u-hero-right">
+        <div class="u-cover-stack">
+          <div class="u-cover-card">
+            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/b_ab264ab0-7a1e-485a-b236-dba666afb45c.jpg?v=1763902877" alt="Trauma Healing Essentials cover 1">
+          </div>
+          <div class="u-cover-card">
+            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/c_e467ac80-4c1d-44ef-9e55-8911f49d0a31.jpg?v=1763902877" alt="Trauma Healing Essentials cover 2">
+          </div>
+          <div class="u-cover-card">
+            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_b14d43fd-290d-480e-97ee-29408eeb41cc.jpg?v=1763902877" alt="Trauma Healing Essentials cover 3">
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 gap-4 text-base">
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-5">Step-by-step frameworks for PTSD and C-PTSD</div>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-5">Integrates somatic practices with IFS-style parts work</div>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-5">Printable worksheets to track progress and regulation</div>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-5">Gentle, evidence-informed guidance you can revisit anytime</div>
-      </div>
-    </div>
-
-    <!-- What You Receive -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-      <div class="md:col-span-2 space-y-4">
-        <p class="text-sm font-semibold tracking-[0.2em] uppercase text-sky-700">What You Receive</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Everything you need to begin healing today</h2>
-        <ul class="space-y-3 text-base">
-          <li class="flex items-start gap-3"><span class="text-teal-500 text-xl">•</span><span>3 high-quality PDF books with instant download links</span></li>
-          <li class="flex items-start gap-3"><span class="text-teal-500 text-xl">•</span><span>Lifetime access across devices—phone, tablet, laptop</span></li>
-          <li class="flex items-start gap-3"><span class="text-teal-500 text-xl">•</span><span>Printable worksheets and exercises you can reuse</span></li>
-          <li class="flex items-start gap-3"><span class="text-teal-500 text-xl">•</span><span>Clinician-trusted structure for clients or personal practice</span></li>
-        </ul>
-      </div>
-      <div class="bg-white border border-slate-100 rounded-xl shadow-lg p-6 space-y-3">
-        <div class="text-lg font-bold text-slate-900 leading-tight">100% Satisfaction Guarantee</div>
-        <p class="text-base">If you’re not fully satisfied, reach out within 30 days for a full refund. Your healing comes first.</p>
-      </div>
-    </div>
-
-    <!-- Guarantee -->
-    <div class="bg-amber-100 border border-amber-200 rounded-xl shadow-lg p-6 space-y-3">
-      <h3 class="text-xl font-bold text-slate-900 leading-tight">Your purchase is protected</h3>
-      <p class="text-base">Experience the resources risk-free. If this bundle doesn’t support your healing journey, contact us within 30 days for a full refund—no questions asked.</p>
-    </div>
-
-    <!-- Final CTA -->
-    <div class="text-center space-y-3">
-      <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Ready to begin?</h3>
-      <p class="text-base sm:text-lg max-w-2xl mx-auto">Download the Trauma Healing Essentials Bundle now to access powerful, therapist-backed tools for calm, connection, and lasting change.</p>
-      <a href="/products/trauma-healing-essentials-bundle-3-book-pdf-set" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-white text-lg bg-gradient-to-r from-teal-500 to-blue-600 shadow-lg hover:from-teal-600 hover:to-blue-700 transition">Download the Trauma Healing Essentials Bundle</a>
     </div>
   </div>
-</section>
+
+  <!-- WHAT'S INSIDE -->
+  <div class="u-section">
+    <h2>What’s inside the Trauma Healing Essentials bundle</h2>
+    <p>Each PDF brings a different layer of support—body regulation, parts work, and practical daily exercises—to help you rebuild safety from the inside out.</p>
+
+    <div class="u-books-grid">
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/b_ab264ab0-7a1e-485a-b236-dba666afb45c.jpg?v=1763902877" alt="Somatic regulation guide">
+        </div>
+        <div class="u-book-meta">Somatic · Body-based</div>
+        <h3>Somatic Regulation Guide</h3>
+        <p>Restore nervous system balance with grounding, breathwork, and movement practices designed to reduce overwhelm.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/c_e467ac80-4c1d-44ef-9e55-8911f49d0a31.jpg?v=1763902877" alt="IFS-informed workbook">
+        </div>
+        <div class="u-book-meta">Parts work · IFS</div>
+        <h3>IFS-Informed Healing Workbook</h3>
+        <p>Reconnect with protective and wounded parts using scripts, prompts, and gentle exercises to build inner safety.</p>
+      </div>
+
+      <div class="u-book-card">
+        <div class="u-book-img">
+          <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/a_b14d43fd-290d-480e-97ee-29408eeb41cc.jpg?v=1763902877" alt="Trauma integration planner">
+        </div>
+        <div class="u-book-meta">Integration · Daily practice</div>
+        <h3>Trauma Integration Planner</h3>
+        <p>Create sustainable routines with printable worksheets, tracking templates, and reflection prompts for long-term change.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="u-section">
+    <h2>How this 3-book set supports your healing</h2>
+
+    <div class="u-benefits">
+      <div class="u-benefit-card">
+        <h3>🧠 Clear, evidence-informed guidance</h3>
+        <p>Grounded in trauma neuroscience, somatic therapy, and parts work so you can trust every step of the process.</p>
+      </div>
+      <div class="u-benefit-card">
+        <h3>📝 Printable, session-ready worksheets</h3>
+        <p>Use the PDFs across devices or print key pages for daily practice, therapy sessions, or group work.</p>
+      </div>
+      <div class="u-benefit-card">
+        <h3>🌱 Gradual nervous system regulation</h3>
+        <p>Layered exercises that move from stabilization to integration, reducing overwhelm while building resilience.</p>
+      </div>
+      <div class="u-benefit-card">
+        <h3>🤝 Built for therapists and self-guided work</h3>
+        <p>Perfect for clinicians, coaches, or personal healing—with scripts, prompts, and guidance that adapt to your pace.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU RECEIVE -->
+  <div class="u-section">
+    <h2>What you receive immediately</h2>
+    <p>Everything arrives as high-quality PDFs with simple, actionable steps you can use the moment you download.</p>
+
+    <div class="u-checklist">
+      <div class="u-checklist-item">Three beautifully designed PDF books with instant download links.</div>
+      <div class="u-checklist-item">Lifetime access across phone, tablet, and laptop—no expiry.</div>
+      <div class="u-checklist-item">Guided exercises, prompts, and trackers to revisit whenever you need support.</div>
+      <div class="u-checklist-item">Clinician-trusted structure for personal practice or client sessions.</div>
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="u-section">
+    <div class="u-guarantee">
+      <h2>🛡️ 30-day satisfaction guarantee</h2>
+      <p>If this bundle doesn’t support your healing journey within 30 days, contact us for a full refund—no questions asked.</p>
+      <p style="margin-bottom:0;font-size:.9rem;color:var(--muted);">Keep any notes or worksheets you’ve already used. Your recovery comes first.</p>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="u-section u-bottom-cta">
+    <h2>Begin your trauma healing essentials journey today</h2>
+    <p>Download the 3-book PDF set to get somatic regulation tools, IFS-informed guidance, and daily practices that build lasting resilience.</p>
+
+    <a class="u-cta-btn u-cta-primary" href="/products/trauma-healing-essentials-bundle-3-book-pdf-set">Download the Trauma Healing Essentials Bundle</a>
+  </div>
+
+</div>
 
 {% schema %}
 {
