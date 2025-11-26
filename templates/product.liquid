@@ -10,19 +10,17 @@
     <div class="product__grid">
       <div class="product__gallery product__media">
         {%- assign featured_media = product.featured_media -%}
-        {%- assign replacement_image_url = 'https://cdn.shopify.com/s/files/1/0673/8755/5923/files/Liberation_par_l_ecriture___Traumatismes_et_guerison_1.png?v=1763913159' -%}
+        {%- assign primary_media = featured_media | default: product.media.first -%}
         {%- assign primary_image_alt = product.title | default: 'Product image' -%}
 
-        {%- if featured_media and featured_media.alt != blank -%}
-          {%- assign primary_image_alt = featured_media.alt -%}
-        {%- elsif product.media.size > 0 and product.media.first.alt != blank -%}
-          {%- assign primary_image_alt = product.media.first.alt -%}
+        {%- if primary_media and primary_media.alt != blank -%}
+          {%- assign primary_image_alt = primary_media.alt -%}
         {%- endif -%}
 
-        {%- if featured_media or product.media.size > 0 -%}
+        {%- if primary_media -%}
           <figure class="product__gallery-stage">
             <img
-              src="{{ replacement_image_url }}"
+              src="{{ primary_media | image_url: width: 1200 }}"
               alt="{{ primary_image_alt | escape }}"
               class="product__media-image product__media-image--primary"
               loading="lazy"
