@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "icd10_cm_2025_landing",
+      "settings": {
+        "hero_heading": "ICD-10-CM 2025: The Complete Official Code Book",
+        "hero_subtitle": "The official, complete 2025 ICD-10-CM code book trusted by medical coders, billers, auditors, and students preparing for certification exams."
+      },
+      "blocks": {
+        "hero-bullet-1": {
+          "type": "hero_bullet",
+          "settings": {
+            "text": "Complete 2025 ICD-10-CM official code set"
+          }
+        },
+        "hero-bullet-2": {
+          "type": "hero_bullet",
+          "settings": {
+            "text": "Perfect for coders, billers, and auditors"
+          }
+        },
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Alexandra M.",
+            "role": "CPC, Coding Specialist",
+            "quote": "The 2025 ICD-10-CM updates are all here—easy to reference and vital for clean claims."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jordan P.",
+            "role": "Revenue Cycle Analyst",
+            "quote": "Clear layout and official guidelines make team training simple."
+          }
+        }
+      },
+      "block_order": [
+        "hero-bullet-1",
+        "hero-bullet-2",
+        "testimonial-1",
+        "testimonial-2"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
