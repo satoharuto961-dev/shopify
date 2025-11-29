@@ -5,7 +5,7 @@
 {% if book %}
   {% assign checkout_variant = book.selected_or_first_available_variant %}
   {% if checkout_variant %}
-    {% capture checkout_link %}{{ routes.cart_url }}?add={{ checkout_variant.id }}&quantity=1&return_to=/checkout{% endcapture %}
+    {% capture checkout_link %}{{ routes.cart_add_url }}?id={{ checkout_variant.id }}&quantity=1&return_to={{ '/checkout' | url_encode }}{% endcapture %}
   {% endif %}
 {% endif %}
 
