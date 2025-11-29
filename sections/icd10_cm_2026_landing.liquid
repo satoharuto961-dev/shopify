@@ -134,6 +134,15 @@
       grid-template-columns: 1fr;
       gap: 16px;
     }
+    .icd10-landing__warning {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      color: #92400e;
+    }
+    .icd10-landing__warning h2 {
+      margin: 0 0 12px;
+      color: #92400e;
+    }
     .icd10-landing__card {
       border: 1px solid #e5e7eb;
       border-radius: 12px;
@@ -271,8 +280,8 @@
         </div>
         <div class="icd10-landing__hero-content">
           <div class="icd10-landing__eyebrow">2026 ICD-10-CM Code Book</div>
-          <h1 id="icd10-hero-title">{{ section.settings.hero_title | default: 'Stay Audit-Ready with the Official 2026 ICD-10-CM Code Book' }}</h1>
-          <p class="icd10-landing__subtext">{{ section.settings.hero_subtitle | default: 'Confidently code, bill, and document with the newest compliant ICD-10-CM updates vetted for professional use.' }}</p>
+          <h1 id="icd10-hero-title">{{ section.settings.hero_title | default: 'Code Right. Get Paid Right.' }}</h1>
+          <p class="icd10-landing__subtext">{{ section.settings.hero_subtitle | default: 'Stay compliant with the official 2026 ICD-10-CM edition so every claim, audit, and chart meets payer standards on day one.' }}</p>
           {% assign bullet_blocks = section.blocks | where: 'type', 'bullet_point' %}
           {% if bullet_blocks.size > 0 %}
             <ul class="icd10-landing__bullets">
@@ -304,12 +313,22 @@
       </section>
     {% endif %}
 
+    <section class="icd10-landing__section icd10-landing__warning" aria-labelledby="icd10-warning-title">
+      <h2 id="icd10-warning-title">What Happens If You DON’T Upgrade?</h2>
+      <ul class="icd10-landing__list">
+        <li>Denied claims that delay payment cycles</li>
+        <li>Higher audit exposure from outdated references</li>
+        <li>Compliance issues when payers enforce 2026 rules</li>
+        <li>Revenue loss from rework, appeals, and resubmissions</li>
+      </ul>
+    </section>
+
     <section class="icd10-landing__section" aria-labelledby="icd10-upgrade-title">
       <h2 id="icd10-upgrade-title">Why Upgrade to the 2026 Edition?</h2>
       <ul class="icd10-landing__list">
-        <li>Code changes: new, revised, and deleted ICD-10-CM codes ready for October 1 updates.</li>
-        <li>Compliance: aligns your coding, billing, and documentation with the latest official guidelines.</li>
-        <li>Risk mitigation: avoid denials, penalties, and rework caused by outdated code references.</li>
+        <li>Track every new, revised, and deleted ICD-10-CM code before the effective date.</li>
+        <li>Align documentation and billing with payer-mandated 2026 compliance requirements.</li>
+        <li>Reduce audit findings with the most current regulatory guidance at your fingertips.</li>
       </ul>
     </section>
 
@@ -318,19 +337,19 @@
       <div class="icd10-landing__cards">
         <div class="icd10-landing__card">
           <h3>Medical Coders &amp; Billers</h3>
-          <p>Protect revenue cycle accuracy with current diagnosis codes that clear payer edits and audits.</p>
+          <p>Frustrated by denials and recoding? Use the official 2026 edition to pass payer edits the first time.</p>
         </div>
         <div class="icd10-landing__card">
           <h3>Students &amp; Exam Candidates</h3>
-          <p>Train with the official 2026 layout so exam practice mirrors real-world coding scenarios.</p>
+          <p>Worried about outdated practice materials? Train with the complete 2026 layout to mirror exam-day coding.</p>
         </div>
         <div class="icd10-landing__card">
           <h3>Hospitals &amp; Clinics</h3>
-          <p>Equip teams with verified references to reduce denials, resubmissions, and compliance risk.</p>
+          <p>Facing compliance pressure? Equip teams with the current official reference to cut denials and rework.</p>
         </div>
         <div class="icd10-landing__card">
           <h3>Healthcare Consultants</h3>
-          <p>Deliver audit-ready guidance backed by the latest ICD-10-CM changes for your clients.</p>
+          <p>Need authoritative guidance? Advise clients with the fully updated 2026 code set and guidelines.</p>
         </div>
       </div>
     </section>
@@ -339,33 +358,33 @@
       <h2 id="icd10-inside-title">What’s Inside the 2026 Edition?</h2>
       <div class="icd10-landing__cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
         <div class="icd10-landing__card">
-          <h3>Complete Code Set</h3>
+          <h3>Complete &amp; Official Code Set</h3>
           <ul class="icd10-landing__list">
-            <li>Full ICD-10-CM code set for 2026 with chapter-specific updates</li>
-            <li>Clear callouts for new, revised, and deleted codes effective for FY2026</li>
+            <li>Full ICD-10-CM 2026 code set with chapter-specific updates</li>
+            <li>Callouts for every new, revised, and deleted code effective for FY2026</li>
           </ul>
         </div>
         <div class="icd10-landing__card">
-          <h3>Official Guidance</h3>
+          <h3>Guidelines &amp; Conventions</h3>
           <ul class="icd10-landing__list">
-            <li>Official guidelines for coding and reporting with practical application notes</li>
-            <li>Alphabetic Index and Tabular List with conventions, symbols, and chapter-specific rules</li>
+            <li>Official coding and reporting guidelines with regulatory notes and examples</li>
+            <li>Alphabetic Index, Tabular List, symbols, and chapter rules highlighted for quick accuracy</li>
           </ul>
         </div>
         <div class="icd10-landing__card">
-          <h3>Workflow Ready</h3>
+          <h3>Tables &amp; Indexes</h3>
           <ul class="icd10-landing__list">
-            <li>Color-coded tabs, highlights, and legends to speed daily coding decisions</li>
-            <li>Indexing aids and tables designed for quick lookups during audits and appeals</li>
+            <li>Neoplasm, Drug &amp; Chemical, and External Causes tables organized for fast lookup</li>
+            <li>Official indexes and legends structured for rapid navigation during audits and appeals</li>
           </ul>
         </div>
         <div class="icd10-landing__card">
-          <h3>Benefits</h3>
+          <h3>Built for Daily Use</h3>
           <div class="icd10-landing__benefits">
-            <span class="icd10-landing__benefit">Accuracy</span>
-            <span class="icd10-landing__benefit">Speed</span>
-            <span class="icd10-landing__benefit">Compliance</span>
-            <span class="icd10-landing__benefit">Fewer denials</span>
+            <span class="icd10-landing__benefit">Official</span>
+            <span class="icd10-landing__benefit">Complete</span>
+            <span class="icd10-landing__benefit">Exam-safe</span>
+            <span class="icd10-landing__benefit">Audit-ready</span>
           </div>
         </div>
       </div>
@@ -375,20 +394,24 @@
       <h2 id="icd10-faq-title">Frequently Asked Questions</h2>
       <div class="icd10-landing__cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
         <div class="icd10-landing__card">
-          <h3>Is this the official 2026 codebook?</h3>
-          <p>Yes. This is the complete official ICD-10-CM 2026 edition with all published updates.</p>
+          <h3>Is this the official edition?</h3>
+          <p>Yes. It is the complete, official ICD-10-CM 2026 codebook with all published updates.</p>
         </div>
         <div class="icd10-landing__card">
           <h3>Who should use it?</h3>
-          <p>Coders, billers, CDI specialists, auditors, educators, and compliance teams preparing for FY2026.</p>
+          <p>Students, coders, CDI specialists, auditors, educators, and clinics preparing for the 2026 code year.</p>
         </div>
         <div class="icd10-landing__card">
-          <h3>What format is it?</h3>
-          <p>Printed codebook with indexing aids, tabular list, and official guidelines for daily reference.</p>
+          <h3>Why do I need the 2026 version?</h3>
+          <p>Payers expect 2026 codes and guidelines; using older editions can trigger denials and audit findings.</p>
         </div>
         <div class="icd10-landing__card">
-          <h3>Why upgrade now?</h3>
-          <p>To align coding and billing workflows before the effective date and minimize denials or penalties.</p>
+          <h3>Is this exam-safe?</h3>
+          <p>Yes. The official structure, tabs, and guidelines mirror what you need for certification prep and testing.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>How is it delivered?</h3>
+          <p>Professional print format with durable binding, organized tables, and indexes for daily coding use.</p>
         </div>
       </div>
     </section>
@@ -397,26 +420,27 @@
       <h2 id="icd10-trust-title">Why Buy From Us?</h2>
       <div class="icd10-landing__cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
         <div class="icd10-landing__card">
-          <h3>Secure checkout</h3>
-          <p>Encrypted payments and trusted processing keep your order safe.</p>
+          <h3>Official Edition</h3>
+          <p>We supply the official, complete 2026 ICD-10-CM codebook trusted by professionals.</p>
         </div>
         <div class="icd10-landing__card">
-          <h3>Reliable fulfillment</h3>
-          <p>Professional packing and quick dispatch to keep your projects on schedule.</p>
+          <h3>Secure Checkout</h3>
+          <p>Encrypted payments and trusted processing keep your order protected.</p>
         </div>
         <div class="icd10-landing__card">
-          <h3>Professional support</h3>
-          <p>Dedicated help for healthcare professionals and purchasing teams.</p>
+          <h3>Fast Delivery</h3>
+          <p>Rapid processing with careful packing so teams can start coding sooner.</p>
         </div>
         <div class="icd10-landing__card">
-          <h3>Healthcare-focused</h3>
-          <p>We specialize in resources for coders, billers, and clinical operations.</p>
+          <h3>Professional Resource</h3>
+          <p>Dedicated support for coders, billers, and clinical operations teams.</p>
         </div>
       </div>
       <div class="icd10-landing__trust-bar" aria-label="Trust indicators">
-        <span class="icd10-landing__trust-pill">Secure Checkout</span>
-        <span class="icd10-landing__trust-pill">Fast Processing</span>
-        <span class="icd10-landing__trust-pill">Healthcare-Focused</span>
+        <span class="icd10-landing__trust-pill">✓ Official Edition</span>
+        <span class="icd10-landing__trust-pill">✓ Secure Checkout</span>
+        <span class="icd10-landing__trust-pill">✓ Fast Delivery</span>
+        <span class="icd10-landing__trust-pill">✓ Professional Resource</span>
       </div>
     </section>
 
@@ -438,9 +462,9 @@
 
     {% if book %}
       <section class="icd10-landing__cta-final" aria-labelledby="icd10-final-title">
-        <h2 id="icd10-final-title">Be Ready for the 2026 Coding Year</h2>
-        <p>Use the latest official ICD-10-CM codes to stay compliant and avoid claim rejections.</p>
-        <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Upgrade to the 2026 Edition">Upgrade to the 2026 Edition</a>
+        <h2 id="icd10-final-title">Secure Your 2026 Edition Today</h2>
+        <p>Avoid mistakes, denials, and outdated coding.</p>
+        <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Code with Confidence in 2026">Code with Confidence in 2026</a>
         <div class="icd10-landing__trust-microcopy">✓ Official Edition &nbsp; &nbsp; ✓ Secure Checkout &nbsp; &nbsp; ✓ Professional Resource</div>
       </section>
     {% endif %}
@@ -455,13 +479,13 @@
       "type": "text",
       "id": "hero_title",
       "label": "Hero title",
-      "default": "Stay Audit-Ready with the Official 2026 ICD-10-CM Code Book"
+      "default": "Code Right. Get Paid Right."
     },
     {
       "type": "textarea",
       "id": "hero_subtitle",
       "label": "Hero subtitle",
-      "default": "Confidently code, bill, and document with the newest compliant ICD-10-CM updates vetted for professional use."
+      "default": "Stay compliant with the official 2026 ICD-10-CM edition so every claim, audit, and chart meets payer standards on day one."
     }
   ],
   "blocks": [
