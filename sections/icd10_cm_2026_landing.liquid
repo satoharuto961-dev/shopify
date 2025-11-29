@@ -1,0 +1,490 @@
+{% comment %}
+  ICD-10-CM 2026 Landing Page Section
+{% endcomment %}
+{% assign book = all_products['icd-10-cm-2026-the-complete-official-codebook'] %}
+{% if book %}
+  {% assign checkout_variant = book.selected_or_first_available_variant %}
+  {% if checkout_variant %}
+    {% capture checkout_link %}{{ routes.cart_url }}?add={{ checkout_variant.id }}&quantity=1&return_to=/checkout{% endcapture %}
+  {% endif %}
+{% endif %}
+
+<div class="icd10-landing">
+  <style>
+    .icd10-landing {
+      padding: 32px 20px 48px;
+      background: #f7f9fb;
+      color: #1c1c1c;
+    }
+    .icd10-landing__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .icd10-landing__hero {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .icd10-landing__hero-media img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #f2f4f7;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+    .icd10-landing__eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f62fe;
+      margin-bottom: 8px;
+    }
+    .icd10-landing h1 {
+      font-size: 32px;
+      line-height: 1.25;
+      margin: 0 0 12px;
+    }
+    .icd10-landing__subtext {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: #3a3a3a;
+    }
+    .icd10-landing__bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+      display: grid;
+      gap: 8px;
+    }
+    .icd10-landing__bullets li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: #1f2937;
+    }
+    .icd10-landing__bullets svg {
+      width: 18px;
+      height: 18px;
+      color: #0f62fe;
+      flex-shrink: 0;
+    }
+    .icd10-landing__price {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 8px 0 12px;
+    }
+    .icd10-landing__price-current {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f62fe;
+    }
+    .icd10-landing__price-compare {
+      font-size: 16px;
+      color: #9ca3af;
+      text-decoration: line-through;
+    }
+    .icd10-landing__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #0f62fe, #4589ff);
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 10px 20px rgba(69, 137, 255, 0.25);
+    }
+    .icd10-landing__cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(15, 98, 254, 0.28);
+    }
+    .icd10-landing__trust-microcopy {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+    .icd10-landing__section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+    }
+    .icd10-landing__section h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+    .icd10-landing__cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .icd10-landing__card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      background: #f9fafb;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+    .icd10-landing__card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    .icd10-landing__list {
+      list-style: disc;
+      padding-left: 18px;
+      margin: 0;
+      color: #1f2937;
+      display: grid;
+      gap: 6px;
+    }
+    .icd10-landing__benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .icd10-landing__benefit {
+      background: #e8f0ff;
+      color: #0f62fe;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .icd10-landing__trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .icd10-landing__trust-pill {
+      background: #eef2ff;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #e0e7ff;
+    }
+    .icd10-landing__testimonials {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .icd10-landing__testimonial {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      background: #f8fafc;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+    }
+    .icd10-landing__quote {
+      font-style: italic;
+      color: #111827;
+      margin: 0 0 10px;
+    }
+    .icd10-landing__person {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .icd10-landing__role {
+      color: #4b5563;
+      font-size: 14px;
+    }
+    .icd10-landing__cta-final {
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #0f62fe, #4f46e5);
+      color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(15, 98, 254, 0.25);
+    }
+    .icd10-landing__cta-final h2 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .icd10-landing__cta-final p {
+      margin: 0 0 16px;
+      color: #e5e7eb;
+    }
+    .icd10-landing__cta-final .icd10-landing__cta {
+      background: #fff;
+      color: #0f62fe;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .icd10-landing__cta-final .icd10-landing__cta:hover {
+      box-shadow: 0 14px 24px rgba(0, 0, 0, 0.2);
+    }
+    @media (min-width: 768px) {
+      .icd10-landing__hero {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        padding: 32px;
+      }
+      .icd10-landing h1 {
+        font-size: 40px;
+      }
+      .icd10-landing__cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .icd10-landing__testimonials {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .icd10-landing__container {
+        gap: 40px;
+      }
+      .icd10-landing__hero {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 32px;
+      }
+      .icd10-landing__cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  </style>
+
+  <div class="icd10-landing__container">
+    {% if book %}
+      <section class="icd10-landing__hero" aria-labelledby="icd10-hero-title">
+        <div class="icd10-landing__hero-media">
+          {% if book.featured_image %}
+            <img src="{{ book.featured_image | image_url: width: 900 }}" alt="Cover of the ICD-10-CM 2026 complete official code book" loading="lazy"/>
+          {% else %}
+            <img src="https://cdn.shopify.com/s/files/1/0673/8755/5923/files/71xxJ3oDBhL._SL1500.jpg?v=1764418987" alt="Cover of the ICD-10-CM 2026 complete official code book" loading="lazy"/>
+          {% endif %}
+        </div>
+        <div class="icd10-landing__hero-content">
+          <div class="icd10-landing__eyebrow">2026 ICD-10-CM Code Book</div>
+          <h1 id="icd10-hero-title">{{ section.settings.hero_title | default: book.title }}</h1>
+          <p class="icd10-landing__subtext">{{ section.settings.hero_subtitle | default: 'The complete and official ICD-10-CM code book for 2026, trusted by coders, billers, and healthcare professionals nationwide.' }}</p>
+          {% assign bullet_blocks = section.blocks | where: 'type', 'bullet_point' %}
+          {% if bullet_blocks.size > 0 %}
+            <ul class="icd10-landing__bullets">
+              {% for block in bullet_blocks %}
+                <li {{ block.shopify_attributes }}>
+                  <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 0 1 .006 1.414l-6.42 6.5a1 1 0 0 1-1.43.01l-3.55-3.45a1 1 0 1 1 1.394-1.434l2.83 2.753 5.712-5.782a1 1 0 0 1 1.438-.011Z" clip-rule="evenodd"/></svg>
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <div class="icd10-landing__price">
+            {% if book.compare_at_price and book.compare_at_price > book.price %}
+              <span class="icd10-landing__price-compare">{{ book.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="icd10-landing__price-current">{{ book.price | money }}</span>
+          </div>
+          <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
+          <div class="icd10-landing__trust-microcopy">Secure checkout • Professional-grade resource</div>
+        </div>
+      </section>
+    {% else %}
+      <section class="icd10-landing__hero" aria-labelledby="icd10-hero-title">
+        <div class="icd10-landing__hero-content">
+          <div class="icd10-landing__eyebrow">Product unavailable</div>
+          <h1 id="icd10-hero-title">ICD-10-CM 2026 Code Book</h1>
+          <p class="icd10-landing__subtext">The product could not be loaded. Please check back soon.</p>
+        </div>
+      </section>
+    {% endif %}
+
+    <section class="icd10-landing__section" aria-labelledby="icd10-who-title">
+      <h2 id="icd10-who-title">Who Is This For?</h2>
+      <div class="icd10-landing__cards">
+        <div class="icd10-landing__card">
+          <h3>Medical Coders &amp; Billers</h3>
+          <p>Ensure every claim uses the latest diagnosis codes and passes payer audits.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Students &amp; Exam Candidates</h3>
+          <p>Prepare confidently with the official 2026 ICD-10-CM structure and guidelines.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Hospitals &amp; Clinics</h3>
+          <p>Equip teams with accurate references to minimize denials and resubmissions.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Healthcare Consultants</h3>
+          <p>Deliver compliant, up-to-date recommendations to clients and providers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="icd10-landing__section" aria-labelledby="icd10-inside-title">
+      <h2 id="icd10-inside-title">What’s Inside the 2026 Edition?</h2>
+      <div class="icd10-landing__cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="icd10-landing__card">
+          <h3>Complete Code Set</h3>
+          <ul class="icd10-landing__list">
+            <li>ICD-10-CM code set for 2026</li>
+            <li>Updated, revised, and deleted codes</li>
+          </ul>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Official Guidance</h3>
+          <ul class="icd10-landing__list">
+            <li>Official guidelines and instructions</li>
+            <li>Alphabetic index + tabular list</li>
+          </ul>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Workflow Ready</h3>
+          <ul class="icd10-landing__list">
+            <li>Clear structure and navigation aids</li>
+            <li>Designed for daily coding accuracy</li>
+          </ul>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Benefits</h3>
+          <div class="icd10-landing__benefits">
+            <span class="icd10-landing__benefit">Accuracy</span>
+            <span class="icd10-landing__benefit">Speed</span>
+            <span class="icd10-landing__benefit">Compliance</span>
+            <span class="icd10-landing__benefit">Fewer denials</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="icd10-landing__section" aria-labelledby="icd10-trust-title">
+      <h2 id="icd10-trust-title">Why Buy From Us?</h2>
+      <div class="icd10-landing__cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="icd10-landing__card">
+          <h3>Secure checkout</h3>
+          <p>Encrypted payments and trusted processing keep your order safe.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Reliable fulfillment</h3>
+          <p>Professional packing and quick dispatch to keep your projects on schedule.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Professional support</h3>
+          <p>Dedicated help for healthcare professionals and purchasing teams.</p>
+        </div>
+        <div class="icd10-landing__card">
+          <h3>Healthcare-focused</h3>
+          <p>We specialize in resources for coders, billers, and clinical operations.</p>
+        </div>
+      </div>
+      <div class="icd10-landing__trust-bar" aria-label="Trust indicators">
+        <span class="icd10-landing__trust-pill">Secure Checkout</span>
+        <span class="icd10-landing__trust-pill">Fast Processing</span>
+        <span class="icd10-landing__trust-pill">Healthcare-Focused</span>
+      </div>
+    </section>
+
+    <section class="icd10-landing__section" aria-labelledby="icd10-testimonials-title">
+      <h2 id="icd10-testimonials-title">What Professionals Say</h2>
+      {% assign testimonial_blocks = section.blocks | where: 'type', 'testimonial' %}
+      {% if testimonial_blocks.size > 0 %}
+        <div class="icd10-landing__testimonials">
+          {% for block in testimonial_blocks %}
+            <article class="icd10-landing__testimonial" {{ block.shopify_attributes }}>
+              <p class="icd10-landing__quote">“{{ block.settings.quote }}”</p>
+              <div class="icd10-landing__person">{{ block.settings.name }}</div>
+              <div class="icd10-landing__role">{{ block.settings.role }}</div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+
+    {% if book %}
+      <section class="icd10-landing__cta-final" aria-labelledby="icd10-final-title">
+        <h2 id="icd10-final-title">Be Ready for the 2026 Coding Year</h2>
+        <p>Use the latest official ICD-10-CM codes to stay compliant and avoid claim rejections.</p>
+        <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
+      </section>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "ICD-10-CM 2026 Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title",
+      "default": "ICD-10-CM 2026: The Complete Official Code Book"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "The complete and official ICD-10-CM code book for 2026, trusted by coders, billers, and healthcare professionals nationwide."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet_point",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Bullet text",
+          "default": "Official 2026 ICD-10-CM diagnosis codes"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Jordan, RHIT"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Senior Medical Coder"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The 2026 ICD-10-CM code book keeps my team aligned with the latest guidelines."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "ICD-10-CM 2026 Landing",
+      "blocks": [
+        { "type": "bullet_point", "settings": { "text": "Official 2026 ICD-10-CM diagnosis codes" } },
+        { "type": "bullet_point", "settings": { "text": "Ideal for coders, billers, auditors, and students" } },
+        { "type": "bullet_point", "settings": { "text": "Clear structure and easy navigation" } },
+        { "type": "bullet_point", "settings": { "text": "Supports accurate billing and compliance" } },
+        { "type": "bullet_point", "settings": { "text": "Essential for exam preparation" } },
+        { "type": "testimonial", "settings": { "name": "Jordan, RHIT", "role": "Senior Medical Coder", "quote": "The 2026 ICD-10-CM code book keeps my team aligned with the latest guidelines." } },
+        { "type": "testimonial", "settings": { "name": "Priya S.", "role": "Clinical Documentation Lead", "quote": "Clear indexing and updated codes make audits smoother and faster." } },
+        { "type": "testimonial", "settings": { "name": "Alex M.", "role": "Billing Specialist", "quote": "A must-have reference to minimize denials and rework." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
