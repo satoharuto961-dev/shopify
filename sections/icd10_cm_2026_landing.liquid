@@ -4,6 +4,9 @@
 {% assign book = all_products['icd-10-cm-2026-the-complete-official-codebook'] %}
 {% if book %}
   {% assign checkout_variant = book.selected_or_first_available_variant %}
+  {% if checkout_variant %}
+    {% capture checkout_link %}{{ routes.cart_url }}?add={{ checkout_variant.id }}&quantity=1&return_to=/checkout{% endcapture %}
+  {% endif %}
 {% endif %}
 
 <div class="icd10-landing">
@@ -287,7 +290,7 @@
             {% endif %}
             <span class="icd10-landing__price-current">{{ book.price | money }}</span>
           </div>
-          <a class="icd10-landing__cta" href="{% if checkout_variant %}/cart/{{ checkout_variant.id }}:1?checkout=1{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
+          <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
           <div class="icd10-landing__trust-microcopy">Secure checkout • Professional-grade resource</div>
         </div>
       </section>
@@ -406,7 +409,7 @@
       <section class="icd10-landing__cta-final" aria-labelledby="icd10-final-title">
         <h2 id="icd10-final-title">Be Ready for the 2026 Coding Year</h2>
         <p>Use the latest official ICD-10-CM codes to stay compliant and avoid claim rejections.</p>
-        <a class="icd10-landing__cta" href="{% if checkout_variant %}/cart/{{ checkout_variant.id }}:1?checkout=1{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
+        <a class="icd10-landing__cta" href="{% if checkout_link %}{{ checkout_link }}{% else %}{{ book.url }}{% endif %}" aria-label="Get the 2026 ICD-10-CM Code Book">Get the 2026 ICD-10-CM Code Book</a>
       </section>
     {% endif %}
   </div>
