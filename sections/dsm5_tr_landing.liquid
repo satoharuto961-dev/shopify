@@ -187,6 +187,95 @@
       line-height: 1.6;
       font-size: 0.97rem;
     }
+    .dsm-landing__reviews {
+      margin-top: 3rem;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      padding: 1.5rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+    .dsm-landing__reviews header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: baseline;
+    }
+    .dsm-landing__reviews h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .dsm-landing__reviews-summary {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .dsm-landing__reviews-summary-stars {
+      color: #f59e0b;
+      letter-spacing: 2px;
+    }
+    .dsm-landing__reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .dsm-landing__review-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+    .dsm-landing__review-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #f59e0b;
+      font-weight: 800;
+    }
+    .dsm-landing__review-rating .score {
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+    .dsm-landing__review-title {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+    .dsm-landing__review-meta,
+    .dsm-landing__review-format,
+    .dsm-landing__review-footer {
+      color: #475569;
+      font-size: 0.92rem;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+    }
+    .dsm-landing__review-format .verified {
+      color: #0f5aad;
+      font-weight: 700;
+    }
+    .dsm-landing__review-quote {
+      margin: 0;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .dsm-landing__review-footnote {
+      background: #e0f2fe;
+      color: #0f172a;
+      padding: 0.15rem 0.45rem;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    .dsm-landing__reviews-note {
+      margin: 0;
+      color: #475569;
+    }
     .dsm-landing__notice {
       margin-top: 1rem;
       color: #ef4444;
@@ -286,6 +375,177 @@
           <h3>Trusted source</h3>
           <p>Produced by the American Psychiatric Association and relied on by clinicians, educators, and researchers worldwide—now available as a convenient download.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="dsm-landing__reviews">
+      <header>
+        <h2>Recent reviews</h2>
+        <div class="dsm-landing__reviews-summary" role="img" aria-label="Rated 5 out of 5 stars based on recent customer feedback">
+          <span class="dsm-landing__reviews-summary-stars" aria-hidden="true">★★★★★</span>
+          <span>Community rated</span>
+        </div>
+      </header>
+      <p class="dsm-landing__reviews-note">Real feedback from clinicians, students, and practitioners keeping DSM-5-TR within reach.</p>
+      <div class="dsm-landing__reviews-grid" role="list">
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">A student or specialist necessity</h3>
+          <p class="dsm-landing__review-meta">MelodicEquestrienne · Reviewed in the United States on November 4, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Pricey, but necessary for students, or specialists! Exactly as pictured. Shiny cover, heavy book, condition was stellar. Came in shrink wrap.</blockquote>
+          <div class="dsm-landing__review-footer">
+            <span class="dsm-landing__review-footnote">Customer image</span>
+            <span>2 people found this helpful</span>
+          </div>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Stay current with the update</h3>
+          <p class="dsm-landing__review-meta">Amazon Customer · Reviewed in the United States on October 26, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">The DSM-TR is a rewrite of the DSM-5. The layout is easier to consume and helpful in the classroom. If you want to stay current, you'll need this update.</blockquote>
+          <div class="dsm-landing__review-footer">
+            <span>One person found this helpful</span>
+          </div>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Great condition</h3>
+          <p class="dsm-landing__review-meta">Anetta Tiquila · Reviewed in the United States on November 14, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">It was well worth the money spent.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Excellent quality must-have</h3>
+          <p class="dsm-landing__review-meta">Valerie Armstrong · Reviewed in the United States on December 1, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Crisp and well bound—an essential for psychotherapists.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Good quality for school</h3>
+          <p class="dsm-landing__review-meta">Lucille Henson · Reviewed in the United States on November 11, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">This will come in handy as I go to school. Glad I ordered.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Necessary reference</h3>
+          <p class="dsm-landing__review-meta">Amazon Customer · Reviewed in the United States on September 30, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Expensive, but necessary. The book helped with my master classes and continues to be useful in the field.</blockquote>
+          <div class="dsm-landing__review-footer">
+            <span>9 people found this helpful</span>
+          </div>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Essential reference</h3>
+          <p class="dsm-landing__review-meta">Mel · Reviewed in the United States on July 17, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">The DSM is a foundational resource with clear diagnostic criteria and updated language. Dense but well-organized for quick information.</blockquote>
+          <div class="dsm-landing__review-footer">
+            <span>4 people found this helpful</span>
+          </div>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 4 out of 5 stars">
+            <span aria-hidden="true">★★★★☆</span>
+            <span class="score">4.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Cover peeling by day 3</h3>
+          <p class="dsm-landing__review-meta">swagstir · Reviewed in the United States on July 12, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">It’s a DSM, which is important, but my cover is peeling by day 3—almost like cling wrap as the blue cover in silver material.</blockquote>
+          <div class="dsm-landing__review-footer">
+            <span>One person found this helpful</span>
+          </div>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Classic reference book</h3>
+          <p class="dsm-landing__review-meta">Anne Moore · Reviewed in Australia on November 29, 2024</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Useful for understanding psychology and learning about mental health issues. Comprehensive and a top item for aspiring psychologists.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">It is what I ordered</h3>
+          <p class="dsm-landing__review-meta">Byung · Reviewed in Canada on May 8, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">It is what it is.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Very good book</h3>
+          <p class="dsm-landing__review-meta">Tobias Schwartz Blass · Reviewed in Brazil on July 15, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Beautiful book with silver printing on the cover and very well structured.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Eccellente</h3>
+          <p class="dsm-landing__review-meta">Alessandra M. · Reviewed in Italy on April 23, 2024</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Arrived carefully packaged and with protective film. Magnificent for anyone approaching psychology.</blockquote>
+        </article>
+
+        <article class="dsm-landing__review-card" role="listitem">
+          <div class="dsm-landing__review-rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="score">5.0</span>
+          </div>
+          <h3 class="dsm-landing__review-title">Good product</h3>
+          <p class="dsm-landing__review-meta">Kajal · Reviewed in India on October 29, 2025</p>
+          <p class="dsm-landing__review-format">Format: Paperback <span class="verified">Verified Purchase</span></p>
+          <blockquote class="dsm-landing__review-quote">Good product.</blockquote>
+        </article>
       </div>
     </div>
   </div>
