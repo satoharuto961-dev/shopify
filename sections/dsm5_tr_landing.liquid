@@ -1,0 +1,394 @@
+{% assign product = all_products['diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'] %}
+{% assign available_variant = nil %}
+{% if product %}
+  {% assign available_variant = product.selected_or_first_available_variant %}
+{% endif %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+<div class="dsm-landing">
+  <style>
+    .dsm-landing {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #f5f7fb;
+      color: #0f172a;
+      padding: 2.5rem 0 3.5rem;
+    }
+    .dsm-landing .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .dsm-landing__hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+    .dsm-landing__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #0f5aad;
+      color: #fff;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 25px rgba(15, 90, 173, 0.25);
+    }
+    .dsm-landing__tag span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.2);
+    }
+    .dsm-landing h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin: 1rem 0 0.75rem;
+      line-height: 1.2;
+    }
+    .dsm-landing__subtitle {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 1.25rem;
+    }
+    .dsm-landing__bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.75rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .dsm-landing__bullets li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      background: #fff;
+      padding: 0.75rem 0.85rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e2e8f0;
+    }
+    .dsm-landing__bullets svg {
+      width: 16px;
+      height: 16px;
+      color: #16a34a;
+      margin-top: 2px;
+    }
+    .dsm-landing__cta {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      border: 1px solid #dbeafe;
+    }
+    .dsm-landing__price {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .dsm-landing__price small {
+      font-size: 0.95rem;
+      color: #0f5aad;
+      font-weight: 600;
+    }
+    .dsm-landing__form {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+    .dsm-landing .buy-now {
+      background: linear-gradient(135deg, #0f5aad, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.95rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .dsm-landing .buy-now:hover,
+    .dsm-landing .buy-now:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.4);
+    }
+    .dsm-landing .buy-now[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .dsm-landing__availability {
+      font-size: 0.95rem;
+      color: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .dsm-landing__availability .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.18);
+    }
+    .dsm-landing__media {
+      background: linear-gradient(180deg, #ffffff, #e2e8f0);
+      border-radius: 18px;
+      padding: 1.25rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+    .dsm-landing__media figure {
+      margin: 0;
+    }
+    .dsm-landing__media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+    .dsm-landing__features {
+      margin-top: 2.75rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .dsm-landing__feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .dsm-landing__feature-card {
+      background: #fff;
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    }
+    .dsm-landing__feature-card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+    }
+    .dsm-landing__feature-card p {
+      margin: 0;
+      color: #334155;
+      line-height: 1.6;
+      font-size: 0.97rem;
+    }
+    .dsm-landing__notice {
+      margin-top: 1rem;
+      color: #ef4444;
+      font-weight: 700;
+    }
+    .dsm-landing__success {
+      color: #16a34a;
+      font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      .dsm-landing {
+        padding: 2rem 0 3rem;
+      }
+      .dsm-landing__cta {
+        order: -1;
+      }
+    }
+  </style>
+  <div class="container">
+    <div class="dsm-landing__hero">
+      <div>
+        <div class="dsm-landing__tag"><span aria-hidden="true"></span>Clinical Reference Standard</div>
+        <h1>{{ section.settings.hero_heading | default: product.title }}</h1>
+        <p class="dsm-landing__subtitle">
+          {{ section.settings.hero_subtitle | default: product.description | strip_html | truncate: 180 }}
+        </p>
+        <ul class="dsm-landing__bullets" role="list">
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div><strong>Authoritative DSM-5-TR content</strong> with the latest diagnostic criteria and codes.</div>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div><strong>Built for clinicians and students</strong> who need an at-a-glance reference for assessments.</div>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div><strong>Ships fast</strong> so you can keep your practice or coursework moving.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="dsm-landing__cta">
+        <div class="dsm-landing__price">
+          <div>{{ available_variant.price | money }}</div>
+          <small>Print edition — {{ product.vendor | default: 'APA Publishing' }}</small>
+        </div>
+        <div class="dsm-landing__availability">
+          <span class="dot" aria-hidden="true"></span>
+          {% if is_available %}
+            In stock and ready to ship
+          {% else %}
+            Currently unavailable
+          {% endif %}
+        </div>
+        <div class="dsm-landing__form">
+          {% if product and available_variant %}
+            <form class="js-buy-now-form" data-product-id="{{ product.id }}">
+              <input type="hidden" name="id" value="{{ available_variant.id }}">
+              <button type="submit" class="buy-now" {% unless is_available %}disabled{% endunless %} data-variant-id="{{ available_variant.id }}">Buy now</button>
+            </form>
+          {% else %}
+            <p class="dsm-landing__notice">This product is not yet available.</p>
+          {% endif %}
+          <p class="dsm-landing__ship-note">Secure checkout powered by Shopify.</p>
+          <p class="dsm-landing__message" data-buy-now-message></p>
+        </div>
+      </div>
+      <div class="dsm-landing__media">
+        <figure>
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 960 }}" alt="{{ section.settings.image_alt | default: product.title | escape }}">
+          {% else %}
+            <div style="height:320px;display:grid;place-items:center;color:#334155;">Cover image coming soon</div>
+          {% endif %}
+        </figure>
+      </div>
+    </div>
+
+    <div class="dsm-landing__features">
+      <h2>Why clinicians choose the DSM-5-TR</h2>
+      <div class="dsm-landing__feature-grid">
+        <div class="dsm-landing__feature-card">
+          <h3>Updated diagnostic guidance</h3>
+          <p>Text revisions clarify criteria and symptom descriptions across chapters, improving accuracy during intake and assessment.</p>
+        </div>
+        <div class="dsm-landing__feature-card">
+          <h3>Codes at your fingertips</h3>
+          <p>ICD-10-CM codes appear alongside each disorder to streamline documentation, billing, and referrals.</p>
+        </div>
+        <div class="dsm-landing__feature-card">
+          <h3>Trusted source</h3>
+          <p>Produced by the American Psychiatric Association and relied on by clinicians, educators, and researchers worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var buyNowForms = document.querySelectorAll('.js-buy-now-form');
+      var messageEl = document.querySelector('[data-buy-now-message]');
+      var isAvailable = {{ is_available | default: false | json }};
+
+      if (!buyNowForms.length) {
+        return;
+      }
+
+      var setMessage = function(text, isError) {
+        if (!messageEl) return;
+        messageEl.textContent = text || '';
+        messageEl.className = 'dsm-landing__message' + (isError ? ' dsm-landing__notice' : ' dsm-landing__success');
+      };
+
+      var toggleButtons = function(disabled) {
+        buyNowForms.forEach(function(form) {
+          var button = form.querySelector('.buy-now');
+          if (!button) return;
+          if (disabled) {
+            button.setAttribute('disabled', 'disabled');
+          } else if (isAvailable) {
+            button.removeAttribute('disabled');
+          }
+        });
+      };
+
+      if (!isAvailable) {
+        toggleButtons(true);
+        return;
+      }
+
+      buyNowForms.forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          var button = form.querySelector('.buy-now');
+          var variantInput = form.querySelector('input[name="id"]');
+          var variantId = variantInput && variantInput.value ? variantInput.value : (button ? button.getAttribute('data-variant-id') : null);
+
+          if (!variantId) {
+            setMessage('Please try again.', true);
+            return;
+          }
+
+          toggleButtons(true);
+          setMessage('');
+
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ id: variantId, quantity: 1 })
+          })
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Request failed');
+              }
+              return response.json();
+            })
+            .then(function() {
+              setMessage('Added! Redirecting to checkout…');
+              window.location.assign('/checkout');
+            })
+            .catch(function() {
+              setMessage('Please try again.', true);
+              toggleButtons(false);
+              form.submit();
+            });
+        });
+      });
+    });
+  </script>
+</div>
+{% schema %}
+{
+  "name": "DSM-5-TR landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "Diagnostic and Statistical Manual of Mental Disorders, Text Revision (DSM-5-TR)"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "The authoritative reference for mental health professionals featuring the latest diagnostic criteria, codes, and clarifications."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "DSM-5-TR text revision book cover"
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}
