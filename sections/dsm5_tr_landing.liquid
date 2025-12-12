@@ -1,6 +1,12 @@
 {% assign product = all_products['diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'] %}
-{% assign available_variant = product.selected_or_first_available_variant %}
-{% assign is_available = product and product.available and available_variant and available_variant.available %}
+{% assign available_variant = nil %}
+{% if product %}
+  {% assign available_variant = product.selected_or_first_available_variant %}
+{% endif %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
 <div class="dsm-landing">
   <style>
     .dsm-landing {
