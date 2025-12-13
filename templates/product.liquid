@@ -142,6 +142,9 @@
                 {%- for variant in product.variants -%}
                   <option
                     value="{{ variant.id }}"
+                    data-price="{{ variant.price | money }}"
+                    data-compare-at-price="{{ variant.compare_at_price | money }}"
+                    data-available="{{ variant.available }}"
                     {%- if variant == product.selected_or_first_available_variant -%} selected{%- endif -%}
                     {%- unless variant.available -%} disabled{%- endunless -%}
                   >
@@ -243,6 +246,32 @@
       </div>
     </div>
   </section>
+
+  {%- if product.available -%}
+    <div class="sticky-buy-now" role="region" aria-label="Quick purchase">
+      <div class="sticky-buy-now__details">
+        <p class="sticky-buy-now__eyebrow">Buy now</p>
+        <p class="sticky-buy-now__title">{{ product.title }}</p>
+        <p class="sticky-buy-now__price" aria-live="polite">
+          <span class="sticky-buy-now__price-current">{{ primary_variant.price | money }}</span>
+          <span class="sticky-buy-now__price-compare"{%- unless primary_variant.compare_at_price > primary_variant.price -%} hidden{%- endunless -%}>
+            {{ primary_variant.compare_at_price | money }}
+          </span>
+        </p>
+      </div>
+      <a
+        class="sticky-buy-now__button"
+        href="/cart"
+        data-checkout-variant="{{ primary_variant.id }}"
+        data-checkout-quantity="1"
+        data-checkout-redirect="/checkout"
+        data-checkout-loading-text="Adding..."
+        role="button"
+      >
+        Buy now
+      </a>
+    </div>
+  {%- endif -%}
 
   {%- render 'product-reviews', product: product -%}
 {%- endif -%}

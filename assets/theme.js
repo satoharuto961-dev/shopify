@@ -83,5 +83,81 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', bindCheckoutButtons);
+  function toggleStickyAvailability(button, isAvailable) {
+    if (!button) {
+      return;
+    }
+
+    if (isAvailable) {
+      button.classList.remove('is-disabled');
+      button.removeAttribute('aria-disabled');
+      button.removeAttribute('tabindex');
+      return;
+    }
+
+    button.classList.add('is-disabled');
+    button.setAttribute('aria-disabled', 'true');
+    button.setAttribute('tabindex', '-1');
+  }
+
+  function updateStickyPriceDisplay(selectedOption) {
+    const priceDisplay = document.querySelector('.sticky-buy-now__price-current');
+    const compareDisplay = document.querySelector('.sticky-buy-now__price-compare');
+    const priceText = selectedOption?.dataset.price;
+    const compareText = selectedOption?.dataset.compareAtPrice;
+
+    if (priceDisplay && priceText) {
+      priceDisplay.textContent = priceText;
+    }
+
+    if (!compareDisplay) {
+      return;
+    }
+
+    const shouldShowCompare = compareText && compareText.trim() !== '' && compareText !== priceText;
+    if (shouldShowCompare) {
+      compareDisplay.textContent = compareText;
+      compareDisplay.removeAttribute('hidden');
+    } else {
+      compareDisplay.setAttribute('hidden', 'hidden');
+    }
+  }
+
+  function handleVariantSelection(event) {
+    const variantSelect = event?.target;
+    const stickyButton = document.querySelector('.sticky-buy-now__button');
+
+    if (!variantSelect || !stickyButton) {
+      return;
+    }
+
+    const selectedOption = variantSelect.options[variantSelect.selectedIndex];
+    const selectedVariantId = variantSelect.value;
+
+    if (selectedVariantId) {
+      stickyButton.setAttribute('data-checkout-variant', selectedVariantId);
+    }
+
+    const isAvailable = selectedOption ? selectedOption.dataset.available !== 'false' : true;
+    toggleStickyAvailability(stickyButton, isAvailable);
+    updateStickyPriceDisplay(selectedOption);
+  }
+
+  function bindVariantListeners() {
+    const variantSelect = document.querySelector('.product-form__select');
+
+    if (!variantSelect) {
+      return;
+    }
+
+    variantSelect.addEventListener('change', handleVariantSelection);
+    handleVariantSelection({ target: variantSelect });
+  }
+
+  function initializeTheme() {
+    bindCheckoutButtons();
+    bindVariantListeners();
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeTheme);
 })();

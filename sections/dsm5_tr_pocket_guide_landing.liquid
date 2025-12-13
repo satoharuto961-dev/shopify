@@ -7,7 +7,7 @@
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
       color: #0f172a;
-      padding: 48px 0 64px;
+      padding: 48px 0 128px;
     }
     .pocket-guide-landing .container {
       max-width: 1100px;
@@ -197,6 +197,18 @@
     .pocket-guide-landing .reviews-block {
       margin-top: 48px;
     }
+
+    @media (max-width: 720px) {
+      .pocket-guide-landing .sticky-buy-now {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pocket-guide-landing .sticky-buy-now__button {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
   <div class="container">
     <div class="hero">
@@ -258,6 +270,31 @@
   <div class="container reviews-block">
     {%- render 'product-reviews', product: product -%}
   </div>
+  {%- if product and primary_variant and product.available and primary_variant.available -%}
+    <div class="sticky-buy-now" role="region" aria-label="Buy DSM-5-TR Pocket Guide">
+      <div class="sticky-buy-now__details">
+        <p class="sticky-buy-now__eyebrow">Instant digital download</p>
+        <p class="sticky-buy-now__title">{{ product.title }}</p>
+        <p class="sticky-buy-now__price" aria-live="polite">
+          <span class="sticky-buy-now__price-current">{{ primary_variant.price | money }}</span>
+          <span class="sticky-buy-now__price-compare"{%- unless primary_variant.compare_at_price > primary_variant.price -%} hidden{%- endunless -%}>
+            {{ primary_variant.compare_at_price | money }}
+          </span>
+        </p>
+      </div>
+      <a
+        class="sticky-buy-now__button"
+        href="/cart"
+        data-checkout-variant="{{ primary_variant.id }}"
+        data-checkout-quantity="1"
+        data-checkout-redirect="/checkout"
+        data-checkout-loading-text="Adding..."
+        role="button"
+      >
+        Buy now
+      </a>
+    </div>
+  {%- endif -%}
   <script>
     (function() {
       var form = document.querySelector('.pocket-guide-form');
