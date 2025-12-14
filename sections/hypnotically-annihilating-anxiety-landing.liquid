@@ -281,6 +281,90 @@
       align-items: start;
     }
 
+    .hypno-landing .reviews {
+      margin-top: 56px;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 18px;
+      padding: 22px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.35);
+    }
+
+    .hypno-landing .reviews h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+    }
+
+    .hypno-landing .reviews p.lede {
+      color: #cbd5e1;
+      margin: 0 0 18px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .hypno-landing .reviews-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hypno-landing .review-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 14px;
+      padding: 14px 14px 16px;
+      display: grid;
+      gap: 6px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .hypno-landing .reviewer {
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hypno-landing .stars {
+      color: #fbbf24;
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .hypno-landing .stars svg { width: 16px; height: 16px; }
+
+    .hypno-landing .review-meta {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .hypno-landing .review-card h3 {
+      margin: 4px 0 0;
+      font-size: 1rem;
+      color: #f8fafc;
+    }
+
+    .hypno-landing .review-card p {
+      margin: 2px 0 0;
+      color: #e2e8f0;
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+
+    .hypno-landing .helpful {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      margin-top: 4px;
+    }
+
     @media (max-width: 720px) {
       .hypno-landing { padding-bottom: 80px; }
       .hypno-landing .hero { padding: 22px; }
@@ -368,6 +452,141 @@
         <li>Guided visualizations to rewire anxious memories</li>
         <li>Client case studies with exact wording and timing notes</li>
         <li>Downloadable checklists and prompts for daily practice</li>
+      </ul>
+    </div>
+
+    <div class="reviews" aria-label="Reader reviews">
+      <h2>What readers are saying</h2>
+      <p class="lede">Unfiltered reactions from hypnotists, clinicians, and everyday readers using these scripts in real life.</p>
+      <ul class="reviews-list">
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>TrishtheDish</span>
+          </div>
+          <div class="review-meta">
+            <span>Invaluable Info for Hypnotists but what about....</span>
+            <span>Reviewed Oct 12, 2016 · Kindle · Verified Purchase</span>
+          </div>
+          <p>I read all of these books back to back, having just completed my hypnotist certificate training. The scripts are amazing, the explanations of concepts are easy to understand, and I totally agree that the root cause of most "mental illness" is not getting needs met!</p>
+          <p class="helpful">10 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Amazon Customer</span>
+          </div>
+          <div class="review-meta">
+            <span>Helpful</span>
+            <span>Reviewed Jul 16, 2016 · Kindle · Verified Purchase</span>
+          </div>
+          <p>I really enjoy this series and find a lot of the tips helpful. I do wish the Rogue Hypnotist would get a better editor and perhaps temper the language a bit, but overall it was a good read with some helpful tips and some insightful points.</p>
+          <p class="helpful">3 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Janine s.</span>
+          </div>
+          <div class="review-meta">
+            <span>Very informative</span>
+            <span>Reviewed May 28, 2019 · Kindle · Verified Purchase</span>
+          </div>
+          <p>The author goes over and above what you would expect. He is very clear and concise in explaining what hypnosis is truly about, and gives extremely detailed inductions. I highly recommend his books!</p>
+          <p class="helpful">2 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Non+</span>
+          </div>
+          <div class="review-meta">
+            <span>Please add these to audible!</span>
+            <span>Reviewed Apr 10, 2023 · Kindle · Verified Purchase</span>
+          </div>
+          <p>I love all these books by whoever this is. I know there is a demand to add these books to audible. A lot of us are waiting on that.</p>
+          <p class="helpful">3 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Ryan E</span>
+          </div>
+          <div class="review-meta">
+            <span>A CLINICAL thumbs Up!</span>
+            <span>Reviewed May 8, 2019 · Kindle · Verified Purchase</span>
+          </div>
+          <p>I love this author! As a clinical psychologist and hypnotherapist, I love how he just gives you tools, and ones that work! I've used his books for several years—my client turn over is positive and word of mouth spreads.</p>
+          <p class="helpful">3 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Sceptic Septic</span>
+          </div>
+          <div class="review-meta">
+            <span>I learned a lot from this</span>
+            <span>Reviewed Nov 12, 2020 · Kindle · Verified Purchase</span>
+          </div>
+          <p>Even if you're not really a hypnotist, read this not to be gullible. It could happen to anybody—these insights help you spot and avoid harmful suggestion.</p>
+          <p class="helpful">Marked as helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>Tony</span>
+          </div>
+          <div class="review-meta">
+            <span>The Rogue's ebooks are awesome!</span>
+            <span>Reviewed Aug 5, 2016 · Kindle · Verified Purchase</span>
+          </div>
+          <p>I used the "How to Detraumatize Anything" script for a client who had terrible feelings of guilt. She left the session a new woman feeling forgiveness and self-acceptance.</p>
+          <p class="helpful">6 people found this helpful</p>
+        </li>
+        <li class="review-card">
+          <div class="reviewer">
+            <span class="stars" aria-label="5 out of 5 stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.8-4.3 4.2 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.5 7.6l5.9-.8z"/></svg>
+              {% endfor %}
+            </span>
+            <span>R H</span>
+          </div>
+          <div class="review-meta">
+            <span>Strange, but good.</span>
+            <span>Reviewed Jun 27, 2016 · Kindle · Verified Purchase</span>
+          </div>
+          <p>Remarkable stuff. The neurobiology cited seems on point throughout, and the material reads like it comes from someone who knows exactly what they're doing.</p>
+          <p class="helpful">6 people found this helpful</p>
+        </li>
       </ul>
     </div>
   </div>
