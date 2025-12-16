@@ -1,0 +1,445 @@
+{% assign product = all_products['encyclopedia-of-counseling-master-review-and-tutorial-for-the-national-counselor-examination-state-counseling-exams-and-the-counselor-preparation-comprehensive-examination'] %}
+{% assign available_variant = product.first_available_variant %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+{% assign display_price = available_variant.price | default: product.price | default: 2900 %}
+
+<div class="encyclopedia-landing">
+  <style>
+    .encyclopedia-landing {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background: #f7fbff;
+    }
+    .encyclopedia-landing .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .encyclopedia-landing h1,
+    .encyclopedia-landing h2,
+    .encyclopedia-landing h3 {
+      color: #0f172a;
+    }
+    .encyclopedia-landing p {
+      color: #334155;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: center;
+      padding: 3rem 0 2rem;
+    }
+    .hero-media {
+      position: relative;
+      background: linear-gradient(180deg, #ffffff, #e1edff);
+      border-radius: 16px;
+      padding: 1.25rem;
+      border: 1px solid rgba(15, 66, 126, 0.12);
+      box-shadow: 0 16px 40px rgba(15, 66, 126, 0.12);
+    }
+    .hero-media img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+    .hero-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #0f416f;
+      color: #fff;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 10px 25px rgba(15, 65, 111, 0.32);
+    }
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .hero-tags {
+      display: inline-flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0 0 1rem;
+    }
+    .hero-tag {
+      background: #0f66c2;
+      color: #fff;
+      padding: 0.35rem 0.75rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(15, 102, 194, 0.28);
+    }
+    .hero-highlights {
+      display: grid;
+      gap: 0.6rem;
+      margin: 1rem 0 1.25rem;
+      padding: 0;
+      list-style: none;
+    }
+    .hero-highlights li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      background: #fff;
+      padding: 0.75rem 0.85rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+    .hero-highlights svg {
+      width: 16px;
+      height: 16px;
+      color: #22c55e;
+      margin-top: 2px;
+    }
+    .purchase-card {
+      background: #0f66c2;
+      color: #fff;
+      border-radius: 16px;
+      padding: 1.4rem;
+      display: grid;
+      gap: 0.75rem;
+      box-shadow: 0 16px 40px rgba(15, 102, 194, 0.32);
+    }
+    .purchase-price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .purchase-price small {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #dbeafe;
+    }
+    .buy-now-form {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .buy-now {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      background: #fff;
+      color: #0f66c2;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.35);
+    }
+    .buy-now[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .buy-now:not([disabled]):hover,
+    .buy-now:not([disabled]):focus {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.45);
+    }
+    .assurances {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      color: #e0edff;
+    }
+    .status-message {
+      min-height: 1.2em;
+      font-size: 0.95rem;
+    }
+    .feature-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 2rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .feature-card {
+      background: #f1f5f9;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.02);
+    }
+    .feature-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card ul {
+      padding-left: 1.25rem;
+      color: #334155;
+      margin: 0.25rem 0 0;
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, #0f66c2, #0f416f);
+      color: #fff;
+      border-radius: 18px;
+      padding: 1.8rem 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+      align-items: center;
+      margin: 2rem 0 3rem;
+      box-shadow: 0 16px 40px rgba(15, 102, 194, 0.28);
+    }
+    .cta-banner .cta-actions {
+      display: grid;
+      gap: 0.5rem;
+      justify-items: start;
+    }
+    .cta-banner .buy-now {
+      background: #fff;
+      color: #0f416f;
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.35);
+    }
+    @media (max-width: 640px) {
+      .purchase-card {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <section class="container hero" aria-labelledby="encyclopedia-hero-heading">
+    <div class="hero-media">
+      <span class="hero-badge">Digital download</span>
+      {% if product and product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 1080 }}" alt="{{ product.title | escape }} cover">
+      {% else %}
+        <img src="https://cdn.shopify.com/s/files/1/0989/7020/6389/files/71CSm1MejcL._SY522.jpg?v=1765879770" alt="Encyclopedia of Counseling book cover">
+      {% endif %}
+    </div>
+    <div class="hero-content">
+      <div class="hero-tags" aria-label="Exam coverage">
+        <span class="hero-tag">NCE</span>
+        <span class="hero-tag">CPCE</span>
+        <span class="hero-tag">State Counseling Exams</span>
+      </div>
+      <h1 id="encyclopedia-hero-heading">Encyclopedia of Counseling — Master Review &amp; Tutorial</h1>
+      <p>Get the digital companion trusted by counseling students and clinicians preparing for the National Counselor Examination, State Counseling Exams, and the Counselor Preparation Comprehensive Examination. Streamlined summaries, mnemonics, and practice questions keep you on pace to pass.</p>
+      <ul class="hero-highlights" aria-label="Key highlights">
+        <li>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+          <div>Comprehensive question banks with rationales for every domain.</div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+          <div>Condensed outlines, charts, and memory cues for quick refreshers.</div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.586l6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+          <div>Instant PDF download — study from any device and print what you need.</div>
+        </li>
+      </ul>
+      <div class="purchase-card" role="region" aria-label="Purchase Encyclopedia of Counseling digital download">
+        <div class="purchase-price">
+          {{ display_price | money }}
+          <small>One-time payment · Professional digital license</small>
+        </div>
+        {% if product and available_variant %}
+          <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
+            <input type="hidden" name="id" value="{{ available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+              {% if is_available %}
+                Download for {{ display_price | money }}
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+          </form>
+        {% else %}
+          <p class="status-message">This product is currently unavailable.</p>
+        {% endif %}
+        <div class="assurances">
+          <span>✔ Instant email delivery after checkout</span>
+          <span>✔ Printable, searchable, and ready for sessions</span>
+          <span>✔ Secure Shopify checkout</span>
+        </div>
+        <p class="status-message" role="status" aria-live="polite" data-buy-now-message></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container feature-section" aria-labelledby="inside-download">
+    <h2 id="inside-download">What’s inside the digital guide</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Exam-aligned coverage</h3>
+        <p>Core domains for NCE, CPCE, and state exams with blueprints that match current test weightings.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Practice that sticks</h3>
+        <p>Scenario-based questions, rationales, and pacing tips so you build confidence for timed sections.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Mnemonics &amp; visuals</h3>
+        <p>Fast-loading charts, summaries, and memory cues to review key theories, ethics, and assessment concepts.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Clinician-ready formats</h3>
+        <ul>
+          <li>Instant PDF access on any device</li>
+          <li>Printable outlines for group study</li>
+          <li>Hyperlinked table of contents</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container feature-section" aria-labelledby="exam-advantages">
+    <h2 id="exam-advantages">Built to keep you on track for exam day</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Confidence on demand</h3>
+        <p>Use the quick-reference outlines the night before your exam to refresh high-yield topics without overwhelm.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Smarter study sessions</h3>
+        <p>Break content into manageable sprints with domain checklists you can mark off as you master each area.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Client-ready knowledge</h3>
+        <p>Keep the guide as a long-term reference for session planning, supervision prep, and continuing education.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container cta-banner" aria-labelledby="cta-download">
+    <div>
+      <h2 id="cta-download">Download the Encyclopedia of Counseling today</h2>
+      <p>Professional-grade digital review for NCE, CPCE, and state counseling exams. Instant access for $29.</p>
+    </div>
+    {% if product and available_variant %}
+      <div class="cta-actions">
+        <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
+          <input type="hidden" name="id" value="{{ available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+            {% if is_available %}
+              Get instant access — {{ display_price | money }}
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        </form>
+        <span>Secure checkout · Digital PDF download · Yours to keep</span>
+      </div>
+    {% else %}
+      <p>This download will be available soon.</p>
+    {% endif %}
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!window.fetch) {
+      return;
+    }
+
+    var buyNowForms = document.querySelectorAll('.encyclopedia-landing .js-buy-now-form');
+    var messageEl = document.querySelector('.encyclopedia-landing [data-buy-now-message]');
+    var isAvailable = {{ is_available | default: false | json }};
+
+    if (!buyNowForms.length) {
+      return;
+    }
+
+    var toggleButtons = function(shouldDisable) {
+      buyNowForms.forEach(function(form) {
+        var button = form.querySelector('.buy-now');
+        if (!button) return;
+        if (shouldDisable) {
+          button.setAttribute('disabled', 'disabled');
+        } else if (isAvailable) {
+          button.removeAttribute('disabled');
+        }
+      });
+    };
+
+    if (!isAvailable) {
+      toggleButtons(true);
+      return;
+    }
+
+    buyNowForms.forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var button = form.querySelector('.buy-now');
+        if (button && button.hasAttribute('disabled')) {
+          return;
+        }
+
+        var variantInput = form.querySelector('input[name="id"]');
+        var variantId = variantInput && variantInput.value ? variantInput.value : (button ? button.getAttribute('data-variant-id') : null);
+
+        if (!variantId) {
+          if (messageEl) {
+            messageEl.textContent = 'Please try again.';
+          }
+          return;
+        }
+
+        toggleButtons(true);
+        if (messageEl) {
+          messageEl.textContent = '';
+        }
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(function() {
+            window.location.assign('/checkout');
+          })
+          .catch(function() {
+            if (messageEl) {
+              messageEl.textContent = 'Please try again.';
+            }
+            toggleButtons(false);
+            form.submit();
+          });
+      });
+    });
+  });
+</script>
