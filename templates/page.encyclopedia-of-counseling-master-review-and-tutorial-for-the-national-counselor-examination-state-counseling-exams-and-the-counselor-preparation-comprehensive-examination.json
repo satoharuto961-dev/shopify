@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "encyclopedia-of-counseling-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
