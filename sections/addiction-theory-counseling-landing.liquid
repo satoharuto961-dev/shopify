@@ -1,0 +1,277 @@
+{% assign product = all_products['a-comprehensive-guide-to-addiction-theory-and-counseling-techniques'] %}
+{% assign available_variant = product.first_available_variant %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+{% assign price_text = '$29' %}
+{% if product and product.price %}
+  {% assign price_text = product.price | money %}
+{% endif %}
+{% assign hero_image = 'https://cdn.shopify.com/s/files/1/0989/7020/6389/files/61lowJfDKoL._SY522.jpg?v=1765972796' %}
+{% if product and product.featured_image %}
+  {% assign hero_image = product.featured_image | image_url: width: 900 %}
+{% endif %}
+
+<div class="addiction-landing">
+  <style>
+    .addiction-landing {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #0c1f35;
+      background: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+    }
+    .addiction-landing .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .addiction-landing h1,
+    .addiction-landing h2,
+    .addiction-landing h3 {
+      color: #0c1f35;
+    }
+    .addiction-landing p {
+      color: #395069;
+      line-height: 1.7;
+    }
+    .page-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.25rem;
+      align-items: center;
+      padding: 3.5rem 0 2.25rem;
+    }
+    .hero-media {
+      position: relative;
+      background: linear-gradient(180deg, #ffffff, #e6f0ff);
+      border: 1px solid rgba(14, 54, 95, 0.12);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 16px 38px rgba(12, 43, 80, 0.14);
+    }
+    .hero-media img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(12, 43, 80, 0.08);
+      background: #fff;
+    }
+    .hero-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #154b8b;
+      color: #fff;
+      padding: 0.45rem 1.05rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: 0 10px 25px rgba(21, 75, 139, 0.3);
+    }
+    .hero-content h1 {
+      font-size: clamp(2.15rem, 4vw, 3.1rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-content .subhead {
+      font-size: 1.12rem;
+      color: #2f435a;
+      line-height: 1.65;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1rem 0;
+    }
+    .pill-list span {
+      background: rgba(16, 43, 77, 0.08);
+      border: 1px solid rgba(16, 43, 77, 0.14);
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      color: #123a70;
+      font-size: 0.95rem;
+    }
+    .purchase-card {
+      background: #fff;
+      border: 1px solid rgba(12, 43, 80, 0.12);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 18px 40px rgba(12, 43, 80, 0.12);
+      margin-top: 1.25rem;
+      display: grid;
+      gap: 0.8rem;
+      max-width: 460px;
+    }
+    .purchase-price {
+      font-size: 1.65rem;
+      font-weight: 850;
+      color: #0c1f35;
+    }
+    .purchase-price span {
+      display: block;
+      font-size: 0.95rem;
+      color: #40556d;
+      font-weight: 600;
+    }
+    .buy-now-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .buy-now {
+      background: linear-gradient(135deg, #1d5bb5, #123a70);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.95rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: 0 12px 30px rgba(29, 91, 181, 0.35);
+    }
+    .buy-now:hover:not([disabled]),
+    .buy-now:focus-visible:not([disabled]) {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(29, 91, 181, 0.45);
+    }
+    .buy-now[disabled] {
+      opacity: 0.65;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .reassurance {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      color: #32455a;
+    }
+    .feature-section {
+      padding: 2.5rem 0 1rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid rgba(12, 43, 80, 0.12);
+      border-radius: 14px;
+      padding: 1.15rem;
+      box-shadow: 0 12px 28px rgba(12, 43, 80, 0.08);
+    }
+    .feature-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.12rem;
+    }
+    .feature-card p,
+    .feature-card ul {
+      color: #395069;
+      line-height: 1.6;
+    }
+    .feature-card ul {
+      padding-left: 1.1rem;
+      margin: 0.5rem 0 0;
+    }
+    .cta-banner {
+      margin: 3rem 0;
+      background: linear-gradient(135deg, #123a70, #0d2e58);
+      color: #eaf2ff;
+      border-radius: 18px;
+      padding: 1.75rem 1.5rem;
+      display: grid;
+      gap: 0.8rem;
+      box-shadow: 0 20px 42px rgba(12, 43, 80, 0.2);
+    }
+    .cta-banner strong {
+      font-size: 1.2rem;
+    }
+    @media (max-width: 640px) {
+      .page-hero {
+        padding: 2.5rem 0 1.5rem;
+      }
+      .purchase-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+  <div class="container">
+    <div class="page-hero">
+      <div class="hero-media">
+        <span class="hero-badge">Digital Download</span>
+        <img src="{{ hero_image }}" alt="A Comprehensive Guide to Addiction Theory and Counseling Techniques cover" loading="lazy" />
+      </div>
+      <div class="hero-content">
+        <h1>A Comprehensive Guide to Addiction Theory and Counseling Techniques</h1>
+        <p class="subhead">Understand addiction through evidence-based frameworks and apply practical counseling strategies that support clients through recovery.</p>
+        <div class="pill-list">
+          <span>PDF Download</span>
+          <span>Instant Access</span>
+          <span>Clinical & Academic Ready</span>
+        </div>
+        <div class="purchase-card">
+          <div class="purchase-price">{{ price_text }} <span>One-time payment</span></div>
+          {% if is_available %}
+            {% form 'product', product, class: 'buy-now-form' %}
+              <input type="hidden" name="id" value="{{ available_variant.id }}" />
+              <button type="submit" name="checkout" class="buy-now">Download Now</button>
+            {% endform %}
+          {% else %}
+            <button type="button" class="buy-now" disabled>Sold Out</button>
+          {% endif %}
+          <div class="reassurance">
+            <span>✔️ Secure checkout via Shopify</span>
+            <span>✔️ Instant email access after purchase</span>
+            <span>✔️ 30-day satisfaction guarantee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-section">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Foundations of Addiction Theory</h3>
+          <p>Clarify biological, psychological, and social models with concise explanations and visual summaries you can reference in session prep.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Evidence-Based Counseling Techniques</h3>
+          <p>Step-by-step guidance for motivational interviewing, relapse prevention planning, and cognitive-behavioral interventions tailored to substance use.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Realistic Client Scenarios</h3>
+          <p>Case vignettes and dialogue scripts show how to navigate ambivalence, cravings, and setbacks with empathy and structure.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Ready-to-Use Tools</h3>
+          <ul>
+            <li>Goal-setting worksheets for early recovery</li>
+            <li>Session checklists and progress trackers</li>
+            <li>Psychoeducation handouts to share with clients</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div>
+        <strong>Equip yourself with a reliable roadmap for addiction counseling for just {{ price_text }}.</strong>
+        <p>Blend theory and practice with tools you can bring straight into supervision, coursework, or client sessions.</p>
+      </div>
+      {% if is_available %}
+        {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ available_variant.id }}" />
+          <button type="submit" name="checkout" class="buy-now">Checkout Now</button>
+        {% endform %}
+      {% else %}
+        <button type="button" class="buy-now" disabled>Unavailable</button>
+      {% endif %}
+    </div>
+  </div>
+</div>
