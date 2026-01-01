@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "highly-sensitive-person-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
