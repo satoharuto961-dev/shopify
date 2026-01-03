@@ -1,0 +1,510 @@
+{% assign product = all_products['assessment-procedures-for-counselors-and-helping-professionals-the-merrill-counseling-series-9th-edition'] %}
+{% assign available_variant = product.first_available_variant %}
+{% assign is_available = false %}
+{% if product and product.available and available_variant and available_variant.available %}
+  {% assign is_available = true %}
+{% endif %}
+
+<section class="assessment-procedures-landing">
+  <style>
+    .assessment-procedures-landing {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #13212e;
+      background: #f6f7fb;
+      padding-bottom: 4rem;
+    }
+    .assessment-procedures-landing .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .assessment-procedures-landing h1,
+    .assessment-procedures-landing h2,
+    .assessment-procedures-landing h3 {
+      color: #13212e;
+    }
+    .assessment-procedures-landing .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      align-items: center;
+      padding: 3.5rem 0 2.5rem;
+    }
+    .assessment-procedures-landing .hero-media {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(19, 33, 46, 0.12);
+      box-shadow: 0 24px 55px rgba(19, 33, 46, 0.12);
+    }
+    .assessment-procedures-landing .hero-media img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 12px 25px rgba(19, 33, 46, 0.12);
+    }
+    .assessment-procedures-landing .hero-tag {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      background: #375a7f;
+      color: #fff;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 12px 22px rgba(55, 90, 127, 0.35);
+    }
+    .assessment-procedures-landing .hero-meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: #13212e;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+    }
+    .assessment-procedures-landing h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .assessment-procedures-landing .hero-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #445262;
+    }
+    .assessment-procedures-landing .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0 0;
+    }
+    .assessment-procedures-landing .pill-row span {
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(55, 90, 127, 0.1);
+      border: 1px solid rgba(55, 90, 127, 0.18);
+      font-weight: 600;
+      color: #375a7f;
+    }
+    .assessment-procedures-landing .purchase-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid rgba(19, 33, 46, 0.12);
+      padding: 1.6rem;
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+      box-shadow: 0 18px 40px rgba(19, 33, 46, 0.12);
+      max-width: 460px;
+    }
+    .assessment-procedures-landing .purchase-price {
+      font-size: 1.65rem;
+      font-weight: 800;
+    }
+    .assessment-procedures-landing .purchase-price span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #445262;
+    }
+    .assessment-procedures-landing .buy-now-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .assessment-procedures-landing .buy-now {
+      background: linear-gradient(135deg, #375a7f, #1e3e5c);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.95rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 14px 28px rgba(55, 90, 127, 0.35);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .assessment-procedures-landing .buy-now:hover:not([disabled]),
+    .assessment-procedures-landing .buy-now:focus-visible:not([disabled]) {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(55, 90, 127, 0.45);
+    }
+    .assessment-procedures-landing .buy-now[disabled] {
+      opacity: 0.65;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .assessment-procedures-landing .reassurance {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      color: #314355;
+    }
+    .assessment-procedures-landing .section {
+      padding: 2.5rem 0;
+    }
+    .assessment-procedures-landing .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+    .assessment-procedures-landing .feature-card {
+      background: #fff;
+      border: 1px solid rgba(19, 33, 46, 0.12);
+      border-radius: 14px;
+      padding: 1.2rem;
+      box-shadow: 0 12px 28px rgba(19, 33, 46, 0.08);
+    }
+    .assessment-procedures-landing .feature-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .assessment-procedures-landing .feature-card p,
+    .assessment-procedures-landing .feature-card ul {
+      color: #445262;
+      line-height: 1.6;
+    }
+    .assessment-procedures-landing .feature-card ul {
+      padding-left: 1.1rem;
+      margin: 0.5rem 0 0;
+    }
+    .assessment-procedures-landing .highlight {
+      background: #13212e;
+      color: #e7edf6;
+      border-radius: 16px;
+      padding: 2rem 1.6rem;
+      margin-top: 2rem;
+      box-shadow: 0 18px 40px rgba(19, 33, 46, 0.2);
+    }
+    .assessment-procedures-landing .highlight strong {
+      display: block;
+      margin-top: 0.75rem;
+      color: #9db8dd;
+      font-size: 0.95rem;
+    }
+    .assessment-procedures-landing .reviews {
+      padding-top: 1rem;
+    }
+    .assessment-procedures-landing .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .assessment-procedures-landing .review-card {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid rgba(19, 33, 46, 0.12);
+      padding: 1.2rem;
+      display: grid;
+      gap: 0.6rem;
+      box-shadow: 0 12px 26px rgba(19, 33, 46, 0.08);
+    }
+    .assessment-procedures-landing .review-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: #375a7f;
+    }
+    .assessment-procedures-landing .review-title {
+      font-weight: 700;
+    }
+    .assessment-procedures-landing .review-meta {
+      font-size: 0.88rem;
+      color: #5a6979;
+    }
+    .assessment-procedures-landing .review-body {
+      color: #445262;
+      line-height: 1.6;
+    }
+    .assessment-procedures-landing .review-helpful {
+      font-size: 0.85rem;
+      color: #6b7a8a;
+    }
+    .assessment-procedures-landing .cta-banner {
+      margin-top: 3rem;
+      background: linear-gradient(135deg, #1e3e5c, #13212e);
+      color: #fff;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      display: grid;
+      gap: 1rem;
+      align-items: center;
+      box-shadow: 0 20px 44px rgba(19, 33, 46, 0.35);
+    }
+    .assessment-procedures-landing .cta-note {
+      color: rgba(231, 237, 246, 0.9);
+      font-size: 0.95rem;
+    }
+    .assessment-procedures-landing .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .assessment-procedures-landing .hero {
+        padding: 2.5rem 0 2rem;
+      }
+      .assessment-procedures-landing .purchase-card {
+        max-width: 100%;
+      }
+      .assessment-procedures-landing .cta-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <div class="container hero" aria-labelledby="assessment-procedures-hero-title">
+    <div class="hero-media">
+      <span class="hero-tag">Digital download</span>
+      <img src="https://cdn.shopify.com/s/files/1/0989/7020/6389/files/81_emz1bZCL._SY522.jpg?v=1767465567" alt="Assessment Procedures for Counselors and Helping Professionals 9th Edition cover">
+    </div>
+    <div>
+      <div class="hero-meta">Assessment fundamentals • Instant digital access</div>
+      <h1 id="assessment-procedures-hero-title">Assessment Procedures for Counselors and Helping Professionals (Merrill Counseling Series, 9th Edition)</h1>
+      <p class="hero-text">Build confident assessment skills with a step-by-step guide to appraisal, interviewing, and ethical decision-making. This 9th edition reference walks counseling students and helping professionals through core measurement concepts, real-world case examples, and the practical tools used in modern clinical settings.</p>
+      <div class="pill-row" aria-label="Highlights">
+        <span>Assessment planning &amp; reporting</span>
+        <span>Ethics, culture, &amp; bias awareness</span>
+        <span>Case studies &amp; review questions</span>
+        <span>Ideal for counselor education</span>
+      </div>
+      <div class="purchase-card" role="region" aria-label="Purchase Assessment Procedures for Counselors and Helping Professionals">
+        <div class="purchase-price">
+          {{ available_variant.price | default: product.price | money }}
+          <span>One-time payment · Digital delivery in minutes.</span>
+        </div>
+        <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
+          <input type="hidden" name="id" value="{{ available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+            {% if is_available %}
+              Download for {{ available_variant.price | default: product.price | money }}
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        </form>
+        <div class="reassurance">
+          <span>✔ Comprehensive assessment overview</span>
+          <span>✔ Practical examples &amp; study support</span>
+          <span>✔ 7-day satisfaction guarantee</span>
+        </div>
+        <p class="purchase-status" role="status" aria-live="polite" data-buy-now-message></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section" aria-labelledby="assessment-procedures-inside-title">
+    <h2 id="assessment-procedures-inside-title">What you’ll cover in the 9th edition</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Assessment foundations</h3>
+        <p>Master the essentials of reliability, validity, and test construction with counselor-friendly language.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Clinical interviewing</h3>
+        <p>Learn how to structure intake sessions, ask culturally responsive questions, and document findings.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Testing &amp; appraisal tools</h3>
+        <ul>
+          <li>Achievement &amp; aptitude measures</li>
+          <li>Personality assessment basics</li>
+          <li>Career and wellness inventories</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h3>Interpretation &amp; reporting</h3>
+        <p>Translate scores into actionable, ethical recommendations for clients, educators, and supervisors.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container highlight" aria-label="Student feedback">
+    “Informative textbook. I had to get this textbook for a class. The textbook is great for students interested in becoming a teacher/counselor.”
+    <strong>— Noralee Hoffman</strong>
+  </div>
+
+  <div class="container section" aria-labelledby="assessment-procedures-benefits-title">
+    <h2 id="assessment-procedures-benefits-title">Why students and counselors rely on this text</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Study-ready structure</h3>
+        <p>Clear chapter flow makes it easy to review for exams or build weekly reading plans.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Classroom-friendly examples</h3>
+        <p>Case studies and classroom scenarios help turn theory into real counseling practice.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Confidence in application</h3>
+        <p>Connect assessment data to client-centered decision-making with real-world guidance.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section reviews" aria-labelledby="assessment-procedures-reviews-title">
+    <header>
+      <h2 id="assessment-procedures-reviews-title">Student &amp; practitioner reviews</h2>
+      <p class="hero-text">Recent feedback from readers using the text in counseling coursework and practice.</p>
+    </header>
+    <div class="reviews-grid">
+      <article class="review-card">
+        <div class="review-header">
+          <span>Noralee Hoffman</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="review-title">Informative textbook</div>
+        <div class="review-meta">Reviewed in the United States on May 30, 2024 · Format: Paperback · Verified Purchase</div>
+        <p class="review-body">Informative textbook. I had to get this textbook for a class. The textbook is great for students interested in becoming a teacher/counselor.</p>
+        <div class="review-helpful">Helpful</div>
+      </article>
+      <article class="review-card">
+        <div class="review-header">
+          <span>Chelsey</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="review-title">Good!</div>
+        <div class="review-meta">Reviewed in the United States on June 23, 2023 · Format: Paperback · Verified Purchase</div>
+        <p class="review-body">Came fast and in great condition!! Useful for my classes.</p>
+        <div class="review-helpful">One person found this helpful</div>
+      </article>
+      <article class="review-card">
+        <div class="review-header">
+          <span>Ezzie</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="review-title">Good</div>
+        <div class="review-meta">Reviewed in the United States on July 10, 2022 · Format: Paperback · Verified Purchase</div>
+        <p class="review-body">Needed book for school.</p>
+        <div class="review-helpful">One person found this helpful</div>
+      </article>
+      <article class="review-card">
+        <div class="review-header">
+          <span>Miguel Perez, Jr.</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="review-title">Would buy from seller</div>
+        <div class="review-meta">Reviewed in the United States on August 19, 2020 · Format: Paperback · Verified Purchase</div>
+        <p class="review-body">Good quality! Seller is genuine.</p>
+        <div class="review-helpful">3 people found this helpful</div>
+      </article>
+    </div>
+  </div>
+
+  <div class="container cta-banner" aria-labelledby="assessment-procedures-cta-title">
+    <div>
+      <h2 id="assessment-procedures-cta-title">Get the 9th edition digital text for $29</h2>
+      <p class="cta-note">Instant access, study-ready structure, and counselor-focused guidance you can use right away.</p>
+    </div>
+    <div class="cta-actions">
+      <form class="buy-now-form js-buy-now-form" method="post" action="/cart/add" novalidate>
+        <input type="hidden" name="id" value="{{ available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button class="buy-now" type="submit" data-variant-id="{{ available_variant.id }}" {% unless is_available %}disabled{% endunless %}>
+          {% if is_available %}
+            Download now — {{ available_variant.price | default: product.price | money }}
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      </form>
+      <span class="cta-note">Secure checkout · Instant access · Need customer service? We’re here to help.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!window.fetch) {
+      return;
+    }
+
+    var buyNowForms = document.querySelectorAll('.assessment-procedures-landing .js-buy-now-form');
+    var messageEl = document.querySelector('.assessment-procedures-landing [data-buy-now-message]');
+    var isAvailable = {{ is_available | default: false | json }};
+
+    if (!buyNowForms.length) {
+      return;
+    }
+
+    var toggleButtons = function(shouldDisable) {
+      buyNowForms.forEach(function(form) {
+        var button = form.querySelector('.buy-now');
+        if (!button) return;
+        if (shouldDisable) {
+          button.setAttribute('disabled', 'disabled');
+        } else if (isAvailable) {
+          button.removeAttribute('disabled');
+        }
+      });
+    };
+
+    if (!isAvailable) {
+      toggleButtons(true);
+      return;
+    }
+
+    buyNowForms.forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var button = form.querySelector('.buy-now');
+        if (button && button.hasAttribute('disabled')) {
+          return;
+        }
+
+        var variantInput = form.querySelector('input[name="id"]');
+        var variantId = variantInput && variantInput.value ? variantInput.value : (button ? button.getAttribute('data-variant-id') : null);
+
+        if (!variantId) {
+          if (messageEl) {
+            messageEl.textContent = 'Please try again.';
+          }
+          return;
+        }
+
+        toggleButtons(true);
+        if (messageEl) {
+          messageEl.textContent = '';
+        }
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(function() {
+            window.location.assign('/checkout');
+          })
+          .catch(function() {
+            if (messageEl) {
+              messageEl.textContent = 'Please try again.';
+            }
+            toggleButtons(false);
+            form.submit();
+          });
+      });
+    });
+  });
+</script>

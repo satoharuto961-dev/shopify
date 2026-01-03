@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "main": {
+      "type": "assessment-procedures-counselors-landing"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
