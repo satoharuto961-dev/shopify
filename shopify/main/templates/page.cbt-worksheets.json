@@ -1,8 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "cbt-worksheets-landing"
-    }
-  },
-  "order": ["main"]
-}

@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "everything-is-tuberculosis-landing",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}

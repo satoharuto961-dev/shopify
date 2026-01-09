@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "trauma-essentials",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}

@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "seeking-safety-landing",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}

@@ -1,36 +1,5 @@
-{% liquid
-  assign is_therapist_landing = false
-  assign template_string = template | append: ''
-  if template_string == 'page.therapist-landing' or template_string == 'page.therapist-landing.json'
-    assign is_therapist_landing = true
-  elsif template.name and template.name == 'page' and template.suffix == 'therapist-landing'
-    assign is_therapist_landing = true
-  elsif template_string == 'page.cbt-worksheets' or template_string == 'page.cbt-worksheets.json'
-    assign is_therapist_landing = true
-  elsif template.name and template.name == 'page' and template.suffix == 'cbt-worksheets'
-    assign is_therapist_landing = true
-  endif
-  assign therapist_page_handle = settings.therapist_landing_page
-  assign therapist_page_url = ''
-  assign therapist_page_title = ''
-  if therapist_page_handle != blank
-    assign therapist_page = pages[therapist_page_handle]
-    if therapist_page
-      assign therapist_page_url = therapist_page.url
-      assign therapist_page_title = therapist_page.title
-    endif
-  endif
-  if therapist_page_url == ''
-    assign fallback_therapist_page = pages['therapist-landing']
-    if fallback_therapist_page
-      assign therapist_page_url = fallback_therapist_page.url
-      assign therapist_page_title = fallback_therapist_page.title
-    endif
-  endif
-  assign show_therapist_links = therapist_page_url != ''
-%}
 <!doctype html>
-<html lang="en"{% if is_therapist_landing %} class="therapist-landing-html"{% endif %}>
+<html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKJWGBWMK"></script>
@@ -55,12 +24,11 @@
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
-  <body class="template-{{ template | replace: '.', '-' }}{% if template.name %} template-name-{{ template.name | handleize }}{% endif %}{% if template.suffix %} template-suffix-{{ template.suffix | handleize }}{% endif %}{% if is_therapist_landing %} template-page-therapist-landing{% endif %}">
+  <body class="template-{{ template | replace: '.', '-' }}{% if template.name %} template-name-{{ template.name | handleize }}{% endif %}{% if template.suffix %} template-suffix-{{ template.suffix | handleize }}{% endif %}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2H2S2ZK"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    {% unless is_therapist_landing %}
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a class="brand" href="/">
@@ -76,9 +44,6 @@
               <li><a href="/#lists">Lists</a></li>
               <li><a href="/#new-releases">New Releases</a></li>
               <li><a href="/#community">Community</a></li>
-              {% if show_therapist_links %}
-                <li><a href="{{ therapist_page_url }}">{{ therapist_page_title | default: 'For Therapists' }}</a></li>
-              {% endif %}
               <li><a href="/#quotes">Quotes</a></li>
             </ul>
           </nav>
@@ -92,14 +57,12 @@
               <a class="header-auth__link" href="/account/login">Sign in</a>
               <a class="header-auth__cta" href="/account/register">Join {{ shop.name | default: 'PsychoReads' | escape }}</a>
             {% endif %}
-          </div>
         </div>
-      </header>
-    {% endunless %}
+      </div>
+    </header>
     <main class="site-main{% if template.name == 'index' or template == 'index' %} site-main--full-bleed{% endif %}" role="main">
       {{ content_for_layout }}
     </main>
-    {% unless is_therapist_landing %}
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <div class="footer-brand">
@@ -112,9 +75,6 @@
             <li><a href="/#lists">Trending lists</a></li>
             <li><a href="/#new-releases">New Releases</a></li>
             <li><a href="/collections/all">Browse all books</a></li>
-            {% if show_therapist_links %}
-              <li><a href="{{ therapist_page_url }}">{{ therapist_page_title | default: 'Therapist Landing' }}</a></li>
-            {% endif %}
           </ul>
         </div>
         <div class="footer-links">
@@ -138,10 +98,9 @@
           <div class="footer-bottom__links">
             <a href="/policies/privacy-policy">Privacy</a>
             <a href="/policies/terms-of-service">Terms</a>
-          </div>
         </div>
-      </footer>
-    {% endunless %}
+      </div>
+    </footer>
     {{ 'theme.js' | asset_url | script_tag }}
     {{ content_for_footer }}
   </body>

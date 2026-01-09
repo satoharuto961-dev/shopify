@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "therapist-landing",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}
