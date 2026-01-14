@@ -520,6 +520,7 @@ a:focus {
 }
 
 @media (max-width: 720px) {
+
   .cart-redirect,
   .cart-limit {
     padding: 3.5rem 1rem;
@@ -720,6 +721,7 @@ a:focus {
 
 /* Responsive stacking */
 @media (max-width: 1024px) {
+
   .hero,
   .hero-container {
     flex-direction: column !important;
@@ -740,6 +742,7 @@ a:focus {
 }
 
 @media (max-width: 600px) {
+
   .hero,
   .hero-container {
     padding: 40px 16px !important;
@@ -796,8 +799,10 @@ a:focus {
   border-radius: 24px;
   overflow: hidden;
   background: var(--color-surface);
+
   box-shadow: var(--shadow-medium);
   display: flex;
+
   align-items: center;
   justify-content: center;
   max-width: clamp(240px, 26vw, 360px);
@@ -1837,4 +1842,11 @@ a:focus {
   .landing-cta-panel {
     align-items: stretch;
   }
+}
+
+/* ---------------- HOME PAGE OVERRIDES ---------------- */
+body.template-index {
+  --color-background: #E3F0E8;
+  /* Premium subtle green */
+  background-color: var(--color-background);
 }
