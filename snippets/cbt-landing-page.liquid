@@ -8,19 +8,33 @@
       <div class="cbt-hero-media cbt-animate">
          <!-- Main Gallery Display -->
          <div class="cbt-gallery-main">
-            <img id="cbtMainImage" src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422" alt="The CBT Flip Chart" class="cbt-main-img">
+            {%- if product.featured_media -%}
+              <img id="cbtMainImage" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.featured_media.alt | escape }}" class="cbt-main-img">
+            {%- else -%}
+              <img id="cbtMainImage" src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422" alt="The CBT Flip Chart" class="cbt-main-img">
+            {%- endif -%}
          </div>
+         
          <!-- Thumbnails -->
          <div class="cbt-gallery-thumbs">
-            <div class="cbt-thumb active" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422')">
-               <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422" alt="Thumbnail 1">
-            </div>
-            <div class="cbt-thumb" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/a.png?v=1768522333')">
-               <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/a.png?v=1768522333" alt="Thumbnail 2">
-            </div>
-            <div class="cbt-thumb" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/b.png?v=1768522333')">
-               <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/b.png?v=1768522333" alt="Thumbnail 3">
-            </div>
+            {%- if product.media.size > 0 -%}
+               {%- for media in product.media -%}
+                  <div class="cbt-thumb {% if forloop.first %}active{% endif %}" onclick="changeImage(this, '{{ media | image_url: width: 1000 }}')">
+                     <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | escape }}">
+                  </div>
+               {%- endfor -%}
+            {%- else -%}
+               <!-- Fallback Hardcoded Thumbnails (Only used if no media in Admin) -->
+               <div class="cbt-thumb active" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422')">
+                  <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422" alt="Thumbnail 1">
+               </div>
+               <div class="cbt-thumb" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/a.png?v=1768522333')">
+                  <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/a.png?v=1768522333" alt="Thumbnail 2">
+               </div>
+               <div class="cbt-thumb" onclick="changeImage(this, 'https://cdn.shopify.com/s/files/1/0796/4557/3349/files/b.png?v=1768522333')">
+                  <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/b.png?v=1768522333" alt="Thumbnail 3">
+               </div>
+            {%- endif -%}
          </div>
       </div>
       
