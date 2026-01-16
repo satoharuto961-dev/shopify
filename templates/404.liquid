@@ -1,16 +1,26 @@
-{%- assign target_handle = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
-{%- assign target_path = '/product-page/' | append: target_handle -%}
+{%- assign req_path = request.path | remove_last: '/' -%}
+{%- assign target_handle_short = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
+{%- assign target_handle_long = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety-depression-stress-insomnia-ptsd-and-more' -%}
+{%- assign target_path = '/product-page/' | append: target_handle_short -%}
 
-{%- if request.path == target_path -%}
-  {%- assign product = all_products[target_handle] -%}
+{%- if req_path == target_path -%}
+  {%- comment -%} Try short handle first {%- endcomment -%}
+  {%- assign product = all_products[target_handle_short] -%}
+  
+  {%- comment -%} If not found, try long handle {%- endcomment -%}
+  {%- if product == empty -%}
+     {%- assign product = all_products[target_handle_long] -%}
+  {%- endif -%}
+
   {%- if product != empty -%}
     {%- render 'cbt-landing-page', product: product -%}
   {%- else -%}
-    {%- comment -%}Fallback if product lookup fails{%- endcomment -%}
+    {%- comment -%}Fallback if product lookup fails completely{%- endcomment -%}
     <section class="error-page">
       <div class="error-card">
-        <h1>Product Not Found (Lookup Failed)</h1>
-        <p>Could not find product with handle: {{ target_handle }}</p>
+        <h1>Product Not Found</h1>
+        <p>We detected the correct URL, but could not load the product data from Shopify. Please check if the product handle is correct.</p>
+        <p>Debug Path: {{ req_path }}</p>
          <div class="error-actions">
            <a href="/" class="button button-primary">Return home</a>
          </div>
