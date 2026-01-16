@@ -1,8 +1,11 @@
 /* CBT Flip Chart Landing Page Styles */
 :root {
-  --cbt-primary: #2C3E50; /* Dark Blue - Professional */
-  --cbt-accent: #3498DB; /* Calm Blue - Trust */
-  --cbt-light-bg: #F8FBFC; /* Very light blue tint */
+  --cbt-primary: #2C3E50;
+  /* Dark Blue - Professional */
+  --cbt-accent: #3498DB;
+  /* Calm Blue - Trust */
+  --cbt-light-bg: #F8FBFC;
+  /* Very light blue tint */
   --cbt-white: #FFFFFF;
   --cbt-text: #4a5568;
   --cbt-dark-text: #1a202c;
@@ -19,6 +22,9 @@
   background-color: var(--cbt-white);
   max-width: 100vw;
   overflow-x: hidden;
+  position: relative;
+  padding-bottom: 80px;
+  /* Space for sticky bar */
 }
 
 .cbt-container {
@@ -108,13 +114,17 @@
   scroll-snap-type: x mandatory;
 }
 
+/* Specific image fix: Ensure they have max width but maintain aspect ratio */
 .cbt-hero-image {
   width: 100%;
-  max-width: 500px; /* Limit size */
+  max-width: 500px;
+  height: auto;
   border-radius: var(--cbt-radius);
   box-shadow: var(--cbt-shadow-lg);
-  object-fit: cover;
+  object-fit: contain;
+  /* changed from cover to contain to prevent cropping */
   display: block;
+  scroll-snap-align: start;
 }
 
 .cbt-price {
@@ -145,8 +155,71 @@
 .cbt-add-to-cart-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--cbt-shadow-lg);
-  background-color: #233140; /* Darker shade of primary */
+  background-color: #233140;
+  /* Darker shade of primary */
 }
+
+/* Sticky Bar */
+.cbt-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid var(--cbt-border);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 1rem 0;
+  z-index: 1000;
+}
+
+.cbt-sticky-bar.visible {
+  transform: translateY(0);
+}
+
+.cbt-sticky-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cbt-sticky-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.cbt-sticky-title {
+  font-weight: 600;
+  font-size: 1rem;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .cbt-sticky-title {
+    display: block;
+  }
+}
+
+.cbt-sticky-price {
+  font-weight: 700;
+  color: var(--cbt-accent);
+}
+
+.cbt-btn-sticky {
+  background-color: var(--cbt-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cbt-btn-sticky:hover {
+  background-color: #233140;
+}
+
 
 /* Benefits Grid */
 .cbt-benefits-grid {
@@ -219,7 +292,8 @@
 }
 
 .cbt-star-rating {
-  color: #F59E0B; /* Amber for stars */
+  color: #F59E0B;
+  /* Amber for stars */
   margin-bottom: 0.5rem;
 }
 
@@ -263,8 +337,15 @@
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cbt-animate {

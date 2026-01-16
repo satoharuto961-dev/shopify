@@ -7,6 +7,7 @@
     <section class="cbt-section cbt-hero">
       <div class="cbt-hero-media cbt-animate">
          <div class="cbt-carousel-container">
+            <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/61EzyrQ3q4L._SL1341.jpg?v=1768246422" alt="CBT Flip Chart Main Image" class="cbt-hero-image">
             <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/a.png?v=1768522333" alt="CBT Flip Chart Image 1" class="cbt-hero-image">
             <img src="https://cdn.shopify.com/s/files/1/0796/4557/3349/files/b.png?v=1768522333" alt="CBT Flip Chart Image 2" class="cbt-hero-image">
          </div>
@@ -20,7 +21,8 @@
           <span class="cbt-price">{{ product.price | money }}</span>
           {% form 'product', product %}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <button type="submit" name="add" class="cbt-add-to-cart-btn">Add to Cart</button>
+            <input type="hidden" name="return_to" value="/checkout" />
+            <button type="submit" name="add" class="cbt-add-to-cart-btn">Buy Now</button>
           {% endform %}
         </div>
       </div>
@@ -84,6 +86,7 @@
     <section class="cbt-section">
       <h2 class="cbt-heading-2">What Customers Are Saying</h2>
       <div class="cbt-customer-reviews-grid">
+        <!-- Reviews content same as before, simplified for brevity in this thought but will include all -->
         
         <div class="cbt-review-card">
            <div class="cbt-review-header">
@@ -94,7 +97,7 @@
            <h4 class="cbt-heading-3" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Good tool to aid in therapy</h4>
            <p>It’s a great visual reference - I work with the geriatric population and usually have handouts or a visual representation to go along with explaining an intervention or theory. One side is glossy color and the Bach side is a gray scale so you can see what they are seeing. Behavioral Activation was also covered and mindfulness</p>
         </div>
-
+        <!-- ... (Include all other reviews here) ... -->
         <div class="cbt-review-card">
            <div class="cbt-review-header">
               <span class="cbt-review-author">Angela D. Hull</span>
@@ -277,6 +280,39 @@
 
       </div>
     </section>
-
+  </div>
+  
+  <!-- Sticky Buy Now Bar -->
+  <div class="cbt-sticky-bar">
+    <div class="cbt-container cbt-sticky-content">
+       <div class="cbt-sticky-info">
+          <span class="cbt-sticky-title">The CBT Flip Chart</span>
+          <span class="cbt-sticky-price">{{ product.price | money }}</span>
+       </div>
+       {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="return_to" value="/checkout" />
+          <button type="submit" name="add" class="cbt-btn-sticky">Buy Now</button>
+       {% endform %}
+    </div>
   </div>
 </div>
+
+<script>
+  // Simple script to show sticky bar on scroll
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyBar = document.querySelector('.cbt-sticky-bar');
+    const heroBtn = document.querySelector('.cbt-hero .cbt-add-to-cart-btn');
+    
+    window.addEventListener('scroll', function() {
+      if (heroBtn) {
+        const btnPosition = heroBtn.getBoundingClientRect().bottom;
+        if (btnPosition < 0) {
+           stickyBar.classList.add('visible');
+        } else {
+           stickyBar.classList.remove('visible');
+        }
+      }
+    });
+  });
+</script>
