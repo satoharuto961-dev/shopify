@@ -29,6 +29,9 @@
   {%- endif -%}
 {%- else -%}
   <section class="error-page">
+    <div style="background: yellow; color: black; padding: 10px; text-align: center; font-weight: bold; border: 2px solid red;">
+       DEBUG: request.path is "{{ request.path }}"
+    </div>
     <div class="error-card">
       <span class="error-eyebrow">Page not found</span>
       <h1>Looks like the story you're after is missing.</h1>
