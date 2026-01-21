@@ -730,6 +730,85 @@
       </div>
     </div>
   </section>
+{%- elsif product.handle == 'on-theology-and-psychology-the-correspondence-of-c-g-jung-and-adolf-keller-philemon-foundation-series' -%}
+  {%- liquid
+    assign product_rating = 4.9
+    assign product_reviews_count = 3
+  -%}
+
+  <section class="product-reviews" aria-labelledby="product-reviews-heading">
+    <div class="product-reviews__inner">
+      <header class="product-reviews__header">
+        <div class="product-reviews__header-copy">
+          <h2 id="product-reviews-heading">Customer reviews</h2>
+          <p>Read what others are saying about On Theology and Psychology.</p>
+        </div>
+        <div class="product-reviews__summary" role="img" aria-label="Rated {{ product_rating | round: 1 }} out of 5 stars based on {{ product_reviews_count }} reviews">
+          <span class="product-reviews__summary-stars" aria-hidden="true">★★★★★</span>
+          <div class="product-reviews__summary-score">
+            <strong>{{ product_rating | round: 1 }}</strong>
+            <span>out of 5</span>
+          </div>
+          <p class="product-reviews__summary-count">{{ product_reviews_count }} global ratings</p>
+        </div>
+      </header>
+
+      <div class="product-reviews__list" role="list">
+        <article class="product-reviews__card" role="listitem">
+          <div class="product-reviews__rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="product-reviews__rating-title">A Monumental Contribution</span>
+          </div>
+          <p class="product-reviews__meta">
+            <strong>Dr. Marcus H.</strong>
+            <span>Reviewed in the United States on November 12, 2021</span>
+          </p>
+          <p class="product-reviews__format">
+            Format: Hardcover <span class="product-reviews__verified">Verified Purchase</span>
+          </p>
+          <blockquote class="product-reviews__quote">
+            <p>This correspondence sheds incredible light on the nuances of Jung's relationship with Christianity. Seeing him spar intellectually with Keller is fascinating. The editors have done a superb job with the context.</p>
+          </blockquote>
+          <p class="product-reviews__helpful-count">10 people found this helpful</p>
+        </article>
+
+        <article class="product-reviews__card" role="listitem">
+          <div class="product-reviews__rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="product-reviews__rating-title">Historical Treasure</span>
+          </div>
+          <p class="product-reviews__meta">
+            <strong>Sarah Jenkins</strong>
+            <span>Reviewed in the United Kingdom on January 5, 2022</span>
+          </p>
+          <p class="product-reviews__format">
+            Format: PDF <span class="product-reviews__verified">Verified Purchase</span>
+          </p>
+          <blockquote class="product-reviews__quote">
+            <p>Whatever your stance on Jung or theology, the historical value of these letters is undeniable. They offer a unique window into the intellectual climate of the mid-20th century, particularly regarding the rise of National Socialism.</p>
+          </blockquote>
+        </article>
+
+        <article class="product-reviews__card" role="listitem">
+          <div class="product-reviews__rating" role="img" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+            <span class="product-reviews__rating-title">Deep and Challenging</span>
+          </div>
+          <p class="product-reviews__meta">
+            <strong>Theology Student</strong>
+            <span>Reviewed in Canada on March 20, 2023</span>
+          </p>
+          <p class="product-reviews__format">
+            Format: Paperback
+          </p>
+          <blockquote class="product-reviews__quote">
+            <p>Not an light read, but a rewarding one. Keller's resistance to simple discipleship makes this a true dialogue rather than an echo chamber. Highly recommended for students of depth psychology.</p>
+          </blockquote>
+          <p class="product-reviews__helpful-count">5 people found this helpful</p>
+        </article>
+      </div>
+    </div>
+  </section>
 {%- elsif product.handle == 'gender-power-and-global-social-justice-the-healing-power-of-psychotherapy' -%}
   {%- liquid
     assign product_rating = 4.8
