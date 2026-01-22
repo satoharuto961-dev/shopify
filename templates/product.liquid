@@ -8,6 +8,8 @@
   {% render 'gender-power-landing-page', product: product %}
 {%- elsif product.handle == 'on-theology-and-psychology-the-correspondence-of-c-g-jung-and-adolf-keller-philemon-foundation-series' -%}
   {% render 'on-theology-psychology-landing-page', product: product %}
+{%- elsif product.handle == 'gut-feelings-the-intelligence-of-the-unconscious' -%}
+  {% render 'gut-feelings-landing-page', product: product %}
 {%- else -%}
   {%- assign is_dsm5_tr =
     product.handle == 'diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'
