@@ -10,6 +10,8 @@
   {% render 'on-theology-psychology-landing-page', product: product %}
 {%- elsif product.handle == 'gut-feelings-the-intelligence-of-the-unconscious' -%}
   {% render 'gut-feelings-landing-page', product: product %}
+{%- elsif product.handle == 'pattern-focused-therapy-highly-effective-cbt-practice-in-mental-health-and-integrated-care-settings-first-edition' -%}
+  {% render 'pattern-focused-therapy-landing-page', product: product %}
 {%- else -%}
   {%- assign is_dsm5_tr =
     product.handle == 'diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'
