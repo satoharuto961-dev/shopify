@@ -14,6 +14,8 @@
   {% render 'pattern-focused-therapy-landing-page', product: product %}
 {%- elsif product.handle == 'cbt-the-cognitive-behavioural-tsunami-managerialism-politics-and-the-corruptions-of-science' -%}
   {% render 'cbt-tsunami-landing-page', product: product %}
+{%- elsif product.handle == 'transformational-chairwork-using-psychotherapeutic-dialogues-in-clinical-practice' -%}
+  {% render 'transformational-chairwork-landing-page', product: product %}
 {%- else -%}
   {%- assign is_dsm5_tr =
     product.handle == 'diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'
