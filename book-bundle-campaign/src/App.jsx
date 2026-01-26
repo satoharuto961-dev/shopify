@@ -33,7 +33,7 @@ function App() {
   // TODO: REPLACE THIS WITH YOUR REAL PRODUCT VARIANT ID FOR THE 7-BOOK BUNDLE
   // You can find this in your Shopify Admin URL for the product variant.
   // Example: .../variants/44665544332211 -> ID is 44665544332211
-  const BUNDLE_VARIANT_ID = 47817482010899; // Placeholder - CHANGE ME
+  const BUNDLE_VARIANT_ID = 9437459415269; // Real ID provided by user
 
   const handleCheckout = async () => {
     if (selectedBooks.length !== 7) {
