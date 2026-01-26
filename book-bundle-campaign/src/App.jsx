@@ -6,6 +6,14 @@ import BookDetailModal from './components/BookDetailModal';
 import { books } from './data/books';
 
 function App() {
+  // Use real Shopify data if available, otherwise use mock data
+  const [bookData, setBookData] = useState(() => {
+    if (window.shopifyBookData && window.shopifyBookData.length > 0) {
+      return window.shopifyBookData;
+    }
+    return books;
+  });
+
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [selectedDetailBook, setSelectedDetailBook] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
@@ -44,7 +52,7 @@ function App() {
     try {
       // 1. Prepare properties (selected books list)
       const properties = selectedBooks.reduce((acc, bookId, index) => {
-        const book = books.find(b => b.id === bookId);
+        const book = bookData.find(b => b.id === bookId);
         acc[`Book ${index + 1}`] = book ? book.title : bookId;
         return acc;
       }, {});
@@ -94,7 +102,7 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <BookGrid
-          books={books}
+          books={bookData}
           selectedIds={selectedBooks}
           onToggle={handleToggleBook}
           onDetail={setSelectedDetailBook}

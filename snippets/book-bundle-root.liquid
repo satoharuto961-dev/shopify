@@ -4,6 +4,23 @@
 {% endcomment %}
 
 <!-- Root container for React -->
+<script>
+  window.shopifyBookData = [
+  {% paginate collections.all.products by 250 %}
+    {% for product in collections.all.products %}
+      {% unless product.handle == '7-book-bundle' %}
+        {
+          id: {{ product.id }},
+          title: {{ product.title | json }},
+          author: {{ product.vendor | json }},
+          description: {{ product.content | strip_html | truncate: 150 | json }},
+          coverUrl: "{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 }}{% else %}https://placehold.co/400x600?text=No+Cover{% endif %}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endpaginate %}
+  ];
+</script>
 <div id="root" class="book-bundle-container"></div>
 
 <!-- Load compiled CSS -->
