@@ -21,7 +21,7 @@ function StickyBar({ count, onCheckout, onReset }) {
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-3xl border-t border-gray-200 dark:border-gray-800 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] z-50 p-4 transition-all duration-300">
+        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-gray-800 shadow-[0_-8px_30px_rgba(0,0,0,0.15)] z-50 p-4 transition-all duration-300">
             {/* Urgency Banner - Mobile Only (Top of sticky bar) */}
             <div className="md:hidden w-full flex justify-center mb-3">
                 <div className="bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 animate-pulse border border-rose-100 dark:border-rose-900/50">
@@ -74,7 +74,7 @@ function StickyBar({ count, onCheckout, onReset }) {
                     {/* Desktop Reset */}
                     <button
                         onClick={onReset}
-                        className="hidden md:block text-gray-400 hover:text-rose-500 font-medium transition-colors px-4 py-2 text-sm"
+                        className="hidden md:block text-gray-600 hover:text-gray-900 font-bold transition-colors px-4 py-2 text-sm underline decoration-gray-300 hover:underline"
                     >
                         Reset Selection
                     </button>
@@ -84,7 +84,7 @@ function StickyBar({ count, onCheckout, onReset }) {
                         onClick={onCheckout}
                         className={`group relative flex-1 md:flex-none py-3.5 px-8 rounded-xl font-bold text-lg shadow-xl shadow-indigo-500/20 transition-all duration-300 transform flex flex-col items-center justify-center leading-tight overflow-hidden ${isComplete
                             ? 'bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 text-white hover:scale-[1.02] hover:shadow-indigo-500/40 cursor-pointer'
-                            : 'bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                            : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 cursor-not-allowed border-2 border-zinc-300 dark:border-zinc-700'
                             }`}
                     >
                         {isComplete ? (
@@ -101,7 +101,7 @@ function StickyBar({ count, onCheckout, onReset }) {
                                 </span>
                             </>
                         ) : (
-                            <span className="text-base">Select {7 - count} more</span>
+                            <span className="text-base font-bold opacity-100">Select {7 - count} more</span>
                         )}
                     </button>
                 </div>
