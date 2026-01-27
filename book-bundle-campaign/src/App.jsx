@@ -55,7 +55,12 @@ function App() {
       // 1. Prepare properties (selected books list)
       const properties = selectedBooks.reduce((acc, bookId, index) => {
         const book = bookData.find(b => b.id === bookId);
-        acc[`Book ${index + 1}`] = book ? book.title : bookId;
+        if (book) {
+          acc[`Book ${index + 1}`] = book.title;
+          acc[`Book ${index + 1} Variant ID`] = book.variantId || 'N/A';
+        } else {
+          acc[`Book ${index + 1}`] = bookId;
+        }
         return acc;
       }, {});
 

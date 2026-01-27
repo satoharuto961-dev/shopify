@@ -11,6 +11,7 @@
       {% unless product.handle == '7-book-bundle' %}
         {
           id: {{ product.id }},
+          variantId: {{ product.selected_or_first_available_variant.id }},
           title: {{ product.title | json }},
           author: {{ product.vendor | json }},
           description: {{ product.content | strip_html | truncate: 150 | json }},
