@@ -43,7 +43,8 @@ function App() {
   // TODO: REPLACE THIS WITH YOUR REAL PRODUCT VARIANT ID FOR THE 7-BOOK BUNDLE
   // You can find this in your Shopify Admin URL for the product variant.
   // Example: .../variants/44665544332211 -> ID is 44665544332211
-  const BUNDLE_VARIANT_ID = 48328424063205; // Correct Variant ID found via JSON
+  // No longer using the single bundle variant ID because we are adding individual items
+  // const BUNDLE_VARIANT_ID = 48328424063205;
 
   const handleCheckout = async () => {
     if (selectedBooks.length !== 7) {
@@ -52,17 +53,22 @@ function App() {
     }
 
     try {
-      // 1. Prepare properties (selected books list)
-      const properties = selectedBooks.reduce((acc, bookId, index) => {
+      // 1. Prepare items for cart (7 individual books)
+      const items = selectedBooks.map(bookId => {
         const book = bookData.find(b => b.id === bookId);
-        if (book) {
-          acc[`Book ${index + 1}`] = book.title;
-          acc[`Book ${index + 1} Variant ID`] = book.variantId || 'N/A';
-        } else {
-          acc[`Book ${index + 1}`] = bookId;
-        }
-        return acc;
-      }, {});
+        // Use variantId if available, fall back to id for dev/mock but that won't work in real Shopify cart
+        return {
+          id: book?.variantId,
+          quantity: 1
+        };
+      });
+
+      // Validate we have IDs
+      if (items.some(i => !i.id)) {
+        setToastMessage("Error: Some books are missing Variant IDs.");
+        console.error("Missing variant IDs for books:", selectedBooks);
+        return;
+      }
 
       // 2. Add to Cart via Shopify AJAX API
       const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
@@ -71,11 +77,7 @@ function App() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          items: [{
-            id: BUNDLE_VARIANT_ID,
-            quantity: 1,
-            properties: properties
-          }]
+          items: items
         })
       });
 
