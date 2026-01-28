@@ -97,7 +97,7 @@ function StickyBar({ count, onCheckout, onReset }) {
                                     </svg>
                                 </div>
                                 <span className="relative text-xs font-medium text-indigo-100 mt-0.5">
-                                    Save $101 today
+                                    Save $171 today
                                 </span>
                             </>
                         ) : (
