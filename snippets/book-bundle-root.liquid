@@ -63,4 +63,25 @@
   .main-content {
     padding-top: 0 !important;
   }
+
+  /* CRO FIXES FOR MOBILE */
+  @media (max-width: 768px) {
+    /* 1. Make "Select" button permanently visible on mobile */
+    /* Target the container wrapping the button which normally starts with opacity-0 */
+    .group .group-hover\:opacity-100.opacity-0 {
+      opacity: 1 !important;
+    }
+    
+    /* 2. Reduce Header Padding to show books "Above the Fold" */
+    .relative.py-16.px-4.text-center {
+      padding-top: 1.5rem !important;
+      padding-bottom: 0.5rem !important;
+    }
+    
+    /* Adjust H1 size/margin */
+    .relative.py-16.px-4.text-center h1 {
+      margin-bottom: 0.5rem !important;
+      font-size: 2.5rem !important; /* Slightly smaller to fit more */
+    }
+  }
 </style>
