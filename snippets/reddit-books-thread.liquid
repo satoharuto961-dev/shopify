@@ -78,7 +78,69 @@
   .reddit-body li {
     margin-bottom: 5px;
   }
-</style>
+    /* Comment Styles */
+    .reddit-comments-section {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+    .reddit-comment {
+      margin-bottom: 20px;
+      padding-left: 10px;
+    }
+    .comment-header {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #787c7e;
+      margin-bottom: 5px;
+    }
+    .comment-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #d7dfe2;
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .comment-avatar svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+    .comment-author {
+      font-weight: 600;
+      color: #1c1c1c;
+      margin-right: 5px;
+    }
+    .comment-body {
+      font-size: 14px;
+      line-height: 21px;
+      color: #1c1c1c;
+      margin-bottom: 5px;
+    }
+    .comment-footer {
+      display: flex;
+      align-items: center;
+      color: #878a8c;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .comment-action {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .comment-action svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+  </style>
 
 <div class="reddit-thread-container">
   <div class="reddit-header">
@@ -112,6 +174,132 @@
     <p style="margin-top: 20px; font-style: italic; color: #555; background-color: #f6f7f8; padding: 10px; border-radius: 4px;">
       We found 230 books suggested in this thread, gave them each a score of importance, and chose the first 30 with the highest scores.
     </p>
+
+  </div>
+
+  <!-- Comments Section -->
+  <div class="reddit-comments-section">
+    
+    <!-- Comment 1 -->
+    <div class="reddit-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <span class="comment-author">nazz_oh</span>
+        <span>• 2h ago</span>
+      </div>
+      <div class="comment-body">
+        <p>Finished The Last Manager: How Earl Weaver Tricked, Tormented, and Reinvented Baseball by John W. Miller</p>
+        <p>It's 11 degrees here now so I highly recommend baseball books to keep warm.</p>
+      </div>
+      <div class="comment-footer">
+        <div class="comment-action">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601 17.919 12H15z"/></svg>
+          1
+        </div>
+        <div class="comment-action">Reply</div>
+        <div class="comment-action">Share</div>
+      </div>
+    </div>
+
+    <!-- Comment 2 -->
+    <div class="reddit-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <span class="comment-author">bunny_watson57</span>
+        <span>• 12h ago</span>
+      </div>
+      <div class="comment-body">
+        <p>Finished: Playground by Richard Powers</p>
+        <p>Started: Bewilderment by Richard Powers</p>
+      </div>
+      <div class="comment-footer">
+        <div class="comment-action">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601 17.919 12H15z"/></svg>
+          1
+        </div>
+        <div class="comment-action">Reply</div>
+        <div class="comment-action">Share</div>
+      </div>
+    </div>
+
+    <!-- Comment 3 -->
+    <div class="reddit-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <span class="comment-author">pecklefratch</span>
+        <span>• 17h ago</span>
+      </div>
+      <div class="comment-body">
+        <p>Finished:</p>
+        <p>King of the Armadillos, by Wendy Chin-Tanner</p>
+        <p>Starting:</p>
+        <p>Six Days in Bombay, by Alka Joshi</p>
+      </div>
+      <div class="comment-footer">
+        <div class="comment-action">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601 17.919 12H15z"/></svg>
+          1
+        </div>
+        <div class="comment-action">Reply</div>
+        <div class="comment-action">Share</div>
+      </div>
+    </div>
+
+    <!-- Comment 4 -->
+    <div class="reddit-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <span class="comment-author">Spiritual-Road2784</span>
+        <span>• 19h ago</span>
+      </div>
+      <div class="comment-body">
+        <p>Started and finished Lisa Jewell’s “Watching You”. Very well done.</p>
+        <p>Started first book in Steve Higgs’ “Realm of the False Gods”. Also hope to start V. E. Schwab’s “Bury My Bones in the Midnight Soil” that I preordered and received last June… it was “a year”…</p>
+      </div>
+      <div class="comment-footer">
+        <div class="comment-action">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601 17.919 12H15z"/></svg>
+          1
+        </div>
+        <div class="comment-action">Reply</div>
+        <div class="comment-action">Share</div>
+      </div>
+    </div>
+
+    <!-- Comment 5 -->
+    <div class="reddit-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <span class="comment-author">Particular-Treat-650</span>
+        <span>• 1d ago</span>
+      </div>
+      <div class="comment-body">
+        <p>Finished:</p>
+        <p>Recursion, by Blake Crouch</p>
+        <p>Started and Finished:</p>
+        <p>The Experience Machine, by Andy Clark - The idea isn't new, but his coverage completely reframed a lot of my psychology reading. Excellent book that made it right near the top of my long list of books about what makes us tick</p>
+        <p>Started:</p>
+        <p>Bleak House, by Charles Dickens</p>
+      </div>
+      <div class="comment-footer">
+        <div class="comment-action">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10zM15 12h-1v8h-4v-8H6.081L12 4.601 17.919 12H15z"/></svg>
+          1
+        </div>
+        <div class="comment-action">Reply</div>
+        <div class="comment-action">Share</div>
+      </div>
+    </div>
 
   </div>
   
