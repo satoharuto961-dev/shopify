@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Testimonials from './components/Testimonials';
 import BookGrid from './components/BookGrid';
 import StickyBar from './components/StickyBar';
 import Footer from './components/Footer';
@@ -108,7 +107,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 font-sans selection:bg-indigo-500 selection:text-white pb-20">
       <Header />
-      <Testimonials />
+
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <BookGrid
