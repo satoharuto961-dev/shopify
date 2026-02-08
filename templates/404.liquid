@@ -1,49 +1,48 @@
-{%- assign target_handle_short = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
-{%- assign target_handle_long = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety-depression-stress-insomnia-ptsd-and-more' -%}
+{%- assign target_url_snippet = '/product-page/the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
 
-{%- comment -%} Attempt to fetch product data (server-side) {%- endcomment -%}
-{%- assign cbt_product = all_products[target_handle_short] -%}
-{%- if cbt_product == empty -%}
-  {%- assign cbt_product = all_products[target_handle_long] -%}
-{%- endif -%}
+{%- if request.path contains target_url_snippet -%}
+  {%- comment -%}
+    Directly render the Book Bundle App for this specific URL to avoid redirect delay.
+    This acts as a server-side rewrite for the 404 page.
+  {%- endcomment -%}
+  {% render 'book-bundle-root' %}
+{%- else -%}
+  {%- assign target_handle_short = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
+  {%- assign target_handle_long = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety-depression-stress-insomnia-ptsd-and-more' -%}
 
-{%- comment -%} Hidden container for the custom landing page {%- endcomment -%}
-<div id="cbt-landing-wrapper" style="display:none;">
-  {%- if cbt_product != empty -%}
-     {%- render 'cbt-landing-page', product: cbt_product -%}
+  {%- comment -%} Attempt to fetch product data (server-side) {%- endcomment -%}
+  {%- assign cbt_product = all_products[target_handle_short] -%}
+  {%- if cbt_product == empty -%}
+    {%- assign cbt_product = all_products[target_handle_long] -%}
   {%- endif -%}
-</div>
 
-{%- comment -%} Standard 404 Content (Wrapped) {%- endcomment -%}
-<div id="standard-404-wrapper">
-  <section class="error-page">
-    <div class="error-card">
-      <span class="error-eyebrow">Page not found</span>
-      <h1>Looks like the story you're after is missing.</h1>
-      <p>
-        The link you followed may be broken or the page might have been archived. Explore our featured
-        collections or head back to the homepage to continue discovering new resources.
-      </p>
-      <div class="error-actions">
-        <a href="/" class="button button-primary">Return home</a>
-        <a href="/collections/all" class="button button-secondary">Browse all collections</a>
+  {%- comment -%} Hidden container for the custom landing page - Legacy/Fallback {%- endcomment -%}
+  <div id="cbt-landing-wrapper" style="display:none;">
+    {%- if cbt_product != empty -%}
+       {%- render 'cbt-landing-page', product: cbt_product -%}
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Standard 404 Content {%- endcomment -%}
+  <div id="standard-404-wrapper">
+    <section class="error-page">
+      <div class="error-card">
+        <span class="error-eyebrow">Page not found</span>
+        <h1>Looks like the story you're after is missing.</h1>
+        <p>
+          The link you followed may be broken or the page might have been archived. Explore our featured
+          collections or head back to the homepage to continue discovering new resources.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="button button-primary">Return home</a>
+          <a href="/collections/all" class="button button-secondary">Browse all collections</a>
+        </div>
+        <ul class="error-links">
+          <li><a href="/collections/new">Latest arrivals</a></li>
+          <li><a href="/collections/bestsellers">Community favorites</a></li>
+          <li><a href="/pages/contact">Connect with our team</a></li>
+        </ul>
       </div>
-      <ul class="error-links">
-        <li><a href="/collections/new">Latest arrivals</a></li>
-        <li><a href="/collections/bestsellers">Community favorites</a></li>
-        <li><a href="/pages/contact">Connect with our team</a></li>
-      </ul>
-    </div>
-  </section>
-</div>
-
-<script>
-  (function() {
-    var checkPath = window.location.pathname;
-    // Check for the custom "product-page" segment AND the product slug
-    if (checkPath.indexOf('/product-page/') > -1 && checkPath.indexOf('the-cbt-flip-chart') > -1) {
-       // Redirect to the actual product page where the Book Bundle is active
-       window.location.replace('/products/the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety');
-    }
-  })();
-</script>
+    </section>
+  </div>
+{%- endif -%}
