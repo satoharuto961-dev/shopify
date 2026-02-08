@@ -1,56 +1,63 @@
-{%- comment -%}
-  Check for custom URL path to render Book Bundle immediately.
-  Matches paths like /product-page/the-cbt-flip-chart...
-{%- endcomment -%}
-{%- if request.path contains '/product-page/' and request.path contains 'the-cbt-flip-chart' -%}
-  {%- layout none -%}
-  {%- comment -%}
-    Directly render the Book Bundle App for this specific URL to avoid redirect delay.
-    This acts as a server-side rewrite for the 404 page.
-  {%- endcomment -%}
-  {% render 'book-bundle-root' %}
-{%- else -%}
-  {%- assign target_handle_short = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
-  {%- assign target_handle_long = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety-depression-stress-insomnia-ptsd-and-more' -%}
-
-  {%- comment -%} Attempt to fetch product data (server-side) {%- endcomment -%}
-  {%- assign cbt_product = all_products[target_handle_short] -%}
-  {%- if cbt_product == empty -%}
-    {%- assign cbt_product = all_products[target_handle_long] -%}
-  {%- endif -%}
-
-  {%- comment -%} Hidden container for the custom landing page - Legacy/Fallback {%- endcomment -%}
-  <div id="cbt-landing-wrapper" style="display:none;">
-    {%- if cbt_product != empty -%}
-       {%- render 'cbt-landing-page', product: cbt_product -%}
-    {%- endif -%}
-  </div>
-
-  {%- comment -%} Standard 404 Content {%- endcomment -%}
-  <div id="standard-404-wrapper">
-    <div style="text-align:center; color:red; font-weight:bold; padding:20px; background:#fff; border:2px solid red;">
-      <p>DEBUG REQUEST.PATH: {{ request.path }}</p>
-      <p>DEBUG CANONICAL_URL: {{ canonical_url }}</p>
-      <p>DEBUG REQUEST.FULLPATH: {{ request.fullpath }} (may be empty)</p>
-    </div>
-    <section class="error-page">
-      <div class="error-card">
-        <span class="error-eyebrow">Page not found</span>
-        <h1>Looks like the story you're after is missing.</h1>
-        <p>
-          The link you followed may be broken or the page might have been archived. Explore our featured
-          collections or head back to the homepage to continue discovering new resources.
-        </p>
-        <div class="error-actions">
-          <a href="/" class="button button-primary">Return home</a>
-          <a href="/collections/all" class="button button-secondary">Browse all collections</a>
-        </div>
-        <ul class="error-links">
-          <li><a href="/collections/new">Latest arrivals</a></li>
-          <li><a href="/collections/bestsellers">Community favorites</a></li>
-          <li><a href="/pages/contact">Connect with our team</a></li>
-        </ul>
-      </div>
-    </section>
-  </div>
+{%- assign target_handle = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' -%}
+{%- assign cbt_product = all_products[target_handle] -%}
+{%- if cbt_product == empty -%}
+  {%- assign target_handle = 'the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety-depression-stress-insomnia-ptsd-and-more' -%}
+  {%- assign cbt_product = all_products[target_handle] -%}
 {%- endif -%}
+
+{%- comment -%}
+  Client-Side Instant Load Logic:
+  Since server-side 404 path detection is rewritten, we use blocking JS to check the URL
+  and instantly toggle visibility of the App vs 404 Content.
+{%- endcomment -%}
+<script>
+  (function() {
+    var checkPath = window.location.pathname;
+    // Check for custom "product-page" segment
+    if (checkPath.indexOf('/product-page/') > -1 && checkPath.indexOf('the-cbt-flip-chart') > -1) {
+      // Inject Styles to Hide Theme Elements & Show App Container
+      var css = '/* Hide Theme Elements */ #shopify-section-header, #shopify-section-footer, .site-header, .site-footer, header[role="banner"], footer[role="contentinfo"], .announcement-bar, #announcement-bar { display: none !important; } /* Reset Layout */ .page-width, .container { padding: 0 !important; max-width: none !important; margin: 0 !important; width: 100% !important; } .main-content { padding-top: 0 !important; } /* Toggle Wrappers */ #standard-404-wrapper { display: none !important; } #cbt-book-bundle-wrapper { display: block !important; }';
+      
+      var head = document.head || document.getElementsByTagName('head')[0];
+      var style = document.createElement('style');
+      style.type = 'text/css';
+      if (style.styleSheet){
+        style.styleSheet.cssText = css;
+      } else {
+        style.appendChild(document.createTextNode(css));
+      }
+      head.appendChild(style);
+    }
+  })();
+</script>
+
+{%- comment -%} Book Bundle App Container (Hidden by Default) {%- endcomment -%}
+<div id="cbt-book-bundle-wrapper" style="display:none;">
+  {%- if cbt_product != empty -%}
+    {%- comment -%} Pass suppress_layout_styles: true so we don't hide the header on real 404s {%- endcomment -%}
+    {% render 'book-bundle-root', suppress_layout_styles: true %}
+  {%- endif -%}
+</div>
+
+{%- comment -%} Standard 404 Content {%- endcomment -%}
+<div id="standard-404-wrapper">
+  <section class="error-page">
+    <div class="error-card">
+      <span class="error-eyebrow">Page not found</span>
+      <h1>Looks like the story you're after is missing.</h1>
+      <p>
+        The link you followed may be broken or the page might have been archived. Explore our featured
+        collections or head back to the homepage to continue discovering new resources.
+      </p>
+      <div class="error-actions">
+        <a href="/" class="button button-primary">Return home</a>
+        <a href="/collections/all" class="button button-secondary">Browse all collections</a>
+      </div>
+      <ul class="error-links">
+        <li><a href="/collections/new">Latest arrivals</a></li>
+        <li><a href="/collections/bestsellers">Community favorites</a></li>
+        <li><a href="/pages/contact">Connect with our team</a></li>
+      </ul>
+    </div>
+  </section>
+</div>

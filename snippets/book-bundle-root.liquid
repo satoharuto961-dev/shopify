@@ -30,6 +30,7 @@
 <!-- Load compiled JS (defer to ensure DOM is ready) -->
 <script src="{{ 'book-bundle.js' | asset_url }}" defer="defer"></script>
 
+{% unless suppress_layout_styles %}
 <style>
   /* Ensure the container takes full width if needed, or resets theme constraints */
   .book-bundle-container {
@@ -99,3 +100,4 @@
     }
   }
 </style>
+{% endunless %}
