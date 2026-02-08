@@ -42,17 +42,8 @@
     var checkPath = window.location.pathname;
     // Check for the custom "product-page" segment AND the product slug
     if (checkPath.indexOf('/product-page/') > -1 && checkPath.indexOf('the-cbt-flip-chart') > -1) {
-       // We are on the custom path!
-       var standard = document.getElementById('standard-404-wrapper');
-       var custom = document.getElementById('cbt-landing-wrapper');
-       
-       if (custom && custom.innerHTML.trim() !== "") {
-          if(standard) standard.style.display = 'none';
-          custom.style.display = 'block';
-          
-          // Optional: Update document title
-          document.title = "The CBT Flip Chart";
-       }
+       // Redirect to the actual product page where the Book Bundle is active
+       window.location.replace('/products/the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety');
     }
   })();
 </script>
