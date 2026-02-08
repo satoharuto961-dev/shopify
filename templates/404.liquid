@@ -28,7 +28,11 @@
 
   {%- comment -%} Standard 404 Content {%- endcomment -%}
   <div id="standard-404-wrapper">
-    <p style="text-align:center; color:red; font-weight:bold;">DEBUG PATH: {{ request.path }}</p>
+    <div style="text-align:center; color:red; font-weight:bold; padding:20px; background:#fff; border:2px solid red;">
+      <p>DEBUG REQUEST.PATH: {{ request.path }}</p>
+      <p>DEBUG CANONICAL_URL: {{ canonical_url }}</p>
+      <p>DEBUG REQUEST.FULLPATH: {{ request.fullpath }} (may be empty)</p>
+    </div>
     <section class="error-page">
       <div class="error-card">
         <span class="error-eyebrow">Page not found</span>
