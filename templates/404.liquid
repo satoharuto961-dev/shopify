@@ -35,27 +35,30 @@
 </script>
 
 {%- comment -%} Standard 404 Content {%- endcomment -%}
-<div id="standard-404-wrapper">
-  <section class="error-page">
-    <div class="error-card">
-      <span class="error-eyebrow">Page not found</span>
-      <h1>Looks like the story you're after is missing.</h1>
-      <p>
-        The link you followed may be broken or the page might have been archived. Explore our featured
-        collections or head back to the homepage to continue discovering new resources.
-      </p>
-      <div class="error-actions">
-        <a href="/" class="button button-primary">Return home</a>
-        <a href="/collections/all" class="button button-secondary">Browse all collections</a>
+{%- comment -%}
+  Standard 404 Content (Hidden as per request to show Homepage content only)
+  <div id="standard-404-wrapper">
+    <section class="error-page">
+      <div class="error-card">
+        <span class="error-eyebrow">Page not found</span>
+        <h1>Looks like the story you're after is missing.</h1>
+        <p>
+          The link you followed may be broken or the page might have been archived. Explore our featured
+          collections or head back to the homepage to continue discovering new resources.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="button button-primary">Return home</a>
+          <a href="/collections/all" class="button button-secondary">Browse all collections</a>
+        </div>
+        <ul class="error-links">
+          <li><a href="/collections/new">Latest arrivals</a></li>
+          <li><a href="/collections/bestsellers">Community favorites</a></li>
+          <li><a href="/pages/contact">Connect with our team</a></li>
+        </ul>
       </div>
-      <ul class="error-links">
-        <li><a href="/collections/new">Latest arrivals</a></li>
-        <li><a href="/collections/bestsellers">Community favorites</a></li>
-        <li><a href="/pages/contact">Connect with our team</a></li>
-      </ul>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
+{%- endcomment -%}
 
 {%- comment -%} Book Bundle App Container (Always Visible on 404) {%- endcomment -%}
 <div id="cbt-book-bundle-wrapper">
