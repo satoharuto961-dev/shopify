@@ -34,14 +34,6 @@
   })();
 </script>
 
-{%- comment -%} Book Bundle App Container (Hidden by Default) {%- endcomment -%}
-<div id="cbt-book-bundle-wrapper" style="display:none;">
-  {%- if cbt_product != empty -%}
-    {%- comment -%} Pass suppress_layout_styles: true so we don't hide the header on real 404s {%- endcomment -%}
-    {% render 'book-bundle-root', suppress_layout_styles: true %}
-  {%- endif -%}
-</div>
-
 {%- comment -%} Standard 404 Content {%- endcomment -%}
 <div id="standard-404-wrapper">
   <section class="error-page">
@@ -63,4 +55,16 @@
       </ul>
     </div>
   </section>
+</div>
+
+{%- comment -%} Book Bundle App Container (Always Visible on 404) {%- endcomment -%}
+<div id="cbt-book-bundle-wrapper">
+  <div class="page-width">
+    <div class="grid">
+      <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+        {%- comment -%} Pass suppress_layout_styles: true so we don't hide the header on real 404s {%- endcomment -%}
+        {% render 'book-bundle-root', suppress_layout_styles: true %}
+      </div>
+    </div>
+  </div>
 </div>
