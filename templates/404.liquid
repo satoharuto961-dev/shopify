@@ -13,9 +13,14 @@
 <script>
   (function() {
     var checkPath = window.location.pathname;
-    // Check for custom "product-page" segment
+    
+    // UPDATE TITLE FOR ALL 404 PAGES
+    // Since we are showing the homepage content, we should use the shop name or a generic welcome title
+    document.title = {{ shop.name | json }} || "Home";
+
+    // Check for custom "product-page" segment (Legacy logic kept for specific product handling if needed)
     if (checkPath.indexOf('/product-page/') > -1 && checkPath.indexOf('the-cbt-flip-chart') > -1) {
-      // SET DOCUMENTS TITLE
+      // SET DOCUMENTS TITLE SPECIFICALLY FOR THIS PRODUCT
       document.title = {{ cbt_product.title | json }} || "The CBT Flip Chart";
 
       // Inject Styles to Hide Theme Elements & Show App Container & Mobile Fixes
