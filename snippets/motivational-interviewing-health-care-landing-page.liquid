@@ -1,0 +1,119 @@
+{{ 'cbt-landing.css' | asset_url | stylesheet_tag }}
+
+<div class="cbt-landing-page">
+  <div class="cbt-container">
+    
+    <!-- Hero Section -->
+    <section class="cbt-section cbt-hero">
+      <div class="cbt-hero-media cbt-animate">
+         <!-- Main Gallery Display -->
+         <div class="cbt-gallery-main">
+            {%- if product.featured_media -%}
+              <img id="cbtMainImage" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.featured_media.alt | escape }}" class="cbt-main-img">
+            {%- else -%}
+              <div class="product__media-placeholder" style="background: #f0f0f0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 400px; color: #666;">
+                 No Image Available
+              </div>
+            {%- endif -%}
+         </div>
+         
+         <!-- Thumbnails -->
+         <div class="cbt-gallery-thumbs">
+            {%- if product.media.size > 1 -%}
+               {%- for media in product.media -%}
+                  <div class="cbt-thumb {% if forloop.first %}active{% endif %}" onclick="changeImage(this, '{{ media | image_url: width: 1000 }}')">
+                     <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | escape }}">
+                  </div>
+               {%- endfor -%}
+            {%- endif -%}
+         </div>
+      </div>
+      
+      <div class="cbt-hero-content cbt-animate" style="animation-delay: 0.2s;">
+        <h1 class="cbt-title">{{ product.title }}</h1>
+        <p class="cbt-subtitle">By Stephen Rollnick, William R. Miller, and Christopher C. Butler</p>
+        <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;"><strong>Motivational Interviewing in Health Care</strong> is the essential guide for clinicians to help patients change behavior. This second edition provides clear, practical examples and strategies to integrate MI into the realities of modern health care visits, making it indispensable for medical, nursing, and allied health professionals.</p>
+        
+        <div class="cbt-product-form">
+          <span class="cbt-price">{{ product.price | money }}</span>
+          {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="return_to" value="/checkout" />
+            <button type="submit" name="add" class="cbt-add-to-cart-btn">Buy Now</button>
+          {% endform %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview / Description Section -->
+    <section class="cbt-section cbt-bg-light">
+      <h2 class="cbt-heading-2">About the Book</h2>
+      <div class="cbt-card" style="max-width: 800px; margin: 0 auto;">
+         <div style="font-size: 1.05rem; line-height: 1.7; color: #333;">
+            <p style="margin-bottom: 1rem;">Much more than just a technique, Motivational Interviewing (MI) is a way of being with patients that fosters partnership and empowers them to make lasting health changes. This second edition is thoroughly updated with nearly all new content, reflecting the latest developments in MI theory and practice.</p>
+            <p style="margin-bottom: 1rem;">Ideal for busy practitioners, the book offers a guiding style that avoids the "righting reflex" and instead elicits the patient's own motivations for change. It includes numerous clinical vignettes and "how-to" guidance for a variety of health care settings.</p>
+            <p style="margin-bottom: 1rem;"><strong>Key Features:</strong></p>
+            <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 1rem;">
+                <li>Practical tools for brief clinic visits (10-15 minutes)</li>
+                <li>Focus on the "Four Processes" of MI: Engaging, Focusing, Evoking, and Planning</li>
+                <li>The "RULE" method: Resist, Understand, Listen, and Empower</li>
+                <li>New chapters on patients who are in a hurry or who seem unmotivated</li>
+                <li>Updated research and clinical examples across diverse medical disciplines</li>
+            </ul>
+         </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    {% render 'product-reviews', product: product %}
+
+  </div>
+  
+  <!-- Sticky Buy Now Bar -->
+  <div class="cbt-sticky-bar">
+    <div class="cbt-container cbt-sticky-content">
+       <div class="cbt-sticky-info">
+          <span class="cbt-sticky-title">{{ product.title }}</span>
+          <span class="cbt-sticky-price">{{ product.price | money }}</span>
+       </div>
+       {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+           <input type="hidden" name="return_to" value="/checkout" />
+          <button type="submit" name="add" class="cbt-btn-sticky">Buy Now</button>
+       {% endform %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function changeImage(thumb, src) {
+     // Update Main Image
+     const mainImg = document.getElementById('cbtMainImage');
+     mainImg.style.opacity = '0.5';
+     setTimeout(() => {
+        mainImg.src = src;
+        mainImg.style.opacity = '1';
+     }, 150);
+
+     // Update Active Thumb
+     document.querySelectorAll('.cbt-thumb').forEach(t => t.classList.remove('active'));
+     thumb.classList.add('active');
+  }
+
+  // Sticky Bar Logic
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyBar = document.querySelector('.cbt-sticky-bar');
+    const heroBtn = document.querySelector('.cbt-hero .cbt-add-to-cart-btn');
+    
+    window.addEventListener('scroll', function() {
+      if (heroBtn) {
+        const btnPosition = heroBtn.getBoundingClientRect().bottom;
+        if (btnPosition < 0) {
+           stickyBar.classList.add('visible');
+        } else {
+           stickyBar.classList.remove('visible');
+        }
+      }
+    });
+  });
+</script>

@@ -28,6 +28,8 @@
   {% render 'transformational-chairwork-landing-page', product: product %}
 {%- elsif product.handle == 'the-making-of-a-therapist-a-practical-guide-for-the-inner-journey-norton-series-on-interpersonal-neurobiology' -%}
   {% render 'the-making-of-a-therapist-landing-page', product: product %}
+{%- elsif product.handle == 'motivational-interviewing-in-health-care-helping-patients-change-behavior-applications-of-motivational-interviewing-series' -%}
+  {% render 'motivational-interviewing-health-care-landing-page', product: product %}
 {%- else -%}
   {%- assign is_dsm5_tr =
     product.handle == 'diagnostic-and-statistical-manual-of-mental-disorders-text-revision-dsm-5-tr-5th-edition'
