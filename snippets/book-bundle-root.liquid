@@ -1,8 +1,103 @@
-{%- assign product = all_products['pattern-focused-therapy-highly-effective-cbt-practice-in-mental-health-and-integrated-care-settings-first-edition'] -%}
-{%- if product == empty -%}
-  <div class="page-width">
-    <p>Product not found. Please check the handle.</p>
-  </div>
-{%- else -%}
-  {% render 'pattern-focused-therapy-landing-page', product: product %}
-{%- endif -%}
+{% comment %}
+  Root element for the React Book Bundle App.
+  This snippet loads the JS and CSS assets required for the app.
+{% endcomment %}
+
+<!-- Root container for React -->
+<script>
+  window.shopifyBookData = [
+  {% paginate collections.all.products by 250 %}
+    {% for product in collections.all.products %}
+      {% unless product.handle == '7-book-bundle' %}
+        {
+          id: {{ product.id }},
+          variantId: {{ product.selected_or_first_available_variant.id }},
+          title: {{ product.title | json }},
+          author: {{ product.vendor | json }},
+          description: {{ product.content | strip_html | truncate: 150 | json }},
+          coverUrl: "{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 }}{% else %}https://placehold.co/400x600?text=No+Cover{% endif %}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endpaginate %}
+  ];
+</script>
+<div id="root" class="book-bundle-container"></div>
+
+<!-- Load compiled CSS -->
+{{ 'book-bundle.css' | asset_url | stylesheet_tag }}
+
+<!-- Load compiled JS (defer to ensure DOM is ready) -->
+<script src="{{ 'book-bundle.js' | asset_url }}" defer="defer"></script>
+
+{% unless suppress_layout_styles %}
+<style>
+  /* Ensure the container takes full width if needed, or resets theme constraints */
+  .book-bundle-container {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* HIDE SHOPIFY THEME ELEMENTS
+     We want the React app to control the full experience (Header & Footer).
+     These selectors target common Shopify theme structures.
+  */
+  #shopify-section-header,
+  #shopify-section-footer,
+  .site-header,
+  .site-footer,
+  header[role="banner"],
+  footer[role="contentinfo"],
+  .announcement-bar,
+  #announcement-bar {
+    display: none !important;
+  }
+  
+  /* Reset page width constraints generally found in themes */
+  .page-width, .container {
+    padding: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .main-content {
+    padding-top: 0 !important;
+  }
+
+  /* CRO FIXES FOR MOBILE */
+  @media (max-width: 768px) {
+    /* 1. Use Mobile-Specific Button (Below Image) instead of Overlay */
+    /* Ensure the Mobile Button is visible (it was md:hidden) */
+    .md\:hidden.p-2 {
+      display: block !important;
+    }
+    
+    /* Style the mobile button to be a Primary CTA (High Contrast) */
+    .md\:hidden.p-2 button {
+      background-color: var(--color-indigo-600) !important; /* Solid Blue */
+      color: white !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* 2. Hide the Overlay Button on mobile to prevent obscuring book details */
+    .group .group-hover\:opacity-100.opacity-0 {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    
+    /* 3. Reduce Header Padding to show books "Above the Fold" */
+    .relative.py-16.px-4.text-center {
+      padding-top: 1.5rem !important;
+      padding-bottom: 0.5rem !important;
+    }
+    
+    /* Adjust H1 size/margin */
+    .relative.py-16.px-4.text-center h1 {
+      margin-bottom: 0.5rem !important;
+      font-size: 2.5rem !important; /* Slightly smaller to fit more */
+    }
+  }
+</style>
+{% endunless %}
