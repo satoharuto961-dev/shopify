@@ -1,46 +1,96 @@
 {% comment %}
-  Root element for the React Book Bundle App.
-  This snippet loads the JS and CSS assets required for the app.
+  General Book Bundle Offer - Buy 1 Get 6 Free
+  Replaces the product picker with a general headline offer.
 {% endcomment %}
 
-<!-- Root container for React -->
-<script>
-  window.shopifyBookData = [
-  {% paginate collections.all.products by 250 %}
-    {% for product in collections.all.products %}
-      {% unless product.handle == '7-book-bundle' %}
-        {
-          id: {{ product.id }},
-          variantId: {{ product.selected_or_first_available_variant.id }},
-          title: {{ product.title | json }},
-          author: {{ product.vendor | json }},
-          description: {{ product.content | strip_html | truncate: 150 | json }},
-          coverUrl: "{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 }}{% else %}https://placehold.co/400x600?text=No+Cover{% endif %}"
-        }{% unless forloop.last %},{% endunless %}
-      {% endunless %}
-    {% endfor %}
-  {% endpaginate %}
-  ];
-</script>
-<div id="root" class="book-bundle-container"></div>
-
-<!-- Load compiled CSS -->
-{{ 'book-bundle.css' | asset_url | stylesheet_tag }}
-
-<!-- Load compiled JS (defer to ensure DOM is ready) -->
-<script src="{{ 'book-bundle.js' | asset_url }}" defer="defer"></script>
+<div class="book-bundle-offer-container">
+  <div class="offer-content">
+    <div class="offer-badge">Limited Time Only</div>
+    <h1 class="offer-headline">
+      Buy 1 Get 6 Free
+    </h1>
+    <p class="offer-subtext">
+      Get our complete collection for the price of one. This exclusive offer is available for a limited time.
+    </p>
+  </div>
+</div>
 
 {% unless suppress_layout_styles %}
 <style>
-  /* Ensure the container takes full width if needed, or resets theme constraints */
-  .book-bundle-container {
-    width: 100%;
+  /* 
+    Full Page Container 
+    Uses a modern dark gradient for a premium feel.
+  */
+  .book-bundle-offer-container {
     min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 2rem;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
-  /* HIDE SHOPIFY THEME ELEMENTS
-     We want the React app to control the full experience (Header & Footer).
-     These selectors target common Shopify theme structures.
+  /* Glassmorphism Card Effect */
+  .offer-content {
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+  }
+
+  .offer-headline {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+
+  .offer-subtext {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #cbd5e0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 
+    Theme Override Styles
+    Hides standard header/footer to focus on the offer.
   */
   #shopify-section-header,
   #shopify-section-footer,
@@ -52,8 +102,8 @@
   #announcement-bar {
     display: none !important;
   }
-  
-  /* Reset page width constraints generally found in themes */
+
+  /* Reset page width constraints */
   .page-width, .container {
     padding: 0 !important;
     max-width: none !important;
@@ -63,41 +113,6 @@
   
   .main-content {
     padding-top: 0 !important;
-  }
-
-  /* CRO FIXES FOR MOBILE */
-  @media (max-width: 768px) {
-    /* 1. Use Mobile-Specific Button (Below Image) instead of Overlay */
-    /* Ensure the Mobile Button is visible (it was md:hidden) */
-    .md\:hidden.p-2 {
-      display: block !important;
-    }
-    
-    /* Style the mobile button to be a Primary CTA (High Contrast) */
-    .md\:hidden.p-2 button {
-      background-color: var(--color-indigo-600) !important; /* Solid Blue */
-      color: white !important;
-      font-weight: 700 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    
-    /* 2. Hide the Overlay Button on mobile to prevent obscuring book details */
-    .group .group-hover\:opacity-100.opacity-0 {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-    
-    /* 3. Reduce Header Padding to show books "Above the Fold" */
-    .relative.py-16.px-4.text-center {
-      padding-top: 1.5rem !important;
-      padding-bottom: 0.5rem !important;
-    }
-    
-    /* Adjust H1 size/margin */
-    .relative.py-16.px-4.text-center h1 {
-      margin-bottom: 0.5rem !important;
-      font-size: 2.5rem !important; /* Slightly smaller to fit more */
-    }
   }
 </style>
 {% endunless %}
