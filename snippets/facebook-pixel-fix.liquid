@@ -1,0 +1,37 @@
+{% comment %}
+  Meta Pixel Fix: Overriding content_ids to match Catalog IDs (Product IDs)
+  This snippet ensures that the content_ids sent to Meta match the product-level IDs in your catalog.
+{% endcomment %}
+
+<script>
+  window.addEventListener('load', function() {
+    {% if template.name == 'product' %}
+      // Product View Event
+      fbq('track', 'ViewContent', {
+        content_ids: ['{{ product.id }}'],
+        content_type: 'product',
+        content_name: '{{ product.title | escape }}',
+        value: {{ product.price | money_without_currency | remove: ',' }},
+        currency: '{{ shop.currency }}'
+      });
+
+      // Add to Cart detection (button click)
+      const addToCartButtons = document.querySelectorAll('form[action="/cart/add"] button, .sticky-buy-now__button');
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          fbq('track', 'AddToCart', {
+            content_ids: ['{{ product.id }}'],
+            content_type: 'product',
+            content_name: '{{ product.title | escape }}',
+            value: {{ product.price | money_without_currency | remove: ',' }},
+            currency: '{{ shop.currency }}'
+          });
+        });
+      });
+    {% endif %}
+
+    {% if template.name == 'index' %}
+      // You can add more global tracking logic here if needed
+    {% endif %}
+  });
+</script>

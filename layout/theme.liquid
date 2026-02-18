@@ -30,6 +30,7 @@
         background: #E3F0E8 !important;
       }
     </style>
+    {% render 'facebook-pixel-fix' %}
   </head>
   <body class="template-{{ template | replace: '.', '-' }}{% if template.name %} template-name-{{ template.name | handleize }}{% endif %}{% if template.suffix %} template-suffix-{{ template.suffix | handleize }}{% endif %}">
     <!-- Google Tag Manager (noscript) -->
