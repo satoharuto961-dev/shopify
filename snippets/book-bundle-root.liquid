@@ -16,7 +16,7 @@
           author: {{ product.vendor | json }},
           description: {{ product.content | strip_html | truncate: 150 | json }},
           coverUrl: "{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 }}{% else %}https://placehold.co/400x600?text=No+Cover{% endif %}",
-          publishedAt: {{ product.published_at | json }}
+          createdAt: {{ product.created_at | json }}
         }{% unless forloop.last %},{% endunless %}
       {% endunless %}
     {% endfor %}
