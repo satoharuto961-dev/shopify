@@ -1,6 +1,8 @@
 {% assign bundle_handles = "zero-to-one,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,principles-for-dealing-with-the-changing-world-order-why-nations-succeed-and-fail,the-48-laws-of-power,influence-the-psychology-of-persuasion-revised-edition" | split: "," %}
 
-{% assign checkout_url = "/cart/" %}
+{% comment %} 
+  We will use a form POST to /cart/update to add all items at once and go to checkout 
+{% endcomment %}
 {% assign bundle_price = 0 %}
 {% assign total_compare_price = 0 %}
 
@@ -8,17 +10,10 @@
   {% assign current_product = all_products[handle] %}
   {% if current_product != empty %}
     {% assign variant = current_product.first_available_variant %}
-    {% assign checkout_url = checkout_url | append: variant.id | append: ":" | append: 1 | append: "," %}
     {% assign bundle_price = bundle_price | plus: variant.price %}
     {% assign total_compare_price = total_compare_price | plus: variant.compare_at_price %}
   {% endif %}
 {% endfor %}
-
-{% comment %} Remove the trailing comma {% endcomment %}
-{% assign url_size = checkout_url | size | minus: 1 %}
-{% assign checkout_url = checkout_url | slice: 0, url_size %}
-
-{% assign checkout_url = checkout_url | append: "?checkout=true" %}
 
 <style>
   /* Base Styles */
@@ -154,7 +149,10 @@ box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
     color: white;
   }
 
-  /* Sticky Footer */
+  .mm-sticky-form {
+    margin: 0;
+  }
+  
   .mm-sticky-bar {
     position: fixed;
     bottom: 0;
@@ -246,9 +244,19 @@ box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
         {% endif %}
       </div>
       
-      <a href="{{ checkout_url }}" class="mm-btn">
-        Get the 5-Book Bundle
-      </a>
+      {% form 'cart', cart %}
+        {% for handle in bundle_handles %}
+          {% assign current_product = all_products[handle] %}
+          {% if current_product != empty %}
+            {% assign variant = current_product.first_available_variant %}
+            <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+          {% endif %}
+        {% endfor %}
+        <input type="hidden" name="checkout" value="Checkout" />
+        <button type="submit" class="mm-btn">
+          Get the 5-Book Bundle
+        </button>
+      {% endform %}
       
       <div class="mm-trust-icons">
         <div class="mm-trust-icon">
@@ -267,9 +275,19 @@ box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
   <div class="mm-sticky-bar" id="sticky-bar">
     <span class="mm-sticky-title">The "Making Money" Library</span>
     <span class="mm-sticky-price">{{ bundle_price | money }}</span>
-    <a href="{{ checkout_url }}" class="mm-btn" style="width: auto; padding: 0.75rem 1.5rem; font-size: 1rem;">
-      Buy Bundle Now
-    </a>
+    {% form 'cart', cart, class: 'mm-sticky-form' %}
+      {% for handle in bundle_handles %}
+        {% assign current_product = all_products[handle] %}
+        {% if current_product != empty %}
+          {% assign variant = current_product.first_available_variant %}
+          <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+        {% endif %}
+      {% endfor %}
+      <input type="hidden" name="checkout" value="Checkout" />
+      <button type="submit" class="mm-btn" style="width: auto; padding: 0.75rem 1.5rem; font-size: 1rem;">
+        Buy Bundle Now
+      </button>
+    {% endform %}
   </div>
 </div>
 
