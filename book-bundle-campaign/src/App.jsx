@@ -113,12 +113,7 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
 
-        {/* Instructions */}
-        <div className="text-center mb-8">
-          <h2 className="text-xl font-medium text-gray-600 dark:text-gray-400">
-            Select any 7 books to build your bundle
-          </h2>
-        </div>
+
 
         <BookGrid
           books={selectableBooks}
