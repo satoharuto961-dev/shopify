@@ -146,14 +146,24 @@
     /* 3. Reduce Header Padding to show books "Above the Fold" */
     /* Since we replaced the header, we adjust our custom header instead */
     .custom-book-bundle-header {
-      padding-top: 1.5rem !important;
-      padding-bottom: 0.5rem !important;
+      padding-top: 1rem !important;
+      padding-bottom: 0.25rem !important;
     }
     
     /* Adjust H1 size/margin */
     .custom-book-bundle-header h1 {
-      margin-bottom: 0.5rem !important;
-      font-size: 2.5rem !important; /* Slightly smaller to fit more */
+      margin-bottom: 0.25rem !important;
+      font-size: 1.75rem !important; /* Smaller for mobile */
+    }
+
+    .custom-book-bundle-header p {
+      font-size: 1rem !important;
+      line-height: 1.4;
+    }
+
+    .cbbh-cta {
+      font-size: 0.9rem !important;
+      margin-top: 0.5rem !important;
     }
   }
 </style>
