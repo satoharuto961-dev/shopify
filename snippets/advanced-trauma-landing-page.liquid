@@ -1,0 +1,566 @@
+{% assign bundle_handles = "emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,transformational-chairwork-using-psychotherapeutic-dialogues-in-clinical-practice,pattern-focused-therapy-highly-effective-cbt-practice-in-mental-health-and-integrated-care-settings-first-edition,evidence-based-counselling-psychotherapy-for-the-21st-century-practitioner" | split: "," %}
+
+{% comment %} 
+  Override bundle_price to exactly $19.99 (1999 in cents) 
+  But keep calculating the total_compare_price to show accurate savings
+{% endcomment %}
+{% assign bundle_price = 1999 %}
+{% assign total_compare_price = 0 %}
+
+{% for handle in bundle_handles %}
+  {% assign current_product = all_products[handle] %}
+  {% if current_product != empty %}
+    {% assign variant = current_product.first_available_variant %}
+    {% assign total_compare_price = total_compare_price | plus: variant.compare_at_price %}
+  {% endif %}
+{% endfor %}
+
+<style>
+  /* Base Styles */
+  .at-landing-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #e2e8f0; /* Light gray text for dark theme */
+    line-height: 1.6;
+    background-color: #0f172a; /* Deep charcoal/navy background */
+    padding-bottom: 100px;
+  }
+  
+  .at-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .at-section {
+    padding: 4rem 0;
+  }
+
+  /* Typography */
+  h1, h2, h3 { line-height: 1.2; font-weight: 800; color: #f8fafc; }
+  h2 { font-size: 2.25rem; margin-bottom: 2rem; text-align: center; }
+  h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #f1f5f9; }
+  p { font-size: 1.125rem; color: #cbd5e1; margin-bottom: 1.5rem; }
+
+  /* Hero Section */
+  .at-hero {
+    text-align: center;
+    padding: 5rem 1rem 3rem;
+    background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+    border-bottom: 1px solid #334155;
+  }
+  
+  .at-hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    color: #f8fafc;
+  }
+  
+  .at-hero-subtitle {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    color: #94a3b8;
+  }
+  
+  .at-books-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  
+  .at-book-wrapper {
+    width: 150px;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .at-book-wrapper:hover {
+    transform: translateY(-15px) scale(1.05);
+    z-index: 10;
+  }
+  
+  .at-book-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: -15px 15px 30px rgba(0,0,0,0.6), inset 2px 0 5px rgba(255,255,255,0.2);
+  }
+
+  /* Button Styles */
+  .at-btn-container {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .at-btn {
+    display: inline-block;
+    background: linear-gradient(to right, #0d9488, #0f766e); /* Clinical deep teal */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 1.25rem 3rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.4);
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .at-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 30px -10px rgba(13, 148, 136, 0.6);
+    color: white;
+  }
+
+  .at-btn-subtext {
+    display: block;
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  /* The Problem/Solution Block */
+  .at-thesis {
+    background: #1e293b; /* Slightly lighter slate */
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    margin-top: -3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 20;
+    border: 1px solid #334155;
+  }
+
+  .at-thesis p {
+    font-size: 1.25rem;
+  }
+
+  /* Book Breakdown Grid */
+  .at-breakdown-card {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    background: #1e293b;
+    padding: 3rem;
+    border-radius: 24px;
+    margin-bottom: 2rem;
+    align-items: center;
+    border: 1px solid #334155;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .at-breakdown-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+    border-color: #475569;
+  }
+
+  .at-breakdown-img {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: -8px 8px 16px rgba(0,0,0,0.4);
+  }
+
+  .at-book-tag {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    background: #134e4a; /* Dark teal background */
+    color: #5eead4; /* Bright teal text */
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .at-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+  }
+
+  .at-checklist li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    color: #cbd5e1;
+  }
+
+  .at-checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #2dd4bf; /* Bright teal checkmark */
+    font-weight: 900;
+  }
+
+  /* Pricing Section */
+  .at-pricing-hero {
+    background: #020617; /* Pure black/slate */
+    color: white;
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    margin: 4rem 0;
+    border: 1px solid #1e293b;
+  }
+
+  .at-pricing-hero h2 { color: white; }
+  .at-pricing-hero p { color: #94a3b8; }
+
+  .at-price-block { margin: 2rem 0; }
+  .at-price-current { font-size: 4rem; font-weight: 900; color: white; line-height: 1; }
+  .at-price-original { font-size: 1.5rem; color: #64748b; text-decoration: line-through; margin-left: 1rem; }
+  
+  .at-savings-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #0d9488;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-top: 1.5rem;
+  }
+
+  /* Social Proof */
+  .at-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .at-review-card {
+    background: #1e293b;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #334155;
+  }
+
+  .at-stars { color: #5eead4; font-size: 1.25rem; margin-bottom: 1rem; }
+  .at-review-text { font-style: italic; font-size: 1.125rem; margin-bottom: 1.5rem; color: #e2e8f0; }
+  .at-review-author { font-weight: 700; color: #f8fafc; }
+
+  /* Trust Icons */
+  .at-trust-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .at-trust-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  /* Sticky Footer */
+  .at-sticky-form { margin: 0; }
+  .at-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    padding: 1rem;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    border-top: 1px solid #334155;
+  }
+  
+  .at-sticky-bar.visible { transform: translateY(0); }
+  .at-sticky-title { font-weight: 800; font-size: 1.125rem; display: none; color: #f8fafc; }
+  .at-sticky-price { font-weight: 900; font-size: 1.5rem; color: #2dd4bf; }
+
+  @media (min-width: 1024px) {
+    .at-sticky-title { display: block; }
+  }
+
+  @media (max-width: 768px) {
+    .at-hero-title { font-size: 2.5rem; }
+    .at-hero-subtitle { font-size: 1.25rem; }
+    .at-thesis { padding: 2rem 1.5rem; margin-top: -2rem; }
+    .at-breakdown-card { grid-template-columns: 1fr; gap: 2rem; text-align: center; padding: 2rem 1.5rem; }
+    .at-checklist li { text-align: left; }
+    .at-books-display { gap: 0.5rem; }
+    .at-book-wrapper { width: 110px; }
+  }
+</style>
+
+<div class="at-landing-page">
+  
+  <!-- HERO HEADLINE -->
+  <header class="at-hero">
+    <div class="at-container">
+      <h1 class="at-hero-title">The Advanced Trauma & Healing Library</h1>
+      <p class="at-hero-subtitle">5 highly specialized texts to master neurobiology, complex PTSD, EMDR, and pattern-focused therapy.</p>
+      
+      <div class="at-books-display">
+        {% for handle in bundle_handles %}
+          {% assign current_product = all_products[handle] %}
+          {% if current_product != empty %}
+            <div class="at-book-wrapper">
+              <img src="{{ current_product.featured_image | img_url: '400x' }}" alt="{{ current_product.title }}" class="at-book-cover">
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="at-btn-container">
+        <a href="#checkout-section" class="at-btn" style="display:inline-block; max-width:400px; padding:1.25rem 2rem;">Claim The Library →</a>
+        <span class="at-btn-subtext">Save over 30% instantly vs buying individually.</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- THE THESIS -->
+  <div class="at-container">
+    <div class="at-thesis">
+      <h2>Why This Advanced Library?</h2>
+      <p>Standard talk-therapy is often insufficient for severe, ingrained trauma. Advanced practitioners require an understanding of the <strong>somatic and neurobiological underpinnings of complex trauma cases.</strong></p>
+      <p>This premium bundle was curated specifically for licensed therapists, trauma researchers, and clinicians handling complex PTSD and attachment issues. From the etiology of neurological trauma responses, to actionable psychotherapeutic dialogues (Chairwork) and attachment-focused EMDR, this is the definitive library for serious, life-changing interventions.</p>
+    </div>
+  </div>
+
+  <!-- BOOK BREAKDOWNS -->
+  <section class="at-section">
+    <div class="at-container">
+      <h2>Inside The Specialist's Toolkit</h2>
+      
+      <!-- Book 1 -->
+      <div class="at-breakdown-card">
+        <img src="{{ all_products['emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment'].featured_image | img_url: '400x' }}" alt="Emotion in PTSD" class="at-breakdown-img">
+        <div>
+          <span class="at-book-tag">Neurobiology</span>
+          <h3>Emotion in Posttraumatic Stress Disorder</h3>
+          <p>A comprehensive academic dive into the etiology, clinical assessment, neurobiology, and treatment of PTSD.</p>
+          <ul class="at-checklist">
+            <li>Understand the deep neurobiological roots of trauma.</li>
+            <li>Advanced clinical assessment methodologies.</li>
+            <li>Bridge the gap between brain science and effective treatment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 2 -->
+      <div class="at-breakdown-card">
+        <img src="{{ all_products['emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments'].featured_image | img_url: '400x' }}" alt="EMDR and Attachment-Focused Trauma Therapy" class="at-breakdown-img">
+        <div>
+          <span class="at-book-tag">Somatic Processing</span>
+          <h3>EMDR and Attachment-Focused Trauma Therapy</h3>
+          <p>Reclaiming the authentic self and healthy attachments through highly specialized EMDR protocols.</p>
+          <ul class="at-checklist">
+            <li>Reprocess severe developmental and relational traumas.</li>
+            <li>Advanced dual-attention strategies for blocked clients.</li>
+            <li>The gold standard for complex adult trauma cases.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 3 -->
+      <div class="at-breakdown-card">
+        <img src="{{ all_products['transformational-chairwork-using-psychotherapeutic-dialogues-in-clinical-practice'].featured_image | img_url: '400x' }}" alt="Transformational Chairwork" class="at-breakdown-img">
+        <div>
+          <span class="at-book-tag">Experiential Therapy</span>
+          <h3>Transformational Chairwork</h3>
+          <p>A masterclass in using structured psychotherapeutic dialogues to resolve inner conflict and trauma.</p>
+          <ul class="at-checklist">
+            <li>Actionable scripts for internal dialogue interventions.</li>
+            <li>Resolve grief, inner criticism, and trauma bonds.</li>
+            <li>Move clients out of intellectualization and into feeling.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 4 -->
+      <div class="at-breakdown-card">
+        <img src="{{ all_products['pattern-focused-therapy-highly-effective-cbt-practice-in-mental-health-and-integrated-care-settings-first-edition'].featured_image | img_url: '400x' }}" alt="Pattern Focused Therapy" class="at-breakdown-img">
+        <div>
+          <span class="at-book-tag">Advanced Intervention</span>
+          <h3>Pattern Focused Therapy</h3>
+          <p>Highly effective, next-generation CBT practice designed for high-acuity mental health and integrated care settings.</p>
+          <ul class="at-checklist">
+            <li>Identify and disrupt deeply ingrained, destructive life patterns.</li>
+            <li>Streamline treatment for complex, comorbid cases.</li>
+            <li>Practical interventions for brief therapy environments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 5 -->
+      <div class="at-breakdown-card">
+        <img src="{{ all_products['evidence-based-counselling-psychotherapy-for-the-21st-century-practitioner'].featured_image | img_url: '400x' }}" alt="Evidence Based Counselling & Psychotherapy" class="at-breakdown-img">
+        <div>
+          <span class="at-book-tag">Clinical Efficacy</span>
+          <h3>Evidence Based Counselling & Psychotherapy</h3>
+          <p>The definitive guide to ensuring your clinical practice is grounded in scientifically validated, 21st-century methodologies.</p>
+          <ul class="at-checklist">
+            <li>Evaluate and implement the latest psychiatric research.</li>
+            <li>Maintain ethical and highly effective outcome tracking.</li>
+            <li>Essential for modern, data-driven practitioners.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="at-section" style="background: #0f172a; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b;">
+    <div class="at-container">
+      <h2>Trusted by Clinical Specialists</h2>
+      <div class="at-reviews">
+        <div class="at-review-card">
+          <div class="at-stars">★★★★★</div>
+          <p class="at-review-text">"The text on the neurobiology of PTSD is required reading for my entire doctoral staff. This bundle is an incredible investment for serious trauma clinicians."</p>
+          <p class="at-review-author">— Dr. Robert Vance, PhD</p>
+        </div>
+        <div class="at-review-card">
+          <div class="at-stars">★★★★★</div>
+          <p class="at-review-text">"Parnell's EMDR protocol changes lives. Combining that with Transformational Chairwork gives you the exact tools needed for highly resistant clients."</p>
+          <p class="at-review-author">— Lisa Chen, LCSW, EMDRIA Approved</p>
+        </div>
+        <div class="at-review-card">
+          <div class="at-stars">★★★★★</div>
+          <p class="at-review-text">"A masterfully curated set of books. This isn't self-help; this is hard science, evidence-based therapy, and clinical excellence."</p>
+          <p class="at-review-author">— Michael T., Clinical Psychologist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE OFFER (CHECKOUT) -->
+  <section class="at-section" id="checkout-section">
+    <div class="at-container">
+      <div class="at-pricing-hero">
+        <h2>Advance Your Practice</h2>
+        <p>Get all 5 advanced clinical texts today.</p>
+        
+        <div class="at-price-block">
+          <span class="at-price-current">{{ bundle_price | money }}</span>
+          {% if total_compare_price > bundle_price %}
+             <span class="at-price-original">{{ total_compare_price | money }}</span>
+             <br/>
+             <div class="at-savings-badge">
+               You Save {{ total_compare_price | minus: bundle_price | money }} By Bundling Today
+             </div>
+          {% endif %}
+        </div>
+        
+        <div class="at-btn-container" style="max-width: 500px; margin: 0 auto;">
+          {% form 'cart', cart %}
+            {% for handle in bundle_handles %}
+              {% assign current_product = all_products[handle] %}
+              {% if current_product != empty %}
+                {% assign variant = current_product.first_available_variant %}
+                <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+              {% endif %}
+            {% endfor %}
+            <input type="hidden" name="checkout" value="Checkout" />
+            <button type="submit" class="at-btn">
+              Proceed to Secure Checkout
+            </button>
+          {% endform %}
+        </div>
+        
+        <p style="color: #64748b; font-size: 0.875rem; margin-top: 1.5rem;">
+          Includes 30-Day Money-Back Guarantee. Checkout securely encrypted.
+        </p>
+
+        <div class="at-trust-icons">
+          <div class="at-trust-icon" style="color:#64748b;">
+            <svg style="width:1.25rem;height:1.25rem;color:#2dd4bf;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Encrypted Checkout
+          </div>
+          <div class="at-trust-icon" style="color:#64748b;">
+            <svg style="width:1.25rem;height:1.25rem;color:#5eead4;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            Instant Processing
+          </div>
+          <div class="at-trust-icon" style="color:#64748b;">
+            <svg style="width:1.25rem;height:1.25rem;color:#0d9488;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            30-Day Guarantee
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY BOTTOM BAR -->
+  <div class="at-sticky-bar" id="sticky-bar">
+    <span class="at-sticky-title">The Advanced Trauma & Healing Library</span>
+    <span class="at-sticky-price">{{ bundle_price | money }}</span>
+    {% form 'cart', cart, class: 'at-sticky-form' %}
+      {% for handle in bundle_handles %}
+        {% assign current_product = all_products[handle] %}
+        {% if current_product != empty %}
+          {% assign variant = current_product.first_available_variant %}
+          <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+        {% endif %}
+      {% endfor %}
+      <input type="hidden" name="checkout" value="Checkout" />
+      <button type="submit" class="at-btn" style="width: auto; padding: 0.75rem 2rem; font-size: 1.125rem;">
+        Buy Library Now
+      </button>
+    {% endform %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyBar = document.getElementById('sticky-bar');
+    const checkoutSection = document.getElementById('checkout-section');
+    
+    // Smooth scroll for hero button
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Sticky bar observer
+    window.addEventListener('scroll', function() {
+      if (checkoutSection) {
+        // Show sticky bar when scrolling past the hero, but hide it when reaching the actual checkout section
+        const checkoutPosition = checkoutSection.getBoundingClientRect().top;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition > 500 && checkoutPosition > window.innerHeight) {
+           stickyBar.classList.add('visible');
+        } else {
+           stickyBar.classList.remove('visible');
+        }
+      }
+    });
+  });
+</script>
