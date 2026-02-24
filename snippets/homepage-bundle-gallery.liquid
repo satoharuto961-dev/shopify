@@ -177,26 +177,13 @@
 
     <div class="gallery-grid">
       
-      {% comment %} Define Bundles Data {% endcomment %}
-      {% capture bundle_data %}
-        timeless-minds|Elite Wisdom|Timeless Minds|bg-timeless|card-large|the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning
-        making-money|Wealth Systems|Making Money|bg-finance||the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition
-        clinical-excellence|Scientific Innovation|Clinical Excellence|bg-clinical-ex|card-tall|lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants,measurement-of-nursing-outcomes-2nd-edition-volume-2-client-outcomes-and-quality-of-care,machine-learning-and-ai-for-healthcare-big-data-for-improved-health-outcomes
-        mystery-intrigue|Dark Suspense|Mystery & Intrigue|bg-mystery||rebecca,murder-on-the-orient-express-a-hercule-poirot-mystery-the-official-authorized-edition,the-plot-against-america-vintage-international
-        advanced-trauma|Clinical Depth|Advanced Trauma|bg-trauma|card-wide|working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment
-        self-mastery|Cognitive Control|Mental Mastery|bg-mastery||master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,taking-charge-of-adult-adhd-proven-strategies-to-succeed-at-work-at-home-and-in-relationships
-        cultural-psychology|Global Justice|Cultural Psychology|bg-cultural||gender-power-and-global-social-justice-the-healing-power-of-psychotherapy,evidence-based-counselling-psychotherapy-for-the-21st-century-practitioner,practical-counselling-and-helping-skills
-        final-chapter|Hidden Gems|The Final Chapter|bg-final|card-wide|the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club
-        classic-literature|Western Canon|Classic Literature|bg-classic||the-iliad,war-and-peace,to-kill-a-mockingbird
-        dystopian-fiction|Radical Futures|Dystopian Fiction|bg-dystopia||the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international
-        clinical-practitioner|Medical Toolbox|Clinical Practitioner|bg-clinical||practical-counselling-and-helping-skills,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety
-      {% endcapture %}
+      {% comment %} Define Bundles Data - Slug|Tag|Title|BG|Size|Handles {% endcomment %}
+      {% capture bundle_data %}timeless-minds|Elite Wisdom|Timeless Minds|bg-timeless|card-large|the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning[ITEM]making-money|Wealth Systems|Making Money|bg-finance||the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition[ITEM]clinical-excellence|Scientific Innovation|Clinical Excellence|bg-clinical-ex|card-tall|lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants,measurement-of-nursing-outcomes-2nd-edition-volume-2-client-outcomes-and-quality-of-care,machine-learning-and-ai-for-healthcare-big-data-for-improved-health-outcomes[ITEM]mystery-intrigue|Dark Suspense|Mystery & Intrigue|bg-mystery||rebecca,murder-on-the-orient-express-a-hercule-poirot-mystery-the-official-authorized-edition,the-plot-against-america-vintage-international[ITEM]advanced-trauma|Clinical Depth|Advanced Trauma|bg-trauma|card-wide|working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment[ITEM]self-mastery|Cognitive Control|Mental Mastery|bg-mastery||master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,taking-charge-of-adult-adhd-proven-strategies-to-succeed-at-work-at-home-and-in-relationships[ITEM]cultural-psychology|Global Justice|Cultural Psychology|bg-cultural||gender-power-and-global-social-justice-the-healing-power-of-psychotherapy,evidence-based-counselling-psychotherapy-for-the-21st-century-practitioner,practical-counselling-and-helping-skills[ITEM]final-chapter|Hidden Gems|The Final Chapter|bg-final|card-wide|the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club[ITEM]classic-literature|Western Canon|Classic Literature|bg-classic||the-iliad,war-and-peace,to-kill-a-mockingbird[ITEM]dystopian-fiction|Radical Futures|Dystopian Fiction|bg-dystopia||the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international[ITEM]clinical-practitioner|Medical Toolbox|Clinical Practitioner|bg-clinical||play-therapy-4th-edition,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety{% endcapture %}
 
-      {% assign lines = bundle_data | strip | split: '
-' %}
-      {% for line in lines %}
-        {% assign parts = line | split: '|' %}
-        {% assign slug = parts[0] | strip %}
+      {% assign bundles = bundle_data | split: '[ITEM]' %}
+      {% for entry in bundles %}
+        {% assign parts = entry | split: '|' %}
+        {% assign slug = parts[0] %}
         {% assign tag = parts[1] %}
         {% assign title = parts[2] %}
         {% assign bg_class = parts[3] %}
@@ -212,7 +199,9 @@
           <div class="book-stack">
             {% for handle in book_handles limit: 3 %}
               {% assign p = all_products[handle] %}
-              <div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>
+              {% if p != empty %}
+                <div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>
+              {% endif %}
             {% endfor %}
           </div>
         </a>
