@@ -177,7 +177,7 @@
 
     <div class="gallery-grid">
       
-      {% comment %} Define Bundles Data - Slug|Tag|Title|BG|Size|Handles {% endcomment %}
+      {% comment %} Define Bundles Data {% endcomment %}
       {% capture bundle_data %}
         timeless-minds|Elite Wisdom|Timeless Minds|bg-timeless|card-large|the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning
         making-money|Wealth Systems|Making Money|bg-finance||the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition
@@ -189,14 +189,13 @@
         final-chapter|Hidden Gems|The Final Chapter|bg-final|card-wide|the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club
         classic-literature|Western Canon|Classic Literature|bg-classic||the-iliad,war-and-peace,to-kill-a-mockingbird
         dystopian-fiction|Radical Futures|Dystopian Fiction|bg-dystopia||the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international
-        clinical-practitioner|Medical Toolbox|Clinical Practitioner|bg-clinical||play-therapy-4th-edition,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety
+        clinical-practitioner|Medical Toolbox|Clinical Practitioner|bg-clinical||practical-counselling-and-helping-skills,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety
       {% endcapture %}
 
-      {% assign lines = bundle_data | strip | split: ' ' %}
+      {% assign lines = bundle_data | strip | split: '
+' %}
       {% for line in lines %}
-        {% assign entry = line | strip %}
-        {% if entry == empty %}{% continue %}{% endif %}
-        {% assign parts = entry | split: '|' %}
+        {% assign parts = line | split: '|' %}
         {% assign slug = parts[0] | strip %}
         {% assign tag = parts[1] %}
         {% assign title = parts[2] %}
