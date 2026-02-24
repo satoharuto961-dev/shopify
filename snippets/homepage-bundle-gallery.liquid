@@ -1,7 +1,7 @@
 {% comment %}
   =============================================================================
   HOMEPAGE BUNDLE GALLERY — Premium "Book Stack" Edition
-  Stable Hardcoded Version (No Duplicates, 100% Reliable)
+  Isolated Workspace Version (Zero Variable Leaks, 100% Unique)
   =============================================================================
 {% endcomment %}
 
@@ -146,101 +146,101 @@
     <div class="gallery-grid">
       
       <!-- 1. TIMELESS MINDS -->
-      {% assign h = 'the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning' | split: ',' %}
+      {% assign stack1 = 'the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning' | split: ',' %}
       <a href="/pages/timeless-minds" class="gallery-card card-large bg-timeless">
         <div class="card-content"><span class="card-tag">Elite Wisdom</span><h2 class="card-title">Timeless Minds</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack1 %}{% assign p1 = all_products[b] %}{% if p1 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p1.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 2. MAKING MONEY -->
-      {% assign h = 'the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition' | split: ',' %}
+      {% assign stack2 = 'the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition' | split: ',' %}
       <a href="/pages/making-money" class="gallery-card bg-finance">
         <div class="card-content"><span class="card-tag">Wealth Systems</span><h2 class="card-title">Making Money</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack2 %}{% assign p2 = all_products[b] %}{% if p2 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p2.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 3. CLINICAL EXCELLENCE (Tall) -->
-      {% assign h = 'lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants,measurement-of-nursing-outcomes-2nd-edition-volume-2-client-outcomes-and-quality-of-care,machine-learning-and-ai-for-healthcare-big-data-for-improved-health-outcomes' | split: ',' %}
+      {% assign stack3 = 'lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants,measurement-of-nursing-outcomes-2nd-edition-volume-2-client-outcomes-and-quality-of-care,machine-learning-and-ai-for-healthcare-big-data-for-improved-health-outcomes' | split: ',' %}
       <a href="/pages/clinical-excellence" class="gallery-card card-tall bg-clinical-ex">
         <div class="card-content"><span class="card-tag">Scientific Innovation</span><h2 class="card-title">Clinical Excellence</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack3 %}{% assign p3 = all_products[b] %}{% if p3 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p3.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 4. MYSTERY & INTRIGUE -->
-      {% assign h = 'rebecca,murder-on-the-orient-express-a-hercule-poirot-mystery-the-official-authorized-edition,the-plot-against-america-vintage-international' | split: ',' %}
+      {% assign stack4 = 'rebecca,murder-on-the-orient-express-a-hercule-poirot-mystery-the-official-authorized-edition,the-plot-against-america-vintage-international' | split: ',' %}
       <a href="/pages/mystery-intrigue" class="gallery-card bg-mystery">
         <div class="card-content"><span class="card-tag">Dark Suspense</span><h2 class="card-title">Mystery & Intrigue</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack4 %}{% assign p4 = all_products[b] %}{% if p4 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p4.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 5. ADVANCED TRAUMA (Wide) -->
-      {% assign h = 'working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,attachment-focused-emdr-healing-relational-trauma' | split: ',' %}
+      {% assign stack5 = 'working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,attachment-focused-emdr-healing-relational-trauma' | split: ',' %}
       <a href="/pages/advanced-trauma" class="gallery-card card-wide bg-trauma">
         <div class="card-content"><span class="card-tag">Clinical Depth</span><h2 class="card-title">Advanced Trauma</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack5 %}{% assign p5 = all_products[b] %}{% if p5 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p5.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 6. MENTAL MASTERY -->
-      {% assign h = 'master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,taking-charge-of-adult-adhd-proven-strategies-to-succeed-at-work-at-home-and-in-relationships' | split: ',' %}
+      {% assign stack6 = 'master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,taking-charge-of-adult-adhd-proven-strategies-to-succeed-at-work-at-home-and-in-relationships' | split: ',' %}
       <a href="/pages/self-mastery" class="gallery-card bg-mastery">
         <div class="card-content"><span class="card-tag">Cognitive Control</span><h2 class="card-title">Mental Mastery</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack6 %}{% assign p6 = all_products[b] %}{% if p6 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p6.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 7. CULTURAL PSYCHOLOGY -->
-      {% assign h = 'gender-power-and-global-social-justice-the-healing-power-of-psychotherapy,addressing-cultural-complexities-in-counseling-and-clinical-practice-an-intersectional-approach,a-thousand-splendid-suns' | split: ',' %}
+      {% assign stack7 = 'gender-power-and-global-social-justice-the-healing-power-of-psychotherapy,addressing-cultural-complexities-in-counseling-and-clinical-practice-an-intersectional-approach,a-thousand-splendid-suns' | split: ',' %}
       <a href="/pages/cultural-psychology" class="gallery-card bg-cultural">
         <div class="card-content"><span class="card-tag">Global Justice</span><h2 class="card-title">Cultural Psychology</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack7 %}{% assign p7 = all_products[b] %}{% if p7 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p7.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 8. THE FINAL CHAPTER (Wide) -->
-      {% assign h = 'the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club' | split: ',' %}
+      {% assign stack8 = 'the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club' | split: ',' %}
       <a href="/pages/final-chapter" class="gallery-card card-wide bg-final">
         <div class="card-content"><span class="card-tag">Hidden Gems</span><h2 class="card-title">The Final Chapter</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack8 %}{% assign p8 = all_products[b] %}{% if p8 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p8.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 9. CLASSIC LITERATURE -->
-      {% assign h = 'the-iliad,war-and-peace,the-aeneid' | split: ',' %}
+      {% assign stack9 = 'the-iliad,war-and-peace,the-aeneid' | split: ',' %}
       <a href="/pages/classic-literature" class="gallery-card bg-classic">
         <div class="card-content"><span class="card-tag">Western Canon</span><h2 class="card-title">Classic Literature</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack9 %}{% assign p9 = all_products[b] %}{% if p9 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p9.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 10. DYSTOPIAN FICTION -->
-      {% assign h = 'the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international' | split: ',' %}
+      {% assign stack10 = 'the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international' | split: ',' %}
       <a href="/pages/dystopian-fiction" class="gallery-card bg-dystopia">
         <div class="card-content"><span class="card-tag">Radical Futures</span><h2 class="card-title">Dystopian Fiction</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack10 %}{% assign p10 = all_products[b] %}{% if p10 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p10.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
       <!-- 11. CLINICAL PRACTITIONER -->
-      {% assign h = 'play-therapy-4th-edition,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' | split: ',' %}
+      {% assign stack11 = 'play-therapy-4th-edition,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety' | split: ',' %}
       <a href="/pages/clinical-practitioner" class="gallery-card bg-clinical">
         <div class="card-content"><span class="card-tag">Medical Toolbox</span><h2 class="card-title">Clinical Practitioner</h2></div>
         <div class="book-stack">
-          {% for handle in h %}{% assign p = all_products[handle] %}{% if p != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
+          {% for b in stack11 %}{% assign p11 = all_products[b] %}{% if p11 != empty %}<div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p11.featured_image | img_url: '400x' }}');"></div>{% endif %}{% endfor %}
         </div>
       </a>
 
