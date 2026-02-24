@@ -1,36 +1,22 @@
 {% comment %}
   =============================================================================
-  HOMEPAGE BUNDLE GALLERY — Premium "Free Style" Grid (Dynamic Imagery)
-  Showcases all 11 Psychoreads collections with real book backgrounds.
+  HOMEPAGE BUNDLE GALLERY — Premium "Book Stack" Edition
+  Combines unique color signatures with a stylized 3D collage of collection covers.
   =============================================================================
 {% endcomment %}
-
-{% comment %} Representative handles for background images {% endcomment %}
-{% assign img_timeless = all_products['the-fountainhead'].featured_image | img_url: '800x' %}
-{% assign img_money = all_products['the-48-laws-of-power'].featured_image | img_url: '800x' %}
-{% assign img_clinical_ex = all_products['lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants'].featured_image | img_url: '800x' %}
-{% assign img_mystery = all_products['rebecca'].featured_image | img_url: '800x' %}
-{% assign img_trauma = all_products['working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system'].featured_image | img_url: '800x' %}
-{% assign img_mastery = all_products['master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings'].featured_image | img_url: '800x' %}
-{% assign img_cultural = all_products['gender-power-and-global-social-justice-the-healing-power-of-psychotherapy'].featured_image | img_url: '800x' %}
-{% assign img_final = all_products['the-plague-a-new-translation-by-laura-marris'].featured_image | img_url: '800x' %}
-{% assign img_classic = all_products['the-iliad'].featured_image | img_url: '800x' %}
-{% assign img_dystopia = all_products['the-handmaid-s-tale'].featured_image | img_url: '800x' %}
-{% assign img_practitioner = all_products['practical-counselling-and-helping-skills'].featured_image | img_url: '800x' %}
 
 <style>
   :root {
     --bg-main: #ffffff;
     --text-dark: #0f172a;
     --text-muted: #64748b;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
   .gallery-wrapper {
     background-color: var(--bg-main);
     padding: 60px 0 120px;
     font-family: 'Inter', -apple-system, sans-serif;
+    overflow-x: hidden;
   }
 
   .gallery-container {
@@ -65,47 +51,52 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 320px;
-    gap: 24px;
+    gap: 32px;
   }
 
+  /* Card Base */
   .gallery-card {
     position: relative;
-    border-radius: 32px;
+    border-radius: 40px;
     overflow: hidden;
     text-decoration: none;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 40px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    z-index: 1;
   }
 
   .gallery-card:hover {
-    transform: translateY(-8px) scale(0.98);
-    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.3);
   }
 
-  /* Overlay for legibility */
+  /* Stack Backgrounds */
+  .bg-finance    { background: linear-gradient(135deg, #059669, #064e3b); }
+  .bg-mastery    { background: linear-gradient(135deg, #2563eb, #1e3a8a); }
+  .bg-classic    { background: linear-gradient(135deg, #d97706, #78350f); }
+  .bg-clinical   { background: linear-gradient(135deg, #0d9488, #134e4a); }
+  .bg-trauma     { background: linear-gradient(135deg, #dc2626, #7f1d1d); }
+  .bg-dystopia   { background: linear-gradient(135deg, #4b5563, #111827); }
+  .bg-timeless   { background: linear-gradient(135deg, #7c3aed, #4c1d95); }
+  .bg-mystery    { background: linear-gradient(135deg, #db2777, #831843); }
+  .bg-cultural   { background: linear-gradient(135deg, #4f46e5, #312e81); }
+  .bg-final      { background: linear-gradient(135deg, #0891b2, #155e75); }
+  .bg-clinical-ex { background: linear-gradient(135deg, #1e3a8a, #0f172a); }
+
+  /* Overlay for text legibility */
   .gallery-card::after {
     content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.1) 100%);
-    z-index: 1;
-    transition: opacity 0.4s ease;
-  }
-
-  .gallery-card:hover::after {
-    background: linear-gradient(to top, rgba(15, 23, 42, 1) 10%, rgba(15, 23, 42, 0.5) 70%, rgba(15, 23, 42, 0.2) 100%);
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
+    z-index: 2;
   }
 
   .card-content {
     position: relative;
-    z-index: 2;
-    transition: transform 0.5s ease;
+    z-index: 10;
   }
 
   .card-tag {
@@ -113,52 +104,67 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #38bdf8; /* Medical light blue accent */
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 8px;
     display: block;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
   .card-title {
     font-size: 1.85rem;
     font-weight: 900;
     color: white;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
     line-height: 1.1;
-    text-shadow: 0 4px 8px rgba(0,0,0,0.5);
   }
 
-  .card-desc {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 90%;
-    margin: 0;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    transition: all 0.4s ease;
+  /* Book Stack Magic */
+  .book-stack {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 320px;
+    z-index: 3;
+    pointer-events: none;
   }
 
-  .gallery-card:hover .card-desc {
-    opacity: 1;
-    height: auto;
-    margin-top: 8px;
+  .book-item-layer {
+    position: absolute;
+    width: 140px;
+    height: 200px;
+    border-radius: 6px;
+    box-shadow: -10px 10px 25px rgba(0,0,0,0.5);
+    background-size: cover;
+    background-position: center;
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    border: 1px solid rgba(255,255,255,0.1);
   }
 
-  /* Card Layouts */
+  .layer-1 { z-index: 1; transform: rotate(-8deg) translateX(-60px); opacity: 0.9; }
+  .layer-2 { z-index: 2; transform: rotate(-2deg) translateX(-30px); opacity: 0.95; }
+  .layer-3 { z-index: 3; transform: rotate(4deg) translateX(0); }
+
+  .gallery-card:hover .layer-1 { transform: rotate(-15deg) translateX(-100px) translateY(-20px); opacity: 1; }
+  .gallery-card:hover .layer-2 { transform: rotate(-5deg) translateX(-40px) translateY(-10px); opacity: 1; }
+  .gallery-card:hover .layer-3 { transform: rotate(10deg) translateX(20px) translateY(10px) scale(1.05); }
+
+  /* Grid Layouts */
   .card-large { grid-column: span 2; grid-row: span 2; }
   .card-wide  { grid-column: span 2; }
   .card-tall  { grid-row: span 2; }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     .card-large, .card-wide, .card-tall { grid-column: span 1; grid-row: span 1; }
-    .gallery-card { height: 320px; }
+    .book-stack { right: -60px; transform: translateY(-50%) scale(0.8); }
   }
 
   @media (max-width: 640px) {
     .gallery-grid { grid-template-columns: 1fr; }
     .gallery-intro h1 { font-size: 2.5rem; }
+    .book-stack { display: none; } /* Hide stack on mobile to focus on text */
+    .gallery-card { border-radius: 24px; padding: 30px; }
   }
 </style>
 
@@ -166,108 +172,52 @@
   <div class="gallery-container">
     <header class="gallery-intro">
       <h1>Infinite Thinking</h1>
-      <p>Curated libraries of the world’s most impactful knowledge. Build your intellectual foundation across 11 disciplines.</p>
+      <p>Curated libraries of the world’s most impactful knowledge. Build your intellectual foundation across 11 master disciplines.</p>
     </header>
 
     <div class="gallery-grid">
-      <!-- 1. Timeless Minds (Large) -->
-      <a href="/pages/timeless-minds" class="gallery-card card-large" style="background-image: url('{{ img_timeless }}');">
-        <div class="card-content">
-          <span class="card-tag">Elite Wisdom</span>
-          <h2 class="card-title">Timeless Minds</h2>
-          <p class="card-desc">Homer to Rand. 3,000 years of philosophy and epic fiction curated for the genuinely curious.</p>
-        </div>
-      </a>
+      
+      {% comment %} Define Bundles Data {% endcomment %}
+      {% capture bundle_data %}
+        timeless-minds|Elite Wisdom|Timeless Minds|bg-timeless|card-large|the-fountainhead,the-picture-of-dorian-gray-the-original-1891-classic-readers-library-classics,mans-search-for-meaning
+        making-money|Wealth Systems|Making Money|bg-finance||the-48-laws-of-power,zero-to-one,influence-the-psychology-of-persuasion-revised-edition
+        clinical-excellence|Scientific Innovation|Clinical Excellence|bg-clinical-ex|card-tall|lehnes-pharmacotherapeutics-for-advanced-practice-nurses-and-physician-assistants,measurement-of-nursing-outcomes-2nd-edition-volume-2-client-outcomes-and-quality-of-care,machine-learning-and-ai-for-healthcare-big-data-for-improved-health-outcomes
+        mystery-intrigue|Dark Suspense|Mystery & Intrigue|bg-mystery||rebecca,murder-on-the-orient-express-a-hercule-poirot-mystery-the-official-authorized-edition,the-plot-against-america-vintage-international
+        advanced-trauma|Clinical Depth|Advanced Trauma|bg-trauma|card-wide|working-with-attachment-trauma-clinical-application-of-the-adult-attachment-projective-picture-system,emdr-and-attachment-focused-trauma-therapy-for-adults-reclaiming-authentic-self-and-healthy-attachments,emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment
+        self-mastery|Cognitive Control|Mental Mastery|bg-mastery||master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,psycho-cybernetics-updated-and-expanded-the-psycho-cybernetics-series,taking-charge-of-adult-adhd-proven-strategies-to-succeed-at-work-at-home-and-in-relationships
+        cultural-psychology|Global Justice|Cultural Psychology|bg-cultural||gender-power-and-global-social-justice-the-healing-power-of-psychotherapy,evidence-based-counselling-psychotherapy-for-the-21st-century-practitioner,practical-counselling-and-helping-skills
+        final-chapter|Hidden Gems|The Final Chapter|bg-final|card-wide|the-plague-a-new-translation-by-laura-marris,the-island-of-the-day-before,love-in-the-time-of-cholera-oprahs-book-club
+        classic-literature|Western Canon|Classic Literature|bg-classic||the-iliad,war-and-peace,to-kill-a-mockingbird
+        dystopian-fiction|Radical Futures|Dystopian Fiction|bg-dystopia||the-handmaid-s-tale,fahrenheit-451,never-let-me-go-vintage-international
+        clinical-practitioner|Medical Toolbox|Clinical Practitioner|bg-clinical||practical-counselling-and-helping-skills,the-guide-to-play-therapy-documentation-and-parent-consultation,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety
+      {% endcapture %}
 
-      <!-- 2. Making Money -->
-      <a href="/pages/making-money" class="gallery-card" style="background-image: url('{{ img_money }}');">
-        <div class="card-content">
-          <span class="card-tag">Systems of Wealth</span>
-          <h2 class="card-title">Making Money</h2>
-          <p class="card-desc">The psychological and strategic blueprints of the world’s top wealth creators.</p>
-        </div>
-      </a>
+      {% assign lines = bundle_data | strip | split: '
+' %}
+      {% for line in lines %}
+        {% assign parts = line | split: '|' %}
+        {% assign slug = parts[0] | strip %}
+        {% assign tag = parts[1] %}
+        {% assign title = parts[2] %}
+        {% assign bg_class = parts[3] %}
+        {% assign size_class = parts[4] %}
+        {% assign book_handles = parts[5] | split: ',' %}
 
-      <!-- 3. Clinical Excellence (Tall) -->
-      <a href="/pages/clinical-excellence" class="gallery-card card-tall" style="background-image: url('{{ img_clinical_ex }}');">
-        <div class="card-content">
-          <span class="card-tag">Scientific Innovation</span>
-          <h2 class="card-title">Clinical Excellence</h2>
-          <p class="card-desc">Medical AI, advanced pharmacotherapeutics, and the future of healthcare.</p>
-        </div>
-      </a>
+        <a href="/pages/{{ slug }}" class="gallery-card {{ size_class }} {{ bg_class }}">
+          <div class="card-content">
+            <span class="card-tag">{{ tag }}</span>
+            <h2 class="card-title">{{ title }}</h2>
+          </div>
+          
+          <div class="book-stack">
+            {% for handle in book_handles limit: 3 %}
+              {% assign p = all_products[handle] %}
+              <div class="book-item-layer layer-{{ forloop.index }}" style="background-image: url('{{ p.featured_image | img_url: '400x' }}');"></div>
+            {% endfor %}
+          </div>
+        </a>
+      {% endfor %}
 
-      <!-- 4. Mystery & Intrigue -->
-      <a href="/pages/mystery-intrigue" class="gallery-card" style="background-image: url('{{ img_mystery }}');">
-        <div class="card-content">
-          <span class="card-tag">Dark Suspense</span>
-          <h2 class="card-title">Mystery & Intrigue</h2>
-          <p class="card-desc">The most haunting psychological thrillers in modern literature.</p>
-        </div>
-      </a>
-
-      <!-- 5. Advanced Trauma (Wide) -->
-      <a href="/pages/advanced-trauma" class="gallery-card card-wide" style="background-image: url('{{ img_trauma }}');">
-        <div class="card-content">
-          <span class="card-tag">Professional Therapy</span>
-          <h2 class="card-title">Advanced Trauma</h2>
-          <p class="card-desc">The clinician’s toolbox for repairing complex emotional and developmental trauma.</p>
-        </div>
-      </a>
-
-      <!-- 6. Mental Mastery -->
-      <a href="/pages/self-mastery" class="gallery-card" style="background-image: url('{{ img_mastery }}');">
-        <div class="card-content">
-          <span class="card-tag">Cognitive Control</span>
-          <h2 class="card-title">Mental Mastery</h2>
-          <p class="card-desc">Frameworks for emotional intelligence, discipline, and absolute mental clarity.</p>
-        </div>
-      </a>
-
-      <!-- 7. Cultural Psychology -->
-      <a href="/pages/cultural-psychology" class="gallery-card" style="background-image: url('{{ img_cultural }}');">
-        <div class="card-content">
-          <span class="card-tag">Global Justice</span>
-          <h2 class="card-title">Cultural Psychology</h2>
-          <p class="card-desc">Navigating bias, inclusivity, and community mental health in the 21st century.</p>
-        </div>
-      </a>
-
-      <!-- 8. The Final Chapter (Wide) -->
-      <a href="/pages/final-chapter" class="gallery-card card-wide" style="background-image: url('{{ img_final }}');">
-        <div class="card-content">
-          <span class="card-tag">The Hidden Gems</span>
-          <h2 class="card-title">The Final Chapter</h2>
-          <p class="card-desc">Rare Nobel prize winners and radical literary voices that demand to be heard.</p>
-        </div>
-      </a>
-
-      <!-- 9. Classic Literature -->
-      <a href="/pages/classic-literature" class="gallery-card" style="background-image: url('{{ img_classic }}');">
-        <div class="card-content">
-          <span class="card-tag">The Western Canon</span>
-          <h2 class="card-title">Classic Literature</h2>
-          <p class="card-desc">The foundational epics that defined the boundaries of human imagination.</p>
-        </div>
-      </a>
-
-      <!-- 10. Dystopian Fiction -->
-      <a href="/pages/dystopian-fiction" class="gallery-card" style="background-image: url('{{ img_dystopia }}');">
-        <div class="card-content">
-          <span class="card-tag">Radical Futures</span>
-          <h2 class="card-title">Dystopian Fiction</h2>
-          <p class="card-desc">Dark warnings and social critiques from the most visionary authors.</p>
-        </div>
-      </a>
-
-      <!-- 11. Clinical Practitioner -->
-      <a href="/pages/clinical-practitioner" class="gallery-card" style="background-image: url('{{ img_practitioner }}');">
-        <div class="card-content">
-          <span class="card-tag">The Medical Toolbox</span>
-          <h2 class="card-title">Clinical Practitioner</h2>
-          <p class="card-desc">Core therapeutic strategies and practical skills for the modern professional.</p>
-        </div>
-      </a>
     </div>
   </div>
 </div>
