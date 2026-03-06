@@ -69,5 +69,127 @@
     </header>
     {{ order_summary_toggle }}
     {{ content_for_layout }}
+    <!-- Meta Pixel & CAPI: Purchase Event on Thank-You Page -->
+    <script>
+      (function() {
+        if (typeof Shopify === 'undefined' || !Shopify.checkout || Shopify.Checkout.step !== 'thank_you') {
+          return;
+        }
+
+        var PIXEL_ID   = '751173873685974';
+        var CAPI_TOKEN = 'EAAXvxtc6CJABQZCzZAY9Mi9bhcOqFABC8ABOXmLF4ZCVkzsYqVZBZAFILfNHG84ZBe8OhOG147vJk1Axw5foZAPuhZAZATiuJOXuhkIBcRjyq9QMFeFInLGm30u3nsnL34avLSLdy3Y33Bh3QwgoHFDtpfr8qoyV2D0a3hRMhqDQpA4KIzO5pvePy5ZCz27dwoXnwWcgZDZD';
+        var API_VER    = 'v19.0';
+        var CAPI_URL   = 'https://graph.facebook.com/' + API_VER + '/' + PIXEL_ID + '/events?access_token=' + CAPI_TOKEN;
+
+        function uuid() {
+          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0;
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+          });
+        }
+
+        async function sha256(str) {
+          if (!str || !window.crypto || !window.crypto.subtle) return null;
+          var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str.trim().toLowerCase()));
+          return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+        }
+
+        function getCookie(name) {
+          var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+          return match ? match[2] : null;
+        }
+
+        window.addEventListener('load', async function() {
+          // Guard against double firing by checking if we already fired for this order
+          var storageKey = 'fbpixel_purchase_' + Shopify.checkout.order_id;
+          if (sessionStorage.getItem(storageKey)) return;
+
+          var eid = uuid();
+          var checkout = Shopify.checkout;
+
+          // Prepare Item Data
+          var contentIds = [];
+          var contents = [];
+          
+          if (checkout.line_items) {
+            checkout.line_items.forEach(function(item) {
+              contentIds.push(item.product_id.toString());
+              contents.push({
+                id: item.product_id.toString(),
+                quantity: item.quantity,
+                item_price: parseFloat(item.price)
+              });
+            });
+          }
+
+          var customData = {
+            content_ids: contentIds,
+            contents: contents,
+            content_type: 'product',
+            value: parseFloat(checkout.total_price),
+            currency: checkout.currency
+          };
+
+          // 1. Fire Browser Pixel
+          if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', customData, { eventID: eid });
+          }
+
+          // 2. Fire CAPI Server Event
+          try {
+            var emailHash = checkout.email ? await sha256(checkout.email) : null;
+            var phoneHash = (checkout.billing_address && checkout.billing_address.phone) 
+                              ? await sha256(checkout.billing_address.phone) : null;
+            var fnameHash = (checkout.billing_address && checkout.billing_address.first_name) 
+                              ? await sha256(checkout.billing_address.first_name) : null;
+            var lnameHash = (checkout.billing_address && checkout.billing_address.last_name) 
+                              ? await sha256(checkout.billing_address.last_name) : null;
+
+            var userData = {
+              client_user_agent: navigator.userAgent,
+              fbc: getCookie('_fbc') || undefined,
+              fbp: getCookie('_fbp') || undefined,
+              em: emailHash ? [emailHash] : undefined,
+              ph: phoneHash ? [phoneHash] : undefined,
+              fn: fnameHash ? [fnameHash] : undefined,
+              ln: lnameHash ? [lnameHash] : undefined
+            };
+
+            // Remove undefined fields
+            Object.keys(userData).forEach(function(key) {
+               if (userData[key] === undefined) delete userData[key];
+            });
+
+            var payload = {
+              data: [{
+                event_name: 'Purchase',
+                event_time: Math.floor(Date.now() / 1000),
+                event_id: eid,
+                event_source_url: window.location.href,
+                action_source: 'website',
+                user_data: userData,
+                custom_data: customData,
+                original_event_data: {
+                  event_name: 'Purchase',
+                  event_time: Math.floor(Date.now() / 1000)
+                }
+              }]
+            };
+
+            await fetch(CAPI_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            // Mark as fired so refreshing the thank-you page doesn't fire again
+            sessionStorage.setItem(storageKey, 'true');
+
+          } catch (e) {
+            console.error('CAPI Purchase Error:', e);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

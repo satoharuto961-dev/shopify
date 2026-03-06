@@ -1,0 +1,573 @@
+{% assign bundle_handles = "emotion-in-posttraumatic-stress-disorder-etiology-assessment-neurobiology-and-treatment,master-your-emotions-develop-emotional-intelligence-and-discover-the-essential-rules-of-when-and-how-to-control-your-feelings,the-cbt-flip-chart-an-evidence-based-psychoeducational-tool-for-anxiety,cbt-the-cognitive-behavioural-tsunami-managerialism-politics-and-the-corruptions-of-science,the-aeneid" | split: "," %}
+
+{% comment %}
+  Bundle price set to $19.99. Compare price auto-calculated from product variants.
+{% endcomment %}
+{% assign bundle_price = 1999 %}
+{% assign total_compare_price = 0 %}
+
+{% for handle in bundle_handles %}
+  {% assign current_product = all_products[handle] %}
+  {% if current_product != empty %}
+    {% assign variant = current_product.first_available_variant %}
+    {% assign total_compare_price = total_compare_price | plus: variant.compare_at_price %}
+  {% endif %}
+{% endfor %}
+
+<style>
+  .ec-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #111827;
+    line-height: 1.6;
+    background-color: #f9fafb;
+    padding-bottom: 100px;
+  }
+
+  .ec-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .ec-section { padding: 4rem 0; }
+
+  h1, h2, h3 { line-height: 1.2; font-weight: 800; color: #111827; }
+  h2 { font-size: 2.25rem; margin-bottom: 2rem; text-align: center; }
+  h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+  p { font-size: 1.125rem; color: #4b5563; margin-bottom: 1.5rem; }
+
+  /* Hero */
+  .ec-hero {
+    text-align: center;
+    padding: 5rem 1rem 3rem;
+    background: linear-gradient(135deg, #fdf2f8 0%, #ede9fe 60%, #ffffff 100%);
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .ec-eyebrow {
+    display: inline-block;
+    background: #7c3aed;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+  }
+
+  .ec-hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ec-hero-subtitle {
+    font-size: 1.4rem;
+    max-width: 780px;
+    margin: 0 auto 3rem;
+    color: #4b5563;
+  }
+
+  .ec-books-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .ec-book-wrapper {
+    width: 150px;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ec-book-wrapper:hover {
+    transform: translateY(-15px) scale(1.05);
+    z-index: 10;
+  }
+
+  .ec-book-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: -12px 12px 24px rgba(0,0,0,0.2), inset 2px 0 5px rgba(255,255,255,0.3);
+  }
+
+  /* CTA Button */
+  .ec-btn-container { text-align: center; margin: 2rem 0; }
+
+  .ec-btn {
+    display: inline-block;
+    background: linear-gradient(to right, #7c3aed, #a855f7);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 1.25rem 3rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.45);
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .ec-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 35px -10px rgba(124, 58, 237, 0.6);
+    color: white;
+  }
+
+  .ec-btn-subtext {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  /* Thesis block */
+  .ec-thesis {
+    background: white;
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    margin-top: -3rem;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 20;
+  }
+
+  .ec-thesis p { font-size: 1.25rem; }
+
+  /* Book breakdown cards */
+  .ec-breakdown-card {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+    margin-bottom: 2rem;
+    align-items: center;
+    border: 1px solid #f3f4f6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ec-breakdown-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.07);
+  }
+
+  .ec-breakdown-img {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: -8px 8px 16px rgba(0,0,0,0.15);
+  }
+
+  .ec-book-tag {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    background: #ede9fe;
+    color: #5b21b6;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ec-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+  }
+
+  .ec-checklist li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    color: #4b5563;
+  }
+
+  .ec-checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #7c3aed;
+    font-weight: 900;
+  }
+
+  /* Pricing */
+  .ec-pricing-hero {
+    background: #1e1b4b;
+    color: white;
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    margin: 4rem 0;
+  }
+
+  .ec-pricing-hero h2 { color: white; }
+  .ec-pricing-hero p { color: #a5b4fc; }
+
+  .ec-price-block { margin: 2rem 0; }
+  .ec-price-current { font-size: 4rem; font-weight: 900; color: white; line-height: 1; }
+  .ec-price-original { font-size: 1.5rem; color: #6b7280; text-decoration: line-through; margin-left: 1rem; }
+
+  .ec-savings-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #7c3aed;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-top: 1.5rem;
+  }
+
+  /* Reviews */
+  .ec-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .ec-review-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .ec-stars { color: #fbbf24; font-size: 1.25rem; margin-bottom: 1rem; }
+  .ec-review-text { font-style: italic; font-size: 1.125rem; margin-bottom: 1.5rem; }
+  .ec-review-author { font-weight: 700; color: #111827; }
+
+  /* Trust icons */
+  .ec-trust-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .ec-trust-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  /* Sticky bar */
+  .ec-sticky-form { margin: 0; }
+  .ec-sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .ec-sticky-bar.visible { transform: translateY(0); }
+  .ec-sticky-title { font-weight: 800; font-size: 1.125rem; display: none; }
+  .ec-sticky-price { font-weight: 900; font-size: 1.5rem; color: #7c3aed; }
+
+  @media (min-width: 1024px) { .ec-sticky-title { display: block; } }
+
+  @media (max-width: 768px) {
+    .ec-hero-title { font-size: 2.5rem; }
+    .ec-hero-subtitle { font-size: 1.2rem; }
+    .ec-thesis { padding: 2rem 1.5rem; margin-top: -2rem; }
+    .ec-breakdown-card { grid-template-columns: 1fr; gap: 2rem; text-align: center; padding: 2rem 1.5rem; }
+    .ec-checklist li { text-align: left; }
+    .ec-books-display { gap: 0.75rem; }
+    .ec-book-wrapper { width: 105px; }
+  }
+</style>
+
+<div class="ec-page">
+
+  <!-- HERO -->
+  <header class="ec-hero">
+    <div class="ec-container">
+      <span class="ec-eyebrow">Clinical & Emotional Intelligence</span>
+      <h1 class="ec-hero-title">The "Emotion & CBT" Library</h1>
+      <p class="ec-hero-subtitle">5 essential books spanning trauma neuroscience, emotional mastery, CBT clinical tools, critical psychology, and timeless wisdom.</p>
+
+      <div class="ec-books-display">
+        {% for handle in bundle_handles %}
+          {% assign current_product = all_products[handle] %}
+          {% if current_product != empty %}
+            <div class="ec-book-wrapper">
+              <img src="{{ current_product.featured_image | img_url: '400x' }}" alt="{{ current_product.title }}" class="ec-book-cover">
+            </div>
+          {% else %}
+            <!-- Fallback CDN images if product not found in store -->
+            {% case forloop.index %}
+              {% when 1 %}
+                <div class="ec-book-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/a_22bddb14-10fe-4a18-8565-c30b0d9938a5.jpg?v=1771266740" alt="Emotion in Posttraumatic Stress Disorder" class="ec-book-cover">
+                </div>
+              {% when 2 %}
+                <div class="ec-book-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/71iFYWNT_xL._SY522.jpg?v=1771266750" alt="Master Your Emotions" class="ec-book-cover">
+                </div>
+              {% when 3 %}
+                <div class="ec-book-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/61EzyrQ3q4L._SL1341.jpg?v=1771266765" alt="The CBT Flip Chart" class="ec-book-cover">
+                </div>
+              {% when 4 %}
+                <div class="ec-book-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/710iQ-n0hDL._SY522.jpg?v=1771266735" alt="CBT: The Cognitive Behavioural Tsunami" class="ec-book-cover">
+                </div>
+              {% when 5 %}
+                <div class="ec-book-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/71oIgUbGkTL._SY522.jpg?v=1771266763" alt="The Aeneid" class="ec-book-cover">
+                </div>
+            {% endcase %}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="ec-btn-container">
+        <a href="#checkout-section" class="ec-btn" style="display:inline-block; max-width:420px; padding:1.25rem 2rem;">Claim the Bundle →</a>
+        <span class="ec-btn-subtext">Save massively vs buying each book separately.</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- THESIS -->
+  <div class="ec-container">
+    <div class="ec-thesis">
+      <h2>Why These 5 Books?</h2>
+      <p>Emotions are not weakness — they are <strong>data</strong>. And if you can't read that data, you can't heal from trauma, make rational decisions under pressure, or build the mental resilience that modern life demands.</p>
+      <p>This bundle moves from the clinical science of trauma and emotion, through the practical tools of CBT, into critical perspectives on the field itself — and ends with Virgil's timeless exploration of duty, loss, and perseverance. Together, they form a complete map of the emotional mind.</p>
+    </div>
+  </div>
+
+  <!-- BOOK BREAKDOWNS -->
+  <section class="ec-section">
+    <div class="ec-container">
+      <h2>What's Inside the Library</h2>
+
+      <!-- Book 1 -->
+      <div class="ec-breakdown-card">
+        <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/a_22bddb14-10fe-4a18-8565-c30b0d9938a5.jpg?v=1771266740" alt="Emotion in Posttraumatic Stress Disorder" class="ec-breakdown-img">
+        <div>
+          <span class="ec-book-tag">Trauma Science</span>
+          <h3>Emotion in Posttraumatic Stress Disorder</h3>
+          <p>A comprehensive clinical reference covering the etiology, neurobiology, and cutting-edge treatment of PTSD through an emotion-focused lens.</p>
+          <ul class="ec-checklist">
+            <li>Understand the neurobiology of traumatic memory.</li>
+            <li>Apply evidence-based emotion-regulation strategies.</li>
+            <li>Master the most up-to-date PTSD assessment tools.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 2 -->
+      <div class="ec-breakdown-card">
+        <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/71iFYWNT_xL._SY522.jpg?v=1771266750" alt="Master Your Emotions" class="ec-breakdown-img">
+        <div>
+          <span class="ec-book-tag">Emotional Intelligence</span>
+          <h3>Master Your Emotions</h3>
+          <p>A practical, no-fluff guide to understanding your emotional architecture and taking back control of how you feel.</p>
+          <ul class="ec-checklist">
+            <li>Break free from chronic negativity cycles.</li>
+            <li>Rewire your emotional default responses.</li>
+            <li>Build lasting resilience under stress.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 3 -->
+      <div class="ec-breakdown-card">
+        <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/61EzyrQ3q4L._SL1341.jpg?v=1771266765" alt="The CBT Flip Chart" class="ec-breakdown-img">
+        <div>
+          <span class="ec-book-tag">Clinical Tool</span>
+          <h3>The CBT Flip Chart</h3>
+          <p>An evidence-based psychoeducational resource covering anxiety, depression, stress, insomnia, PTSD, and more — ready to use in sessions or self-study.</p>
+          <ul class="ec-checklist">
+            <li>Instant reference for CBT psychoeducation.</li>
+            <li>Covers 10+ psychological conditions.</li>
+            <li>Ideal for clinicians and self-directed learners.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 4 -->
+      <div class="ec-breakdown-card">
+        <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/710iQ-n0hDL._SY522.jpg?v=1771266735" alt="CBT: The Cognitive Behavioural Tsunami" class="ec-breakdown-img">
+        <div>
+          <span class="ec-book-tag">Critical Psychology</span>
+          <h3>CBT: The Cognitive Behavioural Tsunami</h3>
+          <p>A provocative and essential critique of managerialism and the political corruption of CBT — a must-read for any serious practitioner.</p>
+          <ul class="ec-checklist">
+            <li>Understand the institutional limits of CBT.</li>
+            <li>Develop a more critical clinical framework.</li>
+            <li>Navigate the intersection of politics and practice.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Book 5 -->
+      <div class="ec-breakdown-card">
+        <img src="https://cdn.shopify.com/s/files/1/0741/5070/7372/files/71oIgUbGkTL._SY522.jpg?v=1771266763" alt="The Aeneid" class="ec-breakdown-img">
+        <div>
+          <span class="ec-book-tag">Timeless Wisdom</span>
+          <h3>The Aeneid</h3>
+          <p>Virgil's epic masterpiece on duty, suffering, and the forging of identity through adversity — as psychologically rich today as it was two millennia ago.</p>
+          <ul class="ec-checklist">
+            <li>Explore stoic endurance through epic narrative.</li>
+            <li>Understand identity construction under trauma.</li>
+            <li>Contextualise modern psychology in ancient wisdom.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="ec-section" style="background: white; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;">
+    <div class="ec-container">
+      <h2>What Readers Are Saying</h2>
+      <div class="ec-reviews">
+        <div class="ec-review-card">
+          <div class="ec-stars">★★★★★</div>
+          <p class="ec-review-text">"The Emotion in PTSD book completely changed how I understand my clients. Paired with the CBT Flip Chart, I use this stack daily in my practice."</p>
+          <p class="ec-review-author">— Dr. Sarah L., Clinical Psychologist</p>
+        </div>
+        <div class="ec-review-card">
+          <div class="ec-stars">★★★★★</div>
+          <p class="ec-review-text">"I bought Master Your Emotions years ago but only after reading the CBT Tsunami did I understand the full picture. This collection is a masterclass."</p>
+          <p class="ec-review-author">— James W., Therapist in Training</p>
+        </div>
+        <div class="ec-review-card">
+          <div class="ec-stars">★★★★★</div>
+          <p class="ec-review-text">"I didn't expect The Aeneid to be so relevant to my psychology studies. This is a surprisingly cohesive and profound reading bundle."</p>
+          <p class="ec-review-author">— Amira K., Graduate Student</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING / CHECKOUT -->
+  <section class="ec-section" id="checkout-section">
+    <div class="ec-container">
+      <div class="ec-pricing-hero">
+        <h2>Your Library Awaits</h2>
+        <p>Get all 5 books today at one unbeatable price.</p>
+
+        <div class="ec-price-block">
+          <span class="ec-price-current">{{ bundle_price | money }}</span>
+          {% if total_compare_price > bundle_price %}
+            <span class="ec-price-original">{{ total_compare_price | money }}</span>
+            <br>
+            <div class="ec-savings-badge">
+              You Save {{ total_compare_price | minus: bundle_price | money }} By Bundling Today
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ec-btn-container" style="max-width: 500px; margin: 0 auto;">
+          {% form 'cart', cart %}
+            {% for handle in bundle_handles %}
+              {% assign current_product = all_products[handle] %}
+              {% if current_product != empty %}
+                {% assign variant = current_product.first_available_variant %}
+                <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+              {% endif %}
+            {% endfor %}
+            <input type="hidden" name="checkout" value="Checkout" />
+            <button type="submit" class="ec-btn">Proceed to Secure Checkout</button>
+          {% endform %}
+        </div>
+
+        <p style="color: #818cf8; font-size: 0.875rem; margin-top: 1.5rem;">Includes 30-Day Money-Back Guarantee.</p>
+
+        <div class="ec-trust-icons">
+          <div class="ec-trust-icon" style="color:#a5b4fc;">
+            <svg style="width:1.25rem;height:1.25rem;color:#a78bfa;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Encrypted Checkout
+          </div>
+          <div class="ec-trust-icon" style="color:#a5b4fc;">
+            <svg style="width:1.25rem;height:1.25rem;color:#fbbf24;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            Instant Processing
+          </div>
+          <div class="ec-trust-icon" style="color:#a5b4fc;">
+            <svg style="width:1.25rem;height:1.25rem;color:#34d399;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            30-Day Guarantee
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY BAR -->
+  <div class="ec-sticky-bar" id="ec-sticky-bar">
+    <span class="ec-sticky-title">The "Emotion & CBT" Library</span>
+    <span class="ec-sticky-price">{{ bundle_price | money }}</span>
+    {% form 'cart', cart, class: 'ec-sticky-form' %}
+      {% for handle in bundle_handles %}
+        {% assign current_product = all_products[handle] %}
+        {% if current_product != empty %}
+          {% assign variant = current_product.first_available_variant %}
+          <input type="hidden" name="updates[{{ variant.id }}]" value="1" />
+        {% endif %}
+      {% endfor %}
+      <input type="hidden" name="checkout" value="Checkout" />
+      <button type="submit" class="ec-btn" style="width:auto; padding:0.75rem 2rem; font-size:1.125rem;">Buy Bundle Now</button>
+    {% endform %}
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var stickyBar = document.getElementById('ec-sticky-bar');
+    var checkoutSection = document.getElementById('checkout-section');
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      if (!checkoutSection || !stickyBar) return;
+      var checkoutTop = checkoutSection.getBoundingClientRect().top;
+      if (window.scrollY > 500 && checkoutTop > window.innerHeight) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+  });
+</script>

@@ -1,37 +1,147 @@
 {% comment %}
-  Meta Pixel Fix: Overriding content_ids to match Catalog IDs (Product IDs)
-  This snippet ensures that the content_ids sent to Meta match the product-level IDs in your catalog.
+  =============================================================================
+  Meta Pixel + Conversions API (CAPI) Integration
+  - Browser pixel events are sent via fbq() with a unique event_id
+  - The same event is mirrored to the CAPI via fetch() using the same event_id
+  - This enables deduplication: Facebook sees 2 signals for 1 event and counts it once
+  - Events: ViewContent (product page), AddToCart (button click)
+  - Purchase event is handled in checkout.liquid (thank-you page)
+  =============================================================================
 {% endcomment %}
 
 <script>
-  window.addEventListener('load', function() {
-    {% if template.name == 'product' %}
-      // Product View Event
-      fbq('track', 'ViewContent', {
-        content_ids: ['{{ product.id }}'],
-        content_type: 'product',
-        content_name: '{{ product.title | escape }}',
-        value: {{ product.price | money_without_currency | remove: ',' }},
-        currency: '{{ shop.currency }}'
-      });
+(function () {
+  // ─── Config ────────────────────────────────────────────────────────────────
+  var PIXEL_ID   = '751173873685974';
+  var CAPI_TOKEN = 'EAAXvxtc6CJABQZCzZAY9Mi9bhcOqFABC8ABOXmLF4ZCVkzsYqVZBZAFILfNHG84ZBe8OhOG147vJk1Axw5foZAPuhZAZATiuJOXuhkIBcRjyq9QMFeFInLGm30u3nsnL34avLSLdy3Y33Bh3QwgoHFDtpfr8qoyV2D0a3hRMhqDQpA4KIzO5pvePy5ZCz27dwoXnwWcgZDZD';
+  var API_VER    = 'v19.0';
+  var CAPI_URL   = 'https://graph.facebook.com/' + API_VER + '/' + PIXEL_ID + '/events?access_token=' + CAPI_TOKEN;
 
-      // Add to Cart detection (button click)
-      const addToCartButtons = document.querySelectorAll('form[action="/cart/add"] button, .sticky-buy-now__button');
-      addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          fbq('track', 'AddToCart', {
-            content_ids: ['{{ product.id }}'],
+  // ─── Helpers ───────────────────────────────────────────────────────────────
+
+  /** Generate a UUID v4 for event deduplication */
+  function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  /** SHA-256 hash a string using Web Crypto API. Returns hex string. */
+  async function sha256(str) {
+    if (!str || !window.crypto || !window.crypto.subtle) return null;
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str.trim().toLowerCase()));
+    return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  /** Build the user_data object, hashing PII via SHA-256 */
+  async function buildUserData() {
+    var ud = {
+      client_user_agent: navigator.userAgent,
+      fbc: getCookie('_fbc'),
+      fbp: getCookie('_fbp')
+    };
+
+    {% if customer %}
+      ud.em  = [await sha256('{{ customer.email | downcase | escape }}')];
+      ud.fn  = [await sha256('{{ customer.first_name | downcase | escape }}')];
+      ud.ln  = [await sha256('{{ customer.last_name | downcase | escape }}')];
+    {% endif %}
+
+    // Remove null / empty values
+    Object.keys(ud).forEach(function (k) { if (!ud[k]) delete ud[k]; });
+    return ud;
+  }
+
+  /** Read a cookie value by name */
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+
+  /**
+   * Send an event to the Conversions API.
+   * @param {string} eventName  - Standard Meta event name
+   * @param {string} eventId    - Must match the eventID passed to fbq()
+   * @param {object} customData - currency, value, content_ids, etc.
+   */
+  async function sendCAPI(eventName, eventId, customData) {
+    try {
+      var userData = await buildUserData();
+      var payload = {
+        data: [{
+          event_name:    eventName,
+          event_time:    Math.floor(Date.now() / 1000),
+          event_id:      eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data:     userData,
+          custom_data:   customData
+        }]
+      };
+
+      await fetch(CAPI_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      });
+    } catch (e) {
+      // Silently fail — pixel event already fired
+    }
+  }
+
+  // ─── Events ────────────────────────────────────────────────────────────────
+
+  window.addEventListener('load', function () {
+
+    {% if template.name == 'product' %}
+
+      // ── ViewContent ──────────────────────────────────────────────────────
+      (function () {
+        var eid = uuid();
+        var customData = {
+          content_ids:  ['{{ product.id }}'],
+          content_type: 'product',
+          content_name: '{{ product.title | escape }}',
+          value:        {{ product.price | money_without_currency | remove: ',' }},
+          currency:     '{{ shop.currency }}'
+        };
+
+        if (typeof fbq === 'function') {
+          fbq('track', 'ViewContent', customData, { eventID: eid });
+        }
+        sendCAPI('ViewContent', eid, customData);
+      })();
+
+      // ── AddToCart ────────────────────────────────────────────────────────
+      var addToCartButtons = document.querySelectorAll(
+        'form[action="/cart/add"] button, .sticky-buy-now__button, [data-checkout-variant]'
+      );
+      addToCartButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var eid = uuid();
+          var customData = {
+            content_ids:  ['{{ product.id }}'],
             content_type: 'product',
             content_name: '{{ product.title | escape }}',
-            value: {{ product.price | money_without_currency | remove: ',' }},
-            currency: '{{ shop.currency }}'
-          });
+            value:        {{ product.price | money_without_currency | remove: ',' }},
+            currency:     '{{ shop.currency }}'
+          };
+
+          if (typeof fbq === 'function') {
+            fbq('track', 'AddToCart', customData, { eventID: eid });
+          }
+          sendCAPI('AddToCart', eid, customData);
         });
       });
+
     {% endif %}
 
     {% if template.name == 'index' %}
-      // You can add more global tracking logic here if needed
+      // Homepage: PageView already fired by the native pixel — no extra events needed
     {% endif %}
+
   });
+
+})();
 </script>
