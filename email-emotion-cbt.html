@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Emotion &amp; CBT Library</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f9fafb;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-spacing: 0;
+            color: #111827;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #7c3aed;
+            /* Deep purple */
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        .header-sub {
+            color: #ede9fe;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .text-block {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0 0 20px 0;
+        }
+
+        .bold-text {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .book-list {
+            background-color: #faf5ff;
+            /* Light purple tint */
+            border-left: 4px solid #7c3aed;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .book-item {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #111827;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .book-item span {
+            font-weight: 400;
+            color: #4b5563;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .btn {
+            background-color: #7c3aed;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 99px;
+            display: inline-block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .footer a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <center class="wrapper">
+        <table class="main" width="100%">
+            <tbody>
+
+                <!-- HERO HEADER -->
+                <tr>
+                    <td class="header">
+                        <h1 class="header-title">The "Emotion &amp; CBT" Library</h1>
+                        <p class="header-sub">5 books to master the psychology of feeling.</p>
+                    </td>
+                </tr>
+
+                <!-- BODY COPY -->
+                <tr>
+                    <td class="content">
+                        <p class="text-block">Hi there,</p>
+                        <p class="text-block">Emotions are not weakness — they are <span class="bold-text">data</span>.
+                            But
+                            if you can't read that data, you can't make rational decisions or heal from trauma.</p>
+                        <p class="text-block">We've curated the ultimate collection to help you understand the emotional
+                            mind. This goes far beyond basic self-help into the clinical science of how your feelings
+                            actually work.</p>
+
+                        <!-- HIGHLIGHT BOX -->
+                        <div class="book-list">
+                            <p class="text-block bold-text" style="color: #7c3aed; margin-bottom: 15px;">Inside The
+                                Required
+                                Reading Bundle:</p>
+                            <p class="book-item">1. Emotion in PTSD <span>(Trauma neurobiology)</span></p>
+                            <p class="book-item">2. Master Your Emotions <span>(Emotional intelligence)</span></p>
+                            <p class="book-item">3. The CBT Flip Chart <span>(Clinical tools)</span></p>
+                            <p class="book-item">4. CBT: The CBT Tsunami <span>(Critical psychology)</span></p>
+                            <p class="book-item" style="margin-bottom: 0;">5. The Aeneid <span>(Timeless
+                                    endurance)</span>
+                            </p>
+                        </div>
+
+                        <p class="text-block">Instead of buying these separately, we've bundled all 5 together for <span
+                                class="bold-text">just $19.99.</span></p>
+                        <p class="text-block">That's massively discounted from the standard retail price.</p>
+
+                        <!-- CTA BUTTON -->
+                        <div class="btn-container">
+                            <a href="https://psychoreads.com/pages/emotion-cbt" class="btn">Claim The Bundle and
+                                Save</a>
+                        </div>
+
+                        <p class="text-block" style="text-align: center; font-size: 14px; color: #6b7280;">Includes our
+                            30-Day Money-Back Guarantee.</p>
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td class="footer">
+                        {{ open_tracking_block }}
+                        <p>&copy; 2026 PsychoReads. All rights reserved.</p>
+                        <p>Don't want these emails? <a href="{{ unsubscribe_url }}">Unsubscribe</a></p>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>
