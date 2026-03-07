@@ -1,54 +1,10 @@
 {% comment %}
   =============================================================================
-  HOMEPAGE PRODUCT GRID — All Books with Add to Cart
+  HOMEPAGE PRODUCT GRID — All Books + Self-contained Cart Drawer + Sticky Bar
   =============================================================================
 {% endcomment %}
 
 <style>
-  /* ── Announcement Bar ── */
-  .announce-bar {
-    background: #0f172a;
-    color: #fff;
-    padding: 10px 0;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
-  .announce-track {
-    display: flex;
-    gap: 80px;
-    width: max-content;
-    animation: marquee 28s linear infinite;
-    white-space: nowrap;
-  }
-  .announce-bar:hover .announce-track { animation-play-state: paused; }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .announce-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .announce-item .tag {
-    background: #f59e0b;
-    color: #0f172a;
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 0.7rem;
-    font-weight: 900;
-  }
-  .announce-dot {
-    color: #f59e0b;
-    font-size: 1.2rem;
-    line-height: 1;
-  }
-
   /* ── Page Shell ── */
   .shop-page {
     background: #f8fafc;
@@ -83,7 +39,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 0;
   }
   .hero-offer-pill {
     background: rgba(245,158,11,0.15);
@@ -104,7 +59,7 @@
   .shop-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 48px 24px 80px;
+    padding: 48px 24px 120px;
   }
   .section-label {
     font-size: 0.75rem;
@@ -129,8 +84,7 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(15,23,42,0.07);
-    transition: transform 0.35s cubic-bezier(0.19,1,0.22,1),
-                box-shadow 0.35s cubic-bezier(0.19,1,0.22,1);
+    transition: transform 0.35s cubic-bezier(0.19,1,0.22,1), box-shadow 0.35s cubic-bezier(0.19,1,0.22,1);
     display: flex;
     flex-direction: column;
   }
@@ -141,7 +95,7 @@
   .book-card__img-wrap {
     position: relative;
     width: 100%;
-    padding-top: 140%; /* portrait ratio */
+    padding-top: 140%;
     overflow: hidden;
     background: #f1f5f9;
   }
@@ -167,7 +121,6 @@
     padding: 3px 8px;
     border-radius: 4px;
   }
-
   .book-card__body {
     padding: 20px 20px 16px;
     flex: 1;
@@ -184,15 +137,17 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    text-decoration: none;
   }
+  .book-card__title:hover { color: #4f46e5; }
   .book-card__stars {
     display: flex;
     align-items: center;
     gap: 4px;
     margin-bottom: 12px;
   }
-  .book-card__stars .stars-svg { color: #f59e0b; font-size: 0.75rem; letter-spacing: 1px; }
-  .book-card__stars .review-count { font-size: 0.73rem; color: #94a3b8; }
+  .book-card__stars .stars { color: #f59e0b; font-size: 0.8rem; }
+  .book-card__stars .count { font-size: 0.73rem; color: #94a3b8; }
   .book-card__price {
     font-size: 1.1rem;
     font-weight: 900;
@@ -216,30 +171,252 @@
     border-radius: 12px;
     font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
-    text-decoration: none;
+    font-family: inherit;
   }
-  .btn-atc:hover { background: #1e293b; transform: scale(1.02); }
-  .btn-atc:active { transform: scale(0.98); }
-  .btn-atc svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .btn-atc.added {
-    background: #059669;
+  .btn-atc:hover:not(:disabled) { background: #1e3a8a; }
+  .btn-atc:active:not(:disabled) { transform: scale(0.97); }
+  .btn-atc:disabled { background: #94a3b8; cursor: not-allowed; }
+  .btn-atc.state-adding { background: #4f46e5; }
+  .btn-atc.state-added  { background: #059669; }
+
+  /* ── Cart Drawer ── */
+  .cd-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15,23,42,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 9000;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .cd-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .cd-panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(420px, 100vw);
+    background: #fff;
+    z-index: 9001;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.38s cubic-bezier(0.19,1,0.22,1);
+    box-shadow: -8px 0 40px rgba(15,23,42,0.18);
+  }
+  .cd-panel.open { transform: translateX(0); }
+
+  .cd-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #0f172a;
+    color: #fff;
+  }
+  .cd-header h2 { font-size: 1.1rem; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px; }
+  .cd-count-badge {
+    background: #f59e0b; color: #0f172a;
+    border-radius: 999px; font-size: 0.7rem; font-weight: 900;
+    min-width: 20px; height: 20px; display: inline-flex;
+    align-items: center; justify-content: center; padding: 0 5px;
+  }
+  .cd-close {
+    background: rgba(255,255,255,0.1); border: none; color: #fff;
+    width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .cd-close:hover { background: rgba(255,255,255,0.2); }
+
+  .cd-offers {
+    display: flex; gap: 8px; padding: 12px 24px;
+    background: #fffbeb; border-bottom: 1px solid #fde68a;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .cd-offers::-webkit-scrollbar { display: none; }
+  .cd-offer-pill {
+    flex-shrink: 0;
+    background: #f59e0b; color: #0f172a;
+    border-radius: 999px; padding: 4px 12px;
+    font-size: 0.72rem; font-weight: 800; white-space: nowrap;
   }
 
-  /* ── Empty state ── */
-  .no-products {
-    text-align: center;
-    padding: 80px 24px;
-    color: #64748b;
-    font-size: 1.1rem;
+  .cd-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
+  .cd-empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; color: #94a3b8; gap: 12px; text-align: center;
   }
+  .cd-empty svg { width: 56px; height: 56px; opacity: 0.3; }
+
+  .cd-item {
+    display: flex; gap: 14px; padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9; align-items: flex-start;
+  }
+  .cd-item img {
+    width: 70px; height: 95px; object-fit: cover;
+    border-radius: 8px; flex-shrink: 0;
+    border: 1px solid #e2e8f0;
+  }
+  .cd-item__info { flex: 1; min-width: 0; }
+  .cd-item__title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; line-height: 1.3; }
+  .cd-item__price { font-size: 0.9rem; font-weight: 800; color: #4f46e5; margin-bottom: 8px; }
+  .cd-item__qty {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cd-item__qty button {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid #e2e8f0; background: #f8fafc;
+    font-size: 1rem; font-weight: 700; cursor: pointer; color: #0f172a;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .cd-item__qty button:hover { background: #0f172a; color: #fff; border-color: #0f172a; }
+  .cd-item__qty span { font-size: 0.9rem; font-weight: 700; min-width: 20px; text-align: center; }
+  .cd-item__remove { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.1rem; padding: 4px; }
+  .cd-item__remove:hover { color: #dc2626; }
+
+  .cd-footer {
+    padding: 20px 24px;
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+  .cd-subtotal {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .cd-subtotal span { font-size: 0.9rem; color: #64748b; }
+  .cd-subtotal strong { font-size: 1.2rem; font-weight: 900; color: #0f172a; }
+  .cd-checkout-btn {
+    display: block; width: 100%; padding: 16px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; border: none; border-radius: 14px;
+    font-size: 1rem; font-weight: 800; cursor: pointer;
+    text-align: center; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    font-family: inherit;
+  }
+  .cd-checkout-btn:hover { opacity: 0.9; transform: scale(1.01); }
+  .cd-cart-link {
+    display: block; text-align: center; margin-top: 12px;
+    color: #64748b; font-size: 0.85rem; text-decoration: underline; cursor: pointer;
+    background: none; border: none; font-family: inherit; width: 100%;
+  }
+  .cd-cart-link:hover { color: #0f172a; }
+
+  /* ── Sticky Add to Cart Bar ── */
+  .sticky-atc-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #0f172a;
+    padding: 14px 24px;
+    z-index: 8000;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    box-shadow: 0 -8px 32px rgba(15,23,42,0.3);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.19,1,0.22,1);
+  }
+  .sticky-atc-bar.visible { transform: translateY(0); }
+  .sticky-atc-bar__left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .sticky-atc-bar__left img { width: 44px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+  .sticky-atc-bar__info { min-width: 0; }
+  .sticky-atc-bar__title { font-size: 0.85rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+  .sticky-atc-bar__price { font-size: 0.9rem; font-weight: 800; color: #f59e0b; }
+  .sticky-atc-bar__right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .sticky-bar-atc {
+    background: #f59e0b; color: #0f172a;
+    border: none; border-radius: 10px;
+    padding: 11px 20px; font-size: 0.9rem; font-weight: 800;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    font-family: inherit; white-space: nowrap;
+  }
+  .sticky-bar-atc:hover { background: #fbbf24; }
+  .sticky-bar-atc:active { transform: scale(0.97); }
+  .sticky-cart-btn {
+    background: rgba(255,255,255,0.1); color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 9px 14px;
+    font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: background 0.2s; font-family: inherit; white-space: nowrap;
+  }
+  .sticky-cart-btn:hover { background: rgba(255,255,255,0.2); }
+  .sticky-cart-btn .cart-bubble {
+    background: #f59e0b; color: #0f172a;
+    border-radius: 999px; font-size: 0.65rem; font-weight: 900;
+    min-width: 18px; height: 18px;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
+  }
+
+  /* ── Toast Notification ── */
+  .hp-toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #059669; color: #fff;
+    padding: 12px 24px; border-radius: 999px;
+    font-size: 0.9rem; font-weight: 700;
+    box-shadow: 0 8px 32px rgba(5,150,105,0.4);
+    z-index: 9999;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    white-space: nowrap;
+  }
+  .hp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 
+<!-- ── Cart Drawer Overlay ── -->
+<div class="cd-overlay" id="cdOverlay"></div>
+
+<!-- ── Cart Drawer Panel ── -->
+<div class="cd-panel" id="cdPanel" role="dialog" aria-label="Shopping cart" aria-modal="true">
+  <div class="cd-header">
+    <h2>🛒 Your Cart <span class="cd-count-badge" id="cdCountBadge">0</span></h2>
+    <button class="cd-close" id="cdClose" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cd-offers">
+    <span class="cd-offer-pill">🎁 Buy 1 → Get 2 FREE</span>
+    <span class="cd-offer-pill">🎁 Buy 2 → Get 5 FREE</span>
+    <span class="cd-offer-pill">🎁 Buy 3 → Get 12 FREE</span>
+  </div>
+  <div class="cd-items" id="cdItems">
+    <div class="cd-empty">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      <p>Your cart is empty</p>
+    </div>
+  </div>
+  <div class="cd-footer" id="cdFooter" style="display:none;">
+    <div class="cd-subtotal">
+      <span>Subtotal</span>
+      <strong id="cdSubtotal">$0.00</strong>
+    </div>
+    <button class="cd-checkout-btn" onclick="window.location='/checkout'">
+      ✦ Checkout Securely
+    </button>
+    <button class="cd-cart-link" onclick="window.location='/cart'">View full cart</button>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div class="hp-toast" id="hpToast">✓ Added to cart!</div>
+
+<!-- ── Sticky Bar ── -->
+<div class="sticky-atc-bar" id="stickyAtcBar">
+  <div class="sticky-atc-bar__left">
+    <img src="" alt="" id="stickyImg" style="display:none;">
+    <div class="sticky-atc-bar__info">
+      <div class="sticky-atc-bar__title" id="stickyTitle">Shop All Books</div>
+      <div class="sticky-atc-bar__price" id="stickyPrice"></div>
+    </div>
+  </div>
+  <div class="sticky-atc-bar__right">
+    <button class="sticky-cart-btn" onclick="HPcart.open()">
+      🛒 Cart <span class="cart-bubble" id="stickyCartBubble">0</span>
+    </button>
+    <button class="sticky-bar-atc" id="stickyAtcBtn" style="display:none;" onclick="HPCart.addLastItem()">
+      + Add to Cart
+    </button>
+  </div>
+</div>
+
+<!-- ── Page Content ── -->
 <div class="shop-page">
 
-  <!-- ── Hero ── -->
+  <!-- Hero -->
   <div class="shop-hero">
     <h1>Build Your <span>Library.</span></h1>
     <p>Curated psychology & self-improvement books. Grab more, save more — exclusive bundles just for you.</p>
@@ -250,7 +427,7 @@
     </div>
   </div>
 
-  <!-- ── Product Grid ── -->
+  <!-- Grid -->
   <div class="shop-container">
     <p class="section-label">All Books — {{ collections.all.products_count }} titles</p>
 
@@ -258,35 +435,30 @@
       <div class="product-grid">
         {% for product in collections.all.products limit: 100 %}
           {% assign variant = product.first_available_variant | default: product.variants.first %}
-          <div class="book-card">
+          <div class="book-card"
+               data-product-title="{{ product.title | escape }}"
+               data-variant-id="{{ variant.id }}"
+               data-price="{{ variant.price | money }}"
+               data-img="{{ product.featured_image | img_url: '200x280', crop: 'center' }}">
 
-            <!-- Image -->
             <a href="{{ product.url }}" class="book-card__img-wrap">
               {% if product.featured_image %}
                 <img
                   src="{{ product.featured_image | img_url: '600x900', crop: 'center' }}"
                   alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                  loading="lazy"
-                >
+                  loading="lazy">
               {% else %}
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#e2e8f0;color:#94a3b8;font-size:0.8rem;">No image</div>
               {% endif %}
-              <span class="book-card__badge">Book Bundle</span>
+              <span class="book-card__badge">Bundle</span>
             </a>
 
-            <!-- Body -->
             <div class="book-card__body">
-              <a href="{{ product.url }}" style="text-decoration:none;">
-                <h2 class="book-card__title">{{ product.title }}</h2>
-              </a>
-
-              <!-- Stars -->
+              <a href="{{ product.url }}" class="book-card__title">{{ product.title }}</a>
               <div class="book-card__stars">
-                <span class="stars-svg">★★★★★</span>
-                <span class="review-count">({{ product.metafields.reviews.rating_count | default: '4.9' }})</span>
+                <span class="stars">★★★★★</span>
+                <span class="count">(4.9)</span>
               </div>
-
-              <!-- Price -->
               <div class="book-card__price">
                 {{ variant.price | money }}
                 {% if variant.compare_at_price > variant.price %}
@@ -294,71 +466,235 @@
                 {% endif %}
               </div>
 
-              <!-- Add to Cart -->
               {% if variant.available %}
-                <form action="/cart/add" method="post" class="atc-form" data-product-id="{{ product.id }}">
-                  <input type="hidden" name="id" value="{{ variant.id }}">
-                  <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="btn-atc">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Add to Cart
-                  </button>
-                </form>
+                <button
+                  class="btn-atc"
+                  data-variant-id="{{ variant.id }}"
+                  data-title="{{ product.title | escape }}"
+                  data-price="{{ variant.price | money }}"
+                  data-img="{{ product.featured_image | img_url: '200x280', crop: 'center' }}"
+                  onclick="HPCart.addToCart(this)">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                  Add to Cart
+                </button>
               {% else %}
-                <button class="btn-atc" disabled style="background:#94a3b8;cursor:not-allowed;">Sold Out</button>
+                <button class="btn-atc" disabled>Sold Out</button>
               {% endif %}
-
             </div>
           </div>
         {% endfor %}
       </div>
-
     {% else %}
-      <div class="no-products">
-        <p>No products found. Add some products to your store to see them here.</p>
+      <div style="text-align:center;padding:80px 24px;color:#64748b;">
+        <p>No products found. Add products to your store to see them here.</p>
       </div>
     {% endif %}
   </div>
-
 </div>
 
 <script>
-  // AJAX Add to Cart — intercept forms and use fetch API
-  document.querySelectorAll('.atc-form').forEach(function(form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = form.querySelector('.btn-atc');
-      var originalText = btn.innerHTML;
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Adding...';
+(function() {
+  'use strict';
+
+  /* ── Tiny money formatter ── */
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  /* ── Toast ── */
+  function showToast(msg) {
+    var t = document.getElementById('hpToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2800);
+  }
+
+  /* ── Cart State ── */
+  var HPCart = {
+    _lastBtn: null,
+    _lastVariantId: null,
+
+    /* Open / Close */
+    open: function() {
+      document.getElementById('cdPanel').classList.add('open');
+      document.getElementById('cdOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      HPCart.refresh();
+    },
+    close: function() {
+      document.getElementById('cdPanel').classList.remove('open');
+      document.getElementById('cdOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    },
+
+    /* Refresh cart contents from Shopify */
+    refresh: function() {
+      fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+        .then(function(r){ return r.json(); })
+        .then(function(cart){ HPCart.renderCart(cart); })
+        .catch(function(){ });
+    },
+
+    /* Render items in drawer */
+    renderCart: function(cart) {
+      var count = cart.item_count;
+      var itemsEl = document.getElementById('cdItems');
+      var footerEl = document.getElementById('cdFooter');
+      var badgeEl  = document.getElementById('cdCountBadge');
+      var bubbleEl = document.getElementById('stickyCartBubble');
+
+      /* Update count badges */
+      badgeEl.textContent = count;
+      bubbleEl.textContent = count;
+
+      /* Update all theme cart counts */
+      document.querySelectorAll('[data-cart-count], .cart-count, .cart__count, .cart-item-count').forEach(function(el){
+        el.textContent = count;
+      });
+
+      if (count === 0) {
+        itemsEl.innerHTML = '<div class="cd-empty"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg><p>Your cart is empty</p></div>';
+        footerEl.style.display = 'none';
+        return;
+      }
+
+      footerEl.style.display = 'block';
+      document.getElementById('cdSubtotal').textContent = formatMoney(cart.total_price);
+
+      itemsEl.innerHTML = cart.items.map(function(item) {
+        return '<div class="cd-item" data-key="' + item.key + '">' +
+          '<img src="' + (item.image ? item.image.replace('_small','').replace('_medium','') + '&width=140' : '') + '" alt="' + item.title.replace(/"/g,'') + '" onerror="this.style.display=\'none\'">' +
+          '<div class="cd-item__info">' +
+            '<div class="cd-item__title">' + item.product_title + '</div>' +
+            '<div class="cd-item__price">' + formatMoney(item.final_line_price) + '</div>' +
+            '<div class="cd-item__qty">' +
+              '<button onclick="HPCart.changeQty(\'' + item.key + '\',' + (item.quantity - 1) + ')">−</button>' +
+              '<span>' + item.quantity + '</span>' +
+              '<button onclick="HPCart.changeQty(\'' + item.key + '\',' + (item.quantity + 1) + ')">+</button>' +
+              '<button class="cd-item__remove" title="Remove" onclick="HPCart.changeQty(\'' + item.key + '\',0)">🗑</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    },
+
+    /* Change quantity */
+    changeQty: function(key, qty) {
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: qty })
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(cart){ HPCart.renderCart(cart); });
+    },
+
+    /* Add to cart from card button */
+    addToCart: function(btn) {
+      var variantId = btn.getAttribute('data-variant-id');
+      var title     = btn.getAttribute('data-title');
+      var price     = btn.getAttribute('data-price');
+      var img       = btn.getAttribute('data-img');
+      HPCart._lastVariantId = variantId;
+      HPCart._updateStickyBar(title, price, img, variantId);
+
+      var orig = btn.innerHTML;
       btn.disabled = true;
+      btn.classList.add('state-adding');
+      btn.innerHTML = '⟳ Adding…';
 
       fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ id: form.querySelector('[name="id"]').value, quantity: 1 })
+        body: JSON.stringify({ id: parseInt(variantId, 10), quantity: 1 })
       })
-      .then(function(res) { return res.json(); })
+      .then(function(r){
+        if (!r.ok) throw new Error('Cart add failed');
+        return r.json();
+      })
       .then(function() {
-        btn.classList.add('added');
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Added!';
-        // Update cart count if your theme has one
-        fetch('/cart.js').then(function(r){ return r.json(); }).then(function(cart){
-          var counters = document.querySelectorAll('[data-cart-count], .cart-count, .cart__count');
-          counters.forEach(function(el){ el.textContent = cart.item_count; });
-        });
-        setTimeout(function() {
-          btn.classList.remove('added');
-          btn.innerHTML = originalText;
+        btn.classList.remove('state-adding');
+        btn.classList.add('state-added');
+        btn.innerHTML = '✓ Added!';
+        showToast('✓ "' + title + '" added to cart!');
+        HPCart.refresh();
+        /* Auto-open drawer */
+        HPCart.open();
+        setTimeout(function(){
+          btn.classList.remove('state-added');
+          btn.innerHTML = orig;
           btn.disabled = false;
         }, 2500);
       })
       .catch(function() {
-        btn.innerHTML = originalText;
+        btn.classList.remove('state-adding');
+        btn.innerHTML = orig;
         btn.disabled = false;
-        window.location = '/cart';
+        /* Fallback to native form */
+        fetch('/cart/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'id=' + variantId + '&quantity=1'
+        }).then(function(){ HPCart.open(); HPCart.refresh(); });
       });
+    },
+
+    /* Add last hovered item from sticky bar */
+    addLastItem: function() {
+      var id = HPCart._lastVariantId;
+      if (!id) return;
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: parseInt(id, 10), quantity: 1 })
+      })
+      .then(function(r){ return r.json(); })
+      .then(function() { HPCart.open(); HPCart.refresh(); showToast('✓ Added to cart!'); });
+    },
+
+    /* Update sticky bar with last hovered book */
+    _updateStickyBar: function(title, price, img, variantId) {
+      document.getElementById('stickyTitle').textContent = title;
+      document.getElementById('stickyPrice').textContent = price;
+      var sImg = document.getElementById('stickyImg');
+      if (img) { sImg.src = img; sImg.style.display = ''; }
+      document.getElementById('stickyAtcBtn').style.display = '';
+      HPCart._lastVariantId = variantId;
+    }
+  };
+
+  /* ── Sticky bar visibility on scroll ── */
+  var stickyBar = document.getElementById('stickyAtcBar');
+  var heroEl    = document.querySelector('.shop-hero');
+  window.addEventListener('scroll', function() {
+    if (!heroEl) return;
+    var heroBottom = heroEl.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  /* ── Update sticky on card hover ── */
+  document.querySelectorAll('.book-card').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+      var title = card.getAttribute('data-product-title');
+      var price = card.getAttribute('data-price');
+      var img   = card.getAttribute('data-img');
+      var vid   = card.getAttribute('data-variant-id');
+      if (title) HPCart._updateStickyBar(title, price, img, vid);
     });
   });
+
+  /* ── Close drawer ── */
+  document.getElementById('cdClose').addEventListener('click', HPCart.close);
+  document.getElementById('cdOverlay').addEventListener('click', HPCart.close);
+
+  /* ── Initial cart count ── */
+  HPCart.refresh();
+
+  /* Expose globally */
+  window.HPCart = HPCart;
+})();
 </script>
