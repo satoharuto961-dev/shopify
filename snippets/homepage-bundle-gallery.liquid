@@ -108,6 +108,35 @@
     transition: transform 0.5s ease;
   }
   .book-card:hover .book-card__img-wrap img { transform: scale(1.05); }
+  
+  /* ── Description Overlay ── */
+  .book-card__desc-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85); /* Dark slate overlay */
+    color: #fff;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .book-card__img-wrap:hover .book-card__desc-overlay {
+    opacity: 1;
+  }
+  .book-card__desc-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+
   .book-card__badge {
     position: absolute;
     top: 12px;
@@ -450,6 +479,14 @@
               {% else %}
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#e2e8f0;color:#94a3b8;font-size:0.8rem;">No image</div>
               {% endif %}
+              
+              <!-- Hover Description Overlay -->
+              <div class="book-card__desc-overlay">
+                <div class="book-card__desc-text">
+                  {{ product.description | strip_html | truncatewords: 35 }}
+                </div>
+              </div>
+
               <span class="book-card__badge">Bundle</span>
             </a>
 
