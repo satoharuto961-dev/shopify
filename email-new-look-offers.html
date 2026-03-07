@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The New PsychoReads Library</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            /* matching shop page bg */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto;
+            vertical-align: top;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f8fafc;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-spacing: 0;
+            color: #0f172a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+            margin-top: 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f3460 100%);
+            padding: 50px 30px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 900;
+            margin: 0 0 16px 0;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            color: #f59e0b;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px 36px;
+        }
+
+        .text-block {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+            margin: 0 0 20px 0;
+        }
+
+        /* Featured Highlight */
+        .highlight-banner {
+            background-color: #fffbeb;
+            border: 2px solid #fde68a;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .highlight-banner h2 {
+            color: #b45309;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .offer-row {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            /* Use flexbox for modern clients but fallback below */
+        }
+
+        .offer-row p {
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .offer-row strong {
+            color: #f59e0b;
+            font-weight: 900;
+        }
+
+        /* Buttons */
+        .btn-container {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .btn {
+            background-color: #0f172a;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            border-radius: 12px;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: #94a3b8;
+            background-color: #f8fafc;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <center class="wrapper">
+        <table class="main" width="100%">
+            <tbody>
+                <!-- HERO SECTION -->
+                <tr>
+                    <td class="hero">
+                        <h1>Build Your <span>Library.</span></h1>
+                        <p>Welcome to the entirely redesigned PsychoReads experience. Faster, cleaner, better.</p>
+                    </td>
+                </tr>
+
+                <!-- CONTENT -->
+                <tr>
+                    <td class="content">
+                        <p class="text-block">Hi Reader,</p>
+                        <p class="text-block">
+                            We've entirely rebuilt the PsychoReads store from the ground up. You can now browse our full
+                            collection of curated psychology, literature, and self-improvement books in one seamless
+                            view.
+                        </p>
+                        <p class="text-block">
+                            To celebrate our new look, we want to help you stack your shelf. We're launching our biggest
+                            bundle deals ever—built directly into the store.
+                        </p>
+
+                        <!-- OFFER HIGHLIGHT -->
+                        <div class="highlight-banner">
+                            <h2>The Launch Offers</h2>
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding-bottom:12px;">
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">🎁</span> Buy 1 Book &rarr; Get <strong>2
+                                                FREE</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom:12px;">
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">🎁</span> Buy 2 Books &rarr; Get <strong>5
+                                                FREE</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">🎁</span> Buy 3 Books &rarr; Get <strong>12
+                                                FREE</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <p class="text-block">
+                            Just click "Add to Cart" directly from the homepage. The discounts will apply automatically
+                            at checkout. Explore the new store and grab your bundle today.
+                        </p>
+
+                        <!-- CTA BUTTON -->
+                        <div class="btn-container">
+                            <a href="https://psychoreads.com" class="btn">Shop The New Store</a>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td class="footer">
+                        {{ open_tracking_block }}
+                        <p>&copy; 2026 PsychoReads. All rights reserved.</p>
+                        <p>Don't want these updates? <a href="{{ unsubscribe_url }}">Unsubscribe</a></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>
