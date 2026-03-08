@@ -108,6 +108,17 @@
     transition: transform 0.5s ease;
   }
   .book-card:hover .book-card__img-wrap img { transform: scale(1.05); }
+
+  /* Adjust cover fit on mobile so it doesn't get clipped */
+  @media (max-width: 540px) {
+    .book-card__img-wrap {
+      padding-top: 125%; /* Slightly shorter ratio */
+    }
+    .book-card__img-wrap img {
+      object-fit: contain; /* Prevents edges from getting cut off */
+      padding: 10px;
+    }
+  }
   
   /* ── Description Overlay ── */
   .book-card__desc-overlay {
