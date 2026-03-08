@@ -447,7 +447,7 @@
     <button class="sticky-cart-btn" onclick="HPcart.open()">
       🛒 Cart <span class="cart-bubble" id="stickyCartBubble">0</span>
     </button>
-    <button class="sticky-bar-atc" id="stickyAtcBtn" style="display:none;" onclick="HPCart.addLastItem()">
+    <button class="sticky-bar-atc" id="stickyAtcBtn" style="display:none;" onclick="HPCart.buyLastItemNow()">
       + Checkout
     </button>
   </div>
@@ -696,6 +696,27 @@
       })
       .then(function(r){ return r.json(); })
       .then(function() { HPCart.refresh(); showToast('✓ Added to cart!'); });
+    },
+
+    /* Buy last hovered item immediately (Checkout button) */
+    buyLastItemNow: function() {
+      var id = HPCart._lastVariantId;
+      if (!id) {
+        window.location = '/checkout';
+        return;
+      }
+      var btn = document.getElementById('stickyAtcBtn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = 'Loading...';
+      btn.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: parseInt(id, 10), quantity: 1 })
+      })
+      .then(function(){ window.location = '/checkout'; })
+      .catch(function(){ window.location = '/checkout'; });
     },
 
     /* Update sticky bar with last hovered book */
