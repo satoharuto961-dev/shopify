@@ -12,33 +12,55 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  /* ── Hero Banner ── */
+  /* ── Featured Hero Product ── */
   .shop-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f3460 100%);
-    padding: 56px 24px 48px;
-    text-align: center;
     color: #fff;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
   }
-  .shop-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .hero-text {
+    flex: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: #0f172a;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
     line-height: 1.05;
     margin-bottom: 16px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
   }
-  .shop-hero h1 span { color: #f59e0b; }
-  .shop-hero p {
-    font-size: 1.1rem;
-    color: #94a3b8;
-    max-width: 580px;
-    margin: 0 auto 32px;
+  .hero-text p {
+    font-size: 1.15rem;
+    color: #cbd5e1;
     line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 500px;
   }
   .hero-offers {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 12px;
+    margin-bottom: 32px;
   }
   .hero-offer-pill {
     background: rgba(245,158,11,0.15);
@@ -54,349 +76,38 @@
     gap: 6px;
   }
   .hero-offer-pill em { color: #fff; font-style: normal; }
-
-  /* ── Grid ── */
-  .shop-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 48px 24px 120px;
-  }
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #64748b;
-    margin-bottom: 24px;
-  }
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-  @media (max-width: 1200px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 900px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 540px)  { .product-grid { grid-template-columns: 1fr; } }
-
-  /* ── Card ── */
-  .book-card {
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(15,23,42,0.07);
-    transition: transform 0.35s cubic-bezier(0.19,1,0.22,1), box-shadow 0.35s cubic-bezier(0.19,1,0.22,1);
-    display: flex;
-    flex-direction: column;
-  }
-  .book-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(15,23,42,0.16);
-  }
-  .book-card__img-wrap {
-    position: relative;
-    width: 100%;
-    padding-top: 140%;
-    overflow: hidden;
-    background: #f1f5f9;
-  }
-  .book-card__img-wrap img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .book-card:hover .book-card__img-wrap img { transform: scale(1.05); }
-
-  /* Adjust cover fit on mobile so it doesn't get clipped */
-  @media (max-width: 540px) {
-    .book-card__img-wrap {
-      padding-top: 125%; /* Slightly shorter ratio */
-    }
-    .book-card__img-wrap img {
-      object-fit: contain; /* Prevents edges from getting cut off */
-      padding: 10px;
-    }
-  }
   
-  /* ── Description Overlay ── */
-  .book-card__desc-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.85); /* Dark slate overlay */
-    color: #fff;
-    padding: 24px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    backdrop-filter: blur(4px);
+  .hero-product {
+    flex: 0 0 340px;
+    position: relative;
   }
-  .book-card__img-wrap:hover .book-card__desc-overlay {
-    opacity: 1;
-  }
-  .book-card__desc-text {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    font-weight: 500;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 8;
-    overflow: hidden;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  }
-
-  .book-card__badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #0f172a;
-    color: #f59e0b;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-  .book-card__body {
-    padding: 20px 20px 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .book-card__title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.35;
-    margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-decoration: none;
-  }
-  .book-card__title:hover { color: #4f46e5; }
-  .book-card__stars {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-  .book-card__stars .stars { color: #f59e0b; font-size: 0.8rem; }
-  .book-card__stars .count { font-size: 0.73rem; color: #94a3b8; }
-  .book-card__price {
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: #0f172a;
-    margin-bottom: 16px;
-    margin-top: auto;
-  }
-  .book-card__price .compare { text-decoration: line-through; color: #94a3b8; font-weight: 400; font-size: 0.85rem; margin-left: 6px; }
-
-  /* ── Add to Cart Button ── */
-  .btn-atc {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 12px 16px;
-    background: #0f172a;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    font-size: 0.875rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    font-family: inherit;
-  }
-  .btn-atc:hover:not(:disabled) { background: #1e3a8a; }
-  .btn-atc:active:not(:disabled) { transform: scale(0.97); }
-  .btn-atc:disabled { background: #94a3b8; cursor: not-allowed; }
-  .btn-atc.state-adding { background: #4f46e5; }
-  .btn-atc.state-added  { background: #059669; }
-
-  /* ── Cart Drawer ── */
-  .cd-overlay {
-    position: fixed; inset: 0;
-    background: rgba(15,23,42,0.5);
-    backdrop-filter: blur(3px);
-    z-index: 9000;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .cd-overlay.open { opacity: 1; pointer-events: auto; }
-
-  .cd-panel {
-    position: fixed; top: 0; right: 0; bottom: 0;
-    width: min(420px, 100vw);
+  .hero-product-inner {
     background: #fff;
-    z-index: 9001;
-    display: flex; flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.38s cubic-bezier(0.19,1,0.22,1);
-    box-shadow: -8px 0 40px rgba(15,23,42,0.18);
-  }
-  .cd-panel.open { transform: translateX(0); }
-
-  .cd-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 24px;
-    border-bottom: 1px solid #e2e8f0;
-    background: #0f172a;
-    color: #fff;
-  }
-  .cd-header h2 { font-size: 1.1rem; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px; }
-  .cd-count-badge {
-    background: #f59e0b; color: #0f172a;
-    border-radius: 999px; font-size: 0.7rem; font-weight: 900;
-    min-width: 20px; height: 20px; display: inline-flex;
-    align-items: center; justify-content: center; padding: 0 5px;
-  }
-  .cd-close {
-    background: rgba(255,255,255,0.1); border: none; color: #fff;
-    width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
-    font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-  }
-  .cd-close:hover { background: rgba(255,255,255,0.2); }
-
-  .cd-offers {
-    display: flex; gap: 8px; padding: 12px 24px;
-    background: #fffbeb; border-bottom: 1px solid #fde68a;
-    overflow-x: auto; scrollbar-width: none;
-  }
-  .cd-offers::-webkit-scrollbar { display: none; }
-  .cd-offer-pill {
-    flex-shrink: 0;
-    background: #f59e0b; color: #0f172a;
-    border-radius: 999px; padding: 4px 12px;
-    font-size: 0.72rem; font-weight: 800; white-space: nowrap;
-  }
-
-  .cd-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
-  .cd-empty {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    height: 100%; color: #94a3b8; gap: 12px; text-align: center;
-  }
-  .cd-empty svg { width: 56px; height: 56px; opacity: 0.3; }
-
-  .cd-item {
-    display: flex; gap: 14px; padding: 14px 0;
-    border-bottom: 1px solid #f1f5f9; align-items: flex-start;
-  }
-  .cd-item img {
-    width: 70px; height: 95px; object-fit: cover;
-    border-radius: 8px; flex-shrink: 0;
-    border: 1px solid #e2e8f0;
-  }
-  .cd-item__info { flex: 1; min-width: 0; }
-  .cd-item__title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; line-height: 1.3; }
-  .cd-item__price { font-size: 0.9rem; font-weight: 800; color: #4f46e5; margin-bottom: 8px; }
-  .cd-item__qty {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .cd-item__qty button {
-    width: 28px; height: 28px; border-radius: 50%;
-    border: 1.5px solid #e2e8f0; background: #f8fafc;
-    font-size: 1rem; font-weight: 700; cursor: pointer; color: #0f172a;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
-  .cd-item__qty button:hover { background: #0f172a; color: #fff; border-color: #0f172a; }
-  .cd-item__qty span { font-size: 0.9rem; font-weight: 700; min-width: 20px; text-align: center; }
-  .cd-item__remove { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.1rem; padding: 4px; }
-  .cd-item__remove:hover { color: #dc2626; }
-
-  .cd-footer {
-    padding: 20px 24px;
-    border-top: 1px solid #e2e8f0;
-    background: #f8fafc;
-  }
-  .cd-subtotal {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 16px;
-  }
-  .cd-subtotal span { font-size: 0.9rem; color: #64748b; }
-  .cd-subtotal strong { font-size: 1.2rem; font-weight: 900; color: #0f172a; }
-  .cd-checkout-btn {
-    display: block; width: 100%; padding: 16px;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: #fff; border: none; border-radius: 14px;
-    font-size: 1rem; font-weight: 800; cursor: pointer;
-    text-align: center; text-decoration: none;
-    transition: opacity 0.2s, transform 0.15s;
-    font-family: inherit;
-  }
-  .cd-checkout-btn:hover { opacity: 0.9; transform: scale(1.01); }
-  .cd-cart-link {
-    display: block; text-align: center; margin-top: 12px;
-    color: #64748b; font-size: 0.85rem; text-decoration: underline; cursor: pointer;
-    background: none; border: none; font-family: inherit; width: 100%;
-  }
-  .cd-cart-link:hover { color: #0f172a; }
-
-  /* ── Sticky Add to Cart Bar ── */
-  .sticky-atc-bar {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: #0f172a;
-    padding: 14px 24px;
-    z-index: 8000;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    box-shadow: 0 -8px 32px rgba(15,23,42,0.3);
-    transform: translateY(100%);
+    border-radius: 24px;
+    padding: 24px;
+    color: #0f172a;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transform: rotate(2deg);
     transition: transform 0.4s cubic-bezier(0.19,1,0.22,1);
   }
-  .sticky-atc-bar.visible { transform: translateY(0); }
-  .sticky-atc-bar__left { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .sticky-atc-bar__left img { width: 44px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
-  .sticky-atc-bar__info { min-width: 0; }
-  .sticky-atc-bar__title { font-size: 0.85rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
-  .sticky-atc-bar__price { font-size: 0.9rem; font-weight: 800; color: #f59e0b; }
-  .sticky-atc-bar__right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .sticky-bar-atc {
-    background: #f59e0b; color: #0f172a;
-    border: none; border-radius: 10px;
-    padding: 11px 20px; font-size: 0.9rem; font-weight: 800;
-    cursor: pointer; transition: background 0.2s, transform 0.15s;
-    font-family: inherit; white-space: nowrap;
+  .hero-product-inner:hover {
+    transform: rotate(0deg) translateY(-8px);
   }
-  .sticky-bar-atc:hover { background: #fbbf24; }
-  .sticky-bar-atc:active { transform: scale(0.97); }
-  .sticky-cart-btn {
-    background: rgba(255,255,255,0.1); color: #fff;
-    border: 1.5px solid rgba(255,255,255,0.2);
-    border-radius: 10px; padding: 9px 14px;
-    font-size: 0.85rem; font-weight: 700; cursor: pointer;
-    display: flex; align-items: center; gap: 6px;
-    transition: background 0.2s; font-family: inherit; white-space: nowrap;
+  .hero-book-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.15);
   }
-  .sticky-cart-btn:hover { background: rgba(255,255,255,0.2); }
-  .sticky-cart-btn .cart-bubble {
-    background: #f59e0b; color: #0f172a;
-    border-radius: 999px; font-size: 0.65rem; font-weight: 900;
-    min-width: 18px; height: 18px;
-    display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
-  }
+  .hero-book-price { margin-bottom: 16px; font-size: 1.25rem; font-weight: 900; }
+  .hero-book-price s { color: #94a3b8; font-weight: 500; font-size: 0.9rem; margin-left: 8px; }
 
-  /* ── Toast Notification ── */
-  .hp-toast {
-    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: #059669; color: #fff;
-    padding: 12px 24px; border-radius: 999px;
-    font-size: 0.9rem; font-weight: 700;
-    box-shadow: 0 8px 32px rgba(5,150,105,0.4);
-    z-index: 9999;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s, transform 0.25s;
-    white-space: nowrap;
+  @media (max-width: 900px) {
+    .hero-container { flex-direction: column; text-align: center; gap: 40px; }
+    .hero-offers { justify-content: center; }
+    .hero-text p { margin-left: auto; margin-right: auto; }
+    .hero-product { flex: 0 0 auto; width: 100%; max-width: 380px; }
   }
-  .hp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 
 <!-- ── Cart Drawer Overlay ── -->
@@ -457,13 +168,51 @@
 <div class="shop-page">
 
   <!-- Hero -->
+  {% assign hero_book = all_products['the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma'] %}
+  {% if hero_book == empty or hero_book == blank %}
+    {% assign hero_book = all_products['the-body-keeps-the-score'] %}
+  {% endif %}
+
   <div class="shop-hero">
-    <h1>Build Your <span>Library.</span></h1>
-    <p>Curated psychology & self-improvement books. Grab more, save more — exclusive bundles just for you.</p>
-    <div class="hero-offers">
-      <div class="hero-offer-pill">🎁 Buy <em>1</em> → Get <em>2 Free</em></div>
-      <div class="hero-offer-pill">🎁 Buy <em>2</em> → Get <em>5 Free</em></div>
-      <div class="hero-offer-pill">🎁 Buy <em>3</em> → Get <em>12 Free</em></div>
+    <div class="hero-container">
+      <div class="hero-text">
+        <span class="hero-badge">New Arrival</span>
+        <h1>The Body Keeps <span style="color:#f59e0b;">The Score.</span></h1>
+        <p>Bessel van der Kolk's pioneering work on trauma and healing. Discover how traumatic stress reshapes the brain and body—and how we can heal.</p>
+        
+        <div class="hero-offers">
+          <div class="hero-offer-pill">🎁 Buy <em>1</em> → Get <em>2 Free</em></div>
+          <div class="hero-offer-pill">🎁 Buy <em>2</em> → Get <em>5 Free</em></div>
+          <div class="hero-offer-pill">🎁 Buy <em>3</em> → Get <em>12 Free</em></div>
+        </div>
+      </div>
+
+      {% if hero_book and hero_book != empty %}
+        {% assign hero_variant = hero_book.first_available_variant | default: hero_book.variants.first %}
+        <div class="hero-product">
+          <div class="hero-product-inner">
+            <a href="{{ hero_book.url }}">
+              <img src="{{ hero_book.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ hero_book.title }}" class="hero-book-img">
+            </a>
+            <div class="hero-book-price">
+              {{ hero_variant.price | money }}
+              {% if hero_variant.compare_at_price > hero_variant.price %}
+                <s>{{ hero_variant.compare_at_price | money }}</s>
+              {% endif %}
+            </div>
+            <button
+              class="btn-atc"
+              data-variant-id="{{ hero_variant.id }}"
+              data-title="{{ hero_book.title | escape }}"
+              data-price="{{ hero_variant.price | money }}"
+              data-img="{{ hero_book.featured_image | img_url: '200x280', crop: 'center' }}"
+              onclick="HPCart.addToCart(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 
