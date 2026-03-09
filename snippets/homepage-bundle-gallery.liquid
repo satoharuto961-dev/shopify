@@ -473,7 +473,8 @@
 
     {% if collections.all.products.size > 0 %}
       <div class="product-grid">
-        {% for product in collections.all.products limit: 100 %}
+        {% assign products_reversed = collections.all.products | reverse %}
+        {% for product in products_reversed limit: 100 %}
           {% assign variant = product.first_available_variant | default: product.variants.first %}
           <div class="book-card"
                data-product-title="{{ product.title | escape }}"
