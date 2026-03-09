@@ -482,8 +482,8 @@
           {% render 'book-card', product: target_book %}
         {% endif %}
 
-        {% assign products_reversed = collections.all.products | reverse %}
-        {% for product in products_reversed limit: 100 %}
+        {% assign products_sorted = collections.all.products | sort: 'published_at' | reverse %}
+        {% for product in products_sorted limit: 100 %}
           {% if target_book and product.handle == target_book.handle %}
             {% continue %}
           {% endif %}
