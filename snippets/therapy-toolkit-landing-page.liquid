@@ -1,5 +1,5 @@
 {% comment %}
-  Therapy Toolkit Landing Page
+  Therapy Toolkit Landing Page - Professional Edition
   Template: page.therapy-toolkit.liquid
   Product: ultimate-therapist-toolkit-1100-professional-therapy-resources
 {% endcomment %}
@@ -8,405 +8,507 @@
 {% assign tt_variant = tt.variants.first %}
 
 <style>
-  /* ── Hide theme chrome on this page only ── */
-  .announce-bar,
-  .site-header {
-    display: none !important;
-  }
-
-  /* ── Reset ── */
+  /* ── GLOBALS & RESET ── */
+  .announce-bar, .site-header { display: none !important; }
   .tt-wrap * { box-sizing: border-box; }
-
   .tt-wrap {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1f2937;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
     line-height: 1.6;
-    background: #f7f9fc;
+    background: #f8fafc;
+    overflow-x: hidden;
   }
-
-  /* ── HERO ── */
-  .tt-hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
-    color: white;
-    padding: clamp(60px, 10vw, 120px) 20px;
-    text-align: center;
-  }
-
-  .tt-hero-eyebrow {
-    display: inline-block;
-    background: rgba(255,107,0,0.2);
-    border: 1px solid rgba(255,107,0,0.5);
-    color: #ff9a4a;
-    font-size: 12px;
+  
+  /* ── TYPOGRAPHY & UTILS ── */
+  .tt-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
+  .tt-section { padding: 90px 0; }
+  .tt-section-bg-white { background: #ffffff; }
+  .tt-section-bg-dark { background: #0f172a; color: white; }
+  .tt-text-center { text-align: center; }
+  
+  .tt-h2 {
+    font-size: clamp(32px, 4vw, 44px);
     font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 999px;
-    margin-bottom: 20px;
+    line-height: 1.15;
+    margin: 0 0 20px;
+    letter-spacing: -0.02em;
+    color: inherit;
   }
-
-  .tt-hero h1 {
-    font-size: clamp(28px, 5vw, 54px);
-    margin: 0 0 16px;
-    font-weight: 800;
-    line-height: 1.12;
-    max-width: 860px;
-    margin-inline: auto;
+  
+  .tt-p-lead {
+    font-size: clamp(18px, 2vw, 22px);
+    color: #475569;
+    max-width: 720px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
   }
-
-  .tt-hero p {
-    font-size: clamp(16px, 2.5vw, 20px);
-    opacity: 0.85;
-    max-width: 680px;
-    margin: 0 auto 32px;
-  }
-
-  .tt-trust-row {
-    display: flex;
-    flex-wrap: wrap;
+  .tt-section-bg-dark .tt-p-lead { color: #94a3b8; }
+  
+  /* ── BUTTONS ── */
+  .tt-btn {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 24px;
-    margin-top: 28px;
-    font-size: 14px;
-    opacity: 0.75;
-  }
-
-  .tt-trust-row span { display: flex; align-items: center; gap: 6px; }
-
-  /* ── CTA Button ── */
-  .tt-cta-btn {
-    display: inline-block;
-    padding: 18px 44px;
+    gap: 12px;
     background: #ff6b00;
     color: white !important;
-    font-size: 18px;
-    border-radius: 8px;
-    text-decoration: none;
+    font-size: 20px;
     font-weight: 800;
+    padding: 20px 48px;
+    border-radius: 99px;
+    text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.4);
     line-height: 1;
+    width: auto;
   }
-
-  .tt-cta-btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 10px 28px rgba(255,107,0,0.45);
-    color: white !important;
+  .tt-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 30px -10px rgba(255, 107, 0, 0.5);
   }
-
-  /* ── SECTION CONTAINER ── */
-  .tt-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-  }
-
-  .tt-section-title {
+  .tt-btn-full { width: 100%; }
+  
+  .tt-btn-subtext {
+    display: block;
     text-align: center;
-    font-size: clamp(24px, 3vw, 36px);
-    margin: 0 0 48px;
-    font-weight: 800;
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 12px;
+    font-weight: 500;
   }
+  .tt-section-bg-dark .tt-btn-subtext { color: #64748b; }
 
-  /* ── STAT GRID ── */
-  .tt-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-  }
-
-  .tt-stat-card {
-    background: white;
-    padding: 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  /* ── HERO SECTION ── */
+  .tt-hero {
+    position: relative;
+    background: linear-gradient(145deg, #020617 0%, #0f172a 100%);
+    color: white;
+    padding: 120px 0 100px;
     text-align: center;
-    font-size: 15px;
+    overflow: hidden;
+  }
+  
+  /* Background glow effect */
+  .tt-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+  }
+
+  .tt-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border-radius: 99px;
+    font-size: 14px;
     font-weight: 600;
-    color: #374151;
-    transition: transform 0.25s ease;
+    color: #e2e8f0;
+    margin-bottom: 32px;
   }
+  .tt-hero-badge span { color: #38bdf8; }
 
-  .tt-stat-card:hover { transform: translateY(-5px); }
-
-  .tt-stat-num {
-    font-size: 50px;
+  .tt-hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
     font-weight: 900;
-    color: #ff6b00;
-    line-height: 1;
-    margin-bottom: 8px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    margin: 0 auto 24px;
+    background: linear-gradient(to right, #ffffff, #e2e8f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  /* ── PRODUCT BLOCK ── */
-  .tt-product-section {
+  .tt-hero p.tt-subtitle {
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: #94a3b8;
+    max-width: 760px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+  }
+
+  .tt-trust-indicators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .tt-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #cbd5e1;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .tt-trust-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(14, 165, 233, 0.15);
+    border-radius: 50%;
+    color: #38bdf8;
+  }
+
+  /* ── SOCIAL PROOF BAR ── */
+  .tt-proof-bar {
     background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 32px 0;
   }
+  .tt-proof-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .tt-proof-stat { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .tt-proof-num { font-size: 36px; font-weight: 900; color: #0f172a; line-height: 1; }
+  .tt-proof-label { font-size: 14px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tt-proof-stars { color: #f59e0b; font-size: 20px; letter-spacing: 2px; }
 
-  .tt-product-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
+  /* ── WHO IS THIS FOR (Professions) ── */
+  .tt-professions-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
   }
+  .tt-profession-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .tt-profession-card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+    box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.1);
+  }
+  .tt-prof-icon {
+    width: 64px;
+    height: 64px;
+    background: #f0f9ff;
+    color: #0284c7;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 20px;
+  }
+  .tt-prof-title { font-size: 18px; font-weight: 800; color: #0f172a; margin: 0; }
 
-  /* Image gallery */
+  /* ── PRODUCT SHOWCASE ── */
+  .tt-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  
+  /* Images */
   .tt-gallery { display: flex; flex-direction: column; gap: 16px; }
-
   .tt-gallery-main {
     width: 100%;
     aspect-ratio: 3/4;
     object-fit: contain;
-    background: #f3f4f6;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    border: 1px solid #e2e8f0;
     cursor: zoom-in;
-    padding: 16px;
   }
-
-  .tt-gallery-thumbs {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
+  .tt-gallery-thumbs { display: flex; gap: 12px; flex-wrap: wrap; }
   .tt-gallery-thumb {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    background: #f3f4f6;
-    border-radius: 8px;
-    cursor: pointer;
+    background: #ffffff;
+    border-radius: 12px;
     border: 2px solid transparent;
-    transition: border-color 0.2s;
-    opacity: 0.7;
-    padding: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
   }
+  .tt-gallery-thumb:hover, .tt-gallery-thumb.active { border-color: #38bdf8; transform: translateY(-2px); }
 
-  .tt-gallery-thumb:hover,
-  .tt-gallery-thumb.active {
-    border-color: #ff6b00;
-    opacity: 1;
-  }
-
-  /* Product details */
-  .tt-product-details { display: flex; flex-direction: column; gap: 20px; }
-
-  .tt-product-tag {
-    display: inline-block;
-    background: #fff7ed;
-    color: #c2410c;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+  /* Details */
+  .tt-showcase-content { display: flex; flex-direction: column; gap: 24px; }
+  .tt-tag {
+    display: inline-flex;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 999px;
-    border: 1px solid #fed7aa;
+    align-self: flex-start;
   }
-
-  .tt-product-title {
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 900;
-    line-height: 1.2;
-    margin: 0;
-    color: #111827;
-  }
-
-  .tt-product-desc {
+  .tt-showcase-title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; line-height: 1.1; margin: 0; }
+  
+  .tt-features-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .tt-features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
     font-size: 16px;
-    color: #4b5563;
-    line-height: 1.75;
+    color: #475569;
   }
-
-  .tt-product-desc ul {
-    padding-left: 20px;
-    margin: 10px 0;
+  .tt-features-list .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #dcfce7;
+    color: #16a34a;
+    border-radius: 50%;
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 2px;
   }
+  .tt-feat-title { font-weight: 700; color: #0f172a; display: block; margin-bottom: 2px; }
 
-  .tt-product-desc li { margin-bottom: 6px; }
-
-  /* Price row */
+  /* Price Block */
+  .tt-price-block {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 16px;
+  }
   .tt-price-row {
     display: flex;
-    align-items: baseline;
-    gap: 14px;
-    padding: 16px 0;
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .tt-price-now {
-    font-size: 52px;
-    font-weight: 900;
-    color: #111827;
-    line-height: 1;
-  }
-
-  .tt-price-was {
-    font-size: 22px;
-    color: #9ca3af;
-    text-decoration: line-through;
-  }
-
-  .tt-price-save {
-    background: #dcfce7;
-    color: #15803d;
-    font-size: 13px;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 999px;
-  }
-
-  .tt-buy-form { display: flex; flex-direction: column; gap: 12px; }
-
-  .tt-buy-form .tt-cta-btn { width: 100%; text-align: center; font-size: 20px; padding: 20px; }
-
-  .tt-buy-note {
-    text-align: center;
-    font-size: 13px;
-    color: #9ca3af;
-    display: flex;
-    justify-content: center;
+    align-items: center;
     gap: 16px;
-    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .tt-price-now { font-size: 48px; font-weight: 900; color: #0f172a; line-height: 1; }
+  .tt-price-was { font-size: 24px; color: #94a3b8; text-decoration: line-through; }
+  .tt-price-save {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 800;
   }
 
-  /* ── FEATURE SECTION ── */
-  .tt-feature-section { background: #f0f9ff; }
-
-  .tt-feature-grid {
+  /* ── TRANSFORMATION (Before/After) ── */
+  .tt-transform-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
   }
-
-  .tt-feature-item {
+  .tt-state-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+  }
+  .tt-state-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    background: white;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #1f2937;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f1f5f9;
   }
-
-  .tt-feature-item::before {
-    content: '✓';
-    color: #10b981;
-    font-weight: 900;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  /* ── VALUE STACK ── */
-  .tt-value-section {
-    background: #111827;
-    color: white;
-    padding: 70px 20px;
-    text-align: center;
-  }
-
-  .tt-value-section h2 {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 800;
-    margin: 0 0 32px;
-  }
-
-  .tt-value-table {
-    max-width: 620px;
-    margin: 0 auto;
-    font-size: 18px;
-  }
-
-  .tt-value-row {
+  .tt-state-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
     display: flex;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
   }
-
-  .tt-value-row:last-child {
-    border-bottom: none;
-    margin-top: 8px;
-    font-size: 22px;
+  .tt-state-card.before .tt-state-icon { background: #fee2e2; color: #ef4444; }
+  .tt-state-card.after .tt-state-icon { background: #dcfce7; color: #22c55e; }
+  .tt-state-title { font-size: 24px; font-weight: 800; margin: 0; }
+  
+  .tt-state-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+  .tt-state-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 16px;
+    color: #475569;
+  }
+  .tt-state-list li::before {
+    content: '✖';
+    font-family: system-ui, sans-serif;
+    color: #ef4444;
     font-weight: 900;
-    color: #ff6b00;
+    margin-top: 2px;
+  }
+  .tt-state-card.after .tt-state-list li::before {
+    content: '✔';
+    color: #22c55e;
   }
 
-  .tt-value-amount { opacity: 0.65; }
-  .tt-value-row:last-child .tt-value-amount { opacity: 1; color: #ff6b00; }
-
-  /* ── GUARANTEE ── */
-  .tt-guarantee {
-    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-    border: 1px solid #a7f3d0;
+  /* ── THE CONTENTS (Inventory) ── */
+  .tt-inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .tt-inv-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 40px;
-    text-align: center;
+    padding: 32px;
     display: flex;
     flex-direction: column;
+  }
+  .tt-inv-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: #38bdf8;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .tt-inv-title { font-size: 20px; font-weight: 800; color: #0f172a; margin: 0 0 12px; }
+  .tt-inv-desc { color: #64748b; font-size: 15px; margin: 0; }
+
+  /* ── VALUE STACK ── */
+  .tt-val-container { max-width: 800px; margin: 0 auto; }
+  .tt-val-box {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+  }
+  .tt-val-row {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin-top: 50px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 18px;
+    color: #334155;
+  }
+  .tt-val-row strong { color: #0f172a; font-weight: 700; }
+  .tt-val-row:last-of-type { border-bottom: none; }
+  .tt-val-total {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .tt-val-total-label { font-size: 24px; font-weight: 800; color: #0f172a; }
+  .tt-val-total-price { font-size: 36px; font-weight: 900; color: #ef4444; text-decoration: line-through; }
+
+  .tt-guarantee-box {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 32px;
+  }
+  .tt-guarantee-box img { width: 80px; height: 80px; }
+  .tt-gb-content h4 { font-size: 20px; font-weight: 800; color: #166534; margin: 0 0 8px; }
+  .tt-gb-content p { color: #15803d; margin: 0; font-size: 15px; }
+
+  /* ── TESTIMONIALS (Imported & Integrated) ── */
+  .tt-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
   }
 
-  .tt-guarantee-icon { font-size: 48px; }
-  .tt-guarantee h3 { font-size: 22px; font-weight: 800; color: #065f46; margin: 0; }
-  .tt-guarantee p { color: #047857; font-size: 15px; max-width: 460px; margin: 0; }
+  .tt-review-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    transition: transform 0.25s ease;
+  }
+  .tt-review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08); }
+
+  .tt-review-stars { display: flex; gap: 3px; color: #f59e0b; font-size: 14px; }
+  .tt-review-text { font-size: 14px; line-height: 1.7; color: #334155; flex: 1; font-style: italic; }
+  
+  .tt-review-author {
+    display: flex; align-items: center; gap: 12px; border-top: 1px solid #f1f5f9; padding-top: 14px; margin-top: auto;
+  }
+  .tt-review-avatar {
+    width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: white;
+  }
+  .tt-review-info { flex: 1; min-width: 0; }
+  .tt-review-name { font-size: 14px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tt-review-title { font-size: 12px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tt-verified { font-size: 11px; font-weight: 700; color: #0ea5e9; display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+
+  /* Avatar gradients */
+  .tt-av-1 { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
+  .tt-av-2 { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+  .tt-av-3 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .tt-av-4 { background: linear-gradient(135deg, #f97316, #c2410c); }
+  .tt-av-5 { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .tt-av-6 { background: linear-gradient(135deg, #10b981, #047857); }
 
   /* ── FAQ ── */
-  .tt-faq { max-width: 800px; margin: 0 auto; }
-
+  .tt-faq-grid { max-width: 800px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 16px; }
   .tt-faq-item {
     background: white;
-    border-radius: 12px;
-    padding: 26px 28px;
-    margin-bottom: 16px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-  }
-
-  .tt-faq-item h3 { font-size: 17px; font-weight: 800; margin: 0 0 8px; color: #111827; }
-  .tt-faq-item p { margin: 0; color: #6b7280; font-size: 15px; }
-
-  /* ── FINAL CTA STRIP ── */
-  .tt-final-cta {
-    background: linear-gradient(135deg, #0f172a, #1e3a5f);
-    color: white;
-    text-align: center;
-    padding: 70px 20px;
-  }
-
-  .tt-final-cta h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; margin: 0 0 12px; }
-  .tt-final-cta p { opacity: 0.8; margin: 0 0 28px; font-size: 17px; }
-
-  /* ── FOOTER ── */
-  .tt-footer {
-    background: #0f172a;
-    color: rgba(255,255,255,0.5);
-    text-align: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
     padding: 32px;
-    font-size: 13px;
   }
+  .tt-faq-item h3 { font-size: 18px; font-weight: 800; color: #0f172a; margin: 0 0 12px; }
+  .tt-faq-item p { margin: 0; color: #475569; font-size: 16px; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .tt-product-inner {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
+  /* ── RESPONSIVE RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .tt-showcase { grid-template-columns: 1fr; gap: 48px; }
+    .tt-reviews-grid { grid-template-columns: repeat(3, 1fr); }
   }
-
+  @media (max-width: 768px) {
+    .tt-transform-grid { grid-template-columns: 1fr; }
+    .tt-reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .tt-hero { padding: 80px 0 60px; }
+    .tt-guarantee-box { flex-direction: column; text-align: center; }
+  }
   @media (max-width: 600px) {
-    .tt-gallery-main { aspect-ratio: 3/2; }
-    .tt-price-now { font-size: 40px; }
+    .tt-val-box { padding: 32px 20px; }
+    .tt-val-row { font-size: 15px; }
+    .tt-val-total { flex-direction: column; gap: 12px; }
+    .tt-reviews-grid { grid-template-columns: 1fr; }
+    .tt-price-row { flex-wrap: wrap; }
   }
 </style>
 
@@ -414,338 +516,321 @@
 
   {%- comment -%} ═══════════════════ HERO ═══════════════════ {%- endcomment -%}
   <section class="tt-hero">
-    <div class="tt-hero-eyebrow">⚡ #1 Therapist Resource Bundle</div>
-    <h1>{{ tt.title }}</h1>
-    <p>A complete library of 1,100+ professional therapy tools designed to save therapists hours of preparation every week.</p>
-    <form action="/cart/add" method="post">
-      <input type="hidden" name="id" value="{{ tt_variant.id }}">
-      <input type="hidden" name="quantity" value="1">
-      <input type="hidden" name="return_to" value="/checkout">
-      <button type="submit" class="tt-cta-btn">Get Instant Access — {{ tt_variant.price | money }}</button>
-    </form>
-    <div class="tt-trust-row">
-      <span>🔒 Secure Checkout</span>
-      <span>⚡ Instant Download</span>
-      <span>🛡️ 30-Day Guarantee</span>
-      <span>♾️ Lifetime Access</span>
-    </div>
-  </section>
-
-  {%- comment -%} ═══════════════════ STATS ═══════════════════ {%- endcomment -%}
-  <section class="tt-container">
-    <h2 class="tt-section-title">What You Get Inside</h2>
-    <div class="tt-stat-grid">
-      <div class="tt-stat-card"><div class="tt-stat-num">500</div>Professional Therapy Worksheets</div>
-      <div class="tt-stat-card"><div class="tt-stat-num">200</div>Guided Session Scripts</div>
-      <div class="tt-stat-card"><div class="tt-stat-num">100</div>Clinical Assessment Tools</div>
-      <div class="tt-stat-card"><div class="tt-stat-num">100</div>Complete Treatment Plans</div>
-      <div class="tt-stat-card"><div class="tt-stat-num">200</div>AI Therapy Prompts</div>
-    </div>
-  </section>
-
-  {%- comment -%} ═══════════════════ LIVE PRODUCT BLOCK ═══════════════════ {%- endcomment -%}
-  <section class="tt-product-section">
-    <div class="tt-product-inner">
-
-      {%- comment -%} — Image Gallery — {%- endcomment -%}
-      <div class="tt-gallery">
-        {% if tt.images.size > 0 %}
-          <img
-            id="tt-main-img"
-            class="tt-gallery-main"
-            src="{{ tt.images.first | image_url: width: 800 }}"
-            alt="{{ tt.images.first.alt | default: tt.title }}"
-          >
-          {% if tt.images.size > 1 %}
-            <div class="tt-gallery-thumbs">
-              {% for img in tt.images %}
-                <img
-                  class="tt-gallery-thumb{% if forloop.first %} active{% endif %}"
-                  src="{{ img | image_url: width: 200 }}"
-                  alt="{{ img.alt | default: tt.title }}"
-                  data-full="{{ img | image_url: width: 800 }}"
-                  onclick="ttSetImg(this)"
-                >
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endif %}
-      </div>
-
-      {%- comment -%} — Product Details — {%- endcomment -%}
-      <div class="tt-product-details">
-        <span class="tt-product-tag">🩺 Professional Bundle</span>
-
-        <h2 class="tt-product-title">{{ tt.title }}</h2>
-
-        <div class="tt-product-desc">{{ tt.description }}</div>
-
-        <div class="tt-price-row">
-          <span class="tt-price-now">{{ tt_variant.price | money }}</span>
-          {% if tt_variant.compare_at_price > tt_variant.price %}
-            <span class="tt-price-was">{{ tt_variant.compare_at_price | money }}</span>
-            <span class="tt-price-save">Save {{ tt_variant.compare_at_price | minus: tt_variant.price | money }}</span>
-          {% endif %}
-        </div>
-
-        <form class="tt-buy-form" action="/cart/add" method="post">
-          <input type="hidden" name="id" value="{{ tt_variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
-          <button type="submit" class="tt-cta-btn">🛒 Buy Now — Instant Download</button>
-        </form>
-
-        <div class="tt-buy-note">
-          <span>🔒 100% Secure Payment</span>
-          <span>⚡ Delivered Instantly</span>
-          <span>🛡️ 30-Day Refund</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  {%- comment -%} ═══════════════════ FEATURES ═══════════════════ {%- endcomment -%}
-  <section class="tt-feature-section">
     <div class="tt-container">
-      <h2 class="tt-section-title">Covers Every Area of Therapy Practice</h2>
-      <div class="tt-feature-grid">
-        <div class="tt-feature-item">CBT Worksheets</div>
-        <div class="tt-feature-item">DBT Exercises</div>
-        <div class="tt-feature-item">Trauma Processing Worksheets</div>
-        <div class="tt-feature-item">Anxiety Treatment Tools</div>
-        <div class="tt-feature-item">Depression Recovery Plans</div>
-        <div class="tt-feature-item">Couples Therapy Exercises</div>
-        <div class="tt-feature-item">Client Homework Sheets</div>
-        <div class="tt-feature-item">Session Structure Templates</div>
-        <div class="tt-feature-item">AI Therapy Prompts</div>
-        <div class="tt-feature-item">Clinical Assessments</div>
-        <div class="tt-feature-item">Guided Session Scripts</div>
-        <div class="tt-feature-item">Complete Treatment Plans</div>
+      <div class="tt-hero-badge">
+        <span>★</span> #1 Ranked Resource for Mental Health Professionals
+      </div>
+      
+      <h1>The Ultimate Therapist Toolkit</h1>
+      <p class="tt-subtitle">Stop spending hours creating worksheets from scratch. Get instant access to 1,100+ professional, ready-to-use therapy resources, scripts, and treatment plans.</p>
+      
+      <form action="/cart/add" method="post" style="margin: 0;">
+        <input type="hidden" name="id" value="{{ tt_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="tt-btn">
+          Get Instant Access Now — {{ tt_variant.price | money }}
+        </button>
+      </form>
+      <span class="tt-btn-subtext">One-time payment. Lifetime access. 30-Day Money-Back Guarantee.</span>
+
+      <div class="tt-trust-indicators">
+        <div class="tt-trust-item"><div class="tt-trust-icon">✓</div> 1,100+ Resources</div>
+        <div class="tt-trust-item"><div class="tt-trust-icon">✓</div> Clinically Designed</div>
+        <div class="tt-trust-item"><div class="tt-trust-icon">✓</div> Editable Formats</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═══════════════════ SOCIAL PROOF BAR ═══════════════════ {%- endcomment -%}
+  <div class="tt-proof-bar">
+    <div class="tt-container">
+      <div class="tt-proof-grid">
+        <div class="tt-proof-stat">
+          <div class="tt-proof-stars">★★★★★</div>
+          <div class="tt-proof-label">4.9/5 Average Rating</div>
+        </div>
+        <div class="tt-proof-stat">
+          <div class="tt-proof-num">15,000+</div>
+          <div class="tt-proof-label">Professionals using it</div>
+        </div>
+        <div class="tt-proof-stat">
+          <div class="tt-proof-num">1.5M+</div>
+          <div class="tt-proof-label">Sessions Supported</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ═══════════════════ WHO IS THIS FOR (Professions) ═══════════════════ {%- endcomment -%}
+  <section class="tt-section">
+    <div class="tt-container">
+      <div class="tt-text-center">
+        <h2 class="tt-h2">Designed Specifically For Your Practice</h2>
+        <p class="tt-p-lead">Whether you're just starting out or managing a full private practice, this toolkit provides the exact resources you need.</p>
+      </div>
+
+      <div class="tt-professions-grid">
+        <!-- Psychologist -->
+        <div class="tt-profession-card">
+          <div class="tt-prof-icon">🧠</div>
+          <h3 class="tt-prof-title">Psychologists</h3>
+          <p style="color:#64748b;font-size:15px;margin:12px 0 0;">Comprehensive assessments and evidence-based clinical treatment frameworks.</p>
+        </div>
+        <!-- Therapist -->
+        <div class="tt-profession-card">
+          <div class="tt-prof-icon">🛋️</div>
+          <h3 class="tt-prof-title">Therapists</h3>
+          <p style="color:#64748b;font-size:15px;margin:12px 0 0;">In-depth session scripts, CBT/DBT exercises, and trauma processing worksheets.</p>
+        </div>
+        <!-- Counselor -->
+        <div class="tt-profession-card">
+          <div class="tt-prof-icon">🗣️</div>
+          <h3 class="tt-prof-title">Counselors</h3>
+          <p style="color:#64748b;font-size:15px;margin:12px 0 0;">Practical homework sheets, communication exercises, and goal-setting tools.</p>
+        </div>
+        <!-- Social Worker -->
+        <div class="tt-profession-card">
+          <div class="tt-prof-icon">🤝</div>
+          <h3 class="tt-prof-title">Social Workers</h3>
+          <p style="color:#64748b;font-size:15px;margin:12px 0 0;">Intake forms, family dynamic tools, and crisis management resources.</p>
+        </div>
+        <!-- Mental Health Professional -->
+        <div class="tt-profession-card">
+          <div class="tt-prof-icon">⚕️</div>
+          <h3 class="tt-prof-title">Mental Health Pros</h3>
+          <p style="color:#64748b;font-size:15px;margin:12px 0 0;">Everything you need to streamline documentation and client resources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═══════════════════ BEFORE / AFTER ═══════════════════ {%- endcomment -%}
+  <section class="tt-section tt-section-bg-white">
+    <div class="tt-container">
+      <div class="tt-text-center">
+        <h2 class="tt-h2">The Reality of Private Practice</h2>
+        <p class="tt-p-lead">Stop sacrificing your personal time for session prep.</p>
+      </div>
+
+      <div class="tt-transform-grid">
+        <div class="tt-state-card before">
+          <div class="tt-state-header">
+            <div class="tt-state-icon">😞</div>
+            <h3 class="tt-state-title">Without the Toolkit</h3>
+          </div>
+          <ul class="tt-state-list">
+            <li>Spending 5-10 unpaid hours a week creating worksheets from scratch.</li>
+            <li>Feeling anxious before sessions with new or complex clients.</li>
+            <li>Struggling to find the right homework assignments for specific disorders.</li>
+            <li>Inconsistent documentation and intake processes.</li>
+            <li>Experiencing rapid burnout from the administrative workload.</li>
+          </ul>
+        </div>
+
+        <div class="tt-state-card after">
+          <div class="tt-state-header">
+            <div class="tt-state-icon">😊</div>
+            <h3 class="tt-state-title">With the Toolkit</h3>
+          </div>
+          <ul class="tt-state-list">
+            <li>Zero prep time — instantly print or email the exact worksheet you need.</li>
+            <li>Entering every session with confidence using guided scripts.</li>
+            <li>Providing clients with high-quality, professional take-home materials.</li>
+            <li>Standardized, professional intake and assessment processes.</li>
+            <li>Reclaiming your weekends and evenings to focus on yourself.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═══════════════════ PRODUCT SHOWCASE (Live Shopify Data) ═══════════════════ {%- endcomment -%}
+  <section class="tt-section" id="purchase">
+    <div class="tt-container">
+      <div class="tt-showcase">
+        
+        <!-- Gallery -->
+        <div class="tt-gallery">
+          {% if tt.images.size > 0 %}
+            <img id="tt-main-img" class="tt-gallery-main" src="{{ tt.images.first | image_url: width: 800 }}" alt="{{ tt.images.first.alt | default: tt.title }}">
+            {% if tt.images.size > 1 %}
+              <div class="tt-gallery-thumbs">
+                {% for img in tt.images %}
+                  <img
+                    class="tt-gallery-thumb{% if forloop.first %} active{% endif %}"
+                    src="{{ img | image_url: width: 200 }}"
+                    alt="{{ img.alt | default: tt.title }}"
+                    data-full="{{ img | image_url: width: 800 }}"
+                    onclick="ttSetImg(this)"
+                  >
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        <!-- Content -->
+        <div class="tt-showcase-content">
+          <div class="tt-tag">Digital Download • Instant Access</div>
+          <h2 class="tt-showcase-title">{{ tt.title }}</h2>
+          
+          <ul class="tt-features-list">
+            <li>
+              <div class="icon">✓</div>
+              <div><span class="tt-feat-title">Comprehensive Library</span>1,100+ individual resources covering CBT, DBT, ACT, trauma, and more.</div>
+            </li>
+            <li>
+              <div class="icon">✓</div>
+              <div><span class="tt-feat-title">Fully Editable Formats</span>Customize worksheets with your practice details in PDF, Word, and Canva.</div>
+            </li>
+            <li>
+              <div class="icon">✓</div>
+              <div><span class="tt-feat-title">Lifetime Updates included</span>Pay once, access forever. Get all future additions at no extra cost.</div>
+            </li>
+          </ul>
+
+          <div class="tt-price-block">
+            <div class="tt-price-row">
+              <span class="tt-price-now">{{ tt_variant.price | money }}</span>
+              {% if tt_variant.compare_at_price > tt_variant.price %}
+                <span class="tt-price-was">{{ tt_variant.compare_at_price | money }}</span>
+                <span class="tt-price-save">Save {{ tt_variant.compare_at_price | minus: tt_variant.price | money }}</span>
+              {% endif %}
+            </div>
+
+            <form action="/cart/add" method="post" style="margin:0;">
+              <input type="hidden" name="id" value="{{ tt_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <input type="hidden" name="return_to" value="/checkout">
+              <button type="submit" class="tt-btn tt-btn-full">
+                🛒 Add to Cart & Checkout Now
+              </button>
+            </form>
+            <span class="tt-btn-subtext">Secure checkout by Shopify. Delivered via email instantly.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═══════════════════ WHAT'S INSIDE THE TOOLKIT ═══════════════════ {%- endcomment -%}
+  <section class="tt-section tt-section-bg-white">
+    <div class="tt-container">
+      <div class="tt-text-center">
+        <h2 class="tt-h2">Everything Required for Elite Clinical Care</h2>
+        <p class="tt-p-lead">A comprehensive look at the 1,100+ files included in your instant download.</p>
+      </div>
+
+      <div class="tt-inventory-grid">
+        <div class="tt-inv-card">
+          <div class="tt-inv-num">500+</div>
+          <h3 class="tt-inv-title">Clinical Worksheets</h3>
+          <p class="tt-inv-desc">Extensive exercises for anxiety, depression, PTSD, relationship issues, boundary setting, and emotional regulation.</p>
+        </div>
+        <div class="tt-inv-card">
+          <div class="tt-inv-num">200+</div>
+          <h3 class="tt-inv-title">Session Scripts</h3>
+          <p class="tt-inv-desc">Word-for-word guides on how to introduce concepts, de-escalate crisis, and conduct specialized interventions.</p>
+        </div>
+        <div class="tt-inv-card">
+          <div class="tt-inv-num">100+</div>
+          <h3 class="tt-inv-title">Assessments & Intake</h3>
+          <p class="tt-inv-desc">Professional diagnostic screening tools, bio-psycho-social templates, and comprehensive client intake forms.</p>
+        </div>
+        <div class="tt-inv-card">
+          <div class="tt-inv-num">100+</div>
+          <h3 class="tt-inv-title">Treatment Plans</h3>
+          <p class="tt-inv-desc">Structured, evidence-based blueprints with specific goals, objectives, and interventions for common diagnoses.</p>
+        </div>
+        <div class="tt-inv-card">
+          <div class="tt-inv-num">200+</div>
+          <h3 class="tt-inv-title">AI Therapy Prompts</h3>
+          <p class="tt-inv-desc">Copy-paste prompts to help you generate custom session notes, treatment plans, and resources using ChatGPT.</p>
+        </div>
+        <div class="tt-inv-card" style="background:#0f172a; color:white; border:none;">
+          <h3 class="tt-inv-title" style="color:white; font-size: 28px; margin-top:20px;">Plus Bonus Material</h3>
+          <p class="tt-inv-desc" style="color:#94a3b8; margin-top:16px;">Marketing templates for private practice, telehealth guides, and billing tracking sheets.</p>
+        </div>
       </div>
     </div>
   </section>
 
   {%- comment -%} ═══════════════════ VALUE STACK ═══════════════════ {%- endcomment -%}
-  <section class="tt-value-section">
-    <h2>Total Value Of The Toolkit</h2>
-    <div class="tt-value-table">
-      <div class="tt-value-row"><span>500 Worksheets</span><span class="tt-value-amount">$297</span></div>
-      <div class="tt-value-row"><span>200 Session Scripts</span><span class="tt-value-amount">$197</span></div>
-      <div class="tt-value-row"><span>100 Assessments</span><span class="tt-value-amount">$147</span></div>
-      <div class="tt-value-row"><span>100 Treatment Plans</span><span class="tt-value-amount">$197</span></div>
-      <div class="tt-value-row"><span>200 AI Prompts</span><span class="tt-value-amount">$97</span></div>
-      <div class="tt-value-row"><strong>Total Value</strong><span class="tt-value-amount"><strong>$935</strong></span></div>
-    </div>
-  </section>
+  <section class="tt-section" style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
+    <div class="tt-container">
+      <div class="tt-val-container">
+        <div class="tt-text-center">
+          <h2 class="tt-h2">The True Value of Your Time</h2>
+          <p class="tt-p-lead">If you billed for the hours it takes to create these resources yourself, it would cost thousands of dollars.</p>
+        </div>
 
-  {%- comment -%} ═══════════════════ FINAL CTA ═══════════════════ {%- endcomment -%}
-  <section class="tt-final-cta">
-    <h2>Ready to Transform Your Practice?</h2>
-    <p>Join thousands of therapists who save hours every week with the Ultimate Therapist Toolkit.</p>
-    <form action="/cart/add" method="post">
-      <input type="hidden" name="id" value="{{ tt_variant.id }}">
-      <input type="hidden" name="quantity" value="1">
-      <input type="hidden" name="return_to" value="/checkout">
-      <button type="submit" class="tt-cta-btn">Download The Toolkit — {{ tt_variant.price | money }}</button>
-    </form>
-    <div class="tt-guarantee" style="max-width:560px; margin: 40px auto 0;">
-      <div class="tt-guarantee-icon">🛡️</div>
-      <h3>30-Day Money-Back Guarantee</h3>
-      <p>Not satisfied? Get a full refund within 30 days — no questions asked.</p>
+        <div class="tt-val-box">
+          <div class="tt-val-row">
+            <span>500+ Clinical Worksheets</span>
+            <strong>$297 Value</strong>
+          </div>
+          <div class="tt-val-row">
+            <span>200+ Guided Session Scripts</span>
+            <strong>$197 Value</strong>
+          </div>
+          <div class="tt-val-row">
+            <span>100+ Assessment Tools</span>
+            <strong>$147 Value</strong>
+          </div>
+          <div class="tt-val-row">
+            <span>100+ Treatment Plans</span>
+            <strong>$197 Value</strong>
+          </div>
+          <div class="tt-val-row">
+            <span>200+ AI Therapy Prompts</span>
+            <strong>$97 Value</strong>
+          </div>
+          <div class="tt-val-row">
+            <span>Private Practice Bonus Materials</span>
+            <strong>$99 Value</strong>
+          </div>
+          
+          <div class="tt-val-total">
+            <span class="tt-val-total-label">Total Real World Value</span>
+            <span class="tt-val-total-price">$1,034</span>
+          </div>
+
+          <div style="text-align:center; margin-top: 40px;">
+            <p style="font-size: 20px; color: #475569; margin-bottom: 24px;">Get everything today for just <strong style="color:#0f172a; font-size:28px;">{{ tt_variant.price | money }}</strong></p>
+            <form action="/cart/add" method="post" style="margin:0;">
+              <input type="hidden" name="id" value="{{ tt_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <input type="hidden" name="return_to" value="/checkout">
+              <button type="submit" class="tt-btn" style="width: 100%;">Claim This Offer Now</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="tt-guarantee-box">
+          <div style="font-size: 60px; line-height: 1;">🛡️</div>
+          <div class="tt-gb-content">
+            <h4>100% Iron-Clad 30-Day Guarantee</h4>
+            <p>Download the toolkit, use the resources in your sessions. If it doesn't save you time and improve your clinical outcomes, email us within 30 days for a full, no-questions-asked refund.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   {%- comment -%} ═══════════════════ TESTIMONIALS ═══════════════════ {%- endcomment -%}
-  <style>
-    .tt-testimonials {
-      background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
-      padding: 80px 20px;
-    }
-
-    .tt-testimonials-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .tt-testimonials-eyebrow {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 14px;
-    }
-
-    .tt-testimonials-eyebrow span {
-      background: #e0f2fe;
-      color: #0369a1;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 999px;
-      border: 1px solid #bae6fd;
-    }
-
-    .tt-testimonials-title {
-      text-align: center;
-      font-size: clamp(24px, 3vw, 36px);
-      font-weight: 900;
-      color: #0f172a;
-      margin: 0 0 8px;
-    }
-
-    .tt-testimonials-sub {
-      text-align: center;
-      color: #64748b;
-      font-size: 16px;
-      margin: 0 0 52px;
-    }
-
-    .tt-reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .tt-review-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      position: relative;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .tt-review-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
-    }
-
-    .tt-review-quote {
-      position: absolute;
-      top: 20px;
-      right: 22px;
-      font-size: 52px;
-      line-height: 1;
-      color: #e0f2fe;
-      font-family: Georgia, serif;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .tt-review-stars {
-      display: flex;
-      gap: 3px;
-    }
-
-    .tt-review-stars span {
-      color: #f59e0b;
-      font-size: 16px;
-    }
-
-    .tt-review-text {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #334155;
-      flex: 1;
-      font-style: italic;
-    }
-
-    .tt-review-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 14px;
-      margin-top: auto;
-    }
-
-    .tt-review-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      font-size: 15px;
-      font-weight: 800;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      letter-spacing: -0.5px;
-    }
-
-    .tt-review-info { flex: 1; min-width: 0; }
-
-    .tt-review-name {
-      font-size: 14px;
-      font-weight: 800;
-      color: #0f172a;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .tt-review-title {
-      font-size: 12px;
-      color: #64748b;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .tt-verified {
-      font-size: 11px;
-      font-weight: 700;
-      color: #0ea5e9;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    /* Accent colors per card */
-    .tt-av-1  { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
-    .tt-av-2  { background: linear-gradient(135deg, #14b8a6, #0f766e); }
-    .tt-av-3  { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
-    .tt-av-4  { background: linear-gradient(135deg, #f97316, #c2410c); }
-    .tt-av-5  { background: linear-gradient(135deg, #ec4899, #be185d); }
-    .tt-av-6  { background: linear-gradient(135deg, #10b981, #047857); }
-    .tt-av-7  { background: linear-gradient(135deg, #f59e0b, #b45309); }
-    .tt-av-8  { background: linear-gradient(135deg, #6366f1, #4338ca); }
-    .tt-av-9  { background: linear-gradient(135deg, #0ea5e9, #0c4a6e); }
-    .tt-av-10 { background: linear-gradient(135deg, #14b8a6, #134e4a); }
-    .tt-av-11 { background: linear-gradient(135deg, #f43f5e, #be123c); }
-    .tt-av-12 { background: linear-gradient(135deg, #a855f7, #7e22ce); }
-
-    /* Responsive grid */
-    @media (max-width: 1100px) {
-      .tt-reviews-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .tt-reviews-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .tt-reviews-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <section class="tt-testimonials">
-    <div class="tt-testimonials-inner">
-
-      <div class="tt-testimonials-eyebrow"><span>⭐ Verified Reviews</span></div>
-      <h2 class="tt-testimonials-title">Trusted by Mental Health Professionals Worldwide</h2>
-      <p class="tt-testimonials-sub">Join thousands of therapists who use these tools every week in real sessions.</p>
+  <section class="tt-section tt-section-bg-white">
+    <div class="tt-container">
+      <div class="tt-text-center">
+        <h2 class="tt-h2">Trusted by 15,000+ Mental Health Professionals</h2>
+        <p class="tt-p-lead">See what your colleagues are saying about the toolkit.</p>
+      </div>
 
       <div class="tt-reviews-grid">
-
+        <!-- 1 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">This toolkit saved me hours of preparation every week. It's now an essential part of my practice.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-1">SM</div>
@@ -756,10 +841,9 @@
             </div>
           </div>
         </div>
-
+        <!-- 2 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">The CBT worksheets are extremely practical in real sessions. My clients find them clear and helpful.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-2">JC</div>
@@ -770,10 +854,9 @@
             </div>
           </div>
         </div>
-
+        <!-- 3 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">My clients respond very well to these exercises. I've seen real progress in sessions since I started using them.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-3">LG</div>
@@ -784,10 +867,9 @@
             </div>
           </div>
         </div>
-
+        <!-- 4 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">One of the most complete therapy resource libraries I've ever come across. Incredible value.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-4">DW</div>
@@ -798,10 +880,9 @@
             </div>
           </div>
         </div>
-
+        <!-- 5 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">The session scripts make structuring therapy sessions effortless. I feel so much more prepared going in.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-5">ET</div>
@@ -812,10 +893,9 @@
             </div>
           </div>
         </div>
-
+        <!-- 6 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">Excellent resource for therapists working with anxiety and trauma. Well-structured and clinically sound.</p>
           <div class="tt-review-author">
             <div class="tt-review-avatar tt-av-6">MB</div>
@@ -826,13 +906,12 @@
             </div>
           </div>
         </div>
-
+        <!-- 7 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">Very professional worksheets that are easy for clients to follow. I use them in almost every session now.</p>
           <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-7">OH</div>
+            <div class="tt-review-avatar tt-av-1">OH</div>
             <div class="tt-review-info">
               <div class="tt-review-name">Olivia Harris</div>
               <div class="tt-review-title">Trauma Therapist</div>
@@ -840,13 +919,12 @@
             </div>
           </div>
         </div>
-
+        <!-- 8 -->
         <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tt-review-stars">★★★★★</div>
           <p class="tt-review-text">The treatment plans are clear and ready to use immediately. Exactly what I needed for my family therapy work.</p>
           <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-8">DC</div>
+            <div class="tt-review-avatar tt-av-2">DC</div>
             <div class="tt-review-info">
               <div class="tt-review-name">David Chen</div>
               <div class="tt-review-title">Family Counselor</div>
@@ -854,91 +932,60 @@
             </div>
           </div>
         </div>
-
-        <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="tt-review-text">A fantastic toolkit for both new and experienced therapists. I recommend it to every colleague I know.</p>
-          <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-9">SM</div>
-            <div class="tt-review-info">
-              <div class="tt-review-name">Sophia Martinez</div>
-              <div class="tt-review-title">Licensed Psychologist</div>
-              <div class="tt-verified">✔ Verified Purchase</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="tt-review-text">The AI prompts help generate therapy materials quickly. It's like having an assistant ready at all times.</p>
-          <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-10">AP</div>
-            <div class="tt-review-info">
-              <div class="tt-review-name">Andrew Patel</div>
-              <div class="tt-review-title">Behavioral Therapist</div>
-              <div class="tt-verified">✔ Verified Purchase</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="tt-review-text">I now spend far less time preparing for sessions and can focus more on actually helping my clients.</p>
-          <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-11">RA</div>
-            <div class="tt-review-info">
-              <div class="tt-review-name">Rachel Adams</div>
-              <div class="tt-review-title">Mental Health Counselor</div>
-              <div class="tt-verified">✔ Verified Purchase</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tt-review-card">
-          <div class="tt-review-quote">"</div>
-          <div class="tt-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="tt-review-text">Highly recommended for any mental health professional. This is genuinely one of the best investments I've made.</p>
-          <div class="tt-review-author">
-            <div class="tt-review-avatar tt-av-12">MJ</div>
-            <div class="tt-review-info">
-              <div class="tt-review-name">Mark Johnson</div>
-              <div class="tt-review-title">Addiction Therapist</div>
-              <div class="tt-verified">✔ Verified Purchase</div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
   {%- comment -%} ═══════════════════ FAQ ═══════════════════ {%- endcomment -%}
-  <section class="tt-container tt-faq">
-    <h2 class="tt-section-title">Frequently Asked Questions</h2>
-    <div class="tt-faq-item">
-      <h3>Who is this toolkit for?</h3>
-      <p>Therapists, counselors, psychologists, and mental health professionals who want to save time and improve session quality.</p>
+  <section class="tt-section">
+    <div class="tt-container">
+      <div class="tt-text-center">
+        <h2 class="tt-h2">Frequently Asked Questions</h2>
+      </div>
+      
+      <div class="tt-faq-grid">
+        <div class="tt-faq-item">
+          <h3>Which professions is this toolkit for?</h3>
+          <p>It is specifically designed for Psychologists, Therapists, Counselors, Licensed Social Workers, and Mental Health Professionals working in both agency settings and private practice.</p>
+        </div>
+        <div class="tt-faq-item">
+          <h3>How will I receive the files?</h3>
+          <p>You will receive an email with instant download access immediately after your payment is processed. You can download the files to your computer, tablet, or phone.</p>
+        </div>
+        <div class="tt-faq-item">
+          <h3>Are the materials editable so I can add my branding?</h3>
+          <p>Yes, many of the files are provided in editable formats (Word, Canva) allowing you to add your practice's logo, adjust colors, and modify text to suit your specific clinical approach.</p>
+        </div>
+        <div class="tt-faq-item">
+          <h3>Is this a subscription or a one-time payment?</h3>
+          <p>This is a strictly one-time payment. There are no monthly fees. You get lifetime access to all 1,100+ current resources, plus free access to any future updates we make to the toolkit.</p>
+        </div>
+      </div>
     </div>
-    <div class="tt-faq-item">
-      <h3>How will I receive the files?</h3>
-      <p>You will receive instant download access immediately after purchase — no waiting, no shipping.</p>
-    </div>
-    <div class="tt-faq-item">
-      <h3>Are the materials editable?</h3>
-      <p>Yes, most files include editable formats so you can customize them for your practice and clients.</p>
-    </div>
-    <div class="tt-faq-item">
-      <h3>Is this a one-time payment?</h3>
-      <p>Yes — you pay once and get lifetime access to all 1,100+ resources, including any future updates.</p>
+  </section>
+
+  {%- comment -%} ═══════════════════ FINAL CALL TO ACTION ═══════════════════ {%- endcomment -%}
+  <section class="tt-section tt-section-bg-dark" style="text-align: center;">
+    <div class="tt-container">
+      <h2 class="tt-h2" style="color: white;">Ready to Upgrade Your Clinical Practice?</h2>
+      <p class="tt-p-lead">Join 15,000+ professionals who save hours every week.</p>
+      
+      <form action="/cart/add" method="post" style="margin: 40px 0 0;">
+        <input type="hidden" name="id" value="{{ tt_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="tt-btn">
+          Download The Complete Toolkit Now
+        </button>
+      </form>
     </div>
   </section>
 
   {%- comment -%} ═══════════════════ FOOTER ═══════════════════ {%- endcomment -%}
-  <footer class="tt-footer">
-    <p>© {{ 'now' | date: '%Y' }} Ultimate Therapist Toolkit. All rights reserved.</p>
+  <footer style="background: #020617; color: #475569; padding: 32px 0; text-align: center; font-size: 14px;">
+    <div class="tt-container">
+      <p>© {{ 'now' | date: '%Y' }} Ultimate Therapist Toolkit. By Professionals, For Professionals.</p>
+    </div>
   </footer>
 
 </div>
