@@ -1,0 +1,457 @@
+{% comment %}
+  Therapy Toolkit Landing Page Snippet
+  Template: page.therapy-toolkit.liquid
+{% endcomment %}
+
+<style>
+  .tt-wrap * {
+    box-sizing: border-box;
+  }
+
+  .tt-wrap {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1f2937;
+    line-height: 1.6;
+  }
+
+  /* --- HERO --- */
+  .tt-hero {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    padding: 120px 20px;
+    text-align: center;
+  }
+
+  .tt-hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    margin-bottom: 20px;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .tt-hero p {
+    font-size: clamp(17px, 2.5vw, 20px);
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* --- CTA Button --- */
+  .tt-cta {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 18px 40px;
+    background: #ff6b00;
+    color: white;
+    font-size: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tt-cta:hover {
+    transform: scale(1.05);
+    color: white;
+    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.4);
+  }
+
+  /* --- CONTAINER --- */
+  .tt-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  /* --- SECTION TITLE --- */
+  .tt-section-title {
+    text-align: center;
+    font-size: clamp(26px, 3vw, 36px);
+    margin-bottom: 50px;
+    font-weight: 800;
+  }
+
+  /* --- STAT GRID --- */
+  .tt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+
+  .tt-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: transform 0.3s ease;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .tt-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .tt-big {
+    font-size: 48px;
+    font-weight: 900;
+    color: #ff6b00;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  /* --- PREVIEW --- */
+  .tt-preview {
+    background: white;
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+
+  .tt-preview p {
+    font-size: 18px;
+    color: #4b5563;
+  }
+
+  .tt-feature-list {
+    margin-top: 25px;
+    font-size: 18px;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px 24px;
+  }
+
+  .tt-feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .tt-feature-list li::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: 900;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* --- VALUE STACK --- */
+  .tt-value {
+    background: #111827;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .tt-value h2 {
+    font-size: clamp(26px, 3vw, 38px);
+    margin-bottom: 30px;
+    font-weight: 800;
+  }
+
+  .tt-stack {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tt-stack-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tt-stack-row:last-child {
+    border-bottom: none;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ff6b00;
+  }
+
+  .tt-stack-price {
+    opacity: 0.75;
+    font-size: 0.9em;
+  }
+
+  /* --- PRICE BOX --- */
+  .tt-price-box {
+    background: white;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    position: relative;
+  }
+
+  .tt-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff6b00;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .tt-old {
+    text-decoration: line-through;
+    color: #9ca3af;
+    font-size: 22px;
+    margin-top: 10px;
+  }
+
+  .tt-price {
+    font-size: 68px;
+    font-weight: 900;
+    color: #111827;
+    margin: 8px 0;
+    line-height: 1;
+  }
+
+  .tt-price-sub {
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  /* --- GUARANTEE --- */
+  .tt-guarantee {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 1px solid #a7f3d0;
+    padding: 40px;
+    border-radius: 16px;
+    margin-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tt-guarantee-icon {
+    font-size: 48px;
+  }
+
+  .tt-guarantee h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #065f46;
+    margin: 0;
+  }
+
+  .tt-guarantee p {
+    color: #047857;
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0;
+  }
+
+  /* --- FAQ --- */
+  .tt-faq {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tt-faq-item {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .tt-faq-item h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #111827;
+  }
+
+  .tt-faq-item p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+  }
+
+  /* --- FOOTER --- */
+  .tt-footer {
+    background: #0f172a;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    padding: 40px;
+    font-size: 14px;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 720px) {
+    .tt-preview {
+      padding: 30px 20px;
+    }
+
+    .tt-price-box {
+      padding: 40px 24px;
+    }
+
+    .tt-price {
+      font-size: 52px;
+    }
+  }
+</style>
+
+<div class="tt-wrap">
+
+  <!-- HERO -->
+  <section class="tt-hero">
+    <h1>The Ultimate Therapist Toolkit</h1>
+    <p>A complete library of 1,100+ professional therapy tools designed to save therapists hours of preparation every week.</p>
+    <a class="tt-cta" href="{{ product.url | default: '#' }}">Get Instant Access</a>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="tt-container">
+    <h2 class="tt-section-title">What You Get Inside</h2>
+    <div class="tt-grid">
+      <div class="tt-card">
+        <div class="tt-big">500</div>
+        Professional Therapy Worksheets
+      </div>
+      <div class="tt-card">
+        <div class="tt-big">200</div>
+        Guided Session Scripts
+      </div>
+      <div class="tt-card">
+        <div class="tt-big">100</div>
+        Clinical Assessment Tools
+      </div>
+      <div class="tt-card">
+        <div class="tt-big">100</div>
+        Complete Treatment Plans
+      </div>
+      <div class="tt-card">
+        <div class="tt-big">200</div>
+        AI Therapy Prompts
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGNED FOR REAL THERAPY -->
+  <section class="tt-container" style="padding-top:0;">
+    <div class="tt-preview">
+      <h2 class="tt-section-title">Designed For Real Therapy Work</h2>
+      <p>Every resource inside this toolkit was created to help therapists run more effective sessions, reduce preparation time, and deliver better outcomes for their clients.</p>
+      <ul class="tt-feature-list">
+        <li>CBT Worksheets</li>
+        <li>DBT Exercises</li>
+        <li>Trauma Processing Worksheets</li>
+        <li>Anxiety Treatment Tools</li>
+        <li>Depression Recovery Plans</li>
+        <li>Couples Therapy Exercises</li>
+        <li>Client Homework Sheets</li>
+        <li>Session Structure Templates</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VALUE STACK -->
+  <section class="tt-value">
+    <h2>Total Value Of The Toolkit</h2>
+    <div class="tt-stack">
+      <div class="tt-stack-row">
+        <span>500 Worksheets</span>
+        <span class="tt-stack-price">$297</span>
+      </div>
+      <div class="tt-stack-row">
+        <span>200 Session Scripts</span>
+        <span class="tt-stack-price">$197</span>
+      </div>
+      <div class="tt-stack-row">
+        <span>100 Assessments</span>
+        <span class="tt-stack-price">$147</span>
+      </div>
+      <div class="tt-stack-row">
+        <span>100 Treatment Plans</span>
+        <span class="tt-stack-price">$197</span>
+      </div>
+      <div class="tt-stack-row">
+        <span>200 AI Prompts</span>
+        <span class="tt-stack-price">$97</span>
+      </div>
+      <div class="tt-stack-row">
+        <span><strong>Total Value</strong></span>
+        <span><strong>$935</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE + CTA -->
+  <section class="tt-container">
+    <div class="tt-price-box">
+      <span class="tt-badge">🎉 Limited Time Offer</span>
+      <p class="tt-old">$297</p>
+      <div class="tt-price">$39</div>
+      <p class="tt-price-sub">Instant Download &bull; Lifetime Access</p>
+      <a class="tt-cta" href="{{ product.url | default: '#' }}">Download The Toolkit Now</a>
+    </div>
+
+    <div class="tt-guarantee">
+      <div class="tt-guarantee-icon">🛡️</div>
+      <h3>30-Day Money-Back Guarantee</h3>
+      <p>If you're not completely satisfied with the toolkit, simply request a full refund within 30 days — no questions asked.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="tt-container tt-faq">
+    <h2 class="tt-section-title">Frequently Asked Questions</h2>
+
+    <div class="tt-faq-item">
+      <h3>Who is this toolkit for?</h3>
+      <p>Therapists, counselors, psychologists, and mental health professionals who want to save time and improve session quality.</p>
+    </div>
+
+    <div class="tt-faq-item">
+      <h3>How will I receive the files?</h3>
+      <p>You will receive instant download access immediately after purchase — no waiting, no shipping.</p>
+    </div>
+
+    <div class="tt-faq-item">
+      <h3>Are the materials editable?</h3>
+      <p>Yes, most files include editable formats so you can customize them for your practice and clients.</p>
+    </div>
+
+    <div class="tt-faq-item">
+      <h3>Is this a one-time payment?</h3>
+      <p>Yes — you pay once and get lifetime access to everything, including any future updates.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="tt-footer">
+    <p>© {{ 'now' | date: '%Y' }} Ultimate Therapist Toolkit. All rights reserved.</p>
+  </footer>
+
+</div>
