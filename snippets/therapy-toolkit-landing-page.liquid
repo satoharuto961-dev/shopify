@@ -521,18 +521,18 @@
         <span>★</span> #1 Ranked Resource for Mental Health Professionals
       </div>
       
-      <h1>The Ultimate Therapist Toolkit</h1>
-      <p class="tt-subtitle">Stop spending hours creating worksheets from scratch. Get instant access to 1,100+ professional, ready-to-use therapy resources, scripts, and treatment plans.</p>
+      <h1>Stop Creating Therapy Worksheets From Scratch</h1>
+      <p class="tt-subtitle">Get instant access to 1,100+ professional therapy resources, worksheets, session scripts, and treatment plans designed to save you hours of preparation every week.</p>
       
       <form action="/cart/add" method="post" style="margin: 0;">
         <input type="hidden" name="id" value="{{ tt_variant.id }}">
         <input type="hidden" name="quantity" value="1">
         <input type="hidden" name="return_to" value="/checkout">
         <button type="submit" class="tt-btn">
-          Get Instant Access Now — {{ tt_variant.price | money }}
+          Get Instant Access — {{ tt_variant.price | money }}
         </button>
       </form>
-      <span class="tt-btn-subtext">One-time payment. Lifetime access. 30-Day Money-Back Guarantee.</span>
+      <span class="tt-btn-subtext">One-time payment &bull; Instant download &bull; 30-day guarantee</span>
 
       <div class="tt-trust-indicators">
         <div class="tt-trust-item"><div class="tt-trust-icon">✓</div> 1,100+ Resources</div>
@@ -605,12 +605,12 @@
     </div>
   </section>
 
-  {%- comment -%} ═══════════════════ BEFORE / AFTER ═══════════════════ {%- endcomment -%}
+  {%- comment -%} ═══════════════════ THE PROBLEM (Before / After) ═══════════════════ {%- endcomment -%}
   <section class="tt-section tt-section-bg-white">
     <div class="tt-container">
       <div class="tt-text-center">
-        <h2 class="tt-h2">The Reality of Private Practice</h2>
-        <p class="tt-p-lead">Stop sacrificing your personal time for session prep.</p>
+        <h2 class="tt-h2">The Hidden Struggle of Private Practice</h2>
+        <p class="tt-p-lead">Are you spending your evenings and weekends preparing for sessions?</p>
       </div>
 
       <div class="tt-transform-grid">
@@ -620,9 +620,9 @@
             <h3 class="tt-state-title">Without the Toolkit</h3>
           </div>
           <ul class="tt-state-list">
-            <li>Spending 5-10 unpaid hours a week creating worksheets from scratch.</li>
-            <li>Feeling anxious before sessions with new or complex clients.</li>
-            <li>Struggling to find the right homework assignments for specific disorders.</li>
+            <li>Losing hours every week creating worksheets from scratch.</li>
+            <li>Lack of structured clinical treatment materials.</li>
+            <li>Session preparation stress and anxiety with new clients.</li>
             <li>Inconsistent documentation and intake processes.</li>
             <li>Experiencing rapid burnout from the administrative workload.</li>
           </ul>
@@ -635,10 +635,10 @@
           </div>
           <ul class="tt-state-list">
             <li>Zero prep time — instantly print or email the exact worksheet you need.</li>
-            <li>Entering every session with confidence using guided scripts.</li>
+            <li>Better structured therapy sessions using guided scripts.</li>
             <li>Providing clients with high-quality, professional take-home materials.</li>
             <li>Standardized, professional intake and assessment processes.</li>
-            <li>Reclaiming your weekends and evenings to focus on yourself.</li>
+            <li>Reclaiming your weekends and experiencing far less burnout.</li>
           </ul>
         </div>
       </div>
@@ -673,7 +673,8 @@
         <!-- Content -->
         <div class="tt-showcase-content">
           <div class="tt-tag">Digital Download • Instant Access</div>
-          <h2 class="tt-showcase-title">{{ tt.title }}</h2>
+          <h2 class="tt-showcase-title">Look Inside the Toolkit</h2>
+          <p style="color:#475569; font-size:16px; margin:0 0 16px;">Every worksheet, script, and assessment is ready to use immediately.</p>
           
           <ul class="tt-features-list">
             <li>
@@ -704,10 +705,10 @@
               <input type="hidden" name="quantity" value="1">
               <input type="hidden" name="return_to" value="/checkout">
               <button type="submit" class="tt-btn tt-btn-full">
-                🛒 Add to Cart & Checkout Now
+                Get Instant Access
               </button>
             </form>
-            <span class="tt-btn-subtext">Secure checkout by Shopify. Delivered via email instantly.</span>
+            <span class="tt-btn-subtext">One-time payment &bull; Instant download &bull; 30-day guarantee</span>
           </div>
         </div>
 
@@ -803,7 +804,7 @@
               <input type="hidden" name="id" value="{{ tt_variant.id }}">
               <input type="hidden" name="quantity" value="1">
               <input type="hidden" name="return_to" value="/checkout">
-              <button type="submit" class="tt-btn" style="width: 100%;">Claim This Offer Now</button>
+              <button type="submit" class="tt-btn" style="width: 100%;">Download the Toolkit Now</button>
             </form>
           </div>
         </div>
@@ -975,7 +976,7 @@
         <input type="hidden" name="quantity" value="1">
         <input type="hidden" name="return_to" value="/checkout">
         <button type="submit" class="tt-btn">
-          Download The Complete Toolkit Now
+          Download the Toolkit Now
         </button>
       </form>
     </div>
