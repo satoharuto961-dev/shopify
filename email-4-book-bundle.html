@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Foundation Library - 4 Book Bundle</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            /* matching shop page bg */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto;
+            vertical-align: top;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f8fafc;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-spacing: 0;
+            color: #0f172a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+            margin-top: 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f3460 100%);
+            padding: 50px 30px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 900;
+            margin: 0 0 16px 0;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            color: #f59e0b;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px 36px;
+        }
+
+        .text-block {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+            margin: 0 0 20px 0;
+        }
+
+        /* Featured Highlight */
+        .highlight-banner {
+            background-color: #fffbeb;
+            border: 2px solid #fde68a;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .highlight-banner h2 {
+            color: #b45309;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .offer-row {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            /* Use flexbox for modern clients but fallback below */
+        }
+
+        .offer-row p {
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .offer-row strong {
+            color: #f59e0b;
+            font-weight: 900;
+        }
+
+        .price-banner {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .price-banner p.retail {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 16px;
+            margin: 0 0 4px 0;
+        }
+        
+        .price-banner p.bundle {
+            color: #ef4444;
+            font-size: 24px;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn-container {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .btn {
+            background-color: #0f172a;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            border-radius: 12px;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: #94a3b8;
+            background-color: #f8fafc;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PREVIEW TEXT (Hidden from view but visible in inbox) -->
+    <div
+        style="display:none;font-size:1px;color:#f8fafc;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+        Four transformative masterworks on understanding trauma, regulating the nervous system, and cultivating profound emotional intelligence...
+        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
+
+    <center class="wrapper">
+        <table class="main" width="100%">
+            <tbody>
+                <!-- HERO SECTION -->
+                <tr>
+                    <td class="hero">
+                        <h1>The Foundation <span>Library.</span></h1>
+                        <p>Get the 4 definitive bestselling books on trauma and healing bundled together for an unbeatable price.</p>
+                    </td>
+                </tr>
+
+                <!-- CONTENT -->
+                <tr>
+                    <td class="content">
+                        <p class="text-block">Hi Reader,</p>
+                        <p class="text-block">
+                            We are excited to announce our newest curation: <strong>The Ultimate Trauma & Emotional Intelligence Collection.</strong>
+                        </p>
+                        <p class="text-block">
+                            Whether you're a clinician seeking the foundational tools to navigate the mind-body connection, or an individual searching for profound self-understanding, these masterworks provide the definitive roadmap to healing.
+                        </p>
+
+                        <!-- OFFER HIGHLIGHT -->
+                        <div class="highlight-banner">
+                            <h2>The 4 Bestselling Books Included:</h2>
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding-bottom:12px;">
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">📖</span> <strong>The Body Keeps the Score</strong> <span style="font-weight:400; color:#475569;">by Bessel van der Kolk</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom:12px;">
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">📖</span> <strong>Emotional Intelligence 2.0</strong> <span style="font-weight:400; color:#475569;">by Travis Bradberry</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom:12px;">
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">📖</span> <strong>The Boy Who Was Raised as a Dog</strong> <span style="font-weight:400; color:#475569;">by Bruce D. Perry</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="margin:0; font-size:16px; font-weight:600; color:#0f172a;">
+                                            <span style="font-size:18px;">📖</span> <strong>Waking the Tiger</strong> <span style="font-weight:400; color:#475569;">by Peter A. Levine</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <div class="price-banner">
+                                <p class="retail">Total Retail Value: $79.96</p>
+                                <p class="bundle">Your Price Today: $29.00</p>
+                            </div>
+                        </div>
+
+                        <p class="text-block">
+                            This limited-time bundle delivers straight to you with a 30-day money back guarantee. Equip yourself with the absolute essentials of emotional resilience.
+                        </p>
+
+                        <!-- CTA BUTTON -->
+                        <div class="btn-container">
+                            <a href="https://psychoreads.com/pages/4-book-bundle" class="btn">Claim My Bundle for $29</a>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td class="footer">
+                        {{ open_tracking_block }}
+                        <p>&copy; 2026 PsychoReads. All rights reserved.</p>
+                        <p>Don't want these updates? <a href="{{ unsubscribe_url }}">Unsubscribe</a></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>
