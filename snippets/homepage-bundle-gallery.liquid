@@ -210,8 +210,11 @@
     font-weight: 700;
     margin-bottom: 16px;
     align-self: flex-start;
+    transition: opacity 0.3s ease;
   }
+  .book-card__social-proof.updating { opacity: 0.5; }
   .book-card__social-proof svg { width: 12px; height: 12px; opacity: 0.8; }
+  .js-cart-count { transition: all 0.3s ease; }
 
   /* ── Add to Cart Button ── */
   .btn-atc {
@@ -781,6 +784,22 @@
 
   /* ── Initial cart count ── */
   HPCart.refresh();
+
+  /* ── Dynamic Social Proof Counts (7-25, every 7s) ── */
+  function updateSocialProof() {
+    var counts = document.querySelectorAll('.js-cart-count');
+    counts.forEach(function(el) {
+      var badge = el.closest('.book-card__social-proof');
+      if (badge) badge.classList.add('updating');
+      
+      setTimeout(function() {
+        var newCount = Math.floor(Math.random() * (25 - 7 + 1)) + 7;
+        el.textContent = newCount;
+        if (badge) badge.classList.remove('updating');
+      }, 300);
+    });
+  }
+  setInterval(updateSocialProof, 7000);
 
   /* Expose globally */
   window.HPCart = HPCart;
