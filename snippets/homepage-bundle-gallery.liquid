@@ -722,15 +722,12 @@
       .then(function(r) { return r.json(); })
       .then(function(cart) { 
         if (cart.item_count < 5) {
-          HPCart.refresh();
-          HPCart.open();
-          btn.innerHTML = orig;
-          btn.disabled = false;
+          window.location.href = '/cart';
         } else {
-          window.location = '/checkout';
+          window.location.href = '/checkout';
         }
       })
-      .catch(function(){ window.location = '/checkout'; });
+      .catch(function(){ window.location = '/cart'; });
     },
 
     /* Update sticky bar with last hovered book */

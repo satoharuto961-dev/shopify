@@ -68,7 +68,14 @@
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      window.location.href = redirectUrl;
+      // Check cart count before redirecting
+      const cartResponse = await fetch('/cart.js');
+      const cart = await cartResponse.json();
+      if (cart.item_count < 5) {
+        window.location.href = '/cart';
+      } else {
+        window.location.href = redirectUrl;
+      }
     } catch (error) {
       console.error('Unable to start checkout from homepage', error);
       clearLoadingState(trigger);
