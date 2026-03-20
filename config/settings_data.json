@@ -14,8 +14,8 @@
     "welcome_body": "",
     "content_for_index": [],
     "blocks": {
-      "9752555012629308362": {
-        "type": "shopify://apps/parkour-facebook-pixel/blocks/threasury_pixel/f23b2ffe-4c53-446e-ad3a-7976ffbee5c2",
+      "6615124273980966592": {
+        "type": "shopify://apps/chatty/blocks/app-embed/1c0e135d-e8e1-4fe2-86be-1c36def46675",
         "disabled": false,
         "settings": {}
       }
