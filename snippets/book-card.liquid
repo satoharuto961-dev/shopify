@@ -1,4 +1,4 @@
-{% assign variant = product.first_available_variant | default: product.variants.first %}
+{% assign variant = product.selected_or_first_available_variant | default: product.variants.first %}
 <div class="book-card"
      data-product-title="{{ product.title | escape }}"
      data-variant-id="{{ variant.id }}"

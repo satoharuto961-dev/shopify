@@ -619,6 +619,7 @@
       HPCart._updateStickyBar(title, price, img, variantId);
 
       var orig = btn.innerHTML;
+      console.log('HPCart adding to cart:', { variantId: variantId, title: title });
       btn.disabled = true;
       btn.classList.add('state-adding');
       btn.innerHTML = '⟳ Adding…';
