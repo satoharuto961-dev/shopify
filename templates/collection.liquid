@@ -3,92 +3,58 @@
 {% else %}
   {% render 'shop-common' %}
 
-
-    <style>
-      {% if collection.handle == 'new' %}
-        .shop-hero--hidden { display: none; }
-        .shop-container--compact {
-          padding-top: 32px;
-          max-width: 1600px;
-        }
-        .shop-container--compact .product-grid {
-          grid-template-columns: repeat(6, 1fr);
-          gap: 16px;
-        }
-        @media (max-width: 1440px) { .shop-container--compact .product-grid { grid-template-columns: repeat(5, 1fr); } }
-        @media (max-width: 1100px) { .shop-container--compact .product-grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 800px)  { .shop-container--compact .product-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 540px)  { .shop-container--compact .product-grid { grid-template-columns: repeat(2, 1fr); } }
-
-        .shop-container--compact .book-card__img-wrap {
-          padding-top: 125%;
-        }
-        .shop-container--compact .book-card__title {
-          font-size: 0.85rem;
-          -webkit-line-clamp: 3;
-        }
-        .shop-container--compact .section-label {
-          margin-bottom: 32px;
-          font-size: 0.85rem;
-          color: #1e293b;
-          border-bottom: 2px solid #e2e8f0;
-          padding-bottom: 12px;
-        }
-      {% endif %}
-
-      .collection-pagination {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 40px;
-        align-items: center;
-        padding-bottom: 60px;
+  <style>
+    {% if collection.handle == 'new' %}
+      .shop-container--compact {
+        padding-top: 32px;
+        max-width: 1600px;
       }
-      .collection-pagination a, .collection-pagination span {
-        padding: 0.6rem 1.1rem;
-        border-radius: 999px;
-        border: 1px solid #e2e8f0;
-        text-decoration: none;
-        color: #0f172a;
-        font-weight: 600;
-        background: #fff;
+      .shop-container--compact .product-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
       }
-      .collection-pagination .current {
-        background: #0f172a;
-        color: #fff;
-        border-color: #0f172a;
+      @media (max-width: 1440px) { .shop-container--compact .product-grid { grid-template-columns: repeat(5, 1fr); } }
+      @media (max-width: 1100px) { .shop-container--compact .product-grid { grid-template-columns: repeat(4, 1fr); } }
+      @media (max-width: 800px)  { .shop-container--compact .product-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 540px)  { .shop-container--compact .product-grid { grid-template-columns: repeat(2, 1fr); } }
+
+      .shop-container--compact .book-card__img-wrap { padding-top: 125%; }
+      .shop-container--compact .book-card__title { font-size: 0.85rem; -webkit-line-clamp: 3; }
+      .shop-container--compact .section-label {
+        margin-bottom: 32px;
+        font-size: 0.85rem;
+        color: #1e293b;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 12px;
       }
-    </style>
+    {% endif %}
+  </style>
 
-    <div class="shop-page">
-      <!-- Collection Hero -->
-      {% unless collection.handle == 'new' %}
-        <div class="shop-hero">
-          <h1>{{ collection.title }}</h1>
-          {% if collection.description != blank %}
-            <div class="shop-description" style="color: #94a3b8; max-width: 600px; margin: 16px auto 0; line-height: 1.6;">{{ collection.description }}</div>
-          {% endif %}
-        </div>
-      {% endunless %}
-
-      <div class="shop-container {% if collection.handle == 'new' %}shop-container--compact{% endif %}">
-        <p class="section-label">{{ collection.title }} — {{ collection.products_count }} titles</p>
-
-        {% if collection.products.size > 0 %}
-          <div class="product-grid">
-            {% paginate collection.products by 250 %}
-              {% for product in collection.products %}
-                {% render 'book-card', product: product %}
-              {% endfor %}
-            {% endpaginate %}
-          </div>
-        {% else %}
-          <div style="text-align:center;padding:80px 24px;color:#64748b;">
-            <p>No products found in this collection. Please check back soon.</p>
-          </div>
+  <div class="shop-page">
+    {% unless collection.handle == 'new' %}
+      <div class="shop-hero">
+        <h1>{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div class="shop-description" style="color:#94a3b8;max-width:600px;margin:16px auto 0;line-height:1.6;">{{ collection.description }}</div>
         {% endif %}
       </div>
-    </div>
+    {% endunless %}
 
+    <div class="shop-container {% if collection.handle == 'new' %}shop-container--compact{% endif %}">
+      <p class="section-label">{{ collection.title }} — {{ collection.products_count }} titles</p>
+
+      {% if collection.products_count > 0 %}
+        <div class="product-grid">
+          {% for product in collection.products limit: 250 %}
+            {% render 'book-card', product: product %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div style="text-align:center;padding:80px 24px;color:#64748b;">
+          <p>No products found in this collection. Please check back soon.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 
 {% endif %}
