@@ -1,7 +1,7 @@
 {% if collection.handle == 'frontpage' %}
   {% render 'homepage-bundle-gallery' %}
 {% else %}
-  {% paginate collection.products by 50 %}
+  {% paginate collection.products by 250 %}
     {% render 'shop-common' %}
 
     <style>
@@ -103,78 +103,4 @@
     </div>
   {% endpaginate %}
 
-  {% if collection.products_count > 50 %}
-    <script>
-    (function() {
-      const grid = document.querySelector('.product-grid');
-      const pagination = document.querySelector('.collection-pagination');
-      if (!grid || !pagination) return;
-
-      let isLoading = false;
-      let nextUrl = pagination.querySelector('a[href*="page="]:last-of-type')?.href;
-      
-      // If the last link is "Next", that's our nextUrl. 
-      // In the liquid template, it's defined as: {% if paginate.next %}<a href="{{ paginate.next.url }}">Next &rarr;</a>{% endif %}
-      const nextBtn = Array.from(pagination.querySelectorAll('a')).find(a => a.textContent.includes('Next'));
-      nextUrl = nextBtn ? nextBtn.href : null;
-
-      if (!nextUrl) return;
-
-      const loadNextPage = async () => {
-        if (isLoading || !nextUrl) return;
-        isLoading = true;
-
-        // Show a simple loading indicator
-        let loader = document.getElementById('infinite-loader');
-        if (!loader) {
-          loader = document.createElement('div');
-          loader.id = 'infinite-loader';
-          loader.innerHTML = '<div style="text-align:center;padding:20px;color:#64748b;font-weight:600;">Loading more titles...</div>';
-          grid.after(loader);
-        }
-
-        try {
-          const response = await fetch(nextUrl);
-          const html = await response.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          
-          const newProducts = doc.querySelectorAll('.product-grid > *');
-          newProducts.forEach(prod => grid.appendChild(prod));
-
-          const newPagination = doc.querySelector('.collection-pagination');
-          if (newPagination) {
-            const nextBtn = Array.from(newPagination.querySelectorAll('a')).find(a => a.textContent.includes('Next'));
-            nextUrl = nextBtn ? nextBtn.href : null;
-            // Update the "Page X of Y" text if we want, or just hide it
-            pagination.style.display = 'none'; 
-          } else {
-            nextUrl = null;
-          }
-
-          if (!nextUrl && loader) {
-            loader.remove();
-          }
-        } catch (e) {
-          console.error('Failed to load next page:', e);
-        } finally {
-          isLoading = false;
-        }
-      };
-
-      // Use IntersectionObserver to trigger loading when the user scrolls to the bottom
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          loadNextPage();
-        }
-      }, { rootMargin: '400px' });
-
-      // Create a sentinel element at the bottom of the grid
-      const sentinel = document.createElement('div');
-      sentinel.style.height = '10px';
-      grid.after(sentinel);
-      observer.observe(sentinel);
-    })();
-    </script>
-  {% endif %}
 {% endif %}
