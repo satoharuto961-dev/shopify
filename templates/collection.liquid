@@ -1,8 +1,8 @@
 {% if collection.handle == 'frontpage' %}
   {% render 'homepage-bundle-gallery' %}
 {% else %}
-  {% paginate collection.products by 250 %}
-    {% render 'shop-common' %}
+  {% render 'shop-common' %}
+
 
     <style>
       {% if collection.handle == 'new' %}
@@ -76,31 +76,19 @@
 
         {% if collection.products.size > 0 %}
           <div class="product-grid">
-            {% for product in collection.products %}
-              {% render 'book-card', product: product %}
-            {% endfor %}
+            {% paginate collection.products by 250 %}
+              {% for product in collection.products %}
+                {% render 'book-card', product: product %}
+              {% endfor %}
+            {% endpaginate %}
           </div>
         {% else %}
           <div style="text-align:center;padding:80px 24px;color:#64748b;">
             <p>No products found in this collection. Please check back soon.</p>
           </div>
         {% endif %}
-
-        {% if paginate.pages > 1 %}
-          <nav class="collection-pagination" role="navigation" aria-label="Pagination">
-            {% if paginate.previous %}
-              <a href="{{ paginate.previous.url }}">&larr; Previous</a>
-            {% endif %}
-
-            <span class="current">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
-
-            {% if paginate.next %}
-              <a href="{{ paginate.next.url }}">Next &rarr;</a>
-            {% endif %}
-          </nav>
-        {% endif %}
       </div>
     </div>
-  {% endpaginate %}
+
 
 {% endif %}
