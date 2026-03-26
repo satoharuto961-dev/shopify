@@ -24,7 +24,7 @@
 
     {% if collections.frontpage.products.size > 0 %}
       <div class="product-grid">
-        {% paginate collections.frontpage.products by 100 %}
+        {% paginate collections.frontpage.products by 1000 %}
 
         {% assign target_book = all_products['the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma'] %}
         {% if target_book == empty or target_book == blank %}
@@ -36,7 +36,7 @@
         {% endif %}
 
         {% assign products_sorted = collections.frontpage.products %}
-        {% for product in products_sorted limit: 100 %}
+        {% for product in products_sorted limit: 1000 %}
           {% if target_book and product.handle == target_book.handle %}
             {% continue %}
           {% endif %}
