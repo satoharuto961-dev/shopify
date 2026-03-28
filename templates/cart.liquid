@@ -54,14 +54,7 @@
       <div class="cart-review-actions">
         <a class="button button-secondary" href="/">Continue shopping</a>
         <form method="post" action="{{ routes.checkout_url }}" class="cart-review-checkout">
-          {% if cart.item_count < 5 %}
-            <div style="text-align: right; margin-bottom: 10px;">
-              <p style="color: #d9534f; font-weight: bold; margin: 0;">Minimum order is 5 products.</p>
-            </div>
-            <button type="submit" name="checkout" class="button button-primary" disabled>Continue to checkout</button>
-          {% else %}
-            <button type="submit" name="checkout" class="button button-primary">Continue to checkout</button>
-          {% endif %}
+          <button type="submit" name="checkout" class="button button-primary">Continue to checkout</button>
         </form>
       </div>
     </div>
@@ -114,14 +107,7 @@
       <div class="cart-review-actions">
         <a class="button button-secondary" href="/">Continue shopping</a>
         <form method="post" action="{{ routes.checkout_url }}" class="cart-review-checkout">
-          {% if cart.item_count < 5 %}
-            <div style="text-align: right; margin-bottom: 10px;">
-              <p style="color: #d9534f; font-weight: bold; margin: 0;">Minimum order is 5 products.</p>
-            </div>
-            <button type="submit" name="checkout" class="button button-primary" disabled>Continue to checkout</button>
-          {% else %}
-            <button type="submit" name="checkout" class="button button-primary">Continue to checkout</button>
-          {% endif %}
+          <button type="submit" name="checkout" class="button button-primary">Continue to checkout</button>
         </form>
       </div>
     </div>

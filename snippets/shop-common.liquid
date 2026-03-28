@@ -425,7 +425,7 @@
     <button class="cd-close" id="cdClose" aria-label="Close cart">✕</button>
   </div>
   <div class="cd-offers">
-    <span class="cd-offer-pill">🎁 Limited-time price drop! $4 Sale → Minimum order 5 books</span>
+    <span class="cd-offer-pill">Buy one get 5 free</span>
   </div>
   <div class="cd-items" id="cdItems">
     <div class="cd-empty">
@@ -439,10 +439,7 @@
       <strong id="cdSubtotal">$0.00</strong>
     </div>
     
-    <div id="cdMinimumWarning" style="display:none; text-align: center; margin-bottom: 15px; padding: 10px; background: #fee2e2; border: 1px solid #fecaca; border-radius: 8px;">
-      <p style="color: #b91c1c; font-weight: 700; margin: 0; font-size: 0.85rem;">Minimum order is 5 products.</p>
-    </div>
-
+    <!-- Warning element removed -->
     <button class="cd-checkout-btn" id="cdCheckoutBtn" onclick="window.location='/checkout'">
       ✦ Checkout Securely
     </button>
@@ -557,44 +554,19 @@
         '</div>';
       }).join('');
 
-      /* Minimum order enforcement */
+      /* Cart UI Logic */
       var checkoutBtn = document.getElementById('cdCheckoutBtn');
-      var warningEl  = document.getElementById('cdMinimumWarning');
       var stickyAtcBtn = document.getElementById('stickyAtcBtn');
 
-      if (count < 5 && count > 0) {
-        if (checkoutBtn) {
-          checkoutBtn.disabled = true;
-          checkoutBtn.style.opacity = '0.5';
-          checkoutBtn.style.cursor = 'not-allowed';
-        }
-        if (warningEl) {
-          warningEl.style.display = 'block';
-        }
-      } else {
-        if (checkoutBtn) {
-          checkoutBtn.disabled = false;
-          checkoutBtn.style.opacity = '1';
-          checkoutBtn.style.cursor = 'pointer';
-        }
-        if (warningEl) {
-          warningEl.style.display = 'none';
-        }
+      if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.style.opacity = '1';
+        checkoutBtn.style.cursor = 'pointer';
       }
-
-      /* Sticky Bar Checkout Button Logic: 
-         It adds 1 item, so it should be disabled if adding 1 still results in < 5 items (i.e. current count < 4).
-      */
       if (stickyAtcBtn) {
-        if (count < 4) {
-          stickyAtcBtn.disabled = true;
-          stickyAtcBtn.style.opacity = '0.5';
-          stickyAtcBtn.style.cursor = 'not-allowed';
-        } else {
-          stickyAtcBtn.disabled = false;
-          stickyAtcBtn.style.opacity = '1';
-          stickyAtcBtn.style.cursor = 'pointer';
-        }
+        stickyAtcBtn.disabled = false;
+        stickyAtcBtn.style.opacity = '1';
+        stickyAtcBtn.style.cursor = 'pointer';
       }
     },
 
@@ -713,11 +685,7 @@
       })
       .then(function(r) { return r.json(); })
       .then(function(cart) {
-        if (cart.item_count < 5) {
-          window.location.href = '/cart';
-        } else {
-          window.location.href = '/checkout';
-        }
+        window.location.href = '/checkout';
       })
       .catch(function(){ window.location = '/cart'; });
     },
