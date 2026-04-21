@@ -1,0 +1,327 @@
+{% assign ifs_wb_product = all_products['the-internal-family-systems-workbook-a-guide-to-discover-your-self-and-heal-your-parts-sounds-true-inner-workbooks'] %}
+{% assign ifs_wb_variant = ifs_wb_product.variants.first %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Internal Family Systems Workbook — Discover Your Self & Heal Your Parts</title>
+  <meta name="description" content="A practical, step-by-step IFS workbook from Sounds True Inner Workbooks. Discover your Self, understand your parts, and heal from within." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #553c9a;
+      --brand-dark: #44337a;
+      --brand-light: #faf5ff;
+      --accent: #805ad5;
+      --accent2: #d69e2e;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --bg: #ffffff;
+      --surface: #faf5ff;
+      --border: rgba(214, 188, 250, 0.4);
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(85, 60, 154, 0.08);
+      --shadow-lg: 0 16px 48px rgba(85, 60, 154, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* Nav */
+    .sl-nav { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .sl-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sl-nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--text-primary); letter-spacing: -0.5px; }
+    .sl-nav-cta { background: var(--brand); color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 0.9rem; font-weight: 800; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 14px rgba(85,60,154,0.3); }
+    .sl-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(85,60,154,0.45); }
+
+    /* Sticky Bottom CTA */
+    .sl-sticky-cta { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 16px 24px; z-index: 999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.08); transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sl-sticky-cta.visible { bottom: 0; }
+    .sl-sticky-text { font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+
+    /* Hero */
+    .sl-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, #faf5ff 50%, #f0e6ff 100%); padding: 110px 24px 100px; text-align: center; }
+    .sl-hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(128,90,213,0.08) 0%, transparent 70%); pointer-events: none; }
+    .sl-hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(250,245,255,0.9); backdrop-filter: blur(10px); border: 1px solid #d6bcfa; border-radius: 999px; padding: 6px 18px; font-size: 0.85rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
+    .sl-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; color: var(--text-primary); line-height: 1.1; letter-spacing: -1.2px; max-width: 900px; margin: 0 auto 24px; }
+    .sl-hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.2rem); color: var(--text-secondary); max-width: 720px; margin: 0 auto 40px; line-height: 1.75; font-weight: 500; }
+    .sl-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; }
+    .sl-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--brand), var(--accent)); color: #fff; border: none; border-radius: 14px; padding: 18px 40px; font-size: 1.1rem; font-weight: 900; cursor: pointer; text-decoration: none; box-shadow: 0 10px 30px rgba(85,60,154,0.35); transition: all 0.25s; position: relative; overflow: hidden; }
+    .sl-btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(85,60,154,0.48); }
+    .sl-hero-img { margin-top: 50px; }
+    .sl-hero-img img { max-width: 520px; width: 100%; border-radius: 20px; box-shadow: 0 32px 90px rgba(85,60,154,0.2); border: 2px solid rgba(255,255,255,0.7); }
+
+    /* Trust bar */
+    .sl-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 28px 24px; border-bottom: 1px solid var(--border); background: #fff; }
+    .sl-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); }
+    .sl-trust-item span { font-size: 1.2rem; }
+
+    /* Sections */
+    .sl-section { padding: 90px 24px; }
+    .sl-section-inner { max-width: 1100px; margin: 0 auto; }
+    .sl-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; display: inline-block; background: var(--brand-light); padding: 6px 16px; border-radius: 999px; border: 1px solid #e9d8fd; }
+    .sl-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-primary); letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+    /* Cards grid */
+    .sl-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; margin-top: 48px; }
+    .sl-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .sl-card-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .sl-card-body { padding: 28px; }
+    .sl-card-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; color: var(--text-primary); }
+    .sl-card-text { font-size: 0.93rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* Features */
+    .sl-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 40px; }
+    .sl-feature-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .sl-check { width: 36px; height: 36px; background: linear-gradient(135deg, var(--brand), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; font-size: 1rem; }
+    .sl-feature-text { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .sl-feature-sub { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; }
+
+    /* Quote / testimonial */
+    .sl-quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 44px; }
+    .sl-quote { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 0 16px 16px 0; padding: 24px 28px; }
+    .sl-quote-text { font-size: 1rem; font-style: italic; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
+    .sl-quote-author { font-size: 0.85rem; font-weight: 800; color: var(--brand); }
+
+    /* CTA section */
+    .sl-cta-section { background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: #fff; text-align: center; padding: 90px 24px; }
+    .sl-cta-section .sl-title { color: #fff; }
+    .sl-cta-section .sl-hero-sub { color: rgba(255,255,255,0.88); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .sl-btn-white { background: #fff; color: var(--brand); font-size: 1.15rem; padding: 20px 48px; border-radius: 14px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.18); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+    .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.22); }
+
+    @media (max-width: 768px) {
+      .sl-hero { padding: 80px 20px 60px; }
+      .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
+      .sl-trust { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="sl-nav">
+    <div class="sl-nav-inner">
+      <span class="sl-nav-logo">PsychoReads</span>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ ifs_wb_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-nav-cta">Buy Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sl-hero">
+    <div class="sl-hero-badge">
+      <span>🌀</span> Sounds True Inner Workbooks
+    </div>
+    <h1>The Internal Family Systems Workbook</h1>
+    <p class="sl-hero-sub">
+      A compassionate, step-by-step guide to discovering your Self and healing your inner parts — using the proven Internal Family Systems (IFS) model.
+    </p>
+    <div class="sl-hero-actions">
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ ifs_wb_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-primary" id="hero-btn">
+          🛒 Get the Workbook — {{ ifs_wb_product.price | money }}
+        </button>
+      </form>
+    </div>
+    <div class="sl-hero-img">
+      {%- if ifs_wb_product.images.first -%}
+        <img src="{{ ifs_wb_product.images.first | img_url: 'master' }}" alt="{{ ifs_wb_product.title }}" loading="eager" />
+      {%- else -%}
+        <div style="background: linear-gradient(135deg,#f0e6ff,#e9d8fd); width:100%; max-width:520px; margin:0 auto; height:380px; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#553c9a; font-weight:800; font-size:1.1rem;">
+          📖 IFS Workbook
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="sl-trust">
+    <div class="sl-trust-item"><span>📚</span> Sounds True Publisher</div>
+    <div class="sl-trust-item"><span>⭐</span> Highly Rated by Readers</div>
+    <div class="sl-trust-item"><span>🧠</span> Evidence-Based IFS Model</div>
+    <div class="sl-trust-item"><span>⚡</span> Instant PDF Access</div>
+    <div class="sl-trust-item"><span>🌍</span> English Language</div>
+  </div>
+
+  <!-- INSIDE THE WORKBOOK -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center;">
+        <div class="sl-label">Inside the Workbook</div>
+        <h2 class="sl-title">Explore, Understand & Heal Your Inner World</h2>
+        <p class="sl-hero-sub" style="margin:0 auto; max-width:640px;">
+          This hands-on workbook walks you through the core IFS framework with guided exercises, reflections, and practices that bring real, lasting healing.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🔍</div>
+            <div class="sl-card-title">Meet Your Parts</div>
+            <div class="sl-card-text">Identify and get acquainted with the different parts of yourself — managers, firefighters, and exiles — through guided self-inquiry.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">✨</div>
+            <div class="sl-card-title">Access Your Self</div>
+            <div class="sl-card-text">Learn to embody the eight qualities of Self — calmness, curiosity, confidence, compassion, creativity, clarity, courage, and connectedness.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">💜</div>
+            <div class="sl-card-title">Heal Your Exiles</div>
+            <div class="sl-card-text">Work gently with your wounded parts, helping them release the burdens they carry so you can integrate and heal at a deep level.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sl-section">
+    <div class="sl-section-inner">
+      <div class="sl-label">Why This Workbook</div>
+      <h2 class="sl-title">Practical Tools for Inner Transformation</h2>
+      <div class="sl-features-grid">
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Step-by-Step Guidance</div>
+            <div class="sl-feature-sub">Structured exercises guide you through each phase of the IFS process at your own pace — no prior therapy experience needed.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Sounds True Quality</div>
+            <div class="sl-feature-sub">Part of the trusted Sounds True Inner Workbooks series, renowned for translating transformative psychological models into accessible practice.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Self-Led Healing</div>
+            <div class="sl-feature-sub">Empowers you to do meaningful inner work independently, complementing any therapy you may already be doing.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Rooted in Evidence</div>
+            <div class="sl-feature-sub">IFS is a well-researched, evidence-based psychotherapy model developed by Dr. Richard Schwartz, widely used by therapists worldwide.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU'LL DISCOVER -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div class="sl-label">Reader Voices</div>
+        <h2 class="sl-title">What Readers Are Saying</h2>
+      </div>
+      <div class="sl-quote-grid">
+        <div class="sl-quote">
+          <div class="sl-quote-text">"This workbook gave me language and tools to understand myself in ways years of therapy hadn't. The exercises are gentle yet profound."</div>
+          <div class="sl-quote-author">— Verified Reader</div>
+        </div>
+        <div class="sl-quote">
+          <div class="sl-quote-text">"I finally feel like I can approach my inner critic with compassion instead of fighting it. The IFS model is life-changing and this workbook makes it so accessible."</div>
+          <div class="sl-quote-author">— Verified Reader</div>
+        </div>
+        <div class="sl-quote">
+          <div class="sl-quote-text">"Perfect companion for anyone curious about IFS. The reflections helped me discover parts of myself I'd been ignoring for years. Highly recommend."</div>
+          <div class="sl-quote-author">— Verified Reader</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sl-cta-section">
+    <div class="sl-section-inner">
+      <h2 class="sl-title">Begin Your Journey to Wholeness</h2>
+      <p class="sl-hero-sub">Heal the parts of yourself that have been waiting to be seen, heard, and loved.</p>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ ifs_wb_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-white">
+          🛒 Get the Workbook — {{ ifs_wb_product.price | money }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM ATC -->
+  <div class="sl-sticky-cta" id="sticky-cta">
+    <div class="sl-sticky-text">
+      <div>
+        <div style="font-weight: 900; color: var(--text-primary); line-height: 1.2;">IFS Workbook — Sounds True</div>
+        <div style="font-size: 0.82rem; color: var(--text-secondary);">Discover Your Self & Heal Your Parts</div>
+      </div>
+    </div>
+    <form action="/cart/add" method="post" style="margin:0;">
+      <input type="hidden" name="id" value="{{ ifs_wb_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+        🛒 Buy Now — {{ ifs_wb_product.price | money }}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroBtn = document.getElementById('hero-btn');
+    window.addEventListener('scroll', () => {
+      if (!stickyCta || !heroBtn) return;
+      if (heroBtn.getBoundingClientRect().bottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+    const slObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.sl-feature-item, .sl-card, .sl-quote').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      slObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
