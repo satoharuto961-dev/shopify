@@ -103,10 +103,22 @@
     .sl-btn-white { background: #fff; color: var(--brand); font-size: 1.15rem; padding: 20px 48px; border-radius: 14px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.18); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
     .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.22); }
 
+    /* Reviews */
+    .sl-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .sl-review-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px 28px; box-shadow: 0 4px 18px rgba(85,60,154,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(85,60,154,0.12); }
+    .sl-review-stars { color: #f6ad55; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .sl-review-title { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; line-height: 1.3; }
+    .sl-review-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .sl-verified { color: #38a169; font-weight: 700; }
+    .sl-review-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+    .sl-review-helpful { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
     @media (max-width: 768px) {
       .sl-hero { padding: 80px 20px 60px; }
       .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
       .sl-trust { gap: 18px; }
+      .sl-reviews-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -238,26 +250,257 @@
     </div>
   </div>
 
-  <!-- WHAT YOU'LL DISCOVER -->
+  <!-- REAL CUSTOMER REVIEWS -->
   <div class="sl-section" style="background: var(--surface);">
     <div class="sl-section-inner">
-      <div style="text-align: center; margin-bottom: 20px;">
-        <div class="sl-label">Reader Voices</div>
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Verified Reviews</div>
         <h2 class="sl-title">What Readers Are Saying</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
+          <div style="display:flex;gap:3px;">
+            <span style="color:#f6ad55;font-size:1.5rem;">★★★★★</span>
+          </div>
+          <span style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">5.0 out of 5</span>
+          <span style="font-size:0.9rem;color:var(--text-secondary);">· 30+ verified reviews</span>
+        </div>
       </div>
-      <div class="sl-quote-grid">
-        <div class="sl-quote">
-          <div class="sl-quote-text">"This workbook gave me language and tools to understand myself in ways years of therapy hadn't. The exercises are gentle yet profound."</div>
-          <div class="sl-quote-author">— Verified Reader</div>
+
+      <div class="sl-reviews-grid">
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Organized workbook perfect for healing yourself</div>
+          <div class="sl-review-meta">Raziela &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; March 26, 2025</div>
+          <div class="sl-review-text">A wonderful workbook for practitioners of IFS, suitable for newbies and experts alike. I have been doing IFS therapy both on my own and through coaches for years. I can't believe I hadn't bought this until now! I love the exercises in the book and how interactive it is. Usually, the written exercises will stimulate a part or memory and I can contemplate and meditate from there into parts work and deeper reflection. Book is comprehensive, doesn't overload you with details but explains enough to know how to do the exercises. A great purchase and a great dive into the special, healing world of IFS therapy. Heal on!</div>
+          <div class="sl-review-helpful">👍 17 people found this helpful</div>
         </div>
-        <div class="sl-quote">
-          <div class="sl-quote-text">"I finally feel like I can approach my inner critic with compassion instead of fighting it. The IFS model is life-changing and this workbook makes it so accessible."</div>
-          <div class="sl-quote-author">— Verified Reader</div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Practical intro to IFS</div>
+          <div class="sl-review-meta">generousjustice &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; December 26, 2024</div>
+          <div class="sl-review-text">This is an accessible IFS workbook for personal use with a lot of engaging exercises and QR codes for audio meditations by the author. You can go as deep as you want and at your own pace. If you're curious about Internal Family Systems therapy this is a great place to start.</div>
+          <div class="sl-review-helpful">👍 20 people found this helpful</div>
         </div>
-        <div class="sl-quote">
-          <div class="sl-quote-text">"Perfect companion for anyone curious about IFS. The reflections helped me discover parts of myself I'd been ignoring for years. Highly recommend."</div>
-          <div class="sl-quote-author">— Verified Reader</div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">A healing resource!</div>
+          <div class="sl-review-meta">Hope &nbsp;·&nbsp; December 18, 2024</div>
+          <div class="sl-review-text">This book was written by a therapist and the inventor of Internal Family Systems. I loved how experiential this book is. It's full of exercises, drawing and writing prompts, and meditations. I particularly liked the "All Parts Are Welcome" meditation — I can feel my whole body just relaxing. After reading this book, I feel as if I have a deeper understanding of my parts, and a new appreciation for how my parts kept me alive during the hardest parts of life.</div>
+          <div class="sl-review-helpful">👍 20 people found this helpful</div>
         </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Life changing!</div>
+          <div class="sl-review-meta">J Re &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; December 13, 2024</div>
+          <div class="sl-review-text">I am a huge fan of IFS and Dick Schwartz' work. This workbook surpassed my expectations and is a wonderful way to further explore and journey through the inner landscape. Deeply integrative and healing…Thanks Dick!!!</div>
+          <div class="sl-review-helpful">👍 15 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Amazing</div>
+          <div class="sl-review-meta">Tiffany Justice &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; February 18, 2025</div>
+          <div class="sl-review-text">Wow — what a book! In depth and takes you through the process. Information is lovely. Working through as a therapist and as a client. Amazing.</div>
+          <div class="sl-review-helpful">👍 10 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">An Amazing Resource</div>
+          <div class="sl-review-meta">ORShopper &nbsp;·&nbsp; December 3, 2024</div>
+          <div class="sl-review-text">This is an amazing resource. I have had a passing familiarity with the IFS model and this book is a clear and comprehensive description with a plethora of exercises and meditations. The meditations linked to the Sounds True website are a bonus. While this may become a welcome addition to therapists' bookshelves, a lay person with some exposure to psychological theories and practices would benefit from working with the material as well.</div>
+          <div class="sl-review-helpful">👍 10 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Great for Learning More and Utilizing IFS</div>
+          <div class="sl-review-meta">Lauren &nbsp;·&nbsp; January 30, 2025</div>
+          <div class="sl-review-text">I already own "No Bad Parts" and "You are the One You've Been Waiting for," so I was thrilled to see an official workbook. One of the first things I noticed was the ability to access recordings of different guided exercises. I love that the book gives background without spending too much time on it. I also enjoy different types of exercises to help learn about parts, self energy, and all the in-betweens. This is a must buy for me.</div>
+          <div class="sl-review-helpful">👍 8 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Great resource!</div>
+          <div class="sl-review-meta">Laura Brown &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; July 2, 2025</div>
+          <div class="sl-review-text">I am a therapist and this is a great book! I use it for my clients. It breaks down IFS concepts really well and is easy to understand.</div>
+          <div class="sl-review-helpful">👍 7 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Great IFS exercises</div>
+          <div class="sl-review-meta">L.D. &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; October 14, 2025</div>
+          <div class="sl-review-text">This workbook is a great tool if you're endeavoring internal family systems work. The exercises are great. If you are unfamiliar with IFS, this won't provide a whole lot of information but the exercises can still help. I recommend listening to the author speak, or reading his other books along with doing the workbook, or better yet working with a professional trained to help you navigate IFS.</div>
+          <div class="sl-review-helpful">👍 7 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Great resource for doing IFS on our own</div>
+          <div class="sl-review-meta">Aurora &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; November 2, 2025</div>
+          <div class="sl-review-text">Written by the founder of IFS (Richard Schwartz) to help us be able to do IFS healing practices on our own. Includes a link to recordings on Sounds True, to lead you through the practices. I am trained in IFS, but there are times when I need a bit more guidance and to hear a voice leading me through a practice. Highly Recommended!</div>
+          <div class="sl-review-helpful">👍 7 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Simple IFS Application</div>
+          <div class="sl-review-meta">MW &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; January 19, 2025</div>
+          <div class="sl-review-text">Used in therapy sessions as a guide for helping clients with their parts. IFS can be complicated even after several days of training and this is what I needed to land it in session. Thanks Richard!</div>
+          <div class="sl-review-helpful">👍 7 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Gets the conversation going</div>
+          <div class="sl-review-meta">Stacy &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; May 13, 2025</div>
+          <div class="sl-review-text">Gets you talking to yourself in the right manner and gets you thinking about your many perspectives and how they can be at odds at times. Work to understand those parts so you're more in control and making better choices.</div>
+          <div class="sl-review-helpful">👍 6 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Very useful tool</div>
+          <div class="sl-review-meta">Meaghan Hennings &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; March 30, 2025</div>
+          <div class="sl-review-text">This workbook is ideal for people to work through IFS who have some basic knowledge of the theory. It breaks the concepts down into very understandable terminology and provides exercises and examples that are very relevant and practical.</div>
+          <div class="sl-review-helpful">👍 5 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Fantastic</div>
+          <div class="sl-review-meta">Danielle &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; March 11, 2026</div>
+          <div class="sl-review-text">I'm loving this workbook and the meditations that go with it. I recommend reading the short book "Introduction to Internal Family Systems" to get an idea before starting it. I find IFS to be the most helpful therapy that I've tried so far.</div>
+          <div class="sl-review-helpful">👍 3 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Finally!!</div>
+          <div class="sl-review-meta">Cait &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; June 5, 2025</div>
+          <div class="sl-review-text">Been waiting for this workbook since I read the book.. does NOT disappoint.</div>
+          <div class="sl-review-helpful">👍 3 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Transformative</div>
+          <div class="sl-review-meta">Andre Habet &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; February 13, 2026</div>
+          <div class="sl-review-text">I completed this book, the first psychological workbook I've done, over 3 months. It's been entirely a difficult and rewarding journey. I dug the variety of mediums of the exercises and experienced many moments of Self in the process. This is just the start of my IFS journey and I'll certainly integrate some of the material here into my lifelong healing practice.</div>
+          <div class="sl-review-helpful">👍 1 person found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Easy to understand book to use IFS techniques</div>
+          <div class="sl-review-meta">Kate &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; January 11, 2026</div>
+          <div class="sl-review-text">Great book with easy to follow prompts and audio recordings you can scan in the book. Breaks down the techniques in The IFS book to an easy to understand level.</div>
+          <div class="sl-review-helpful">👍 2 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Super helpful</div>
+          <div class="sl-review-meta">Kristine Guzman &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; January 5, 2026</div>
+          <div class="sl-review-text">Bought this to better my understanding of IFS and I literally love this book! I pair it with the other reading from Richard Schwartz.</div>
+          <div class="sl-review-helpful">👍 2 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">A valuable resource</div>
+          <div class="sl-review-meta">Victoria Albanese &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; December 10, 2024</div>
+          <div class="sl-review-text">This workbook gives practical strategies to connect with and begin the healing journey with our parts. The links to free meditations read by Dick Schwartz were especially helpful!</div>
+          <div class="sl-review-helpful">👍 7 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">IFS workbook</div>
+          <div class="sl-review-meta">Janice K. Lynch &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; September 8, 2025</div>
+          <div class="sl-review-text">Loved this workbook. It explains the parts more clearly than other books I've read on the same subject.</div>
+          <div class="sl-review-helpful">👍 2 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Excellent IFS workbook</div>
+          <div class="sl-review-meta">chocolatepretzels &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; July 14, 2025</div>
+          <div class="sl-review-text">Love this book and all the prompts that lead you through different parts. So helpful!!</div>
+          <div class="sl-review-helpful">👍 1 person found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Buy it</div>
+          <div class="sl-review-meta">S. L. &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; November 22, 2025</div>
+          <div class="sl-review-text">Can't say enough about this book. Wonderful working book if you have interest in inner child work, John Bradshaw, IFS, etc. Really helpful and easy to understand.</div>
+          <div class="sl-review-helpful">👍 2 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Next Level</div>
+          <div class="sl-review-meta">Heather M Underwood &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; October 30, 2025</div>
+          <div class="sl-review-text">Very helpful companion to the book! Helps you apply the concepts.</div>
+          <div class="sl-review-helpful">👍 2 people found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Very effective — find your SELF</div>
+          <div class="sl-review-meta">Jane Lynn Thomas &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; November 29, 2025</div>
+          <div class="sl-review-text">Buy this workbook!! Get to know your SELF.</div>
+          <div class="sl-review-helpful">👍 1 person found this helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Meaningful</div>
+          <div class="sl-review-meta">S. Whit &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; May 24, 2025 · Canada</div>
+          <div class="sl-review-text">Great supplement for those looking for a tool to delve further into independent 'Parts/IFS' work. I'm learning lots about myself from the guided practice. It has helped with vocabulary and reinforcing what I have been learning through practicing with a Psychotherapist.</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Excellent</div>
+          <div class="sl-review-meta">Corinne Borbridge &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; August 31, 2025 · Canada</div>
+          <div class="sl-review-text">Excellent book. I work a lot with Dr. Schwartz's stuff as a therapist and I like having a workbook for clients to work with between sessions. Highly recommend!</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Amazing workbook</div>
+          <div class="sl-review-meta">Amanda Barry &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; January 15, 2026 · Canada</div>
+          <div class="sl-review-text">So amazing and a fantastic addition to your IFS healing journey.</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Really interesting workbook</div>
+          <div class="sl-review-meta">Caroline A. &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; September 7, 2025 · United Kingdom</div>
+          <div class="sl-review-text">Great book with access to videos.</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Healing</div>
+          <div class="sl-review-meta">Batsashvili &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; June 29, 2025 · Germany</div>
+          <div class="sl-review-text">Fascinating exercises and directions. One should first read his introduction to Internal Family Systems to fully understand the exercises in my opinion.</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">highly recommended</div>
+          <div class="sl-review-meta">Abir &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span> &nbsp;·&nbsp; November 3, 2025 · UAE</div>
+          <div class="sl-review-text">Very helpful book.</div>
+        </div>
+
       </div>
     </div>
   </div>
