@@ -1,0 +1,353 @@
+{% assign parts_work_product = all_products['parts-work-an-illustrated-guide-to-your-inner-life-by-tom-holmes'] %}
+{% assign parts_work_variant = parts_work_product.variants.first %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parts Work: An Illustrated Guide to Your Inner Life</title>
+  <meta name="description" content="A highly visual, accessible introduction to Internal Family Systems (IFS) therapy. Tom Holmes beautifully illustrates how our inner parts interact and how to find harmony." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #b7791f;
+      --brand-dark: #975a16;
+      --brand-light: #fffff0;
+      --accent: #d69e2e;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --bg: #ffffff;
+      --surface: #fffff0;
+      --border: rgba(236, 201, 75, 0.4);
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(183, 121, 31, 0.08);
+      --shadow-lg: 0 16px 48px rgba(183, 121, 31, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 80px; }
+
+    .sl-nav { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .sl-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sl-nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--text-primary); letter-spacing: -0.5px; }
+    .sl-nav-cta { background: var(--brand); color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 0.9rem; font-weight: 800; cursor: pointer; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 14px rgba(183,121,31,0.3); }
+    .sl-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(183,121,31,0.45); }
+
+    .sl-sticky-cta { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 16px 24px; z-index: 999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.08); transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sl-sticky-cta.visible { bottom: 0; }
+
+    .sl-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, #fffff0 50%, #fefcbf 100%); padding: 110px 24px 100px; text-align: center; }
+    .sl-hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(214,158,46,0.08) 0%, transparent 70%); pointer-events: none; }
+    .sl-hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,240,0.9); backdrop-filter: blur(10px); border: 1px solid #ecc94b; border-radius: 999px; padding: 6px 18px; font-size: 0.85rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
+    .sl-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; color: var(--text-primary); line-height: 1.1; letter-spacing: -1.2px; max-width: 900px; margin: 0 auto 24px; }
+    .sl-hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.2rem); color: var(--text-secondary); max-width: 720px; margin: 0 auto 40px; line-height: 1.75; font-weight: 500; }
+    .sl-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; }
+    .sl-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--brand), var(--accent)); color: #fff; border: none; border-radius: 14px; padding: 18px 40px; font-size: 1.1rem; font-weight: 900; cursor: pointer; text-decoration: none; box-shadow: 0 10px 30px rgba(183,121,31,0.35); transition: all 0.25s; }
+    .sl-btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(183,121,31,0.48); }
+    .sl-hero-img { margin-top: 50px; }
+    .sl-hero-img img { max-width: 520px; width: 100%; border-radius: 20px; box-shadow: 0 32px 90px rgba(183,121,31,0.2); border: 2px solid rgba(255,255,255,0.7); }
+
+    .sl-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 28px 24px; border-bottom: 1px solid var(--border); background: #fff; }
+    .sl-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); }
+
+    .sl-section { padding: 90px 24px; }
+    .sl-section-inner { max-width: 1100px; margin: 0 auto; }
+    .sl-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; display: inline-block; background: var(--brand-light); padding: 6px 16px; border-radius: 999px; border: 1px solid #ecc94b; }
+    .sl-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-primary); letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+    .sl-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; margin-top: 48px; }
+    .sl-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .sl-card-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .sl-card-body { padding: 28px; }
+    .sl-card-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; color: var(--text-primary); }
+    .sl-card-text { font-size: 0.93rem; color: var(--text-secondary); line-height: 1.6; }
+
+    .sl-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 40px; }
+    .sl-feature-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .sl-check { width: 36px; height: 36px; background: linear-gradient(135deg, var(--brand), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; }
+    .sl-feature-text { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .sl-feature-sub { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; }
+
+    .sl-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .sl-review-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px 28px; box-shadow: 0 4px 18px rgba(183,121,31,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(183,121,31,0.12); }
+    .sl-review-stars { color: #f6ad55; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .sl-review-title { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; }
+    .sl-review-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .sl-verified { color: #38a169; font-weight: 700; }
+    .sl-review-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+    .sl-review-helpful { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
+    .sl-cta-section { background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: #fff; text-align: center; padding: 90px 24px; }
+    .sl-cta-section .sl-title { color: #fff; }
+    .sl-cta-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.88); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .sl-btn-white { background: #fff; color: var(--brand); font-size: 1.15rem; padding: 20px 48px; border-radius: 14px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.18); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+    .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); }
+
+    @media (max-width: 768px) {
+      .sl-hero { padding: 80px 20px 60px; }
+      .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
+      .sl-reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="sl-nav">
+    <div class="sl-nav-inner">
+      <span class="sl-nav-logo">PsychoReads</span>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ parts_work_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-nav-cta">Buy Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sl-hero">
+    <div class="sl-hero-badge">
+      <span>🎨</span> A Visual Guide to IFS
+    </div>
+    <h1>Parts Work: An Illustrated Guide to Your Inner Life</h1>
+    <p class="sl-hero-sub">
+      See your inner world clearly. This highly visual, accessible book by Tom Holmes uses engaging illustrations to make the profound concepts of Internal Family Systems easy to understand and apply.
+    </p>
+    <div class="sl-hero-actions">
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ parts_work_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-primary" id="hero-btn">
+          🛒 Get the Book — {{ parts_work_product.price | money }}
+        </button>
+      </form>
+    </div>
+    <div class="sl-hero-img">
+      {%- if parts_work_product.images.first -%}
+        <img src="{{ parts_work_product.images.first | img_url: 'master' }}" alt="{{ parts_work_product.title }}" loading="eager" />
+      {%- else -%}
+        <div style="background: linear-gradient(135deg,#fffff0,#fefcbf); width:100%; max-width:520px; margin:0 auto; height:380px; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#b7791f; font-weight:800; font-size:1.1rem;">
+          📖 Parts Work Illustrated
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="sl-trust">
+    <div class="sl-trust-item"><span>🏆</span> By Tom Holmes, PhD</div>
+    <div class="sl-trust-item"><span>🎨</span> Fully Illustrated</div>
+    <div class="sl-trust-item"><span>🧠</span> Internal Family Systems</div>
+    <div class="sl-trust-item"><span>⚡</span> Instant PDF Access</div>
+    <div class="sl-trust-item"><span>🌍</span> English Language</div>
+  </div>
+
+  <!-- INSIDE THE BOOK -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center;">
+        <div class="sl-label">Inside the Guide</div>
+        <h2 class="sl-title">A Picture is Worth a Thousand Words</h2>
+        <p class="sl-hero-sub" style="margin: 0 auto; max-width: 640px;">
+          Sometimes psychological concepts are hard to grasp. This book uses vivid imagery to help you visually identify and relate to the different parts of your personality.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">👁️</div>
+            <div class="sl-card-title">Visualize Your Parts</div>
+            <div class="sl-card-text">Learn to "see" your inner critic, your anxious parts, and your protectors through relatable illustrations that bring your inner landscape to life.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🤝</div>
+            <div class="sl-card-title">Understand Relationships</div>
+            <div class="sl-card-text">Discover how different parts interact, form alliances, and fight with each other, creating the internal conflict you feel in your daily life.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🕊️</div>
+            <div class="sl-card-title">Find the Self</div>
+            <div class="sl-card-text">See what it looks like to be anchored in "Self-Leadership"—the calm, compassionate center from which true healing and integration happen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sl-section">
+    <div class="sl-section-inner">
+      <div class="sl-label">Why This Book</div>
+      <h2 class="sl-title">The Most Approachable IFS Resource</h2>
+      <div class="sl-features-grid">
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Visual Learning</div>
+            <div class="sl-feature-sub">Perfect for visual learners or anyone who finds dense psychological text overwhelming. The illustrations make complex ideas instantly intuitive.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Great for Beginners</div>
+            <div class="sl-feature-sub">Considered by many therapists to be the best introductory book to give clients just starting IFS therapy.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">For All Ages</div>
+            <div class="sl-feature-sub">The clear, engaging format makes it accessible for adults and helpful for explaining parts work to teenagers or older children.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Deeply Insightful</div>
+            <div class="sl-feature-sub">Don't let the pictures fool you—this book contains profound wisdom on healing trauma, resolving conflict, and fostering self-compassion.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Verified Reviews</div>
+        <h2 class="sl-title">What Readers Are Saying</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
+          <span style="color:#f6ad55;font-size:1.5rem;">★★★★★</span>
+          <span style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">4.8 out of 5</span>
+          <span style="font-size:0.9rem;color:var(--text-secondary);">· Verified readers</span>
+        </div>
+      </div>
+      <div class="sl-reviews-grid">
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">The best introduction to IFS</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">My therapist recommended I read this, and I'm so glad I did. The illustrations make the concept of "parts" so easy to understand. It gave me a totally new way to look at my anxiety.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">A brilliant, accessible resource</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I've read several books on Internal Family Systems, but this is the one I lend to friends. It cuts through the clinical jargon and gets straight to the heart of how our minds work.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Visualizing my inner critic changed everything</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Seeing the illustrations of the different parts helped me separate from them. I realized "I" am not my inner critic. It's just a part trying to protect me. This book is a must-read.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">As a therapist, I use this constantly</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I keep a copy of this in my office and show the illustrations to clients all the time. It instantly helps them grasp the model and start identifying their own internal cast of characters.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Simple but profoundly deep</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Don't be fooled by the pictures—this isn't a children's book. It deals with deep trauma and complex inner dynamics, but presents them in a way that feels safe and understandable.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Helped me explain my therapy to my partner</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I've been doing parts work in therapy, but I struggled to explain it to my husband. We read this book together, and he finally "got" it. It has brought a lot of compassion into our relationship.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sl-cta-section">
+    <div class="sl-section-inner">
+      <h2 class="sl-title">See Your Inner World Clearly</h2>
+      <p class="sl-cta-sub">Discover the compassionate way to understand your thoughts, heal your emotions, and lead yourself to harmony.</p>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ parts_work_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-white">
+          🛒 Get the Book — {{ parts_work_product.price | money }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM ATC -->
+  <div class="sl-sticky-cta" id="sticky-cta">
+    <div style="font-weight: 700; font-size: 0.95rem;">
+      <div style="font-weight: 900; color: var(--text-primary); line-height: 1.2;">Parts Work</div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary);">An Illustrated Guide to Your Inner Life</div>
+    </div>
+    <form action="/cart/add" method="post" style="margin:0;">
+      <input type="hidden" name="id" value="{{ parts_work_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+        🛒 Buy Now — {{ parts_work_product.price | money }}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroBtn = document.getElementById('hero-btn');
+    window.addEventListener('scroll', () => {
+      if (!stickyCta || !heroBtn) return;
+      if (heroBtn.getBoundingClientRect().bottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+    const slObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.sl-feature-item, .sl-card, .sl-review-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      slObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
