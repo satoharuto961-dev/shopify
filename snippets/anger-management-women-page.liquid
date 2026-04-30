@@ -1,0 +1,354 @@
+{% assign anger_women_product = all_products['the-anger-workbook-for-women-how-to-keep-your-anger-from-undermining-your-self-esteem-your-emotional-balance-and-your-relationships'] %}
+{% assign anger_women_variant = anger_women_product.variants.first %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Anger Workbook for Women</title>
+  <meta name="description" content="Discover how to process anger healthily without guilt. A practical guide for women to protect self-esteem, maintain emotional balance, and strengthen relationships." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #702459;
+      --brand-dark: #4a143c;
+      --brand-light: #faf5f9;
+      --accent: #d53f8c;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --bg: #ffffff;
+      --surface: #faf5f9;
+      --border: rgba(213, 63, 140, 0.2);
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(112, 36, 89, 0.08);
+      --shadow-lg: 0 16px 48px rgba(112, 36, 89, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 80px; }
+
+    .sl-nav { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .sl-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sl-nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--text-primary); letter-spacing: -0.5px; }
+    .sl-nav-cta { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 0.9rem; font-weight: 800; cursor: pointer; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 14px rgba(112,36,89,0.3); }
+    .sl-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(112,36,89,0.45); }
+
+    .sl-sticky-cta { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 16px 24px; z-index: 999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.08); transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sl-sticky-cta.visible { bottom: 0; }
+
+    .sl-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, #faf5f9 50%, #f3e8f1 100%); padding: 110px 24px 100px; text-align: center; }
+    .sl-hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(213,63,140,0.05) 0%, transparent 70%); pointer-events: none; }
+    .sl-hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 999px; padding: 6px 18px; font-size: 0.85rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+    .sl-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; color: var(--text-primary); line-height: 1.1; letter-spacing: -1.2px; max-width: 900px; margin: 0 auto 24px; }
+    .sl-hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.2rem); color: var(--text-secondary); max-width: 720px; margin: 0 auto 40px; line-height: 1.75; font-weight: 500; }
+    .sl-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; }
+    .sl-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent), var(--brand)); color: #fff; border: none; border-radius: 10px; padding: 18px 40px; font-size: 1.1rem; font-weight: 900; cursor: pointer; text-decoration: none; box-shadow: 0 10px 30px rgba(112,36,89,0.35); transition: all 0.25s; }
+    .sl-btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(112,36,89,0.48); }
+    .sl-hero-img { margin-top: 50px; }
+    .sl-hero-img img { max-width: 480px; width: 100%; border-radius: 16px; box-shadow: 0 32px 90px rgba(112,36,89,0.15); border: 4px solid #fff; }
+
+    .sl-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 28px 24px; border-bottom: 1px solid var(--border); background: #fff; }
+    .sl-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .sl-section { padding: 90px 24px; }
+    .sl-section-inner { max-width: 1100px; margin: 0 auto; }
+    .sl-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; display: inline-block; background: #faf5f9; padding: 6px 16px; border-radius: 999px; border: 1px solid #fbb6ce; }
+    .sl-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-primary); letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+    .sl-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; margin-top: 48px; }
+    .sl-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .sl-card-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .sl-card-body { padding: 28px; }
+    .sl-card-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary); text-transform: uppercase; letter-spacing: -0.5px; }
+    .sl-card-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+    .sl-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 40px; }
+    .sl-feature-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .sl-check { width: 36px; height: 36px; background: var(--brand); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; }
+    .sl-feature-text { font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .sl-feature-sub { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; }
+
+    .sl-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .sl-review-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px 28px; box-shadow: 0 4px 18px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+    .sl-review-stars { color: #f6ad55; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .sl-review-title { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; }
+    .sl-review-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .sl-verified { color: #38a169; font-weight: 700; }
+    .sl-review-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+    .sl-review-helpful { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+    .sl-cta-section { background: var(--brand); color: #fff; text-align: center; padding: 90px 24px; position: relative; overflow: hidden; }
+    .sl-cta-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.4) 100%); pointer-events: none; }
+    .sl-cta-section .sl-title { color: #fff; position: relative; z-index: 1; }
+    .sl-cta-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.88); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; position: relative; z-index: 1; }
+    .sl-btn-white { background: var(--accent); color: #fff; font-size: 1.15rem; padding: 20px 48px; border-radius: 10px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; position: relative; z-index: 1; text-transform: uppercase; letter-spacing: 1px; }
+    .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); background: #b83280; }
+
+    @media (max-width: 768px) {
+      .sl-hero { padding: 80px 20px 60px; }
+      .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
+      .sl-reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="sl-nav">
+    <div class="sl-nav-inner">
+      <span class="sl-nav-logo">PsychoReads</span>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ anger_women_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-nav-cta">Buy Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sl-hero">
+    <div class="sl-hero-badge">
+      <span>🌸</span> Healthy Emotional Processing
+    </div>
+    <h1>The Anger Workbook for Women</h1>
+    <p class="sl-hero-sub">
+      Discover how to process your anger healthily and without guilt. Stop letting unresolved frustration undermine your self-esteem, your emotional balance, and the relationships you care about most.
+    </p>
+    <div class="sl-hero-actions">
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ anger_women_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-primary" id="hero-btn">
+          🛒 Get the Workbook — {{ anger_women_product.price | money }}
+        </button>
+      </form>
+    </div>
+    <div class="sl-hero-img">
+      {%- if anger_women_product.images.first -%}
+        <img src="{{ anger_women_product.images.first | img_url: 'master' }}" alt="{{ anger_women_product.title }}" loading="eager" />
+      {%- else -%}
+        <div style="background: linear-gradient(135deg,#faf5f9,#f3e8f1); width:100%; max-width:480px; margin:0 auto; height:380px; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#702459; font-weight:800; font-size:1.1rem; border:4px solid #fff;">
+          📖 Anger Workbook for Women
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="sl-trust">
+    <div class="sl-trust-item"><span>✍️</span> Self-Paced Exercises</div>
+    <div class="sl-trust-item"><span>🛡️</span> Protect Boundaries</div>
+    <div class="sl-trust-item"><span>⭐</span> Top Rated by Readers</div>
+    <div class="sl-trust-item"><span>⚡</span> Instant PDF Access</div>
+    <div class="sl-trust-item"><span>🌍</span> English Language</div>
+  </div>
+
+  <!-- INSIDE THE BOOK -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center;">
+        <div class="sl-label">What You'll Learn</div>
+        <h2 class="sl-title">Reclaim Your Emotional Voice</h2>
+        <p class="sl-hero-sub" style="margin: 0 auto; max-width: 640px;">
+          Society often tells women that anger is "unfeminine" or "bad." Learn how to break free from these toxic narratives and use your anger as a tool for positive change.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🎭</div>
+            <div class="sl-card-title">Identify the Mask</div>
+            <div class="sl-card-text">Understand how women are conditioned to mask anger as sadness, anxiety, or guilt—and learn how to recognize your true feelings before they turn inward.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">✋</div>
+            <div class="sl-card-title">Set Firm Boundaries</div>
+            <div class="sl-card-text">Translate your anger into effective boundary-setting. Say "no" without apologizing and protect your energy from those who drain you.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🗣️</div>
+            <div class="sl-card-title">Express Without Guilt</div>
+            <div class="sl-card-text">Master the art of assertive communication. Express your needs clearly and respectfully, ensuring you are heard without resorting to passive-aggression.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sl-section">
+    <div class="sl-section-inner">
+      <div class="sl-label">Why This Workbook</div>
+      <h2 class="sl-title">Empowerment Through Understanding</h2>
+      <div class="sl-features-grid">
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Tailored for Women</div>
+            <div class="sl-feature-sub">Directly addresses the unique societal pressures and expectations that make women suppress their legitimate frustrations.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Improves Self-Esteem</div>
+            <div class="sl-feature-sub">Stop beating yourself up for feeling mad. Validating your anger is a profound step toward rebuilding your confidence.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Actionable Exercises</div>
+            <div class="sl-feature-sub">Filled with targeted journaling prompts and CBT exercises that help you rewire your automatic responses to conflict.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Deepens Relationships</div>
+            <div class="sl-feature-sub">By communicating authentically rather than suppressing or exploding, your connections with loved ones become much stronger.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Verified Reviews</div>
+        <h2 class="sl-title">What Readers Are Saying</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
+          <span style="color:#f6ad55;font-size:1.5rem;">★★★★★</span>
+          <span style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">4.9 out of 5</span>
+          <span style="font-size:0.9rem;color:var(--text-secondary);">· Verified readers</span>
+        </div>
+      </div>
+      <div class="sl-reviews-grid">
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Validating and eye-opening</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I never realized how much of my 'anxiety' was actually just suppressed anger. This book gave me permission to be mad and showed me how to deal with it productively.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Helped me set boundaries</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I've always struggled with people-pleasing. The exercises in this workbook helped me use my anger as a signal that a boundary was crossed, and taught me how to enforce it.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">A completely different approach</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Most anger books just tell you to take deep breaths. This one actually digs into *why* women suppress anger and the cultural baggage behind it. Brilliant.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Freed me from guilt</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Whenever I got angry, I immediately felt guilty and apologized. Working through these pages helped me stop apologizing for having valid emotions.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Transformed my marriage</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">My husband and I used to fight in circles. Learning to express my frustration clearly without attacking him has brought us so much closer.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Essential reading for all women</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Whether you explode in rage or quietly seethe with resentment, this workbook will help you. The journaling prompts are tough but so necessary for growth.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sl-cta-section">
+    <div class="sl-section-inner">
+      <h2 class="sl-title">Reclaim Your Inner Peace</h2>
+      <p class="sl-cta-sub">Stop letting unresolved anger eat away at your self-esteem. Get the tools you need to express yourself confidently and without guilt.</p>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ anger_women_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-white">
+          🛒 Get the Workbook — {{ anger_women_product.price | money }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM ATC -->
+  <div class="sl-sticky-cta" id="sticky-cta">
+    <div style="font-weight: 700; font-size: 0.95rem;">
+      <div style="font-weight: 900; color: var(--text-primary); line-height: 1.2;">Anger Workbook for Women</div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary);">Protect Your Emotional Balance</div>
+    </div>
+    <form action="/cart/add" method="post" style="margin:0;">
+      <input type="hidden" name="id" value="{{ anger_women_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem; background: var(--brand);">
+        🛒 Buy Now — {{ anger_women_product.price | money }}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroBtn = document.getElementById('hero-btn');
+    window.addEventListener('scroll', () => {
+      if (!stickyCta || !heroBtn) return;
+      if (heroBtn.getBoundingClientRect().bottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+    const slObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.sl-feature-item, .sl-card, .sl-review-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      slObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
