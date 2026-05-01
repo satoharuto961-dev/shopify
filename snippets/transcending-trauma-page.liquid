@@ -1,0 +1,352 @@
+{% assign transcending_product = all_products['transcending-trauma-healing-complex-ptsd-with-internal-family-systems'] %}
+{% assign transcending_variant = transcending_product.variants.first %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transcending Trauma: Healing Complex PTSD with Internal Family Systems</title>
+  <meta name="description" content="A compassionate guide to healing Complex PTSD using the transformative Internal Family Systems model. Reclaim your life from the grip of trauma." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #553c9a;
+      --brand-dark: #3c2d6f;
+      --brand-light: #faf5ff;
+      --accent: #805ad5;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --bg: #ffffff;
+      --surface: #faf5ff;
+      --border: rgba(128, 90, 213, 0.25);
+      --shadow: 0 8px 32px rgba(85, 60, 154, 0.08);
+      --shadow-lg: 0 16px 48px rgba(85, 60, 154, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 80px; }
+
+    .sl-nav { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .sl-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sl-nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--text-primary); letter-spacing: -0.5px; }
+    .sl-nav-cta { background: var(--brand); color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 0.9rem; font-weight: 800; cursor: pointer; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 14px rgba(85,60,154,0.3); }
+    .sl-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(85,60,154,0.45); }
+
+    .sl-sticky-cta { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 16px 24px; z-index: 999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.08); transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sl-sticky-cta.visible { bottom: 0; }
+
+    .sl-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, #faf5ff 50%, #e9d8fd 100%); padding: 110px 24px 100px; text-align: center; }
+    .sl-hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(128,90,213,0.07) 0%, transparent 70%); pointer-events: none; }
+    .sl-hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(250,245,255,0.9); backdrop-filter: blur(10px); border: 1px solid #d6bcfa; border-radius: 999px; padding: 6px 18px; font-size: 0.85rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
+    .sl-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; color: var(--text-primary); line-height: 1.1; letter-spacing: -1.2px; max-width: 900px; margin: 0 auto 24px; }
+    .sl-hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.2rem); color: var(--text-secondary); max-width: 720px; margin: 0 auto 40px; line-height: 1.75; font-weight: 500; }
+    .sl-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; }
+    .sl-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: #fff; border: none; border-radius: 14px; padding: 18px 40px; font-size: 1.1rem; font-weight: 900; cursor: pointer; text-decoration: none; box-shadow: 0 10px 30px rgba(85,60,154,0.35); transition: all 0.25s; }
+    .sl-btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(85,60,154,0.48); }
+    .sl-hero-img { margin-top: 50px; }
+    .sl-hero-img img { max-width: 520px; width: 100%; border-radius: 20px; box-shadow: 0 32px 90px rgba(85,60,154,0.2); border: 2px solid rgba(255,255,255,0.7); }
+
+    .sl-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 28px 24px; border-bottom: 1px solid var(--border); background: #fff; }
+    .sl-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); }
+
+    .sl-section { padding: 90px 24px; }
+    .sl-section-inner { max-width: 1100px; margin: 0 auto; }
+    .sl-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; display: inline-block; background: var(--brand-light); padding: 6px 16px; border-radius: 999px; border: 1px solid #d6bcfa; }
+    .sl-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-primary); letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+    .sl-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; margin-top: 48px; }
+    .sl-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .sl-card-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .sl-card-body { padding: 28px; }
+    .sl-card-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; color: var(--text-primary); }
+    .sl-card-text { font-size: 0.93rem; color: var(--text-secondary); line-height: 1.6; }
+
+    .sl-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 40px; }
+    .sl-feature-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .sl-check { width: 36px; height: 36px; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; }
+    .sl-feature-text { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .sl-feature-sub { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; }
+
+    .sl-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .sl-review-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px 28px; box-shadow: 0 4px 18px rgba(85,60,154,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(85,60,154,0.12); }
+    .sl-review-stars { color: #f6ad55; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .sl-review-title { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; }
+    .sl-review-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .sl-verified { color: #38a169; font-weight: 700; }
+    .sl-review-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+    .sl-review-helpful { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
+    .sl-cta-section { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); color: #fff; text-align: center; padding: 90px 24px; }
+    .sl-cta-section .sl-title { color: #fff; }
+    .sl-cta-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.88); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .sl-btn-white { background: #fff; color: var(--brand); font-size: 1.15rem; padding: 20px 48px; border-radius: 14px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.18); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+    .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); }
+
+    @media (max-width: 768px) {
+      .sl-hero { padding: 80px 20px 60px; }
+      .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
+      .sl-reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="sl-nav">
+    <div class="sl-nav-inner">
+      <span class="sl-nav-logo">PsychoReads</span>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ transcending_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-nav-cta">Buy Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sl-hero">
+    <div class="sl-hero-badge">
+      <span>🌌</span> Complex PTSD &amp; IFS Therapy
+    </div>
+    <h1>Transcending Trauma: Healing Complex PTSD with Internal Family Systems</h1>
+    <p class="sl-hero-sub">
+      Move beyond surviving and start truly living. This deeply compassionate guide unites the power of Internal Family Systems therapy with the latest understanding of Complex PTSD to offer a genuine path to healing.
+    </p>
+    <div class="sl-hero-actions">
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ transcending_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-primary" id="hero-btn">
+          🛒 Get the Book — {{ transcending_product.price | money }}
+        </button>
+      </form>
+    </div>
+    <div class="sl-hero-img">
+      {%- if transcending_product.images.first -%}
+        <img src="{{ transcending_product.images.first | img_url: 'master' }}" alt="{{ transcending_product.title }}" loading="eager" />
+      {%- else -%}
+        <div style="background: linear-gradient(135deg,#faf5ff,#e9d8fd); width:100%; max-width:520px; margin:0 auto; height:380px; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#553c9a; font-weight:800; font-size:1.1rem;">
+          📖 Transcending Trauma
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="sl-trust">
+    <div class="sl-trust-item"><span>🏅</span> Complex PTSD Focused</div>
+    <div class="sl-trust-item"><span>🧠</span> IFS-Based Approach</div>
+    <div class="sl-trust-item"><span>💜</span> Trauma-Informed</div>
+    <div class="sl-trust-item"><span>⚡</span> Instant PDF Access</div>
+    <div class="sl-trust-item"><span>🌍</span> English Language</div>
+  </div>
+
+  <!-- INSIDE THE BOOK -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center;">
+        <div class="sl-label">Inside the Book</div>
+        <h2 class="sl-title">A Bridge Between Trauma & Healing</h2>
+        <p class="sl-hero-sub" style="margin: 0 auto; max-width: 640px;">
+          Unlike simple PTSD, Complex PTSD stems from prolonged, repeated trauma—and it requires a deeper, more nuanced approach. This book provides exactly that.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🧩</div>
+            <div class="sl-card-title">Understand C-PTSD</div>
+            <div class="sl-card-text">Gain a clear understanding of how chronic trauma reshapes the brain, the nervous system, and the sense of self—and why conventional therapy often falls short.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🛡️</div>
+            <div class="sl-card-title">Work with Protectors</div>
+            <div class="sl-card-text">Learn to recognize and appreciate the extreme protective parts created by trauma—the dissociation, the numbing, the rage—and gently help them relax their grip.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🌱</div>
+            <div class="sl-card-title">Unburden Exiled Parts</div>
+            <div class="sl-card-text">Follow the safe, structured IFS process for accessing the most wounded, traumatized parts of yourself and offering them the healing they've been longing for.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sl-section">
+    <div class="sl-section-inner">
+      <div class="sl-label">Why This Book</div>
+      <h2 class="sl-title">A Genuinely Different Healing Path</h2>
+      <div class="sl-features-grid">
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">C-PTSD Specific</div>
+            <div class="sl-feature-sub">Written specifically for survivors of developmental trauma, emotional neglect, domestic abuse, and other prolonged adverse experiences.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Beyond Talk Therapy</div>
+            <div class="sl-feature-sub">IFS bypasses the thinking brain to reach deeper emotional truths, making it effective even when years of conventional therapy haven't been enough.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Restores the Self</div>
+            <div class="sl-feature-sub">Rebuilds a stable, compassionate sense of "Self" as the leader of your inner world—the foundation for lasting recovery from complex trauma.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">No Re-Traumatization</div>
+            <div class="sl-feature-sub">The IFS model is inherently gentle. You never have to relive traumatic memories in graphic detail for deep healing to occur.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Verified Reviews</div>
+        <h2 class="sl-title">What Readers Are Saying</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
+          <span style="color:#f6ad55;font-size:1.5rem;">★★★★★</span>
+          <span style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">4.9 out of 5</span>
+          <span style="font-size:0.9rem;color:var(--text-secondary);">· Verified readers</span>
+        </div>
+      </div>
+      <div class="sl-reviews-grid">
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Finally something that works for C-PTSD</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I spent years in CBT and DBT therapy and while helpful, something was always missing. This book and the IFS model reached the parts of my trauma that nothing else could touch.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">The most compassionate trauma book I've read</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">The tone of this book made me feel completely safe. There is zero shame, zero blame. It explains why I am the way I am and shows me how to heal without reliving the worst moments.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">My dissociation finally makes sense</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Understanding my dissociation as a protective part rather than a flaw completely changed my relationship with it. I can now work with it instead of fighting it.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Recommended by my trauma therapist</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">My therapist handed me this book and said it was the best companion guide available for IFS-based trauma work. She was absolutely right. Transformative reading.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Healing without re-traumatization</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">So many trauma approaches felt unsafe to me because they asked me to relive awful memories. This book respects your system's pace and never forces anything. It felt like true healing.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">I recognized myself on every page</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">Growing up in a dysfunctional home left me with so many conflicting inner voices. This book finally gave me a framework to understand them all and start the process of healing.</div>
+          <div class="sl-review-helpful">👍 Helpful</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sl-cta-section">
+    <div class="sl-section-inner">
+      <h2 class="sl-title">Your Trauma Does Not Define You</h2>
+      <p class="sl-cta-sub">There is a whole, undamaged Self at your core that has been waiting to lead you to freedom. This book will help you find it.</p>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="id" value="{{ transcending_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-white">
+          🛒 Get the Book — {{ transcending_product.price | money }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM ATC -->
+  <div class="sl-sticky-cta" id="sticky-cta">
+    <div style="font-weight: 700; font-size: 0.95rem;">
+      <div style="font-weight: 900; color: var(--text-primary); line-height: 1.2;">Transcending Trauma</div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary);">Healing Complex PTSD with IFS</div>
+    </div>
+    <form action="/cart/add" method="post" style="margin:0;">
+      <input type="hidden" name="id" value="{{ transcending_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+        🛒 Buy Now — {{ transcending_product.price | money }}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroBtn = document.getElementById('hero-btn');
+    window.addEventListener('scroll', () => {
+      if (!stickyCta || !heroBtn) return;
+      if (heroBtn.getBoundingClientRect().bottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+    const slObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.sl-feature-item, .sl-card, .sl-review-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      slObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
