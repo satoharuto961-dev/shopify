@@ -1,0 +1,398 @@
+{% assign out_trauma_product = all_products['outshining-trauma-a-new-vision-of-radical-self-compassion-integrating-internal-family-systems-and-buddhist-meditation'] %}
+{% assign out_trauma_variant = out_trauma_product.variants.first %}
+{% assign body_keeps_score_product = all_products['the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma'] %}
+{% assign stop_overthinking_product = all_products['stop-overthinking-3-books-in-1-overthinking-self-discipline-cognitive-behavioral-therapy-declutter-your-mind-create-atomic-habits-and-happiness-to-manage-anger-stress-anxiety-and-depression'] %}
+{% assign body_keeps_score_variant = body_keeps_score_product.variants.first %}
+{% assign stop_overthinking_variant = stop_overthinking_product.variants.first %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outshining Trauma — Your Complete Inner Healing System</title>
+  <meta name="description" content="Integrate IFS and Buddhist meditation to outshine trauma. Get the Outshining Trauma book plus 2 best-sellers free." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #d97706;
+      --brand-dark: #92400e;
+      --brand-light: #fffbeb;
+      --accent: #8a5cf6;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --bg: #ffffff;
+      --surface: #fffbeb;
+      --border: rgba(217, 119, 6, 0.2);
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(180, 83, 9, 0.08);
+      --shadow-lg: 0 16px 48px rgba(180, 83, 9, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 80px; }
+
+    .sl-nav { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .sl-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sl-nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--text-primary); letter-spacing: -0.5px; }
+    .sl-nav-cta { background: var(--brand); color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 0.9rem; font-weight: 800; cursor: pointer; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 14px rgba(217,119,6,0.3); }
+    .sl-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,119,6,0.45); }
+
+    .sl-sticky-cta { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 16px 24px; z-index: 999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.08); transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sl-sticky-cta.visible { bottom: 0; }
+
+    .sl-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, #fffbeb 50%, #fde68a 100%); padding: 110px 24px 100px; text-align: center; }
+    .sl-hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(217,119,6,0.07) 0%, transparent 70%); pointer-events: none; }
+    .sl-hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,251,235,0.9); backdrop-filter: blur(10px); border: 1px solid #fcd34d; border-radius: 999px; padding: 6px 18px; font-size: 0.85rem; font-weight: 700; color: var(--brand); margin-bottom: 24px; }
+    .sl-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; color: var(--text-primary); line-height: 1.1; letter-spacing: -1.2px; max-width: 900px; margin: 0 auto 24px; }
+    .sl-hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.2rem); color: var(--text-secondary); max-width: 720px; margin: 0 auto 40px; line-height: 1.75; font-weight: 500; }
+    .sl-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; }
+    .sl-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: #fff; border: none; border-radius: 14px; padding: 18px 40px; font-size: 1.1rem; font-weight: 900; cursor: pointer; text-decoration: none; box-shadow: 0 10px 30px rgba(116,66,16,0.35); transition: all 0.25s; }
+    .sl-btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(116,66,16,0.48); }
+    .sl-price-comparison { margin: 24px 0; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .sl-val-regular { text-decoration: line-through; color: var(--text-muted); font-size: 1.1rem; }
+    .sl-val-today { color: #e53e3e; font-size: 1.8rem; letter-spacing: -0.5px; }
+    .sl-urgency-banner { background: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 12px 20px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px; }
+    .sl-hero-img { margin-top: 50px; }
+    .sl-hero-img img { max-width: 520px; width: 100%; border-radius: 20px; box-shadow: 0 32px 90px rgba(116,66,16,0.2); border: 2px solid rgba(255,255,255,0.7); }
+
+    .sl-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 28px 24px; border-bottom: 1px solid var(--border); background: #fff; }
+    .sl-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); }
+
+    .sl-section { padding: 90px 24px; }
+    .sl-section-inner { max-width: 1100px; margin: 0 auto; }
+    .sl-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; display: inline-block; background: var(--brand-light); padding: 6px 16px; border-radius: 999px; border: 1px solid #fcd34d; }
+    .sl-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-primary); letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+    .sl-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; margin-top: 48px; }
+    .sl-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .sl-card-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .sl-card-body { padding: 28px; }
+    .sl-card-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; color: var(--text-primary); }
+    .sl-card-text { font-size: 0.93rem; color: var(--text-secondary); line-height: 1.6; }
+
+    .sl-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 40px; }
+    .sl-feature-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .sl-check { width: 36px; height: 36px; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; }
+    .sl-feature-text { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .sl-feature-sub { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; }
+
+    .sl-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .sl-review-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px 28px; box-shadow: 0 4px 18px rgba(116,66,16,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+    .sl-review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(116,66,16,0.12); }
+    .sl-review-stars { color: #f6ad55; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .sl-review-title { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; }
+    .sl-review-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .sl-verified { color: #38a169; font-weight: 700; }
+    .sl-review-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+
+    .sl-cta-section { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); color: #fff; text-align: center; padding: 90px 24px; }
+    .sl-cta-section .sl-title { color: #fff; }
+    .sl-cta-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.88); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .sl-btn-white { background: #fff; color: var(--brand); font-size: 1.15rem; padding: 20px 48px; border-radius: 14px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.18); transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+    .sl-btn-white:hover { transform: translateY(-4px) scale(1.02); }
+
+    @media (max-width: 768px) {
+      .sl-hero { padding: 80px 20px 60px; }
+      .sl-sticky-cta { flex-direction: column; text-align: center; gap: 12px; }
+      .sl-reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="sl-nav">
+    <div class="sl-nav-inner">
+      <span class="sl-nav-logo">PsychoReads</span>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="items[0][id]" value="{{ out_trauma_variant.id }}">
+        <input type="hidden" name="items[0][quantity]" value="1">
+        <input type="hidden" name="items[1][id]" value="{{ body_keeps_score_variant.id }}">
+        <input type="hidden" name="items[1][quantity]" value="1">
+        <input type="hidden" name="items[2][id]" value="{{ stop_overthinking_variant.id }}">
+        <input type="hidden" name="items[2][quantity]" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-nav-cta">Get the Bundle</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sl-hero">
+    <div class="sl-hero-badge">
+      <span>✨</span> Your Complete Inner Healing System
+    </div>
+    <h1>Build Your Personal Healing System (3 Books)</h1>
+    <p class="sl-hero-sub">
+      Get <strong>Outshining Trauma</strong> + 2 Best-Selling Books Free.<br>
+      One price. Immediate access. Real transformation.
+    </p>
+    <div class="sl-urgency-banner">
+      ⏳ Limited-time offer — may be removed anytime
+    </div>
+    <div class="sl-price-comparison">
+      <span class="sl-val-regular">Regular Value: $75+</span>
+      <span class="sl-val-today">Today: {{ out_trauma_product.price | money }}</span>
+    </div>
+    <div class="sl-hero-actions">
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="items[0][id]" value="{{ out_trauma_variant.id }}">
+        <input type="hidden" name="items[0][quantity]" value="1">
+        <input type="hidden" name="items[1][id]" value="{{ body_keeps_score_variant.id }}">
+        <input type="hidden" name="items[1][quantity]" value="1">
+        <input type="hidden" name="items[2][id]" value="{{ stop_overthinking_variant.id }}">
+        <input type="hidden" name="items[2][quantity]" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-primary" id="hero-btn">
+          👉 Get Instant Access Now
+        </button>
+      </form>
+    </div>
+    <div class="sl-hero-img">
+      {%- if out_trauma_product.images.first -%}
+        <img src="{{ out_trauma_product.images.first | img_url: 'master' }}" alt="{{ out_trauma_product.title }}" loading="eager" />
+      {%- else -%}
+        <div style="background: linear-gradient(135deg,#fffbeb,#fde68a); width:100%; max-width:520px; margin:0 auto; height:380px; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#d97706; font-weight:800; font-size:1.1rem;">
+          📖 Outshining Trauma
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="sl-trust">
+    <div class="sl-trust-item"><span>🏆</span> IFS & Buddhist Wisdom</div>
+    <div class="sl-trust-item"><span>🪷</span> Radical Self-Compassion</div>
+    <div class="sl-trust-item"><span>🧠</span> Trauma Integration</div>
+    <div class="sl-trust-item"><span>⚡</span> Instant PDF Access</div>
+    <div class="sl-trust-item"><span>🌍</span> English Language</div>
+  </div>
+
+  <!-- INSIDE THE BOOK -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center;">
+        <h2 class="sl-title">The Complete Step-by-Step System</h2>
+        <p class="sl-hero-sub" style="margin: 0 auto; max-width: 640px;">
+          This isn’t just reading. It’s a complete system to outshine your trauma, integrate your inner parts, and find deep peace through Buddhist meditation.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🪷</div>
+            <div class="sl-card-title">Radical Compassion</div>
+            <div class="sl-card-text">Learn to treat your most wounded parts with the same kindness you'd offer a dear friend, using proven meditation techniques.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">🌀</div>
+            <div class="sl-card-title">IFS Integration</div>
+            <div class="sl-card-text">Apply Internal Family Systems (IFS) concepts to map your inner world and heal the burdens your parts have carried for years.</div>
+          </div>
+        </div>
+        <div class="sl-card">
+          <div class="sl-card-body">
+            <div class="sl-card-icon">✨</div>
+            <div class="sl-card-title">Outshining the Past</div>
+            <div class="sl-card-text">Discover how to find the "indestructible goodness" within you that no amount of trauma can ever extinguish.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNDLE CONTENTS -->
+  <div class="sl-section" id="bundle-includes">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Bundle Exclusive</div>
+        <h2 class="sl-title">Everything You Need for Transformation</h2>
+        <p class="sl-hero-sub" style="margin:0 auto; max-width:640px;">
+          Grab "Outshining Trauma" today and receive these two essential best-sellers to complete your healing library.
+        </p>
+      </div>
+      <div class="sl-grid-3">
+        <div class="sl-card" style="border: 2px solid var(--brand);">
+          <div class="sl-card-body">
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--brand); text-transform: uppercase; margin-bottom: 12px; display: block;">Main Book</div>
+            <div style="height: 180px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+              <img src="{{ out_trauma_product.images.first | img_url: '300x' }}" style="max-height: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+            </div>
+            <div class="sl-card-title">Outshining Trauma</div>
+            <div class="sl-card-text">A new vision of radical self-compassion.</div>
+          </div>
+        </div>
+        <div class="sl-card" style="border: 2px dashed var(--accent);">
+          <div class="sl-card-body">
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; display: block;">Free Bonus #1</div>
+            <div style="height: 180px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+              <img src="{{ body_keeps_score_product.images.first | img_url: '300x' }}" style="max-height: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+            </div>
+            <div class="sl-card-title">The Body Keeps the Score</div>
+            <div class="sl-card-text">The #1 trauma recovery book in the world.</div>
+          </div>
+        </div>
+        <div class="sl-card" style="border: 2px dashed var(--accent);">
+          <div class="sl-card-body">
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; display: block;">Free Bonus #2</div>
+            <div style="height: 180px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+              <img src="{{ stop_overthinking_product.images.first | img_url: '300x' }}" style="max-height: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+            </div>
+            <div class="sl-card-title">Stop Overthinking (3-in-1)</div>
+            <div class="sl-card-text">Complete bundle for mental clarity and habits.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sl-section">
+    <div class="sl-section-inner">
+      <div class="sl-label">Why This Book</div>
+      <h2 class="sl-title">A Bridge Between Worlds</h2>
+      <div class="sl-features-grid">
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">IFS Meets Buddhism</div>
+            <div class="sl-feature-sub">The first practical guide that seamlessly integrates Internal Family Systems with traditional Buddhist insight meditation.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Actionable Practices</div>
+            <div class="sl-feature-sub">Includes specific, guided meditations designed to help you work with trauma in the body rather than just the mind.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Deep Self-Love</div>
+            <div class="sl-feature-sub">Learn to cultivate a quality of "wise heart" that can hold even your most painful experiences with grace.</div>
+          </div>
+        </div>
+        <div class="sl-feature-item">
+          <div class="sl-check">✓</div>
+          <div>
+            <div class="sl-feature-text">Evidence-Based</div>
+            <div class="sl-feature-sub">Aligns with the latest neurobiological research on trauma and the proven benefits of mindfulness.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="sl-section" style="background: var(--surface);">
+    <div class="sl-section-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div class="sl-label">Verified Reviews</div>
+        <h2 class="sl-title">What Readers Are Saying</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
+          <span style="color:#f6ad55;font-size:1.5rem;">★★★★★</span>
+          <span style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">4.9 out of 5</span>
+          <span style="font-size:0.9rem;color:var(--text-secondary);">· Verified readers</span>
+        </div>
+      </div>
+      <div class="sl-reviews-grid">
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">A profound synthesis</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">I've practiced IFS and meditation separately for years, but this book finally showed me how to bring them together. Life-changing.</div>
+        </div>
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">So gentle and healing</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">The meditations in this book are so compassionate. I finally feel like I have a way to be with my trauma without being overwhelmed.</div>
+        </div>
+        <div class="sl-review-card">
+          <div class="sl-review-stars">★★★★★</div>
+          <div class="sl-review-title">Exactly what I needed</div>
+          <div class="sl-review-meta">Verified Reader &nbsp;·&nbsp; <span class="sl-verified">✓ Verified Purchase</span></div>
+          <div class="sl-review-text">If you're tired of "talk therapy" and want something that actually helps you heal from the inside out, buy this bundle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sl-cta-section">
+    <div class="sl-section-inner">
+      <h2 class="sl-title">👉 Get Instant Access Now</h2>
+      <p class="sl-cta-sub">This bundle is only available for a short time. Secure your Complete Inner Healing System today.</p>
+      <form action="/cart/add" method="post" style="margin:0;">
+        <input type="hidden" name="items[0][id]" value="{{ out_trauma_variant.id }}">
+        <input type="hidden" name="items[0][quantity]" value="1">
+        <input type="hidden" name="items[1][id]" value="{{ body_keeps_score_variant.id }}">
+        <input type="hidden" name="items[1][quantity]" value="1">
+        <input type="hidden" name="items[2][id]" value="{{ stop_overthinking_variant.id }}">
+        <input type="hidden" name="items[2][quantity]" value="1">
+        <input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="sl-btn-white">
+          🛒 Get the 3-Book Bundle — {{ out_trauma_product.price | money }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM ATC -->
+  <div class="sl-sticky-cta" id="sticky-cta">
+    <div style="font-weight: 700; font-size: 0.95rem;">
+      <div style="font-weight: 900; color: var(--text-primary); line-height: 1.2;">Outshining Trauma</div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary);">3-Book Healing System</div>
+    </div>
+    <form action="/cart/add" method="post" style="margin:0;">
+      <input type="hidden" name="items[0][id]" value="{{ out_trauma_variant.id }}">
+      <input type="hidden" name="items[0][quantity]" value="1">
+      <input type="hidden" name="items[1][id]" value="{{ body_keeps_score_variant.id }}">
+      <input type="hidden" name="items[1][quantity]" value="1">
+      <input type="hidden" name="items[2][id]" value="{{ stop_overthinking_variant.id }}">
+      <input type="hidden" name="items[2][quantity]" value="1">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+        👉 Get Instant Access — {{ out_trauma_product.price | money }}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroBtn = document.getElementById('hero-btn');
+    window.addEventListener('scroll', () => {
+      if (!stickyCta || !heroBtn) return;
+      if (heroBtn.getBoundingClientRect().bottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+    const slObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.sl-feature-item, .sl-card, .sl-review-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      slObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
