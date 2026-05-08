@@ -164,7 +164,7 @@
     </div>
     <div class="sl-price-comparison">
       <span class="sl-val-regular">Regular Value: $75+</span>
-      <span class="sl-val-today">Today: {{ ifs_wb_product.price | money }}</span>
+      <span class="sl-val-today">Today: $19.99</span>
     </div>
     <div class="sl-hero-actions">
       <form action="/cart/add" method="post" style="margin:0;">
@@ -379,7 +379,7 @@
         <input type="hidden" name="items[2][quantity]" value="1">
         <input type="hidden" name="return_to" value="/checkout">
         <button type="submit" class="sl-btn-white">
-          🛒 Get the 3-Book Bundle — {{ ifs_wb_product.price | money }}
+          🛒 Get the 3-Book Bundle — $19.99
         </button>
       </form>
     </div>
@@ -402,7 +402,7 @@
       <input type="hidden" name="items[2][quantity]" value="1">
       <input type="hidden" name="return_to" value="/checkout">
       <button type="submit" class="sl-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
-        👉 Get Instant Access — {{ ifs_wb_product.price | money }}
+        👉 Get Instant Access — $19.99
       </button>
     </form>
   </div>
