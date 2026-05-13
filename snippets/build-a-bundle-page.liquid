@@ -1,6 +1,3 @@
-{% assign handles_string = "self-therapy-a-step-by-step-guide-to-creating-wholeness-using-ifs-a-cutting-edge-psychotherapy,the-internal-family-systems-workbook-a-guide-to-discover-your-self-and-heal-your-parts-sounds-true-inner-workbooks,the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma,the-dialectical-behavior-therapy-skills-workbook-for-anger-using-dbt-mindfulness-and-emotion-regulation-skills-to-manage-anger-new-harbinger-self-help-workbooks,anchored-how-to-befriend-your-nervous-system-using-polyvagal-theory,anger-management-workbook-for-men-take-control-of-your-anger-and-master-your-emotions,the-somatic-therapy-handbook-a-transformative-guide-to-trauma-recovery-anxiety-relief-nervous-system-regulation-and-releasing-emotional-blockages-body-soul-mind-body-trauma-recovery,parts-work-an-illustrated-guide-to-your-inner-life-by-tom-holmes,transcending-trauma-healing-complex-ptsd-with-internal-family-systems,the-self-led-internal-family-systems-workbook-learn-ifs-skills-to-understand-and-love-all-your-parts,the-anger-workbook-for-women-how-to-keep-your-anger-from-undermining-your-self-esteem-your-emotional-balance-and-your-relationships,radical-acceptance-embracing-your-life-with-the-heart-of-a-buddha,healing-the-fragmented-selves-of-trauma-survivors,somatic-internal-family-systems-therapy-awareness-breath-resonance-movement-and-touch-in-practice-endorsed-by-top-experts-in-therapeutic-healing-modalities,destroyyouranger-0,diabetessustenance-0,outshining-trauma-a-new-vision-of-radical-self-compassion-integrating-internal-family-systems-and-buddhist-meditation,quieting-the-storm-within-an-illustrated-introduction-to-your-parts-through-internal-family-systems-and-beyond,stop-overthinking-3-books-in-1-overthinking-self-discipline-cognitive-behavioral-therapy-declutter-your-mind-create-atomic-habits-and-happiness-to-manage-anger-stress-anxiety-and-depression,the-psychology-book-big-ideas-simply-explained,internal-family-systems-skills-training-manual-trauma-informed-treatment-for-anxiety-depression-ptsd-substance-abuse,daily-vagus-nerve-exercise-train-your-nervous-system-to-reduce-anxiety-improve-health-and-restore-mind-body-balance,you-are-the-one-youve-been-waiting-for-internal-family-systems,superhero-therapy-for-anxiety-and-trauma,mans-search-for-meaning,what-my-bones-know-a-memoir-of-healing-from-complex-trauma" %}
-{% assign product_handles = handles_string | split: "," %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,7 +80,8 @@
       .bundle-header-inner { justify-content: center; }
     }
     
-    /* Loading overlay */
+    /* Loading States */
+    .initial-loader { text-align: center; padding: 100px 20px; font-weight: 700; color: var(--text-secondary); grid-column: 1 / -1; }
     .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; }
     .loading-overlay.active { display: flex; }
     .spinner { border: 4px solid rgba(44,122,123,0.1); width: 50px; height: 50px; border-radius: 50%; border-left-color: var(--brand); animation: spin 1s linear infinite; margin-bottom: 16px; }
@@ -92,7 +90,7 @@
 </head>
 <body>
 
-  <!-- Loading Overlay -->
+  <!-- Loading Overlay for Checkout -->
   <div class="loading-overlay" id="loadingOverlay">
     <div class="spinner"></div>
     <h3 style="color: var(--brand-dark);">Building your bundle...</h3>
@@ -125,30 +123,10 @@
   <!-- Product Grid -->
   <section class="grid-container">
     <div class="products-grid" id="productsGrid">
-      
-      {% for handle in product_handles %}
-        {% assign product = all_products[handle] %}
-        {% if product and product.available %}
-          {% assign variant_id = product.variants.first.id %}
-          
-          <div class="product-card" data-variant-id="{{ variant_id }}" onclick="toggleProduct(this, '{{ variant_id }}')">
-            <div class="check-icon">✓</div>
-            
-            <div class="product-img-wrap">
-              {% if product.images.first %}
-                <img src="{{ product.images.first | img_url: '400x' }}" alt="{{ product.title | escape }}" class="product-img" loading="lazy" />
-              {% else %}
-                <div style="width:100%; height:100%; background:#e2e8f0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#a0aec0;">No Image</div>
-              {% endif %}
-            </div>
-            
-            <h3 class="product-title">{{ product.title }}</h3>
-            <button class="btn-select">Select</button>
-          </div>
-          
-        {% endif %}
-      {% endfor %}
-      
+      <div class="initial-loader">
+        <div class="spinner" style="margin: 0 auto 16px;"></div>
+        Loading Collection...
+      </div>
     </div>
   </section>
 
@@ -161,33 +139,96 @@
     const MAX_SELECTIONS = 6;
     let selectedVariants = new Set();
     
+    // Product Handles
+    const handles = [
+      "self-therapy-a-step-by-step-guide-to-creating-wholeness-using-ifs-a-cutting-edge-psychotherapy",
+      "the-internal-family-systems-workbook-a-guide-to-discover-your-self-and-heal-your-parts-sounds-true-inner-workbooks",
+      "the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma",
+      "the-dialectical-behavior-therapy-skills-workbook-for-anger-using-dbt-mindfulness-and-emotion-regulation-skills-to-manage-anger-new-harbinger-self-help-workbooks",
+      "anchored-how-to-befriend-your-nervous-system-using-polyvagal-theory",
+      "anger-management-workbook-for-men-take-control-of-your-anger-and-master-your-emotions",
+      "the-somatic-therapy-handbook-a-transformative-guide-to-trauma-recovery-anxiety-relief-nervous-system-regulation-and-releasing-emotional-blockages-body-soul-mind-body-trauma-recovery",
+      "parts-work-an-illustrated-guide-to-your-inner-life-by-tom-holmes",
+      "transcending-trauma-healing-complex-ptsd-with-internal-family-systems",
+      "the-self-led-internal-family-systems-workbook-learn-ifs-skills-to-understand-and-love-all-your-parts",
+      "the-anger-workbook-for-women-how-to-keep-your-anger-from-undermining-your-self-esteem-your-emotional-balance-and-your-relationships",
+      "radical-acceptance-embracing-your-life-with-the-heart-of-a-buddha",
+      "healing-the-fragmented-selves-of-trauma-survivors",
+      "somatic-internal-family-systems-therapy-awareness-breath-resonance-movement-and-touch-in-practice-endorsed-by-top-experts-in-therapeutic-healing-modalities",
+      "destroyyouranger-0",
+      "diabetessustenance-0",
+      "outshining-trauma-a-new-vision-of-radical-self-compassion-integrating-internal-family-systems-and-buddhist-meditation",
+      "quieting-the-storm-within-an-illustrated-introduction-to-your-parts-through-internal-family-systems-and-beyond",
+      "stop-overthinking-3-books-in-1-overthinking-self-discipline-cognitive-behavioral-therapy-declutter-your-mind-create-atomic-habits-and-happiness-to-manage-anger-stress-anxiety-and-depression",
+      "the-psychology-book-big-ideas-simply-explained",
+      "internal-family-systems-skills-training-manual-trauma-informed-treatment-for-anxiety-depression-ptsd-substance-abuse",
+      "daily-vagus-nerve-exercise-train-your-nervous-system-to-reduce-anxiety-improve-health-and-restore-mind-body-balance",
+      "you-are-the-one-youve-been-waiting-for-internal-family-systems",
+      "superhero-therapy-for-anxiety-and-trauma",
+      "mans-search-for-meaning",
+      "what-my-bones-know-a-memoir-of-healing-from-complex-trauma"
+    ];
+
     // DOM Elements
+    const grid = document.getElementById('productsGrid');
     const countDisplay = document.getElementById('countDisplay');
     const progressDots = document.querySelectorAll('.progress-dot');
     const headerBtn = document.getElementById('headerCheckoutBtn');
     const mobileBtn = document.getElementById('mobileCheckoutBtn');
-    const allCards = document.querySelectorAll('.product-card');
     const loadingOverlay = document.getElementById('loadingOverlay');
 
-    function toggleProduct(cardElement, variantId) {
-      // If already selected, deselect it
+    // Fetch all products via AJAX to bypass Liquid 20-product limit
+    Promise.all(handles.map(handle => 
+      fetch('/products/' + handle + '.js')
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null)
+    )).then(products => {
+      grid.innerHTML = ''; // clear loader
+      
+      products.forEach(product => {
+        if (!product || !product.available) return;
+        
+        const variantId = product.variants[0].id;
+        const imgUrl = product.featured_image 
+          ? product.featured_image.replace('.jpg', '_400x.jpg').replace('.png', '_400x.png')
+          : '';
+
+        const cardHTML = `
+          <div class="product-card" data-variant-id="${variantId}" onclick="toggleProduct(this, '${variantId}')">
+            <div class="check-icon">✓</div>
+            <div class="product-img-wrap">
+              ${imgUrl 
+                ? `<img src="${imgUrl}" alt="${product.title.replace(/"/g, '&quot;')}" class="product-img" loading="lazy" />`
+                : `<div style="width:100%; height:100%; background:#e2e8f0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#a0aec0;">No Image</div>`
+              }
+            </div>
+            <h3 class="product-title">${product.title}</h3>
+            <button class="btn-select">Select</button>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+      
+      updateUI();
+    });
+
+    window.toggleProduct = function(cardElement, variantId) {
       if (selectedVariants.has(variantId)) {
         selectedVariants.delete(variantId);
         cardElement.classList.remove('selected');
         cardElement.querySelector('.btn-select').textContent = 'Select';
       } 
-      // If not selected and we haven't reached the limit, select it
       else if (selectedVariants.size < MAX_SELECTIONS) {
         selectedVariants.add(variantId);
         cardElement.classList.add('selected');
         cardElement.querySelector('.btn-select').textContent = 'Selected';
       }
-      
       updateUI();
     }
 
     function updateUI() {
       const count = selectedVariants.size;
+      const allCards = document.querySelectorAll('.product-card');
       
       // Update text
       countDisplay.textContent = count;
@@ -201,15 +242,13 @@
         }
       });
       
-      // Manage disabled state for unselected cards when limit is reached
+      // Manage disabled state
       if (count >= MAX_SELECTIONS) {
         allCards.forEach(card => {
           if (!card.classList.contains('selected')) {
             card.classList.add('disabled');
           }
         });
-        
-        // Enable checkout buttons
         headerBtn.classList.add('active');
         mobileBtn.classList.add('active');
         headerBtn.textContent = '🛒 Checkout Bundle — $29';
@@ -218,8 +257,6 @@
         allCards.forEach(card => {
           card.classList.remove('disabled');
         });
-        
-        // Disable checkout buttons
         headerBtn.classList.remove('active');
         mobileBtn.classList.remove('active');
         const remaining = MAX_SELECTIONS - count;
@@ -228,36 +265,22 @@
       }
     }
 
-    // Initialize UI state
-    updateUI();
-
-    // Handle Add to Cart & Checkout
-    function checkoutBundle() {
+    window.checkoutBundle = function() {
       if (selectedVariants.size !== MAX_SELECTIONS) return;
       
       loadingOverlay.classList.add('active');
-      
-      // Create items array for Shopify cart API
-      const items = Array.from(selectedVariants).map(id => ({
-        id: id,
-        quantity: 1
-      }));
+      const items = Array.from(selectedVariants).map(id => ({ id: id, quantity: 1 }));
 
-      // Clear cart first, then add the items, then redirect
       fetch('/cart/clear.js', { method: 'POST' })
-        .then(() => {
-          return fetch('/cart/add.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ items: items })
-          });
-        })
+        .then(() => fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        }))
         .then(res => res.json())
-        .then(() => {
-          window.location.href = '/checkout';
-        })
+        .then(() => { window.location.href = '/checkout'; })
         .catch(err => {
-          console.error("Error creating bundle checkout:", err);
+          console.error(err);
           alert("There was an error processing your bundle. Please try again.");
           loadingOverlay.classList.remove('active');
         });
