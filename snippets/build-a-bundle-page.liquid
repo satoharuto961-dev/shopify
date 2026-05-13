@@ -1,0 +1,268 @@
+{% assign handles_string = "self-therapy-a-step-by-step-guide-to-creating-wholeness-using-ifs-a-cutting-edge-psychotherapy,the-internal-family-systems-workbook-a-guide-to-discover-your-self-and-heal-your-parts-sounds-true-inner-workbooks,the-body-keeps-the-score-brain-mind-and-body-in-the-healing-of-trauma,the-dialectical-behavior-therapy-skills-workbook-for-anger-using-dbt-mindfulness-and-emotion-regulation-skills-to-manage-anger-new-harbinger-self-help-workbooks,anchored-how-to-befriend-your-nervous-system-using-polyvagal-theory,anger-management-workbook-for-men-take-control-of-your-anger-and-master-your-emotions,the-somatic-therapy-handbook-a-transformative-guide-to-trauma-recovery-anxiety-relief-nervous-system-regulation-and-releasing-emotional-blockages-body-soul-mind-body-trauma-recovery,parts-work-an-illustrated-guide-to-your-inner-life-by-tom-holmes,transcending-trauma-healing-complex-ptsd-with-internal-family-systems,the-self-led-internal-family-systems-workbook-learn-ifs-skills-to-understand-and-love-all-your-parts,the-anger-workbook-for-women-how-to-keep-your-anger-from-undermining-your-self-esteem-your-emotional-balance-and-your-relationships,radical-acceptance-embracing-your-life-with-the-heart-of-a-buddha,healing-the-fragmented-selves-of-trauma-survivors,somatic-internal-family-systems-therapy-awareness-breath-resonance-movement-and-touch-in-practice-endorsed-by-top-experts-in-therapeutic-healing-modalities,destroyyouranger-0,diabetessustenance-0,outshining-trauma-a-new-vision-of-radical-self-compassion-integrating-internal-family-systems-and-buddhist-meditation,quieting-the-storm-within-an-illustrated-introduction-to-your-parts-through-internal-family-systems-and-beyond,stop-overthinking-3-books-in-1-overthinking-self-discipline-cognitive-behavioral-therapy-declutter-your-mind-create-atomic-habits-and-happiness-to-manage-anger-stress-anxiety-and-depression,the-internal-family-systems-workbook-an-ifs-therapy-skills-training-manual-for-beginners-heal-trauma-calm-anxiety-inner-chaos-build-confidence-and-your-inner-child-acceptance-therapy,the-psychology-book-big-ideas-simply-explained,internal-family-systems-skills-training-manual-trauma-informed-treatment-for-anxiety-depression-ptsd-substance-abuse,daily-vagus-nerve-exercise-train-your-nervous-system-to-reduce-anxiety-improve-health-and-restore-mind-body-balance,you-are-the-one-youve-been-waiting-for-internal-family-systems,superhero-therapy-for-anxiety-and-trauma,mans-search-for-meaning,what-my-bones-know-a-memoir-of-healing-from-complex-trauma" %}
+{% assign product_handles = handles_string | split: "," %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Own Bundle — Choose 6 Books for $29</title>
+  <meta name="description" content="Select any 6 premium psychology and trauma healing books from our collection for just $29." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #2c7a7b;
+      --brand-dark: #1d5657;
+      --brand-light: #e6fffa;
+      --accent: #f6ad55;
+      --accent-hover: #dd6b20;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --bg: #f7fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.95);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; padding-bottom: 120px; }
+
+    /* Sticky Progress Bar */
+    .bundle-header { position: sticky; top: 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 16px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .bundle-header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .bundle-title-area { display: flex; align-items: center; gap: 16px; }
+    .bundle-logo { font-weight: 900; font-size: 1.2rem; color: var(--brand); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    
+    .progress-container { display: flex; align-items: center; gap: 12px; }
+    .progress-text { font-weight: 800; font-size: 1.1rem; color: var(--text-primary); }
+    .progress-dots { display: flex; gap: 6px; }
+    .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: #e2e8f0; transition: all 0.3s ease; }
+    .progress-dot.filled { background: var(--brand); box-shadow: 0 0 8px rgba(44,122,123,0.5); transform: scale(1.1); }
+
+    .btn-checkout { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border: none; border-radius: 12px; padding: 12px 24px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: all 0.3s ease; opacity: 0.5; pointer-events: none; }
+    .btn-checkout.active { opacity: 1; pointer-events: auto; box-shadow: 0 4px 14px rgba(221, 107, 32, 0.4); }
+    .btn-checkout.active:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(221, 107, 32, 0.5); }
+
+    /* Hero */
+    .hero-section { text-align: center; padding: 60px 24px 40px; }
+    .hero-section h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--brand-dark); line-height: 1.2; margin-bottom: 16px; }
+    .hero-section p { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .price-tag { display: inline-block; background: var(--brand-light); color: var(--brand-dark); font-weight: 800; font-size: 1.5rem; padding: 8px 24px; border-radius: 999px; margin-top: 24px; border: 2px solid var(--brand); }
+
+    /* Grid */
+    .grid-container { max-width: 1200px; margin: 0 auto; padding: 0 24px 60px; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+    
+    /* Product Card */
+    .product-card { background: var(--surface); border: 2px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; display: flex; flex-direction: column; height: 100%; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: #cbd5e0; }
+    .product-card.selected { border-color: var(--brand); background: var(--brand-light); box-shadow: 0 8px 20px rgba(44,122,123,0.15); }
+    .product-card.disabled { opacity: 0.5; filter: grayscale(50%); cursor: not-allowed; }
+    .product-card.disabled:hover { transform: none; box-shadow: none; border-color: var(--border); }
+    
+    .check-icon { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; background: var(--brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0; transform: scale(0.5); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 10; }
+    .product-card.selected .check-icon { opacity: 1; transform: scale(1); }
+
+    .product-img-wrap { height: 220px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; }
+    .product-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+    .product-card:hover .product-img { transform: scale(1.05); }
+    
+    .product-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); line-height: 1.4; margin-bottom: 16px; flex-grow: 1; }
+    
+    .btn-select { width: 100%; padding: 10px; border-radius: 8px; border: 2px solid var(--border); background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease; margin-top: auto; }
+    .product-card.selected .btn-select { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .product-card:not(.selected):not(.disabled):hover .btn-select { border-color: var(--brand); color: var(--brand); }
+
+    /* Sticky Bottom Mobile CTA */
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(10px); padding: 16px 24px; border-top: 1px solid var(--border); z-index: 999; text-align: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.05); }
+    @media (max-width: 768px) {
+      .mobile-cta { display: block; }
+      .bundle-header .btn-checkout { display: none; }
+      .bundle-header-inner { justify-content: center; }
+    }
+    
+    /* Loading overlay */
+    .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; }
+    .loading-overlay.active { display: flex; }
+    .spinner { border: 4px solid rgba(44,122,123,0.1); width: 50px; height: 50px; border-radius: 50%; border-left-color: var(--brand); animation: spin 1s linear infinite; margin-bottom: 16px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <h3 style="color: var(--brand-dark);">Building your bundle...</h3>
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="bundle-header">
+    <div class="bundle-header-inner">
+      <div class="bundle-title-area">
+        <a href="/" class="bundle-logo">PsychoReads</a>
+      </div>
+      <div class="progress-container">
+        <div class="progress-text"><span id="countDisplay">0</span> / 6 Selected</div>
+        <div class="progress-dots" id="progressDots">
+          <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+          <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+        </div>
+      </div>
+      <button class="btn-checkout" id="headerCheckoutBtn" onclick="checkoutBundle()">🛒 Checkout Bundle — $29</button>
+    </div>
+  </header>
+
+  <!-- Hero Area -->
+  <section class="hero-section">
+    <h1>Build Your Healing Library</h1>
+    <p>Select any 6 books from our premium collection of trauma healing, IFS, and somatic therapy resources.</p>
+    <div class="price-tag">6 Books for $29</div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="grid-container">
+    <div class="products-grid" id="productsGrid">
+      
+      {% for handle in product_handles %}
+        {% assign product = all_products[handle] %}
+        {% if product and product.available %}
+          {% assign variant_id = product.variants.first.id %}
+          
+          <div class="product-card" data-variant-id="{{ variant_id }}" onclick="toggleProduct(this, '{{ variant_id }}')">
+            <div class="check-icon">✓</div>
+            
+            <div class="product-img-wrap">
+              {% if product.images.first %}
+                <img src="{{ product.images.first | img_url: '400x' }}" alt="{{ product.title | escape }}" class="product-img" loading="lazy" />
+              {% else %}
+                <div style="width:100%; height:100%; background:#e2e8f0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#a0aec0;">No Image</div>
+              {% endif %}
+            </div>
+            
+            <h3 class="product-title">{{ product.title }}</h3>
+            <button class="btn-select">Select</button>
+          </div>
+          
+        {% endif %}
+      {% endfor %}
+      
+    </div>
+  </section>
+
+  <!-- Mobile CTA -->
+  <div class="mobile-cta">
+    <button class="btn-checkout" id="mobileCheckoutBtn" style="width: 100%;" onclick="checkoutBundle()">🛒 Checkout Bundle — $29</button>
+  </div>
+
+  <script>
+    const MAX_SELECTIONS = 6;
+    let selectedVariants = new Set();
+    
+    // DOM Elements
+    const countDisplay = document.getElementById('countDisplay');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const headerBtn = document.getElementById('headerCheckoutBtn');
+    const mobileBtn = document.getElementById('mobileCheckoutBtn');
+    const allCards = document.querySelectorAll('.product-card');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+
+    function toggleProduct(cardElement, variantId) {
+      // If already selected, deselect it
+      if (selectedVariants.has(variantId)) {
+        selectedVariants.delete(variantId);
+        cardElement.classList.remove('selected');
+        cardElement.querySelector('.btn-select').textContent = 'Select';
+      } 
+      // If not selected and we haven't reached the limit, select it
+      else if (selectedVariants.size < MAX_SELECTIONS) {
+        selectedVariants.add(variantId);
+        cardElement.classList.add('selected');
+        cardElement.querySelector('.btn-select').textContent = 'Selected';
+      }
+      
+      updateUI();
+    }
+
+    function updateUI() {
+      const count = selectedVariants.size;
+      
+      // Update text
+      countDisplay.textContent = count;
+      
+      // Update dots
+      progressDots.forEach((dot, index) => {
+        if (index < count) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
+      
+      // Manage disabled state for unselected cards when limit is reached
+      if (count >= MAX_SELECTIONS) {
+        allCards.forEach(card => {
+          if (!card.classList.contains('selected')) {
+            card.classList.add('disabled');
+          }
+        });
+        
+        // Enable checkout buttons
+        headerBtn.classList.add('active');
+        mobileBtn.classList.add('active');
+        headerBtn.textContent = '🛒 Checkout Bundle — $29';
+        mobileBtn.textContent = '🛒 Checkout Bundle — $29';
+      } else {
+        allCards.forEach(card => {
+          card.classList.remove('disabled');
+        });
+        
+        // Disable checkout buttons
+        headerBtn.classList.remove('active');
+        mobileBtn.classList.remove('active');
+        const remaining = MAX_SELECTIONS - count;
+        headerBtn.textContent = `Select ${remaining} more`;
+        mobileBtn.textContent = `Select ${remaining} more`;
+      }
+    }
+
+    // Initialize UI state
+    updateUI();
+
+    // Handle Add to Cart & Checkout
+    function checkoutBundle() {
+      if (selectedVariants.size !== MAX_SELECTIONS) return;
+      
+      loadingOverlay.classList.add('active');
+      
+      // Create items array for Shopify cart API
+      const items = Array.from(selectedVariants).map(id => ({
+        id: id,
+        quantity: 1
+      }));
+
+      // Clear cart first, then add the items, then redirect
+      fetch('/cart/clear.js', { method: 'POST' })
+        .then(() => {
+          return fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ items: items })
+          });
+        })
+        .then(res => res.json())
+        .then(() => {
+          window.location.href = '/checkout';
+        })
+        .catch(err => {
+          console.error("Error creating bundle checkout:", err);
+          alert("There was an error processing your bundle. Please try again.");
+          loadingOverlay.classList.remove('active');
+        });
+    }
+  </script>
+
+</body>
+</html>
