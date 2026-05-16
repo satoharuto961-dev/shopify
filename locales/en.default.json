@@ -20,7 +20,8 @@
   "shopify": {
     "checkout": {
       "order_summary": {
-        "discount_placeholder": "TOTAL SAVINGS"
+        "discount_placeholder": "TOTAL SAVINGS",
+        "apply_discount_button_label": "TOTAL SAVINGS"
       }
     }
   }
